@@ -136,3 +136,10 @@ test("the start call sends a bearer token and a login page stops the module", as
   assert.equal(out.result, "LOGIN_REQUIRED");
   assert.equal(out.actions, 0);
 });
+
+test("a module whose menu link is missing reports NAV_MISSING, not READ", async () => {
+  const page = { url: () => "https://seller.example/home", text: async () => "seller home", box: async () => null, click: async () => false };
+  const out = await runModule(page, { platform: "shopee", module: "orders.handling", maxActions: 3, mode: "read_only", store: { id: "<STORE_A>", mode: "read_only" }, manifest }, { actions: 0, move: async () => {}, alert: async () => {} });
+  assert.equal(out.result, "NAV_MISSING");
+  assert.deepEqual(out.missing, ["My Orders"]);
+});

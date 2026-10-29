@@ -97,7 +97,15 @@ export function wrapPage(page, timeout = 8000) {
     goto: async (url) => { await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 }); await page.waitForTimeout(5000); },
     text: async () => (await page.innerText("body").catch(() => "")).slice(0, 20000),
     box: async (spec) => { const t = await visible(spec); return t ? t.boundingBox() : null; },
-    click: async (spec) => { const t = await visible(spec); if (!t) return false; await t.scrollIntoViewIfNeeded().catch(() => {}); await t.click({ timeout: 10000 }); await page.waitForLoadState("domcontentloaded").catch(() => {}); await page.waitForTimeout(2500); return true; },
+    click: async (spec) => { const t = await visible(spec); if (!t) return false; await t.scrollIntoViewIfNeeded().catch(() => {});
+      try {
+        await t.click({ timeout: 10000 });
+      } catch (error) {
+        // A queued promo modal can sit over the sidebar with no close button. Follow the link the way a person would open it.
+        const href = await t.getAttribute("href").catch(() => null);
+        if (!href) throw error;
+        await page.goto(new URL(href, page.url()).toString(), { waitUntil: "domcontentloaded", timeout: 60000 });
+      } await page.waitForLoadState("domcontentloaded").catch(() => {}); await page.waitForTimeout(2500); return true; },
     fill: async (spec, value) => { const t = await visible(spec); if (!t) return false; await t.fill(value); return true; },
     value: async (spec) => { const t = await visible(spec); return t ? t.inputValue().catch(() => null) : null; },
     textOf: async (spec) => { const t = await visible(spec); return t ? (await t.innerText()).slice(0, 200) : null; },

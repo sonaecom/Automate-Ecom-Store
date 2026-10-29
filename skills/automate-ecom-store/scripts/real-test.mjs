@@ -44,6 +44,7 @@ export function roundLog(options, result) {
     result: result.result,
     missing: result.missing?.length ? result.missing : undefined,
     error: result.error || undefined,
+    landed: result.landed || undefined,
     store_hash: storeHash(options.store),
     at: options.now || new Date().toISOString(),
   };
@@ -157,6 +158,7 @@ async function main() {
   console.log(`result: ${outcome.log.result}`);
   console.log(`actions: ${outcome.log.actions}`);
   if (outcome.log.missing) console.log(`missing: ${outcome.log.missing.join(", ")}`);
+  if (outcome.log.landed) console.log(`landed: ${outcome.log.landed}`);
   if (outcome.log.error) console.log(`error: ${outcome.log.error}`);
   console.log(`store_hash: ${outcome.log.store_hash}`);
   process.exit(outcome.code);

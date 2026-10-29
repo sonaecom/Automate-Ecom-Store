@@ -118,7 +118,7 @@ export async function runModule(page, request, hooks) {
   }
 
   if (request.module === "ads.read" || request.module === "ads.spend-topup") {
-    await clickNamed(page, selectors.ads.nav, hooks);
+    if (!await clickNamed(page, selectors.ads.nav, hooks)) return { result: "NAV_MISSING", actions: hooks.actions, missing: hooks.missing };
     const spend = await page.textOf(selectors.ads.spend);
     return { result: "READ", actions: hooks.actions, spend };
   }
@@ -136,6 +136,7 @@ export async function runModule(page, request, hooks) {
 
   const key = GENERIC[request.module] || "report";
   const nav = selectors[key]?.nav || selectors.report.nav;
-  await clickNamed(page, nav, hooks);
-  return { result: "READ", actions: hooks.actions };
+  const opened = await clickNamed(page, nav, hooks);
+  if (!opened) return { result: "NAV_MISSING", actions: hooks.actions, missing: hooks.missing };
+  return { result: "READ", actions: hooks.actions, landed: page.url ? new URL(page.url()).pathname : undefined };
 }
