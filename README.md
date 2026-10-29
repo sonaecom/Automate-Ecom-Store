@@ -95,18 +95,33 @@ Edit a module under `skills/automate-ecom-store/modules/`. Do not add a second `
 
 Internal test profiles, notes, and store-specific config stay on the shop computer. Put them in `local/` or in a `*.local` / `*.local.*` file. Those paths are gitignored. The public tree keeps placeholders and synthetic samples. Before a push, `.githooks/pre-push` rejects a tracked file that names an internal test store. Turn the hook on with `git config core.hooksPath .githooks`.
 
+## Docs
+
+| Read this | For |
+| --- | --- |
+| `skills/automate-ecom-store/SKILL.md` | Route from a job to one module |
+| `skills/automate-ecom-store/account-safety.md` | Pace, caps, captcha, one visible tab |
+| `skills/automate-ecom-store/policies/LAYER.md` | Policy gate, fee and chat blocks, weekly re-check gaps |
+| `skills/automate-ecom-store/modules/selling/README.md` | Day-to-day selling map |
+| `skills/automate-ecom-store/modules/fees/fee-cap.md` | Fee percent of GMV and join/leave proposals |
+| `skills/automate-ecom-store/modules/fx/reporting.md` | Market or custom monthly rates into VND |
+| `skills/automate-ecom-store/modules/orders/cancel-return.md` | Cancellation versus shipped-only returns |
+| `skills/automate-ecom-store/CHANGELOG.md` | What each version changed |
+| `dashboard/web/README.md` | Optional web dashboard, sample data, password |
+
 ## Layout
 
 ```text
+README.md
 skills/automate-ecom-store/SKILL.md
 skills/automate-ecom-store/account-safety.md
 skills/automate-ecom-store/session-runner.md
-skills/automate-ecom-store/config.example.yaml
-skills/automate-ecom-store/scripts/
-skills/automate-ecom-store/modules/shopee/
-skills/automate-ecom-store/modules/lazada/
-skills/automate-ecom-store/modules/tiktokshop/
-dashboard/web/
+skills/automate-ecom-store/policies/          market notes and the rule list
+skills/automate-ecom-store/modules/          one file per job
+skills/automate-ecom-store/scripts/          checks, pace, caps, reconciles
+skills/automate-ecom-store/templates/        synthetic samples
+dashboard/web/                               optional Vietnamese dashboard
+.githooks/pre-push                           secret scan and private-name check
 ```
 
 ## License

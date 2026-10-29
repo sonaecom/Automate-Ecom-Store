@@ -30,4 +30,4 @@ Official URLs are listed in `{baseDir}/policies/sources.yaml`, including every r
 
 Lazada PH, MY, and ID coverage is incomplete and needs a browser re-check in the weekly updater. The note is repeated in `{baseDir}/policies/incoming/README.md`.
 
-Voucher rules were not captured from an official page in this pack. An official invite limit was not captured either. Keep the skill's invite cap. Do not invent a voucher term or an invite limit. Affiliate checks run through `affiliate-gate.mjs`. Return clocks run through `return-alerts.mjs`.
+Voucher rules were not captured from an official page in this pack. An official invite limit was not captured either. Keep the skill's invite cap. Do not invent a voucher term or an invite limit. The weekly updater prints these gaps on every run so the browser re-check includes them with the Lazada PH, MY, and ID pages. Affiliate checks run through `affiliate-gate.mjs`. Return clocks run through `return-alerts.mjs`.

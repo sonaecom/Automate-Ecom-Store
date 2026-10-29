@@ -110,6 +110,8 @@ const sources = parseSources(readFileSync(sourcesPath, "utf8"));
 if (sources.some((source) => source.platform === "lazada" && ["PH", "MY", "ID"].includes(source.market) && needsBrowser(source))) {
   console.log("note: Lazada PH/MY/ID coverage is incomplete and needs a browser re-check. A timed-out or empty fetch is not the local rule.");
 }
+console.log("gap vouchers: not captured. Browser re-check the voucher pages marked not read.");
+console.log("gap invite_limits: not captured. Keep the skill cap. Do not invent an invite limit.");
 const cacheDir = join(homedir(), ".automate-ecom-store", "policy-cache");
 const changelog = join(homedir(), ".automate-ecom-store", "policy-changelog.md");
 let alerts = 0;

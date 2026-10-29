@@ -2,6 +2,11 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.13.0
+
+- The 2026-10-29 policy pack is the 153-rule file already in `policies/`. Markers stay as recorded. The weekly check now repeats the open gaps: voucher pages, invite limits, and Lazada PH, MY, and ID, for a browser re-check.
+- The public README has the one-command install, the onboarding steps, a docs index, and the file tree.
+
 ## 1.12.0
 
 - Selling operations are mapped in `modules/selling/README.md`. Added order handling, creator chat replies, public review replies, video and livestream publishing, competitor monitoring, and a per-market price step. Listing, homepage, inventory, restock, post-delivery, retention, and the growth and growth-stage modules stay the paths they already were.
