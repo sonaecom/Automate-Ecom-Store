@@ -36,3 +36,32 @@ source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=765418201
 ## Gaps (not researched / not readable)
 
 - Not covered from official pages this pass: affiliate/KOL rules, voucher T&Cs, detailed return/refund SLAs, shop-health metric targets beyond those above, full prohibited-items lists. Add on next re-check.
+
+## Update 2026-10-29: affiliate, vouchers/promotions, returns
+
+### Additional sources
+
+| URL | Title | Read date | Status |
+|---|---|---|---|
+| https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en | TikTok Shop Affiliate Marketing Seller & Product Qualification Guidelines (07/21/2026) | 2026-10-29 | read in full; hosted on SG Seller University, no 'Applies to' list shown - applicability to PH/MY/ID unconfirmed |
+| https://seller-sg.tiktok.com/university/essay?knowledge_id=7654191066023681&lang=en | TikTok Shop Free Sample Guide for Sellers (10/21/2026) | 2026-10-29 | snippet: SG-hosted, how-to guide |
+| https://seller-my.tiktok.com/university/essay?knowledge_id=10000852&lang=en | TikTok Shop MY Customer Order Cancellation, Return and Refund Policy (10/29/2026) | 2026-10-29 | read in full (MY 'Returns And Refunds' detail article with day counts not read) |
+
+### affiliate
+
+- **[TI-MY-123] (block)** Shop MUST have no counterfeit-related AHR deduction in last 60 days and Store Rating ≥ 2 to use Affiliate Marketing — threshold: "at least 2"; 60 calendar days — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en — ⚠️ Applicability to this market not stated on page (SG Seller University)
+- **[TI-MY-124] (warn)** Product affiliate eligibility: negative review rate <1% (Electronics/Fashion) / <0.6% (FMCG/Lifestyle); seller-fault return rate <2% / <1.8% — threshold: applies after ≥4 negative reviews / ≥4 seller-fault returns — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en — ⚠️ Applicability to this market not stated on page (SG Seller University)
+- **[TI-MY-125] (block)** Shop disqualified if Store Rating < 1.5, ≥3 counterfeit violations in 60 days, or deactivation (permanent disqualification) — threshold: <1.5; >=3 in 60 days — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en — ⚠️ Applicability to this market not stated on page (SG Seller University)
+- **[TI-MY-126] (warn)** Free samples: creator eligibility/stock/approval rules set centrally in Sample Settings; Target invite can auto-approve all invited creators — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654191066023681&lang=en — ⚠️ Applicability to this market not stated on page (SG Seller University)
+
+### vouchers
+
+- No rule captured from an official page this pass (see sources table for 'not read').
+
+### returns
+
+- **[TI-MY-148] (block)** MUST NOT reject returns unreasonably (incl. seller-defined Change-of-Mind criteria); MUST refund exact amount paid; alternative solutions need customer agreement + evidence — source: https://seller-my.tiktok.com/university/essay?knowledge_id=10000852&lang=en
+
+### chat
+
+- **[TI-MY-147] (block)** MUST NOT ask customers to cancel orders; seller cancellations count toward SFCR — source: https://seller-my.tiktok.com/university/essay?knowledge_id=10000852&lang=en

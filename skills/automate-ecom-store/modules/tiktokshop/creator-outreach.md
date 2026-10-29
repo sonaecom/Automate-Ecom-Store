@@ -23,7 +23,13 @@ The person wants TikTok Shop creators invited from the official affiliate or cre
 
 1. Finish account-safety session start. Hint for the invite screen: TikTok Shop Affiliate or creator invites. If that area is not on screen, stop and screenshot. Do not tour the rest of TikTok Shop.
 2. First supervised run: stop on the invite screen, save `screenshots/template-invite-screen.png`, and ask the person to confirm this is the creator or affiliate invite form. Do not type and do not send on that first visit.
-3. After the person confirms the screen in this chat, continue in the same tab. Fill top to bottom only the fields that are actually on the form: name, start, end, commission or reward, products, sample, creators, message. Skip a field the form does not have. Do not invent a Shopee-only control.
+3. After the person confirms the screen in this chat, run the affiliate gate. Shop rating under 2, a counterfeit deduction in 60 days, or a disqualified shop is `BLOCK`. A product over the negative-review or seller-fault return threshold is `SKIP`. Invite only `ALLOW` products. The qualification page marker stays `applicability to PH/MY/ID unconfirmed`. Do not treat a skipped product as eligible. Voucher rules and an official invite limit were not captured. Keep the skill cap.
+
+```bash
+node {baseDir}/scripts/affiliate-gate.mjs --platform tiktokshop --market <MARKET> --store-rating <RATING> --counterfeit-60d <N> --deactivated no --products <PRODUCT_CSV>
+```
+
+Continue in the same tab. Fill top to bottom only the fields that are actually on the form: name, start, end, commission or reward, products, sample, creators, message. Skip a field the form does not have. Do not invent a Shopee-only control. Do not add a `SKIP` product.
 4. Start time must be in the future. Commission fields: select all, then type, then read the value back. If the field appended digits, select all and type once more. If it still mismatches, stop.
 5. If a sample control exists, choose the variation by its own name (`<VARIATION_NAME>` from private task config). Never trust the product title. If the exact name is missing, stop. If no sample control exists, do not add a sample. Ask if the person expected one.
 6. Dedupe handles against `paths.invited_csv` with `dedupe-csv.mjs`. Invite `NEW` handles only, in on-screen list order, in batches of `affiliate_batch_size` (default 10), up to `kol_count` and the remaining `affiliate_invites` cap (default 30). Long pause between batches. If the list ends early, do not submit.

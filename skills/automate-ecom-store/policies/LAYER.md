@@ -2,7 +2,7 @@
 
 Read this with `account-safety.md` before every module. If they disagree, the stricter rule wins. Account safety still wins on pace, captcha, one visible tab, and not moving money.
 
-The market file is `policies/<platform>/<MARKET>.md` for Shopee, TikTok Shop, and Lazada, and for PH, VN, MY, ID, TH, and SG. PH, MY, and ID notes read on 2026-10-29 live in those files. `policies/rules.yaml` is the rule list the gate loads for that pair. Each rule keeps its source URL and retrieved date. `UNVERIFIED`, `snippet only`, and `not read` stay as recorded.
+The market file is `policies/<platform>/<MARKET>.md` for Shopee, TikTok Shop, and Lazada, and for PH, VN, MY, ID, TH, and SG. PH, MY, and ID notes read on 2026-10-29 live in those files. `policies/rules.yaml` has 153 rules. Each rule keeps its source URL and retrieved date. `UNVERIFIED`, `snippet only`, `not read`, and `applicability to PH/MY/ID unconfirmed` stay as recorded.
 
 ```bash
 node {baseDir}/scripts/policy-gate.mjs --platform <PLATFORM> --market <MARKET> --action <ACTION> --text "<TEXT>"
@@ -29,3 +29,5 @@ It fetches `policies/sources.yaml` from the public pages, diffs the snapshot, ap
 Official URLs are listed in `{baseDir}/policies/sources.yaml`, including every research URL and its status from 2026-10-29.
 
 Lazada PH, MY, and ID coverage is incomplete and needs a browser re-check in the weekly updater. The note is repeated in `{baseDir}/policies/incoming/README.md`.
+
+Voucher rules were not captured from an official page in this pack. An official invite limit was not captured either. Keep the skill's invite cap. Do not invent a voucher term or an invite limit. Affiliate checks run through `affiliate-gate.mjs`. Return clocks run through `return-alerts.mjs`.

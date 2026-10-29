@@ -2,6 +2,11 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.10.0
+
+- Policy pack replaced with 153 rules. Ids 105–153 add affiliate, returns, and chat rules. Markers `UNVERIFIED`, `snippet only`, `not read`, and `applicability to PH/MY/ID unconfirmed` stay as recorded.
+- Affiliate invites check those rules first. A Shopee MY targeted KOL offer needs a store-wide campaign. TikTok product and shop thresholds skip ineligible products. Return alerts use the TikTok 2-day review and the Shopee PH 1-day evidence reply. Voucher rules, official invite limits, and Lazada coverage remain gaps.
+
 ## 1.9.0
 
 - Platform fee cap. The owner sets a maximum fee percent of GMV per store, platform, and market, and optionally per SKU or category. Settlement exports supply commission, payment fee, service programs, and affiliate commission. Ads are included only when the owner turns that on. The skill computes the percent per order, SKU, and store day or month, alerts near 90 percent of the cap and over the cap, names the program and SKU, and proposes an opt-out, a price change, or stopping a promo. The owner approves. Nothing is changed. Two exports that disagree are both shown.

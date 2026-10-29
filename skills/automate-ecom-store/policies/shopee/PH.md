@@ -49,3 +49,34 @@ source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-p
 ## Gaps (not researched / not readable)
 
 - Not covered from official pages this pass: affiliate/KOL rules, voucher T&Cs, detailed return/refund SLAs, shop-health metric targets beyond those above, full prohibited-items lists. Add on next re-check.
+
+## Update 2026-10-29: affiliate, vouchers/promotions, returns
+
+### Additional sources
+
+| URL | Title | Read date | Status |
+|---|---|---|---|
+| https://help.shopee.ph/portal/10/article/174380-Commission-Structure-on-Shopee | Shopee PH Help - Commission Structure on Shopee (affiliate, eff. April 1, 2025) | 2026-10-29 | snippet: official URL via search index |
+| https://seller.shopee.ph/edu/article/1137 | Shopee PH - Shopee Returns Window (updated Sep 11, 2024) | 2026-10-29 | snippet: official URL via search index (JS page) |
+| https://seller.shopee.ph/edu/article/7808/New-Process-Shopee-New-Return-Refund-Process | Shopee PH - Shopee's Return/Refund Process | 2026-10-29 | snippet: official URL via search index |
+| https://seller.shopee.ph/edu/article/7822/return-refund-on-shopee-app | Shopee PH - Processing Return/Refund Requests | 2026-10-29 | snippet: official URL via search index |
+| https://seller.shopee.ph/edu/article/3088 | Shopee PH - Filling in voucher details | 2026-10-29 | not read: only title seen in search; no rule text captured |
+
+### affiliate
+
+- **[SH-PH-105] (warn)** CommsXtra seller-set affiliate commission MUST be at least 1% (up to 9% Shopee commission on Live/Video; External 2.5%, cap ₱40) — threshold: "at least 1%"; "no order cap for seller set commission" — source: https://help.shopee.ph/portal/10/article/174380-Commission-Structure-on-Shopee
+
+### vouchers
+
+- No rule captured from an official page this pass (see sources table for 'not read').
+
+### returns
+
+- **[SH-PH-106] (warn)** Buyer return/refund window: Mall 15 days, Non-Mall 7 days from 'Delivered' — threshold: Mall 15 days; Non-Mall 7 days — source: https://seller.shopee.ph/edu/article/1137
+- **[SH-PH-107] (block)** MUST respond to Shopee Agent evidence request within 1 day, else case assessed without seller evidence — threshold: within 1 day — source: https://seller.shopee.ph/edu/article/7822/return-refund-on-shopee-app
+- **[SH-PH-108] (warn)** Dispute a non-seller-fault R/R resolution within 2 days (incl. Sundays and Holidays) with valid proof; forward+return shipping fees charged to seller on buyer-win — threshold: 2 days — source: https://seller.shopee.ph/edu/article/7808/New-Process-Shopee-New-Return-Refund-Process
+- **[SH-PH-109] (warn)** MUST assist buyers with warranty claims outside the Returns Window — source: https://seller.shopee.ph/edu/article/7808/New-Process-Shopee-New-Return-Refund-Process
+
+### chat
+
+- No rule captured from an official page this pass (see sources table for 'not read').

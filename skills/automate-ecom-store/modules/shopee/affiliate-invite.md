@@ -43,6 +43,11 @@ Write the message into a file under `data/` before the length check. Continue on
 3. `dedupe-csv.mjs --list` on `paths.invited_csv`. Remember the existing set.
 4. Read remaining invite room from caps: session limit and daily limit minus counts already used. `kol_count` must be a positive integer no higher than that room and no higher than the session cap (default 30). If it is higher, stop and ask. Do not raise the cap.
 5. Check duration. On `TIME_UP`, end the session without opening the form.
+6. Run the affiliate gate before the form. A Targeted offer in MY needs an ongoing store-wide campaign (`--store-wide yes`). On `BLOCK` or `SKIP_ALL`, do not open the form and do not invite. On `WARN`, show the owner and wait. Voucher rules and an official invite limit were not in the pages read on 2026-10-29. Keep the skill cap. Do not invent either number.
+
+```bash
+node {baseDir}/scripts/affiliate-gate.mjs --platform shopee --market <MARKET> --offer targeted --store-wide <yes|no> --commission <PERCENT>
+```
 
 **Done when:** the message is `OK`, the invited set is loaded, and `kol_count` fits the remaining cap.
 

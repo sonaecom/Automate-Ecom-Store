@@ -31,3 +31,36 @@ source_url: https://seller.shopee.com.my/edu/article/2082/calculate-seller-penal
 ## Gaps (not researched / not readable)
 
 - Not covered from official pages this pass: affiliate/KOL rules, voucher T&Cs, detailed return/refund SLAs, shop-health metric targets beyond those above, full prohibited-items lists. Add on next re-check.
+
+## Update 2026-10-29: affiliate, vouchers/promotions, returns
+
+### Additional sources
+
+| URL | Title | Read date | Status |
+|---|---|---|---|
+| https://seller.shopee.com.my/edu/article/26669 | Shopee MY - AMS Commission Rules | 2026-10-29 | snippet: official URL via search index |
+| https://seller.shopee.com.my/edu/article/13951 | Shopee MY - AMS FAQs (19-11-2025) | 2026-10-29 | read in full |
+| https://seller.shopee.com.my/edu/article/11867 | Shopee MY - Return/Refund FAQ for sellers | 2026-10-29 | snippet: official URL via search index |
+| https://seller.shopee.com.my/edu/article/2483 | Shopee MY - Mall Return/Refund Policy | 2026-10-29 | not read: snippet omitted the day numbers |
+| https://seller.shopee.com.my/edu/article/20313/about-voucher-campaign | Shopee MY - Voucher Campaign | 2026-10-29 | not read: only title/summary seen |
+
+### affiliate
+
+- **[SH-MY-110] (block)** AMS store-wide commission MUST be at least 3% (0.5% for EL products); minimum campaign 7 days — threshold: min 3% (0.5% EL); min 7 days — source: https://seller.shopee.com.my/edu/article/13951
+- **[SH-MY-111] (block)** Targeted KOL offers require an ongoing store-wide AMS campaign in the same period; seller cannot choose individual affiliate partners or per-partner rates — source: https://seller.shopee.com.my/edu/article/13951
+- **[SH-MY-112] (warn)** To lower an ongoing AMS rate MUST terminate and recreate (termination permanent); commission still owed for clicks within 7-day window — threshold: 7-day attribution, last-click — source: https://seller.shopee.com.my/edu/article/13951
+- **[SH-MY-113] (block)** AMS banners MUST include Shopee logo and MUST NOT contain competitor logos, outdated dates, tobacco/gambling/weapons, illegal, obscene, hate content — source: https://seller.shopee.com.my/edu/article/13951
+- **[SH-MY-114] (block)** AMS orders must be legitimate; false transactions are invalid (validation) — source: https://seller.shopee.com.my/edu/article/13951
+- **[SH-MY-115] (warn)** Indirect AMS orders charged at 50% of seller rate (effective 24 May 2026); only first order within 7 days charged — threshold: 50% — source: https://seller.shopee.com.my/edu/article/26669
+
+### vouchers
+
+- No rule captured from an official page this pass (see sources table for 'not read').
+
+### returns
+
+- **[SH-MY-116] (warn)** Dispute approved R/R within 3 days after return shipping period, or within 2 days of receiving parcel if received in grey-out period — threshold: 3 days / 2 days — source: https://seller.shopee.com.my/edu/article/11867
+
+### chat
+
+- No rule captured from an official page this pass (see sources table for 'not read').

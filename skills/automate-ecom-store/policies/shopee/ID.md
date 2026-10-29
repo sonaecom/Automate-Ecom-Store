@@ -33,3 +33,30 @@ source_url: https://seller.shopee.co.id/edu/article/7070
 ## Gaps (not researched / not readable)
 
 - Not covered from official pages this pass: affiliate/KOL rules, voucher T&Cs, detailed return/refund SLAs, shop-health metric targets beyond those above, full prohibited-items lists. Add on next re-check.
+
+## Update 2026-10-29: affiliate, vouchers/promotions, returns
+
+### Additional sources
+
+| URL | Title | Read date | Status |
+|---|---|---|---|
+| https://seller.shopee.co.id/edu/article/11239 | Shopee ID - Mekanisme Perhitungan Komisi AMS (09-10-2025) | 2026-10-29 | snippet: official URL via search index |
+| https://seller.shopee.co.id/edu/article/23961 | Shopee ID - Pengajuan Pengembalian Barang/Dana dari Pembeli | 2026-10-29 | snippet (search synthesis only, no verbatim text) - treat as unverified |
+| https://seller.shopee.co.id/edu/article/24020 | Shopee ID - Merespons Pengajuan Pengembalian Barang/Dana | 2026-10-29 | snippet (search synthesis only) - unverified |
+| https://seller.shopee.co.id/edu/article/21016 | Shopee ID - Kebijakan Penyalahgunaan Voucher Live & Video | 2026-10-29 | not read: direct fetch returns empty JS shell; only search summary |
+
+### affiliate
+
+- **[SH-ID-117] (warn)** AMS: direct orders charged full set commission; indirect orders half ('Setengah'); unpaid commission via payment link on the 18th of next month — threshold: 50% indirect — source: https://seller.shopee.co.id/edu/article/11239
+
+### vouchers
+
+- No rule captured from an official page this pass (see sources table for 'not read').
+
+### returns
+
+- **[SH-ID-118] (warn)** Buyer return window: Mall 15 days; non-Mall 2 calendar days after receipt or before order completion; partial-refund response 1 calendar day — threshold: 15 / 2 / 1 days — source: https://seller.shopee.co.id/edu/article/23961 — ⚠️ UNVERIFIED: from search synthesis, no verbatim quote captured
+
+### chat
+
+- No rule captured from an official page this pass (see sources table for 'not read').

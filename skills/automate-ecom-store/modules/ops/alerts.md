@@ -22,6 +22,7 @@ Send an alert when:
 - Shop health from `modules/scale/health.md` is `EARLY` or `BREACH` against the late-shipment, cancellation, chat-reply, or penalty threshold in `policies/rules.yaml` for that same market. An `unverified=yes` Lazada PH, MY, or ID figure is still an alert, and the local page still needs a browser re-check. Do not cancel orders or open a second account to change the number.
 - A sales, ads, or wallet row from `modules/fx/reporting.md` has no rate or the two rate files disagree. Do not invent a rate and do not average the two files.
 - A dispute deadline from `modules/orders/disputes.md` is inside 2 days. Do not submit the appeal yourself.
+- `return-alerts.mjs` prints `DUE` or `OVERDUE`. TikTok Shop PH and ID return reviews use 2 calendar days. Shopee PH evidence replies use 1 day. Do not file the reply yourself.
 - Account security from `modules/ops/account-security.md` shows a new login or a bank-account change. Do not edit the account.
 
 Each alert names the platform, the market, the two exact figures, and the export time. Last 4 digits of a card only, and only if a card was already on screen. Never the full number. Never a top-up.

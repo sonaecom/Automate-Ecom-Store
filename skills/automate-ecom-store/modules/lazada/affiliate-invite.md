@@ -21,7 +21,11 @@ The person wants Lazada affiliates invited from the official affiliate screen. R
 
 ## Steps
 
-1. Finish account-safety session start. Hint for the invite screen: Lazada Affiliate. If that area is not on screen, stop and screenshot. Do not tour the rest of Lazada.
+1. Finish account-safety session start. Hint for the invite screen: Lazada Affiliate. If that area is not on screen, stop and screenshot. Do not tour the rest of Lazada. Run the affiliate gate. Lazada PH, MY, and ID coverage is incomplete. The captured note is commission after delivery, marked from pages that were not fully read. Voucher rules and an official invite limit were not captured. Do not invent them. On `BLOCK`, do not invite.
+
+```bash
+node {baseDir}/scripts/affiliate-gate.mjs --platform lazada --market <MARKET>
+```
 2. First supervised run: stop on the invite screen, save `screenshots/template-invite-screen.png`, and ask the person to confirm this is the creator or affiliate invite form. Do not type and do not send on that first visit.
 3. After the person confirms the screen in this chat, continue in the same tab. Fill top to bottom only the fields that are actually on the form: name, start, end, commission or reward, products, sample, creators, message. Skip a field the form does not have. Do not invent a Shopee-only control.
 4. Start time must be in the future. Commission fields: select all, then type, then read the value back. If the field appended digits, select all and type once more. If it still mismatches, stop.

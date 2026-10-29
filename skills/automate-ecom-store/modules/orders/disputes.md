@@ -15,7 +15,13 @@ A return, a parcel the buyer says did not arrive, or a complaint with a deadline
 ## Steps
 
 1. Read the case list once. For each open case copy the case label, type, status, and the deadline printed on the page. Do not invent a deadline. If the page has no date, write `deadline: not shown` and ask.
-2. Sort by the nearest deadline. Tell the owner any deadline inside 2 days.
+2. Sort by the nearest deadline. Tell the owner any deadline inside 2 days. Also run the return alert for this market. TikTok Shop PH and ID: review a return or refund within 2 calendar days or it is auto-approved. Shopee PH: reply to an evidence request within 1 day. `DUE` and `OVERDUE` go to the owner. Do not send the reply from the alert. A market with no matching rule prints `rule none`. Do not invent that deadline. Lazada coverage for these clocks is incomplete.
+
+```bash
+node {baseDir}/scripts/return-alerts.mjs --platform <PLATFORM> --market <MARKET> --as-of <YYYY-MM-DD> --cases <CASES_CSV>
+```
+
+Columns: `case_id,kind,opened_on`. `kind` is `return_review` or `evidence`.
 3. Evidence lives in Drive under `Automate-Ecom-Store/images/` or a packing photo the person already saved. Name the file. Do not fabricate a photo or a tracking event. A packing video is useful only if it exists.
 4. Draft the reply in the platform case form. Do not send it. The draft states facts from the order export: ship date, carrier status as printed, and the items. No refund promise. No off-platform payment.
 5. Show the draft and the deadline to the owner. Submit only after they say yes for that case, and only if dry-run is off.

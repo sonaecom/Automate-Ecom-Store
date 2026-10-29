@@ -5,7 +5,7 @@ retrieved: 2026-10-29
 source_url: https://sellercenter.lazada.co.id/helpcenter/s/faq/knowledge?questionId=1000145984
 ---
 
-> Lazada ID coverage in this file is incomplete. The weekly updater must browser re-check these pages. UNVERIFIED, snippet only, and not read markers stay in force.
+> Lazada ID coverage in this file is incomplete. The weekly updater must browser re-check these pages. UNVERIFIED, snippet only, not read, and applicability-unconfirmed markers stay in force.
 
 # lazada / ID seller policy rules (retrieved 2026-10-29)
 
@@ -25,3 +25,28 @@ source_url: https://sellercenter.lazada.co.id/helpcenter/s/faq/knowledge?questio
 ## Gaps (not researched / not readable)
 
 - Not covered from official pages this pass: affiliate/KOL rules, voucher T&Cs, detailed return/refund SLAs, shop-health metric targets beyond those above, full prohibited-items lists. Add on next re-check.
+
+## Update 2026-10-29: affiliate, vouchers/promotions, returns
+
+### Additional sources
+
+| URL | Title | Read date | Status |
+|---|---|---|---|
+| https://www.lazadasolutions.com/solutions-overview/sponsored-affiliate/ | Lazada Sponsored Solutions - Sponsored Affiliate (regional, not market-specific) | 2026-10-29 | read in full |
+| https://cdn.contract.alibaba.com/terms/common_product_agreement/20250723151801794/20250723151801794.html?lng=en | Lazada Affiliates Program - General Terms & Conditions | 2026-10-29 | not read: not fetched this pass (time); affiliate-side terms |
+
+### affiliate
+
+- **[LA-ID-153] (warn)** Sponsored Affiliate is CPS: commission paid only after shoppers receive product; storewide rate by category, effective T+1 — source: https://www.lazadasolutions.com/solutions-overview/sponsored-affiliate/ — ⚠️ Regional Lazada Solutions page, not market-specific
+
+### vouchers
+
+- No rule captured from an official page this pass (see sources table for 'not read').
+
+### returns
+
+- No rule captured from an official page this pass (see sources table for 'not read').
+
+### chat
+
+- No rule captured from an official page this pass (see sources table for 'not read').

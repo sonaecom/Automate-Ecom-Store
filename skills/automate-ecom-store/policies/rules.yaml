@@ -943,3 +943,464 @@
   action: block
   source_url: https://www.lazada.com.ph/terms-conditions/
   retrieved: '2026-10-29'
+- id: SH-PH-105
+  platform: shopee
+  market: ph
+  category: affiliate
+  rule: CommsXtra seller-set affiliate commission MUST be at least 1% (up to 9% Shopee commission on Live/Video; External 2.5%, cap ₱40)
+  threshold: '"at least 1%"; "no order cap for seller set commission"'
+  action: warn
+  source_url: https://help.shopee.ph/portal/10/article/174380-Commission-Structure-on-Shopee
+  retrieved: '2026-10-29'
+- id: SH-PH-106
+  platform: shopee
+  market: ph
+  category: returns
+  rule: 'Buyer return/refund window: Mall 15 days, Non-Mall 7 days from ''Delivered'''
+  threshold: Mall 15 days; Non-Mall 7 days
+  action: warn
+  source_url: https://seller.shopee.ph/edu/article/1137
+  retrieved: '2026-10-29'
+- id: SH-PH-107
+  platform: shopee
+  market: ph
+  category: returns
+  rule: MUST respond to Shopee Agent evidence request within 1 day, else case assessed without seller evidence
+  threshold: within 1 day
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/7822/return-refund-on-shopee-app
+  retrieved: '2026-10-29'
+- id: SH-PH-108
+  platform: shopee
+  market: ph
+  category: returns
+  rule: Dispute a non-seller-fault R/R resolution within 2 days (incl. Sundays and Holidays) with valid proof; forward+return shipping fees charged to seller on buyer-win
+  threshold: 2 days
+  action: warn
+  source_url: https://seller.shopee.ph/edu/article/7808/New-Process-Shopee-New-Return-Refund-Process
+  retrieved: '2026-10-29'
+- id: SH-PH-109
+  platform: shopee
+  market: ph
+  category: returns
+  rule: MUST assist buyers with warranty claims outside the Returns Window
+  threshold: null
+  action: warn
+  source_url: https://seller.shopee.ph/edu/article/7808/New-Process-Shopee-New-Return-Refund-Process
+  retrieved: '2026-10-29'
+- id: SH-MY-110
+  platform: shopee
+  market: my
+  category: affiliate
+  rule: AMS store-wide commission MUST be at least 3% (0.5% for EL products); minimum campaign 7 days
+  threshold: min 3% (0.5% EL); min 7 days
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/13951
+  retrieved: '2026-10-29'
+- id: SH-MY-111
+  platform: shopee
+  market: my
+  category: affiliate
+  rule: Targeted KOL offers require an ongoing store-wide AMS campaign in the same period; seller cannot choose individual affiliate partners or per-partner rates
+  threshold: null
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/13951
+  retrieved: '2026-10-29'
+- id: SH-MY-112
+  platform: shopee
+  market: my
+  category: affiliate
+  rule: To lower an ongoing AMS rate MUST terminate and recreate (termination permanent); commission still owed for clicks within 7-day window
+  threshold: 7-day attribution, last-click
+  action: warn
+  source_url: https://seller.shopee.com.my/edu/article/13951
+  retrieved: '2026-10-29'
+- id: SH-MY-113
+  platform: shopee
+  market: my
+  category: affiliate
+  rule: AMS banners MUST include Shopee logo and MUST NOT contain competitor logos, outdated dates, tobacco/gambling/weapons, illegal, obscene, hate content
+  threshold: null
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/13951
+  retrieved: '2026-10-29'
+- id: SH-MY-114
+  platform: shopee
+  market: my
+  category: affiliate
+  rule: AMS orders must be legitimate; false transactions are invalid (validation)
+  threshold: null
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/13951
+  retrieved: '2026-10-29'
+- id: SH-MY-115
+  platform: shopee
+  market: my
+  category: affiliate
+  rule: Indirect AMS orders charged at 50% of seller rate (effective 24 May 2026); only first order within 7 days charged
+  threshold: 50%
+  action: warn
+  source_url: https://seller.shopee.com.my/edu/article/26669
+  retrieved: '2026-10-29'
+- id: SH-MY-116
+  platform: shopee
+  market: my
+  category: returns
+  rule: Dispute approved R/R within 3 days after return shipping period, or within 2 days of receiving parcel if received in grey-out period
+  threshold: 3 days / 2 days
+  action: warn
+  source_url: https://seller.shopee.com.my/edu/article/11867
+  retrieved: '2026-10-29'
+- id: SH-ID-117
+  platform: shopee
+  market: id
+  category: affiliate
+  rule: 'AMS: direct orders charged full set commission; indirect orders half (''Setengah''); unpaid commission via payment link on the 18th of next month'
+  threshold: 50% indirect
+  action: warn
+  source_url: https://seller.shopee.co.id/edu/article/11239
+  retrieved: '2026-10-29'
+- id: SH-ID-118
+  platform: shopee
+  market: id
+  category: returns
+  rule: 'Buyer return window: Mall 15 days; non-Mall 2 calendar days after receipt or before order completion; partial-refund response 1 calendar day'
+  threshold: 15 / 2 / 1 days
+  action: warn
+  source_url: https://seller.shopee.co.id/edu/article/23961
+  retrieved: '2026-10-29'
+  note: 'UNVERIFIED: from search synthesis, no verbatim quote captured'
+- id: TI-PH-119
+  platform: tiktok_shop
+  market: ph
+  category: affiliate
+  rule: Shop MUST have no counterfeit-related AHR deduction in last 60 days and Store Rating ≥ 2 to use Affiliate Marketing
+  threshold: '"at least 2"; 60 calendar days'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-PH-120
+  platform: tiktok_shop
+  market: ph
+  category: affiliate
+  rule: 'Product affiliate eligibility: negative review rate <1% (Electronics/Fashion) / <0.6% (FMCG/Lifestyle); seller-fault return rate <2% / <1.8%'
+  threshold: applies after ≥4 negative reviews / ≥4 seller-fault returns
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-PH-121
+  platform: tiktok_shop
+  market: ph
+  category: affiliate
+  rule: Shop disqualified if Store Rating < 1.5, ≥3 counterfeit violations in 60 days, or deactivation (permanent disqualification)
+  threshold: <1.5; >=3 in 60 days
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-PH-122
+  platform: tiktok_shop
+  market: ph
+  category: affiliate
+  rule: 'Free samples: creator eligibility/stock/approval rules set centrally in Sample Settings; Target invite can auto-approve all invited creators'
+  threshold: null
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654191066023681&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-MY-123
+  platform: tiktok_shop
+  market: my
+  category: affiliate
+  rule: Shop MUST have no counterfeit-related AHR deduction in last 60 days and Store Rating ≥ 2 to use Affiliate Marketing
+  threshold: '"at least 2"; 60 calendar days'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-MY-124
+  platform: tiktok_shop
+  market: my
+  category: affiliate
+  rule: 'Product affiliate eligibility: negative review rate <1% (Electronics/Fashion) / <0.6% (FMCG/Lifestyle); seller-fault return rate <2% / <1.8%'
+  threshold: applies after ≥4 negative reviews / ≥4 seller-fault returns
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-MY-125
+  platform: tiktok_shop
+  market: my
+  category: affiliate
+  rule: Shop disqualified if Store Rating < 1.5, ≥3 counterfeit violations in 60 days, or deactivation (permanent disqualification)
+  threshold: <1.5; >=3 in 60 days
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-MY-126
+  platform: tiktok_shop
+  market: my
+  category: affiliate
+  rule: 'Free samples: creator eligibility/stock/approval rules set centrally in Sample Settings; Target invite can auto-approve all invited creators'
+  threshold: null
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654191066023681&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-ID-127
+  platform: tiktok_shop
+  market: id
+  category: affiliate
+  rule: Shop MUST have no counterfeit-related AHR deduction in last 60 days and Store Rating ≥ 2 to use Affiliate Marketing
+  threshold: '"at least 2"; 60 calendar days'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-ID-128
+  platform: tiktok_shop
+  market: id
+  category: affiliate
+  rule: 'Product affiliate eligibility: negative review rate <1% (Electronics/Fashion) / <0.6% (FMCG/Lifestyle); seller-fault return rate <2% / <1.8%'
+  threshold: applies after ≥4 negative reviews / ≥4 seller-fault returns
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-ID-129
+  platform: tiktok_shop
+  market: id
+  category: affiliate
+  rule: Shop disqualified if Store Rating < 1.5, ≥3 counterfeit violations in 60 days, or deactivation (permanent disqualification)
+  threshold: <1.5; >=3 in 60 days
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=2874121260189441&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-ID-130
+  platform: tiktok_shop
+  market: id
+  category: affiliate
+  rule: 'Free samples: creator eligibility/stock/approval rules set centrally in Sample Settings; Target invite can auto-approve all invited creators'
+  threshold: null
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654191066023681&lang=en
+  retrieved: '2026-10-29'
+  note: Applicability to this market not stated on page (SG Seller University)
+- id: TI-ID-131
+  platform: tiktok_shop
+  market: id
+  category: affiliate
+  rule: Creators can request free samples only through TikTok Shop by Tokopedia
+  threshold: null
+  action: warn
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=7753803734861570&lang=en
+  retrieved: '2026-10-29'
+- id: TI-PH-132
+  platform: tiktok_shop
+  market: ph
+  category: returns
+  rule: MUST review return/refund requests within 2 calendar days, else auto-approved
+  threshold: 2 calendar days
+  action: block
+  source_url: https://seller-ph.tiktok.com/university/essay?knowledge_id=3599251858818817&lang=en
+  retrieved: '2026-10-29'
+- id: TI-PH-133
+  platform: tiktok_shop
+  market: ph
+  category: returns
+  rule: 'Buyer window: 6 Calendar Days (Non-Mall), 15 Calendar Days (Mall)'
+  threshold: 6 / 15 calendar days
+  action: warn
+  source_url: https://seller-ph.tiktok.com/university/essay?knowledge_id=3599251858818817&lang=en
+  retrieved: '2026-10-29'
+- id: TI-PH-134
+  platform: tiktok_shop
+  market: ph
+  category: returns
+  rule: Self-arranged returns MUST be reviewed within 2 calendar days of 'Delivered', else auto-approved; appeal within 7 calendar days; max one appeal; extra info within 24 hours
+  threshold: null
+  action: block
+  source_url: https://seller-ph.tiktok.com/university/essay?knowledge_id=3599251858818817&lang=en
+  retrieved: '2026-10-29'
+- id: TI-PH-135
+  platform: tiktok_shop
+  market: ph
+  category: returns
+  rule: If seller fails to review >90% of requests in time for 1 month, Auto-Approval Tool activates (requests <US$30, ≤3/customer/month, min 15 days)
+  threshold: '>90% / <US$30 / 15 days'
+  action: warn
+  source_url: https://seller-ph.tiktok.com/university/essay?knowledge_id=3599251858818817&lang=en
+  retrieved: '2026-10-29'
+- id: TI-PH-136
+  platform: tiktok_shop
+  market: ph
+  category: chat
+  rule: Partial/full refund may be offered via customer DMs after in-transit; off-platform screenshots may be rejected as evidence
+  threshold: null
+  action: warn
+  source_url: https://seller-ph.tiktok.com/university/essay?knowledge_id=3599251858818817&lang=en
+  retrieved: '2026-10-29'
+- id: TI-PH-137
+  platform: tiktok_shop
+  market: ph
+  category: returns
+  rule: Seller bears return shipping when the reason affects Seller-Fault Return & Refund Rate
+  threshold: null
+  action: warn
+  source_url: https://seller-ph.tiktok.com/university/essay?knowledge_id=3599251858818817&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-138
+  platform: tiktok_shop
+  market: id
+  category: returns
+  rule: MUST review return/refund requests within 2 calendar days, else auto-approved
+  threshold: 2 calendar days
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1683292773779217&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-139
+  platform: tiktok_shop
+  market: id
+  category: returns
+  rule: 'Buyer window: 6 Calendar Days (Non-Mall), 15 Calendar Days (Mall) ; Tokopedia orders 6 days'
+  threshold: 6 / 15 calendar days
+  action: warn
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1683292773779217&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-140
+  platform: tiktok_shop
+  market: id
+  category: returns
+  rule: Self-arranged returns MUST be reviewed within 2 working days of 'Delivered', else auto-approved; appeal within 7 calendar days; max one appeal; extra info within 24 hours
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1683292773779217&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-141
+  platform: tiktok_shop
+  market: id
+  category: returns
+  rule: If seller fails to review >90% of requests in time for 1 month, Auto-Approval Tool activates (requests <US$30, ≤3/customer/month, min 15 days)
+  threshold: '>90% / <US$30 / 15 days'
+  action: warn
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1683292773779217&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-142
+  platform: tiktok_shop
+  market: id
+  category: chat
+  rule: Partial/full refund may be offered via customer DMs after in-transit; off-platform screenshots may be rejected as evidence
+  threshold: null
+  action: warn
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1683292773779217&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-143
+  platform: tiktok_shop
+  market: id
+  category: returns
+  rule: Seller bears return shipping when the reason affects Seller-Fault Return & Refund Rate
+  threshold: null
+  action: warn
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1683292773779217&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-144
+  platform: tiktok_shop
+  market: id
+  category: returns
+  rule: '[From 1 June 2026, grace period until further notice] seller contributes up to Rp5.000 per direction for failed delivery / buyer-fault returns'
+  threshold: Rp5.000
+  action: warn
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=6837727601690370&lang=id-ID
+  retrieved: '2026-10-29'
+- id: TI-PH-145
+  platform: tiktok_shop
+  market: ph
+  category: chat
+  rule: MUST NOT ask customers to cancel orders; seller cancellations count toward SFCR
+  threshold: null
+  action: block
+  source_url: https://seller-my.tiktok.com/university/essay?knowledge_id=10000852&lang=en
+  retrieved: '2026-10-29'
+  note: Read on MY policy page
+- id: TI-PH-146
+  platform: tiktok_shop
+  market: ph
+  category: returns
+  rule: MUST NOT reject returns unreasonably (incl. seller-defined Change-of-Mind criteria); MUST refund exact amount paid; alternative solutions need customer agreement + evidence
+  threshold: null
+  action: block
+  source_url: https://seller-my.tiktok.com/university/essay?knowledge_id=10000852&lang=en
+  retrieved: '2026-10-29'
+  note: Read on MY policy page
+- id: TI-MY-147
+  platform: tiktok_shop
+  market: my
+  category: chat
+  rule: MUST NOT ask customers to cancel orders; seller cancellations count toward SFCR
+  threshold: null
+  action: block
+  source_url: https://seller-my.tiktok.com/university/essay?knowledge_id=10000852&lang=en
+  retrieved: '2026-10-29'
+- id: TI-MY-148
+  platform: tiktok_shop
+  market: my
+  category: returns
+  rule: MUST NOT reject returns unreasonably (incl. seller-defined Change-of-Mind criteria); MUST refund exact amount paid; alternative solutions need customer agreement + evidence
+  threshold: null
+  action: block
+  source_url: https://seller-my.tiktok.com/university/essay?knowledge_id=10000852&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-149
+  platform: tiktok_shop
+  market: id
+  category: chat
+  rule: MUST NOT ask customers to cancel orders; seller cancellations count toward SFCR
+  threshold: null
+  action: block
+  source_url: https://seller-my.tiktok.com/university/essay?knowledge_id=10000852&lang=en
+  retrieved: '2026-10-29'
+  note: Read on MY policy page
+- id: TI-ID-150
+  platform: tiktok_shop
+  market: id
+  category: returns
+  rule: MUST NOT reject returns unreasonably (incl. seller-defined Change-of-Mind criteria); MUST refund exact amount paid; alternative solutions need customer agreement + evidence
+  threshold: null
+  action: block
+  source_url: https://seller-my.tiktok.com/university/essay?knowledge_id=10000852&lang=en
+  retrieved: '2026-10-29'
+  note: Read on MY policy page
+- id: LA-PH-151
+  platform: lazada
+  market: ph
+  category: affiliate
+  rule: 'Sponsored Affiliate is CPS: commission paid only after shoppers receive product; storewide rate by category, effective T+1'
+  threshold: null
+  action: warn
+  source_url: https://www.lazadasolutions.com/solutions-overview/sponsored-affiliate/
+  retrieved: '2026-10-29'
+  note: Regional Lazada Solutions page, not market-specific
+- id: LA-MY-152
+  platform: lazada
+  market: my
+  category: affiliate
+  rule: 'Sponsored Affiliate is CPS: commission paid only after shoppers receive product; storewide rate by category, effective T+1'
+  threshold: null
+  action: warn
+  source_url: https://www.lazadasolutions.com/solutions-overview/sponsored-affiliate/
+  retrieved: '2026-10-29'
+  note: Regional Lazada Solutions page, not market-specific
+- id: LA-ID-153
+  platform: lazada
+  market: id
+  category: affiliate
+  rule: 'Sponsored Affiliate is CPS: commission paid only after shoppers receive product; storewide rate by category, effective T+1'
+  threshold: null
+  action: warn
+  source_url: https://www.lazadasolutions.com/solutions-overview/sponsored-affiliate/
+  retrieved: '2026-10-29'
+  note: Regional Lazada Solutions page, not market-specific

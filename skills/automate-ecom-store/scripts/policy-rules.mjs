@@ -172,6 +172,10 @@ export function textHits(text, rules) {
     if (rule) hits.push(hit(rule, "fake_discount"));
     else hits.push({ id: "pricing_lead_time", status: "block", verify: "no", source: "policies/rules.yaml", why: "fake_discount" });
   }
+  if (/ask(?:ing)? (?:the )?(?:customer|buyer)s? to cancel|please cancel (?:the |your )?order|hủy đơn|batalkan pesanan/i.test(text)) {
+    const rule = firstRule(rules, (item) => item.category === "chat" && /cancel orders/i.test(item.rule || ""));
+    if (rule) hits.push(hit(rule, "cancel_ask"));
+  }
   const seen = new Map();
   for (const item of hits) {
     const previous = seen.get(item.id);
