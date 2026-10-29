@@ -23,6 +23,10 @@
       "role": "textbox",
       "name": "Search"
     },
+    "row": {
+      "role": "link",
+      "name": "Product"
+    },
     "edit": {
       "role": "button",
       "name": "Edit"
@@ -58,12 +62,40 @@
     "nav": {
       "role": "link",
       "name": "Chat Management"
+    },
+    "thread": {
+      "role": "link",
+      "name": "Conversation"
+    },
+    "box": {
+      "role": "textbox",
+      "name": "Type a message"
+    },
+    "send": {
+      "role": "button",
+      "name": "Send"
     }
   },
   "promo": {
     "nav": {
       "role": "link",
       "name": "Discount"
+    },
+    "create": {
+      "role": "button",
+      "name": "Create"
+    },
+    "name": {
+      "role": "textbox",
+      "name": "Promotion Name"
+    },
+    "save": {
+      "role": "button",
+      "name": "Save"
+    },
+    "delete": {
+      "role": "button",
+      "name": "Delete"
     }
   },
   "orders": {
@@ -76,6 +108,18 @@
     "nav": {
       "role": "link",
       "name": "Review Management"
+    },
+    "reply": {
+      "role": "button",
+      "name": "Reply"
+    },
+    "box": {
+      "role": "textbox",
+      "name": "Reply"
+    },
+    "send": {
+      "role": "button",
+      "name": "Submit"
     }
   },
   "report": {

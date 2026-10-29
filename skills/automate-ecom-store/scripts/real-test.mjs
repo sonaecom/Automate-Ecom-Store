@@ -82,8 +82,21 @@ export async function executeRealTest(options, deps) {
     write(body);
     return { code: 2, log: body };
   }
-  const started = await startProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl });
-  const connected = await connectOverCDP(started.ws, deps);
+  let started;
+  let connected;
+  try {
+    started = await startProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl });
+    connected = await connectOverCDP(started.ws, deps);
+  } catch (error) {
+    if (started) await stopProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl }).catch(() => {});
+    const body = roundLog(options, {
+      result: "ERROR",
+      actions: 0,
+      error: String(error.message || "adspower_start_failed").replace(/ws:\/\/\S+/g, "ws").slice(0, 200),
+    });
+    write(body);
+    return { code: 1, log: body };
+  }
   const page = deps.wrap === false ? connected.page : wrapPage(connected.page);
   const random = deps.random || Math.random;
   const hooks = {
@@ -124,7 +137,8 @@ export async function executeRealTest(options, deps) {
   outcome.missing = outcome.missing || hooks.missing;
   const body = roundLog(options, outcome);
   write(body);
-  return { code: ["PAUSE", "LOGIN_REQUIRED", "ERROR"].includes(outcome.result) ? 1 : 0, log: body };
+  const failed = ["PAUSE", "LOGIN_REQUIRED", "ERROR", "NAV_MISSING", "BLOCK"].includes(outcome.result);
+  return { code: failed ? 1 : 0, log: body };
 }
 
 async function main() {

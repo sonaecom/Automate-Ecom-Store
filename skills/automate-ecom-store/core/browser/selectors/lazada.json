@@ -1,115 +1,64 @@
 {
   "home": "https://sellercenter.lazada.com.ph/",
   "affiliate": {
-    "nav": {
-      "role": "link",
-      "name": "Affiliate"
-    },
-    "search": {
-      "role": "textbox",
-      "name": "Search"
-    },
-    "invite": {
-      "role": "button",
-      "name": "Invite"
-    }
+    "nav": { "role": "link", "name": "Affiliate Marketing", "path": "/apps/affiliate" },
+    "search": { "role": "textbox", "name": "Search" },
+    "invite": { "role": "button", "name": "Invite" }
   },
   "listing": {
-    "nav": {
-      "role": "link",
-      "name": "Products"
-    },
-    "search": {
-      "role": "textbox",
-      "name": "Search"
-    },
-    "edit": {
-      "role": "button",
-      "name": "Edit"
-    },
-    "field": {
-      "role": "textbox",
-      "name": "Product Name"
-    },
-    "save": {
-      "role": "button",
-      "name": "Submit"
-    }
+    "nav": { "role": "link", "name": "Products", "path": "/apps/product/list" },
+    "search": { "role": "textbox", "name": "Search" },
+    "row": { "role": "link", "name": "Product" },
+    "edit": { "role": "button", "name": "Edit" },
+    "field": { "role": "textbox", "name": "Product Name" },
+    "save": { "role": "button", "name": "Submit" }
   },
   "ads": {
-    "nav": {
-      "role": "link",
-      "name": "Sponsored Solutions"
-    },
-    "spend": {
-      "role": "text",
-      "name": "Spend"
-    },
-    "toggle": {
-      "role": "switch",
-      "name": "Campaign"
-    },
-    "save": {
-      "role": "button",
-      "name": "Save"
-    }
+    "nav": { "role": "link", "name": "Sponsored Solutions", "path": "/sponsor/solutions" },
+    "spend": { "role": "text", "name": "Spend" },
+    "toggle": { "role": "switch", "name": "Campaign" },
+    "save": { "role": "button", "name": "Save" }
   },
   "chat": {
-    "nav": {
-      "role": "link",
-      "name": "Chat"
-    }
+    "nav": { "role": "link", "name": "Chat", "path": "/apps/im/chat" },
+    "thread": { "role": "link", "name": "Conversation" },
+    "box": { "role": "textbox", "name": "Type a message" },
+    "send": { "role": "button", "name": "Send" }
   },
   "promo": {
-    "nav": {
-      "role": "link",
-      "name": "Promotions"
-    }
+    "nav": { "role": "link", "name": "Promotions", "path": "/apps/promotion/list" },
+    "create": { "role": "button", "name": "Create" },
+    "name": { "role": "textbox", "name": "Promotion Name" },
+    "save": { "role": "button", "name": "Save" },
+    "delete": { "role": "button", "name": "Delete" }
   },
   "orders": {
-    "nav": {
-      "role": "link",
-      "name": "Orders"
-    }
+    "nav": { "role": "link", "name": "Orders", "path": "/apps/order/list" }
   },
   "reviews": {
-    "nav": {
-      "role": "link",
-      "name": "Reviews"
-    }
+    "nav": { "role": "link", "name": "Reviews", "path": "/apps/review/management" },
+    "reply": { "role": "button", "name": "Reply" },
+    "box": { "role": "textbox", "name": "Reply" },
+    "send": { "role": "button", "name": "Submit" }
   },
   "report": {
-    "nav": {
-      "role": "link",
-      "name": "Business Advisor"
-    }
+    "nav": { "role": "link", "name": "Business Advisor", "path": "/ba" }
   },
   "shop": {
-    "nav": {
-      "role": "link",
-      "name": "Store Decoration"
-    }
+    "nav": { "role": "link", "name": "Store Builder", "path": "/apps/store/decorate" }
   },
   "video": {
-    "nav": {
-      "role": "link",
-      "name": "Video"
-    }
+    "nav": { "role": "link", "name": "Video", "path": "/apps/video" }
   },
   "captcha": {
-    "slider": {
-      "role": "slider",
-      "name": "slider"
-    },
+    "slider": { "role": "slider", "name": "slider" },
     "text": "Verify"
   },
-  "unavailable": [
-    "page unavailable",
-    "verify your identity",
-    "unusual traffic"
-  ],
+  "unavailable": ["page unavailable", "verify your identity", "unusual traffic"],
   "popupClose": [
-    "[class*=modal] [class*=close]",
+    ".next-dialog-close",
+    ".next-overlay-close",
+    "[class*=dialog] [class*=close]",
     "[aria-label=Close]"
   ]
 }

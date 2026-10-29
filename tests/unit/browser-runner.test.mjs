@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import test from "node:test";
-import { runModule } from "../../skills/automate-ecom-store/core/browser/actions.mjs";
+import { loadSelectors, runModule } from "../../skills/automate-ecom-store/core/browser/actions.mjs";
 import {
   authHeaders,
   browserStartUrl,
@@ -14,7 +14,10 @@ import {
   wsFromStart,
 } from "../../skills/automate-ecom-store/core/browser/adspower-runner.mjs";
 import { mulberry32 } from "../../skills/automate-ecom-store/core/pace.mjs";
-import { roundLog } from "../../skills/automate-ecom-store/scripts/real-test.mjs";
+import { executeRealTest, roundLog } from "../../skills/automate-ecom-store/scripts/real-test.mjs";
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
 const manifest = {
   id: "listing.product",
@@ -107,7 +110,9 @@ test("a listing edit reverts and the round log hides the store id", async () => 
   }, hooks);
   assert.equal(edited.result, "EDITED");
   assert.equal(edited.previous, "Original title");
-  assert.deepEqual(events.filter((event) => event[0] === "fill").map((event) => event[1]), ["", "Original title"]);
+  const clicks = events.filter((event) => event[0] === "click").map((event) => event[1]);
+  assert.ok(clicks.indexOf("ITEM_1") >= 0 && clicks.indexOf("ITEM_1") < clicks.indexOf("Edit"));
+  assert.deepEqual(events.filter((event) => event[0] === "fill").map((event) => event[1]), ["", "", "Original title"]);
   assert.deepEqual(events.filter((event) => event[0] === "type").map((event) => event[1]), ["ITEM_1", "Temp title"]);
   const log = roundLog({
     round: 1,
@@ -135,6 +140,135 @@ test("the start call sends a bearer token and a login page stops the module", as
   const out = await runModule(page, { platform: "tiktokshop", module: "ads.read", maxActions: 3, mode: "read_only", store: { id: "<STORE_A>", mode: "read_only" }, manifest }, { actions: 0, move: async () => {}, alert: async () => {} });
   assert.equal(out.result, "LOGIN_REQUIRED");
   assert.equal(out.actions, 0);
+});
+
+test("a missing product menu is not a listing or ads pass", async () => {
+  const page = {
+    url: () => "https://seller.example/home",
+    text: async () => "seller home",
+    box: async () => null,
+    click: async () => false,
+    fill: async () => {},
+    value: async () => "Original title",
+  };
+  const hooks = { actions: 0, move: async () => {}, type: async () => {}, alert: async () => {} };
+  const listing = await runModule(page, {
+    platform: "shopee",
+    module: "listing.edit",
+    maxActions: 6,
+    mode: "full",
+    store: { id: "<STORE_A>", mode: "full" },
+    manifest,
+    day: "2026-10-29",
+    journalRows: [],
+    policyResult: "ALLOW",
+    query: "ITEM_1",
+    value: "Temp title",
+  }, hooks);
+  assert.equal(listing.result, "NAV_MISSING");
+  const ads = await runModule(page, {
+    platform: "shopee",
+    module: "ads.change",
+    maxActions: 6,
+    mode: "full",
+    store: { id: "<STORE_A>", mode: "full" },
+    manifest,
+    day: "2026-10-29",
+    journalRows: [],
+    policyResult: "ALLOW",
+  }, { actions: 0, move: async () => {}, type: async () => {}, alert: async () => {} });
+  assert.equal(ads.result, "NAV_MISSING");
+  assert.notEqual(ads.result, "REVERTED");
+});
+
+test("TikTok opens the menu address before the sidebar label", async () => {
+  let visited = "";
+  const page = {
+    url: () => visited,
+    goto: async (url) => { visited = url; },
+    text: async () => "seller home",
+    box: async () => null,
+    click: async () => { throw new Error("label click"); },
+  };
+  const out = await runModule(page, {
+    platform: "tiktokshop",
+    module: "orders.handling",
+    maxActions: 3,
+    mode: "read_only",
+    openHome: false,
+    store: { id: "<STORE_A>", mode: "read_only" },
+    manifest,
+  }, { actions: 0, move: async () => {}, alert: async () => {} });
+  assert.equal(out.result, "READ");
+  assert.match(visited, /seller-ph\.tiktok\.com\/order$/);
+  const selectors = loadSelectors("tiktokshop");
+  assert.ok(selectors.popupClose.length >= 1);
+  assert.ok(selectors.orders.nav.path.startsWith("/"));
+});
+
+test("chat sends one template, a promo draft is removed, and a failed start is an error", async () => {
+  const events = [];
+  const page = {
+    url: () => "https://seller.example/home",
+    text: async () => "seller home",
+    box: async () => ({ x: 4, y: 4, width: 8, height: 8 }),
+    click: async (spec) => events.push(spec.name),
+    fill: async () => {},
+    value: async () => "",
+  };
+  const hooks = { actions: 0, move: async () => {}, type: async (text) => events.push(text), alert: async () => {} };
+  const request = {
+    platform: "shopee",
+    maxActions: 8,
+    mode: "full",
+    store: { id: "<STORE_A>", mode: "full" },
+    manifest,
+    day: "2026-10-29",
+    journalRows: [],
+    policyResult: "ALLOW",
+  };
+  const sent = await runModule(page, { ...request, module: "customers.chat", value: "Your order is packed." }, hooks);
+  assert.equal(sent.result, "SENT");
+  const blocked = await runModule(page, { ...request, module: "reviews.replies", value: "Please change this to 5 stars." }, { ...hooks, actions: 0 });
+  assert.equal(blocked.result, "BLOCK");
+  const promo = await runModule(page, { ...request, module: "selling.promotion", value: "TEST DRAFT" }, { actions: 0, move: async () => {}, type: async () => {} });
+  assert.equal(promo.result, "REVERTED");
+  assert.ok(events.includes("Delete"));
+  const dir = mkdtempSync(join(tmpdir(), "round-"));
+  const failed = await executeRealTest({
+    store: "secret-profile",
+    module: "ads.read",
+    round: 2,
+    maxActions: 1,
+    platform: "shopee",
+    day: "2026-10-29",
+    journal: join(dir, "journal.jsonl"),
+    log: join(dir, "round.json"),
+    mode: "read_only",
+    now: "2026-10-29T00:00:00.000Z",
+  }, {
+    env: { ADSPOWER_API_BASE: "http://adspower.example", ADSPOWER_API_KEY: "k" },
+    fetchImpl: async () => ({ json: async () => ({ code: -1 }) }),
+  });
+  assert.equal(failed.code, 1);
+  assert.equal(failed.log.result, "ERROR");
+  assert.equal(JSON.stringify(failed.log).includes("secret-profile"), false);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test("Lazada selectors name a path, a close control, and the write buttons", () => {
+  const selectors = loadSelectors("lazada");
+  for (const key of ["affiliate", "listing", "ads", "chat", "promo", "orders", "reviews", "report", "shop", "video"]) {
+    assert.equal(typeof selectors[key].nav.path, "string", key);
+    assert.ok(selectors[key].nav.path.startsWith("/"), key);
+    assert.equal(typeof selectors[key].nav.name, "string", key);
+  }
+  assert.ok(selectors.popupClose.length >= 1);
+  assert.equal(selectors.listing.row.role, "link");
+  assert.equal(selectors.chat.send.name, "Send");
+  assert.equal(selectors.reviews.send.name, "Submit");
+  assert.equal(selectors.promo.delete.name, "Delete");
+  assert.equal(selectors.home.includes("sellercenter.lazada.com"), true);
 });
 
 test("a module whose menu link is missing reports NAV_MISSING, not READ", async () => {

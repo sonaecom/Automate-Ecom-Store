@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.42.0
+
+- A failed AdsPower start is an error result, not a crash. A missing product or ads menu is `NAV_MISSING` and exits non-zero. Listing edit opens the product before Edit. TikTok and Lazada navigation tries the page address first, then the label, and closes known promo pop-ups. Chat sends one template, a review gets one reply, and a voucher draft is created then deleted. Refund, off-platform contact, star asks, and money movement stay blocked.
+
 ## 1.41.0
 
 - A browser executor opens one AdsPower profile from `ADSPOWER_API_BASE` and `ADSPOWER_API_KEY`, then drives a single Playwright tab. Writes still pass the read-only guard, the policy check, and the action journal. Money movement stays blocked. `real-test.mjs` runs one module with a tiny action limit and logs a hash of the store id. The orchestrator accepts the store YAML file. The night window is on unless that store sets `night: off`. Unit tests run with `node --test tests/unit/*.test.mjs`.
