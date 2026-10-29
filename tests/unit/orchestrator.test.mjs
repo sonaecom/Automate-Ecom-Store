@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
+import { mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { spawnSync } from "node:child_process";
 import test from "node:test";
-import { inNight, profileStep, tickStores } from "../../skills/automate-ecom-store/scripts/orchestrator.mjs";
+import { inNight, loadStores, profileStep, tickStores } from "../../skills/automate-ecom-store/scripts/orchestrator.mjs";
 
 const base = { batchMinutes: 45, breakMinutes: 15, open: false, captcha: false, hung: false };
 
@@ -29,4 +33,25 @@ test("the eleventh store is refused and the batch stays inside 40 to 50 minutes"
   const night = tickStores([{ ...base, id: "<STORE_A>" }], { nowMinutes: 2 * 60, nightStart: 60, dayStart: 8 * 60, staggerMinutes: 20 });
   assert.equal(night[0].action, "WAIT");
   assert.equal(night[0].detail, "night_off");
+  const awake = tickStores([{ ...base, id: "<STORE_A>", night: false }], { nowMinutes: 2 * 60, nightStart: 60, dayStart: 2 * 60, staggerMinutes: 20 });
+  assert.notEqual(awake[0].detail, "night_off");
+});
+
+test("the example store file is yaml and the night window defaults on", () => {
+  const text = readFileSync(new URL("../../skills/automate-ecom-store/stores.example.yaml", import.meta.url), "utf8");
+  const stores = loadStores(text);
+  assert.equal(stores.length, 3);
+  assert.equal(stores[0].id, "<STORE_A>");
+  assert.equal(stores[0].night, true);
+  assert.equal(stores[0].batchMinutes, 40);
+  const dir = mkdtempSync(join(tmpdir(), "orch-"));
+  const run = spawnSync(process.execPath, [
+    new URL("../../skills/automate-ecom-store/scripts/orchestrator.mjs", import.meta.url).pathname,
+    "--stores", new URL("../../skills/automate-ecom-store/stores.example.yaml", import.meta.url).pathname,
+    "--now", "09:00",
+    "--out-dir", dir,
+  ], { encoding: "utf8" });
+  assert.equal(run.status, 0, run.stderr);
+  assert.match(run.stdout, /result: PLAN/);
+  rmSync(dir, { recursive: true, force: true });
 });

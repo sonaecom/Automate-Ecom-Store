@@ -4,7 +4,11 @@
  * A captcha pauses only that store. A hung profile is restarted.
  * A done action key is not run again.
  *
- *   node orchestrator.mjs --stores file --now HH:MM --out-dir DIR
+ *   node orchestrator.mjs --stores stores.example.yaml --now HH:MM --out-dir DIR
+ *   node orchestrator.mjs --stores stores.json --now HH:MM --out-dir DIR
+ *
+ * JSON is an array of stores. YAML is the stores.example.yaml shape.
+ * night defaults to on. Set night: off on a store to skip the night window.
  */
 
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -38,7 +42,7 @@ export function tickStores(stores, options) {
     const batch = clamp(store.batchMinutes || 45, CEILINGS.batchMinutesMin, CEILINGS.batchMinutesMax);
     const pause = clamp(store.breakMinutes || 15, CEILINGS.breakMinutesMin, CEILINGS.breakMinutesMax);
     const start = (options.dayStart + index * (options.staggerMinutes || 20)) % 1440;
-    if (night) {
+    if (night && store.night !== false) {
       rows.push({ store: store.id, action: "WAIT", detail: "night_off" });
       return;
     }
@@ -92,15 +96,66 @@ function minutes(hhmm) {
   return Number(match[1]) * 60 + Number(match[2]);
 }
 
+function unquote(value) {
+  return String(value || "").trim().replace(/^["']|["']$/g, "");
+}
+
+export function loadStores(text) {
+  const trimmed = String(text || "").trim();
+  if (!trimmed) return [];
+  if (trimmed.startsWith("[") || trimmed.startsWith("{")) {
+    const parsed = JSON.parse(trimmed);
+    return Array.isArray(parsed) ? parsed : (parsed.stores || []);
+  }
+  const stores = [];
+  let current = null;
+  let section = "";
+  for (const raw of trimmed.split(/\n/)) {
+    if (!raw.trim() || raw.trim().startsWith("#")) continue;
+    const line = raw.trim();
+    if (line === "stores:") continue;
+    if (line.startsWith("- ")) {
+      if (current) stores.push(current);
+      current = { night: true };
+      section = "";
+      const body = line.slice(2);
+      const split = body.indexOf(":");
+      if (split > 0) {
+        const key = body.slice(0, split).trim();
+        const value = unquote(body.slice(split + 1));
+        if (key === "label") current.id = value;
+        else if (key === "night") current.night = value !== "off" && value !== "false";
+        else current[key] = value;
+      }
+      continue;
+    }
+    if (!current) continue;
+    if (line.endsWith(":") && !line.includes(": ")) {
+      section = line.slice(0, -1);
+      continue;
+    }
+    const split = line.indexOf(":");
+    if (split < 0) continue;
+    const key = line.slice(0, split).trim();
+    const value = unquote(line.slice(split + 1));
+    if (key === "label") current.id = value;
+    else if (key === "night") current.night = value !== "off" && value !== "false";
+    else if (section === "schedule" && key === "session_minutes_max") current.batchMinutes = Number(value);
+    else if (!section) current[key] = value;
+  }
+  if (current) stores.push(current);
+  return stores;
+}
+
 function main() {
   const file = arg("--stores");
   const outDir = arg("--out-dir");
   const now = minutes(arg("--now"));
   if (!file || !outDir || now === null) {
-    console.error("usage: node orchestrator.mjs --stores file --now HH:MM --out-dir DIR [--night-start HH:MM]");
+    console.error("usage: node orchestrator.mjs --stores file.yaml|file.json --now HH:MM --out-dir DIR [--night-start HH:MM]");
     process.exit(2);
   }
-  const stores = JSON.parse(readFileSync(file, "utf8"));
+  const stores = loadStores(readFileSync(file, "utf8"));
   const nightStart = minutes(arg("--night-start") || "01:00");
   const rows = tickStores(stores, { nowMinutes: now, nightStart, dayStart: minutes(arg("--day-start") || "08:00"), staggerMinutes: Number(arg("--stagger") || 20) });
   mkdirSync(outDir, { recursive: true });

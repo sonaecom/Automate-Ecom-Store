@@ -83,6 +83,17 @@ Pace inside the session uses `delay-range.mjs` profiles `safe`, `normal`, and `f
 
 The queue's daily plan still says what fits today and what moves to tomorrow. A restart does not clear that queue and does not skip a checkpoint.
 
+A real-store round uses the executor. Install dependencies once in the skill folder, with the browser binary, and export the AdsPower base and key in the environment for that command only. Do not write them into the repo.
+
+```bash
+cd <SKILL_DIR>
+npm install
+npx playwright install chromium
+node scripts/real-test.mjs --store <PROFILE_ID> --module listing.edit --round 1 --max-actions 3 --platform shopee --mode read_only --day <YYYY-MM-DD> --journal ~/.automate-ecom-store/data/journal/round.jsonl
+```
+
+`--mode full` is required before a reversible listing edit or ads toggle. The round file records `store_hash`, not the profile id. Unit tests are `node --test tests/unit/*.test.mjs` from the repo root. `node --test tests/unit/` does not run this folder.
+
 ## Safe update
 
 Do this only when the tick is `WAIT` and the queue is not `BUSY`.

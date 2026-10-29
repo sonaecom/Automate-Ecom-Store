@@ -10,7 +10,7 @@ Every owner request and every scheduled job is one item in that store's queue. O
 node {baseDir}/scripts/orchestrator.mjs --stores ~/.automate-ecom-store/data/orchestrator-stores.json --now <HH:MM> --night-start 01:00 --day-start 08:00 --stagger 20 --out-dir ~/.automate-ecom-store/data/orchestrator/
 ```
 
-`OPEN` and `RESTART` use official AdsPower `open-browser` with `"headless":"0"`. `CLOSE` closes that profile. Batches stay inside 40–50 minutes, then a 10–20 minute break. 01:00–05:00 is off. Starts are staggered. Do not open an eleventh store.
+`OPEN` and `RESTART` use official AdsPower `open-browser` with `"headless":"0"`. `CLOSE` closes that profile. Batches stay inside 40–50 minutes, then a 10–20 minute break. The night window defaults to on (01:00–05:00). Set `night: off` on a store to skip it. `--stores` accepts `stores.example.yaml` or a JSON array. Starts are staggered. Do not open an eleventh store. The executor is `scripts/real-test.mjs`. Unit tests are `node --test tests/unit/*.test.mjs` from the repo root.
 
 Config is `{baseDir}/tasks.example.yaml`, copied to `~/.automate-ecom-store/tasks.yaml`. The queue file stays under `~/.automate-ecom-store/data/queues/`. Do not put a profile id in either file.
 

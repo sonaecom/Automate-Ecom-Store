@@ -10,6 +10,7 @@ stores:
     market: "<MARKET_PH>"
     profile_id: "<PROFILE_ID>"
     staff: "<STAFF_A>"
+    # night defaults to on (4 hours from 01:00). Set night: off only for a supervised test store.
     schedule:
       gap_hours_min: 2
       gap_hours_max: 3
