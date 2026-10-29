@@ -99,6 +99,7 @@ If the request matches more than one row, ask which platform and which task. One
 | They want | Read |
 | --- | --- |
 | Shopee affiliate / KOL / Targeted Campaign invite | `{baseDir}/modules/shopee/affiliate-invite.md` |
+| Shopee new listing or full rebuild | `{baseDir}/modules/shopee/product-listing.md` |
 | Shopee listing edit | `{baseDir}/modules/shopee/listing-update.md` |
 | Shopee stock or price sync | `{baseDir}/modules/shopee/stock-price-sync.md` |
 | Shopee voucher or promotion | `{baseDir}/modules/shopee/vouchers-promotions.md` |
@@ -106,6 +107,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Shopee customer chat | `{baseDir}/modules/shopee/customer-chat-reply.md` |
 | Shopee orders, GMV, or ad-spend report | `{baseDir}/modules/shopee/daily-report.md` |
 | TikTok Shop creator or affiliate invite | `{baseDir}/modules/tiktokshop/creator-outreach.md` |
+| TikTok Shop new listing or full rebuild | `{baseDir}/modules/tiktokshop/product-listing.md` |
 | TikTok Shop listing edit | `{baseDir}/modules/tiktokshop/listing-update.md` |
 | TikTok Shop stock or price | `{baseDir}/modules/tiktokshop/stock-price-sync.md` |
 | TikTok Shop promotion | `{baseDir}/modules/tiktokshop/promotions.md` |
@@ -113,6 +115,7 @@ If the request matches more than one row, ask which platform and which task. One
 | TikTok Shop chat | `{baseDir}/modules/tiktokshop/customer-chat-reply.md` |
 | TikTok Shop daily report | `{baseDir}/modules/tiktokshop/daily-report.md` |
 | Lazada affiliate invite | `{baseDir}/modules/lazada/affiliate-invite.md` |
+| Lazada new listing or full rebuild | `{baseDir}/modules/lazada/product-listing.md` |
 | Lazada listing edit | `{baseDir}/modules/lazada/listing-update.md` |
 | Lazada stock or price | `{baseDir}/modules/lazada/stock-price-sync.md` |
 | Lazada promotion | `{baseDir}/modules/lazada/promotions.md` |

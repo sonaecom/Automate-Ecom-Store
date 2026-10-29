@@ -6,7 +6,7 @@ Khung an toàn cho Shopee. Lần chạy có người xem: nhãn menu không kh�
 
 ## When to use
 
-The person has a private change list for existing Shopee listings. Not for new products, deletions, or ads.
+The person has a private change list for existing Shopee listings. A new product or a full gallery rebuild uses `product-listing.md`. Not for deletions or ads.
 
 ## Prerequisites
 

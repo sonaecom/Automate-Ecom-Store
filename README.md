@@ -13,7 +13,7 @@ git clone https://github.com/sonaecom/Automate-Ecom-Store.git && openclaw skills
 2. **Mở AdsPower** như mọi khi. Cửa sổ trình duyệt phải hiện trên màn hình. Đừng bật chế độ ẩn.
 3. **Chỉ dán API Key.** Nhắn agent, ví dụ "làm shop". Khi được hỏi, vào AdsPower → Automation → API, copy API Key và dán vào chat. Không cần gửi địa chỉ mạng hay mã profile.
 4. **Chọn profile theo số.** Agent liệt kê profile và đoán sàn từ tên (Shopee, Lazada, TikTok Shop). Đúng thì trả lời `ok`. Sai thì sửa theo số, ví dụ `1 shopee, 2 tiktok`. Giới hạn an toàn mỗi phiên đã có sẵn (10 lần sửa listing, 30 lời mời, 3 lần đổi ads, 10 tin chat). Không cần điền.
-5. **Nói việc cần làm.** Ví dụ: "mời affiliate Shopee". Agent làm chậm, một tab, và dừng gọi bạn nếu gặp captcha.
+5. **Nói việc cần làm.** Ví dụ: "mời affiliate Shopee" hoặc "đăng sản phẩm mới trên Shopee". Agent làm chậm, một tab, và dừng gọi bạn nếu gặp captcha.
 
 Muốn nhập lại key từ đầu, nhắn `reset config`.
 

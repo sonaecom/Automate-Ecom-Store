@@ -6,7 +6,7 @@ Bản mẫu, cần người phụ trách chỉnh lại. Lần đầu có ngườ
 
 ## When to use
 
-The person has a private change list for existing TikTok Shop listings. Confirm the product menu on a supervised run.
+The person has a private change list for existing TikTok Shop listings. A new product or a full rebuild uses `product-listing.md`. Confirm the product menu on a supervised run.
 
 ## Prerequisites
 
