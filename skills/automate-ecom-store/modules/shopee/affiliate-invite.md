@@ -22,6 +22,16 @@ The person asks to invite affiliates (KOLs) to a Shopee Targeted Campaign with a
 
 If account-safety is missing, stop. Do not open a browser on your own.
 
+## Core
+
+Manifest `affiliate.invite`. Per-store targets live in `{baseDir}/modules/affiliate/targets.example.yaml`. Ask the owner for the profile, the owner name, and any invite target. Do not type a profile id into the repo, and do not treat 2,000 invites as the number to hit. A new store (`stage: A`) ramps from the hourly ceiling. Continue only on `result: PLAN`, then invite only `INVITE` rows.
+
+```bash
+node {baseDir}/scripts/affiliate-plan.mjs --handles <APPROVED_CSV> --out-dir ~/.automate-ecom-store/data/affiliate/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl --stage <STAGE> --day-index <DAY_INDEX> --target <INVITES_PER_DAY>
+```
+
+Omit `--target` when the owner has not set one. The approved list is the work. `read_only` does not plan.
+
 ## Steps
 
 Helpers, from this skill:

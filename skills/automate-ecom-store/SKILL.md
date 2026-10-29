@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.27.0"
+version: "1.28.0"
 user-invocable: true
 metadata:
   openclaw:

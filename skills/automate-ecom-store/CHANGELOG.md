@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.28.0
+
+- Affiliate and KOL invites plan through `affiliate-plan.mjs` on the core runner. The store target is whatever the owner typed. Empty means the approved list only. The ceiling is 2,000 invites a day and 100 an hour, with a ramp for a new store. The ceiling is not a quota.
+
 ## 1.27.0
 
 - Finished videos can be queued for Shopee, TikTok Shop, and Lazada. Intake is a local folder, or a Drive folder only when Google is already connected. Each file is checked against that placement's format, length, size, and aspect ceiling, then the compliance scan. The daily cap is a ceiling. Posting times are spread, and the same hash is not posted twice for one store and platform. Livestream is not developed. The module does not generate a video. Status and performance come from two in-store sources. A rejection or a two-source mismatch alerts the owner. The dashboard has a Video page.

@@ -1,0 +1,13 @@
+{
+  "id": "affiliate.invite",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": true,
+  "money": false,
+  "priority": 2,
+  "cost": { "actions": 8, "captchaRisk": "high" },
+  "input": "approved shortlist",
+  "output": "invite-plan.csv",
+  "policyTags": ["submit"],
+  "schema": "Affiliate"
+}

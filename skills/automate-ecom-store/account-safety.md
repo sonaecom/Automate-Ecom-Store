@@ -81,14 +81,16 @@ After any captcha, run `caps-counter.mjs --set-multiplier 2` and pass `--multipl
 
 ## Caps
 
-Defaults, overridable in private config, never raised during a run:
+These are ceilings, not targets. The owner's target, if they typed one, lives in the store file (`modules/affiliate/targets.example.yaml`). An empty target is not filled up to the ceiling. A number such as 2,000 invites or 10% of GMV is an example of what an owner might type, not a default.
 
-| Action | Session cap | Daily cap | How to apply it |
-| --- | --- | --- | --- |
-| `listing_edits` | 10 | 10 | One edited listing counts as one |
-| `affiliate_invites` | 30 | 30 | One creator counts as one, in batches of 10 |
-| `ads_changes` | 3 | 3 | One saved ads setting change counts as one |
-| `chat_replies` | 10 | 10 | One sent reply counts as one |
+| Action | Ceiling | How to apply it |
+| --- | --- | --- |
+| `listing_edits` | 40 in one hour | One edited listing counts as one. Do not add edits to reach 40. |
+| `affiliate_invites` | 2,000 in one day, and 100 in one hour | One creator counts as one, still in batches of about 10. A new store ramps up from the hourly ceiling. |
+| `ads_changes` | 10 in one hour | One saved ads setting change counts as one. |
+| `chat_replies` | 10 session and 10 day | One sent reply counts as one |
+
+The profile is one AdsPower profile per store, platform, and owner. Ask the owner. Do not hard-code it.
 
 Before the action, `--add` the count you are about to commit. On `CAP`, do not do the action. Affiliate invites happen in small batches (`affiliate_batch_size`, default 10): after each batch, take the 2–5 minute pause, then continue only if time and caps remain.
 

@@ -1,0 +1,15 @@
+# One profile per store, platform, and owner. Ask the owner. Do not hard-code a profile id.
+# Targets are optional. An empty target is not a reason to invite up to the ceiling.
+# 2000 invites/day and 10 percent of GMV are examples of the kind of number an owner might type.
+
+owner: "<OWNER>"
+store: "<STORE_LABEL>"
+platform: "<PLATFORM>"
+profile_id: "<PROFILE_ID>"
+stage: "A"
+day_index: 0
+targets:
+  invites_per_day: "<INVITES_PER_DAY>"
+  listing_edits_per_hour: "<LISTING_EDITS_PER_HOUR>"
+  ads_changes_per_hour: "<ADS_CHANGES_PER_HOUR>"
+  ads_percent_of_gmv: "<ADS_PERCENT_OF_GMV>"
