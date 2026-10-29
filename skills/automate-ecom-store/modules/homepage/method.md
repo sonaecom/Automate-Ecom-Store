@@ -1,5 +1,7 @@
 # Shop homepage method
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 Shared steps for Shopee Shop Decoration, TikTok Shop's shop page, and Lazada Store Builder. The platform file names the menu. Sizes are in `sizes.md`. The editor's crop tool wins over the table.

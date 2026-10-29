@@ -1,5 +1,7 @@
 # Session scheduler
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 Build a plan. Do not start the work until the person says to run the next block.
@@ -13,7 +15,7 @@ A block is at most `session_minutes_max` minutes (30–40). Inside it:
 - Ads setting changes at most 3, and never a top-up.
 - Chat replies at most 10.
 - Homepage publish is one, after its own QC.
-- Policy update runs once a week, before the first block of the week. It only reads public help pages.
+- Policy update runs once a week, before the first block of the week. It reads public help pages, diffs the snapshot, appends the market file's update log, and alerts the owner. It does not change a price, a budget, a listing, or a programme.
 
 Leave at least `gap_hours_min` hours between blocks for the same store. Do not plan two stores in the same hour. Money actions are not scheduled. They stay proposals.
 

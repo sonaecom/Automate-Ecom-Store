@@ -1,5 +1,7 @@
 # FX sources
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 The base currency defaults to VND. Pass `--base` to use another code. A rate is how many units of the base equal **1** unit of the native currency. `1 PHP = 430 VND` is currency `PHP`, rate `430`, base `VND`.

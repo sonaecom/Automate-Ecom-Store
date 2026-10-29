@@ -5,15 +5,17 @@
  *
  *   node policy-gate.mjs --platform shopee --market SG --action read
  *   node policy-gate.mjs --platform shopee --market SG --action publish
+ *   node policy-gate.mjs --platform shopee --market SG --action submit --text "file"
  *
- * Exit 0: ALLOW, or POLICY_PENDING / STALE on a read-only action.
- * Exit 1: POLICY_PENDING or STALE on a mutating action.
+ * Exit 0: ALLOW, or POLICY_PENDING / STALE on a read-only action with no block.
+ * Exit 1: POLICY_PENDING or STALE on a mutating action, or VIOLATION.
  * Exit 2: usage error.
  */
 
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { findForbidden } from "./review-phrases.mjs";
 
 const MUTATING = new Set([
   "publish",
@@ -26,18 +28,22 @@ const MUTATING = new Set([
   "submit",
 ]);
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..", "policy");
+const skillRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+const root = join(skillRoot, "policy");
+const policiesRoot = join(skillRoot, "policies");
 
 function usage() {
-  console.error("usage: node policy-gate.mjs --platform name --market CODE --action name");
+  console.error("usage: node policy-gate.mjs --platform name --market CODE --action name [--text words | --file path]");
 }
 
 function parseArgs(argv) {
-  const out = { platform: "", market: "", action: "read" };
+  const out = { platform: "", market: "", action: "read", text: "" };
   for (let i = 0; i < argv.length; i += 1) {
     if (argv[i] === "--platform") out.platform = argv[++i] || "";
     else if (argv[i] === "--market") out.market = argv[++i] || "";
     else if (argv[i] === "--action") out.action = (argv[++i] || "read").toLowerCase();
+    else if (argv[i] === "--text") out.text = argv[++i] || "";
+    else if (argv[i] === "--file") out.text = readFileSync(argv[++i] || "", "utf8");
     else if (argv[i] === "--help") return { help: true };
     else return { error: `unknown argument: ${argv[i]}` };
   }
@@ -51,11 +57,46 @@ function field(text, key) {
 }
 
 function policyPath(platform, market) {
+  const markdown = join(policiesRoot, platform, `${market}.md`);
+  if (existsSync(markdown)) return markdown;
   const dir = join(root, platform);
   if (!existsSync(dir)) return "";
   const target = `${market}.yaml`;
   const found = readdirSync(dir).find((name) => name === target && !name.includes("example"));
   return found ? join(dir, found) : "";
+}
+
+function parseRules(markdown) {
+  return markdown.split("\n### ").slice(1).map((chunk) => {
+    const lines = chunk.split("\n");
+    const rule = { id: lines[0].trim(), status: "flag", verify: "yes", source: "", match: "" };
+    for (const line of lines.slice(1)) {
+      const fieldMatch = line.match(/^- (status|verify|source|match):\s*(.*)$/);
+      if (fieldMatch) rule[fieldMatch[1]] = fieldMatch[2].trim();
+    }
+    return rule;
+  });
+}
+
+function scanText(text, rules) {
+  const hits = [];
+  const phrases = findForbidden(text);
+  if (phrases.length) hits.push({ id: "review_no_star_ask", status: "block", verify: "no", source: "policies", why: phrases.join(" ") });
+  const offPlatform = /whatsapp|wa\.me|telegram|t\.me\/|zalo|wechat|line\.me/i;
+  if (offPlatform.test(text)) hits.push({ id: "chat_off_platform", status: "block", verify: "no", source: "policies", why: "off_platform" });
+  for (const rule of rules) {
+    if (!rule.match) continue;
+    const needles = rule.match.split(";").map((item) => item.trim()).filter(Boolean);
+    if (needles.some((needle) => text.toLowerCase().includes(needle.toLowerCase()))) {
+      hits.push(rule);
+    }
+  }
+  const seen = new Map();
+  for (const hit of hits) {
+    const previous = seen.get(hit.id);
+    if (!previous || (previous.status !== "block" && hit.status === "block")) seen.set(hit.id, hit);
+  }
+  return [...seen.values()];
 }
 
 function ageDays(retrieved) {
@@ -85,12 +126,21 @@ console.log(`market: ${parsed.market}`);
 console.log(`action: ${parsed.action}`);
 console.log(`mutating: ${mutating ? "yes" : "no"}`);
 
+const text = file ? readFileSync(file, "utf8") : "";
+const rules = text ? parseRules(text) : [];
+const hits = parsed.text ? scanText(parsed.text, rules) : [];
+for (const hit of hits) {
+  console.log(`${hit.status === "block" ? "VIOLATION" : "FLAG"} ${hit.id} verify=${hit.verify || "yes"} source=${hit.source || "policy"}`);
+}
+if (hits.some((hit) => hit.status === "block")) {
+  console.log("result: VIOLATION");
+  process.exit(1);
+}
+
 if (!file) {
   console.log("result: POLICY_PENDING");
   process.exit(mutating ? 1 : 0);
 }
-
-const text = readFileSync(file, "utf8");
 const retrieved = field(text, "retrieved");
 const source = field(text, "source_url");
 const days = ageDays(retrieved);
@@ -107,4 +157,8 @@ if (days > 7) {
   process.exit(mutating ? 1 : 0);
 }
 console.log(`age_days: ${days}`);
+if (hits.some((hit) => hit.status !== "block") && mutating) {
+  console.log("result: FLAG");
+  process.exit(1);
+}
 console.log("result: ALLOW");

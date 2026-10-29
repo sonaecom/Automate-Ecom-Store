@@ -1,5 +1,7 @@
 # Multi-currency reporting
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 Read-only. Sales, ad spend, and wallet amounts stay in the currency of the market. This module converts them into one base currency. Default base is VND. The owner can set another base. It does not change a price, a budget, or a payout.

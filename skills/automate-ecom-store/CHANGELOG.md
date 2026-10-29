@@ -2,6 +2,11 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.4.0
+
+- Platform policy layer in `policies/`, loaded with account safety. Eighteen market summaries for Shopee, TikTok Shop, and Lazada across PH, VN, MY, ID, TH, and SG. Each rule has a source, a retrieved date, and a verify flag.
+- The gate blocks a star-rating ask, an off-platform contact, and other blocked phrases. The weekly checker diffs official pages and only flags. It does not change seller settings.
+
 ## 1.3.0
 
 - Growth path for a new or low-sales store: scorecard with five fixes, a 30/60/90 plan, funnel playbook, hero SKUs, platform-only review tools, a small ads test with a stop-loss, sequential cover/title/price tests, break-even ROAS, and a pre-launch check.

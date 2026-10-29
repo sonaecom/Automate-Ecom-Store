@@ -1,5 +1,7 @@
 # After the affiliate invite
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 Follow creators you already invited. Sample received, video posted, and GMV per creator. Reminders go through the platform chat only. Do not email a creator. Do not promise a refund or an off-platform deal.

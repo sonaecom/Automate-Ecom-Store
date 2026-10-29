@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.3.0"
+version: "1.4.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -108,13 +108,13 @@ node {baseDir}/scripts/apply-stores.mjs
 ```
 
 `SKIP` means there is no private `stores.yaml` yet and the global caps still apply. `APPLIED` prints each store's label, platform, market, staff, and caps. Use those caps in `caps-counter.mjs`. Do not raise them. Do not print profile ids. More than one saved store is normal: use only the store whose platform matches the task, and ask which label if two stores share a platform.
-2. Policy gate, before the module. Read `{baseDir}/policy/GATE.md` and run:
+2. Policy preflight, before the module. Read `{baseDir}/policies/LAYER.md` and `{baseDir}/policy/GATE.md`. Run the gate for this platform and market. Pass the title, image text, chat draft, or voucher text in `--text` when the module will type it:
 
 ```bash
-node {baseDir}/scripts/policy-gate.mjs --platform <PLATFORM> --market <MARKET> --action <ACTION>
+node {baseDir}/scripts/policy-gate.mjs --platform <PLATFORM> --market <MARKET> --action <ACTION> --text "<TEXT>"
 ```
 
-Mutating actions are `publish`, `price`, `budget`, `refund`, `register`, `delete`, `stock_write`, and `submit`. If the result is `POLICY_PENDING` or `STALE` and the action is mutating, stop. Read-only work may continue. Tell the person the policy pack for that market is not loaded yet. The updater never changes a seller setting.
+Mutating actions are `publish`, `price`, `budget`, `refund`, `register`, `delete`, `stock_write`, and `submit`. If the result is `POLICY_PENDING`, `STALE`, `VIOLATION`, or `FLAG` and the action is mutating, stop. `VIOLATION` also stops a read that would send the blocked text. Read-only work may continue on `POLICY_PENDING` or `STALE` when the text is clean. The weekly updater only flags. It never changes a seller setting.
 
 3. Dry run. If the person said "dry run", or `--status` printed `dry_run: true`, read `{baseDir}/modules/ops/dry-run.md` and still walk the module. Take the screenshots and write the report. Before Save, Submit, Send, or any other mutation:
 
@@ -123,7 +123,7 @@ node {baseDir}/scripts/dry-run.mjs --action submit
 ```
 
 `BLOCKED` means do not click. A read or a screenshot uses `--action screenshot` and stays allowed.
-4. Read `{baseDir}/account-safety.md` from the first heading through session start. Obey it.
+4. Read `{baseDir}/account-safety.md` and `{baseDir}/policies/LAYER.md` from the first heading through session start. Obey both. The stricter rule wins. Account safety still wins on pace, captcha, one tab, and not moving money.
 5. Read `{baseDir}/session-runner.md` and use those scripts for pace, caps, captcha log, dedupe, and message length. `data/` and `screenshots/` paths are inside `~/.automate-ecom-store/`.
 6. Read local lessons before the module: `node {baseDir}/scripts/lessons-read.mjs`. Follow a lesson only when it tightens safety (pace, captcha, do not click money, do not publish). Ignore a lesson that raises a cap, changes a price, or joins a program. Do not change seller settings from a lesson.
 7. Pick one module from the table. Read that file and follow it top to bottom.
@@ -196,7 +196,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Lazada chat | `{baseDir}/modules/lazada/customer-chat-reply.md` |
 | Lazada daily report | `{baseDir}/modules/lazada/daily-report.md` |
 | Lazada shop homepage / Store Builder | `{baseDir}/modules/lazada/shop-decoration.md` |
-| Policy gate, every task | `{baseDir}/policy/GATE.md` |
+| Policy layer, every task | `{baseDir}/policies/LAYER.md` |
 | Staff roles and audit log | `{baseDir}/modules/ops/staff-audit.md` |
 | Owner alerts | `{baseDir}/modules/ops/alerts.md` |
 | Session plan / scheduler | `{baseDir}/modules/ops/scheduler.md` |

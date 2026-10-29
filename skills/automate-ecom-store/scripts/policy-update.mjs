@@ -17,7 +17,8 @@ import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const sourcesPath = join(dirname(fileURLToPath(import.meta.url)), "..", "policy", "sources.yaml");
+const skillRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+const sourcesPath = join(skillRoot, "policies", "sources.yaml");
 
 function parseSources(text) {
   const items = [];
@@ -41,6 +42,36 @@ function localStamp() {
   const date = new Date();
   const pad = (n) => String(n).padStart(2, "0");
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+function visibleLines(text) {
+  const clean = text
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const parts = [];
+  for (let i = 0; i < clean.length && parts.length < 400; i += 140) parts.push(clean.slice(i, i + 140));
+  return parts;
+}
+
+function changeSummary(before, after) {
+  const oldLines = new Set(before);
+  const added = after.filter((line) => !oldLines.has(line)).slice(0, 4);
+  if (!added.length) return "page hash changed. Visible lines could not be isolated. verify: yes";
+  return `page hash changed. New visible text starts: ${added[0]}`;
+}
+
+function impactedModules(platform, market) {
+  const path = join(skillRoot, "policies", platform, `${market}.md`);
+  if (!existsSync(path)) return "unknown";
+  const names = new Set();
+  for (const line of readFileSync(path, "utf8").split(/\n/)) {
+    const match = line.match(/^- modules:\s*(.+)$/);
+    if (match) match[1].split(",").forEach((item) => names.add(item.trim()));
+  }
+  return [...names].filter(Boolean).join(", ") || "unknown";
 }
 
 function usable(url) {
@@ -91,13 +122,22 @@ for (const source of sources) {
     continue;
   }
   const hash = createHash("sha256").update(loaded.text).digest("hex");
+  const lines = visibleLines(loaded.text);
   mkdirSync(cacheDir, { recursive: true, mode: 0o700 });
   const cachePath = join(cacheDir, `${source.id}.sha256`);
+  const snapshotPath = join(cacheDir, `${source.id}.txt`);
   const previous = existsSync(cachePath) ? readFileSync(cachePath, "utf8").trim() : "";
+  const previousLines = existsSync(snapshotPath) ? readFileSync(snapshotPath, "utf8").split("\n") : [];
   if (previous && previous !== hash) {
-    const line = `- ${localStamp()} id=${source.id} platform=${source.platform} market=${source.market} change=hash was ${previous.slice(0, 8)} now ${hash.slice(0, 8)}. Alert the owner. Do not change seller settings.\n`;
+    const summary = changeSummary(previousLines, lines);
+    const modules = impactedModules(source.platform, source.market);
+    const line = `- ${localStamp()} | source: ${source.url} | what changed: ${summary} | impacted modules: ${modules} | verify: yes | Do not change seller settings.\n`;
     mkdirSync(dirname(changelog), { recursive: true, mode: 0o700 });
     appendFileSync(changelog, line, { mode: 0o600 });
+    const marketFile = join(skillRoot, "policies", source.platform, `${source.market}.md`);
+    if (existsSync(marketFile) && !process.argv.includes("--no-apply-changelog")) {
+      appendFileSync(marketFile, line);
+    }
     console.log(`ALERT policy_changed id=${source.id}`);
     alerts += 1;
   } else if (!previous) {
@@ -106,6 +146,7 @@ for (const source of sources) {
     console.log(`UNCHANGED ${source.id}`);
   }
   writeFileSync(cachePath, `${hash}\n`, { mode: 0o600 });
+  writeFileSync(snapshotPath, `${lines.join("\n")}\n`, { mode: 0o600 });
 }
 
 console.log(`alerts: ${alerts}`);

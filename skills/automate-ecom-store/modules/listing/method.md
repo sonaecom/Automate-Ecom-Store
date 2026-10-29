@@ -1,5 +1,7 @@
 # Listing method
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 Shared rules for a new product listing. The platform file (`modules/shopee/product-listing.md` and the TikTok Shop and Lazada adaptations) names the menus and the limits. This file is the method. Account safety still wins on pace, caps, captcha, and one seller tab.

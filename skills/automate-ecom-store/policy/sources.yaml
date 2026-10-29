@@ -1,6 +1,5 @@
-# Official pages the weekly updater is allowed to read.
-# It records a hash change and alerts the owner. It does not change a seller setting.
-# Rules for each market are filled from the policy pack. Until then the gate stays pending.
+# Moved. The weekly checker reads policies/sources.yaml.
+# This list remains for the shop-decoration pages already recorded.
 
 sources:
   - id: shopee-decoration-sg

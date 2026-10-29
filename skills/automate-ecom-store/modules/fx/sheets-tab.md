@@ -1,5 +1,7 @@
 # Multi-currency sheet
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 The owner edits `Settings/FX`. The script rewrites `FxFacts` and `RatesUsed`. The owner tab is `Multi-currency`. Formulas on that tab stay put because the script does not write it.

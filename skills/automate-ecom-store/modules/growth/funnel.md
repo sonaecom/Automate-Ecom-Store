@@ -1,5 +1,7 @@
 # Funnel analysis
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 Read impressions, clicks, add-to-cart, and orders. Name one bottleneck and the playbook for that step. Do not change bids or listings here.

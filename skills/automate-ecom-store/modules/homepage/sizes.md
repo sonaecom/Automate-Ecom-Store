@@ -1,5 +1,7 @@
 # Homepage asset sizes
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 The editor on the day wins. If the crop tool or the component panel shows a different pixel size, file-size limit, or ratio, use that and do not upload the file from this table.

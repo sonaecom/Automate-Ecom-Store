@@ -1,5 +1,7 @@
 # 30/60/90-day launch plan
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 A plan for a new or low-sales store. It does not publish, change a price, or raise a budget. Those stay in their own modules after the owner says yes.

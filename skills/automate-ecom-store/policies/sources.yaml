@@ -1,0 +1,155 @@
+# Official policy and seller-education URLs. The weekly checker reads these.
+# A hash change alerts the owner. It does not change a seller setting.
+retrieved: "2026-10-29"
+
+sources:
+  - id: shopee-ph-hub
+    platform: shopee
+    market: PH
+    topic: hub
+    url: https://seller.shopee.ph/edu/home
+    retrieved: "2026-10-29"
+  - id: shopee-vn-hub
+    platform: shopee
+    market: VN
+    topic: hub
+    url: https://banhang.shopee.vn/edu/home
+    retrieved: "2026-10-29"
+  - id: shopee-my-hub
+    platform: shopee
+    market: MY
+    topic: hub
+    url: https://seller.shopee.com.my/edu/home
+    retrieved: "2026-10-29"
+  - id: shopee-id-hub
+    platform: shopee
+    market: ID
+    topic: hub
+    url: https://seller.shopee.co.id/edu/home
+    retrieved: "2026-10-29"
+  - id: shopee-th-hub
+    platform: shopee
+    market: TH
+    topic: hub
+    url: https://seller.shopee.co.th/edu/home
+    retrieved: "2026-10-29"
+  - id: shopee-sg-hub
+    platform: shopee
+    market: SG
+    topic: hub
+    url: https://seller.shopee.sg/edu/home
+    retrieved: "2026-10-29"
+  - id: tiktokshop-ph-hub
+    platform: tiktokshop
+    market: PH
+    topic: hub
+    url: https://seller-ph.tiktok.com/university
+    retrieved: "2026-10-29"
+  - id: tiktokshop-vn-hub
+    platform: tiktokshop
+    market: VN
+    topic: hub
+    url: https://seller-vn.tiktok.com/university
+    retrieved: "2026-10-29"
+  - id: tiktokshop-my-hub
+    platform: tiktokshop
+    market: MY
+    topic: hub
+    url: https://seller-my.tiktok.com/university
+    retrieved: "2026-10-29"
+  - id: tiktokshop-id-hub
+    platform: tiktokshop
+    market: ID
+    topic: hub
+    url: https://seller-id.tiktok.com/university
+    retrieved: "2026-10-29"
+  - id: tiktokshop-th-hub
+    platform: tiktokshop
+    market: TH
+    topic: hub
+    url: https://seller-th.tiktok.com/university
+    retrieved: "2026-10-29"
+  - id: tiktokshop-sg-hub
+    platform: tiktokshop
+    market: SG
+    topic: hub
+    url: https://seller-sg.tiktok.com/university
+    retrieved: "2026-10-29"
+  - id: lazada-ph-hub
+    platform: lazada
+    market: PH
+    topic: hub
+    url: https://www.lazada.com.ph/terms-conditions/
+    retrieved: "2026-10-29"
+  - id: lazada-vn-hub
+    platform: lazada
+    market: VN
+    topic: hub
+    url: https://www.lazada.vn/terms-conditions/
+    retrieved: "2026-10-29"
+  - id: lazada-my-hub
+    platform: lazada
+    market: MY
+    topic: hub
+    url: https://www.lazada.com.my/terms-conditions/
+    retrieved: "2026-10-29"
+  - id: lazada-id-hub
+    platform: lazada
+    market: ID
+    topic: hub
+    url: https://www.lazada.co.id/terms-conditions/
+    retrieved: "2026-10-29"
+  - id: lazada-th-hub
+    platform: lazada
+    market: TH
+    topic: hub
+    url: https://www.lazada.co.th/terms-conditions/
+    retrieved: "2026-10-29"
+  - id: lazada-sg-hub
+    platform: lazada
+    market: SG
+    topic: hub
+    url: https://www.lazada.sg/terms-conditions/
+    retrieved: "2026-10-29"
+  - id: shopee-sg-reviews
+    platform: shopee
+    market: SG
+    topic: review_rating
+    url: https://seller.shopee.sg/edu/article/6820
+    retrieved: "2026-10-29"
+  - id: shopee-sg-brushing
+    platform: shopee
+    market: SG
+    topic: prohibited_restricted
+    url: https://seller.shopee.sg/edu/article/11697/anti-brushing-policy
+    retrieved: "2026-10-29"
+  - id: shopee-sg-review-prize
+    platform: shopee
+    market: SG
+    topic: review_prize
+    url: https://seller.shopee.sg/edu/article/13356/review-prize
+    retrieved: "2026-10-29"
+  - id: shopee-ph-brushing
+    platform: shopee
+    market: PH
+    topic: review_rating
+    url: https://seller.shopee.ph/edu/article/9703
+    retrieved: "2026-10-29"
+  - id: tiktokshop-sg-chat
+    platform: tiktokshop
+    market: SG
+    topic: chat_off_platform
+    url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014502658&lang=en
+    retrieved: "2026-10-29"
+  - id: tiktokshop-us-reviews
+    platform: tiktokshop
+    market: SG
+    topic: review_rating
+    url: https://seller-us.tiktok.com/university/essay?knowledge_id=4451321470682882&lang=en
+    retrieved: "2026-10-29"
+  - id: lazada-sg-points
+    platform: lazada
+    market: SG
+    topic: penalty_points
+    url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145984
+    retrieved: "2026-10-29"

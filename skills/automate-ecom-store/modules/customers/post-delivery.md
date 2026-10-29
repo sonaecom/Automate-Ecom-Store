@@ -1,5 +1,7 @@
 # Post-delivery follow-up
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 When an order is Delivered or Completed, send one polite thank-you in that platform's own chat. Ask if something is wrong, and invite an honest review. Do not ask for a star count, do not pay for a rating, and do not chase.

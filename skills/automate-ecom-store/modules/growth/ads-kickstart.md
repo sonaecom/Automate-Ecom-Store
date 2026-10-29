@@ -1,5 +1,7 @@
 # Safe ads kickstart
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 A small test on the hero products. Stop when the test budget is spent below the ROAS target. A higher budget is a proposal until the owner says yes for that amount.

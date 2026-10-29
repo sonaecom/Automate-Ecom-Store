@@ -8,7 +8,7 @@ This pack operates stores the staff member is allowed to manage. The goal is acc
 
 ## When to use
 
-Use this at the start and the end of every Shopee, Lazada, and TikTok Shop task. SKILL.md reads this file before it opens a module.
+Use this at the start and the end of every Shopee, Lazada, and TikTok Shop task. SKILL.md reads this file before it opens a module. Read `{baseDir}/policies/LAYER.md` in the same preflight. A policy violation stops the action even when pace and caps would allow it.
 
 ## Profile and login
 

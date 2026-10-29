@@ -1,5 +1,7 @@
 # Disputes and claims
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 Prepare returns, lost parcels, and complaints. You may collect evidence. You may not submit an appeal, accept a refund, or close a case until the owner says yes for that case.

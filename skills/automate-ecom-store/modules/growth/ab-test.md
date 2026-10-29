@@ -1,5 +1,7 @@
 # Sequential A/B tests
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 Change one thing at a time: cover image, then title, then price. Measure before the next change. Price is a proposal until the owner says yes.

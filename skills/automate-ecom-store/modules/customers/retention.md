@@ -1,5 +1,7 @@
 # Customer retention
 
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
 Use only the platform's own follower and voucher tools. Propose a comeback offer. Do not publish it until the owner says yes for that offer. Do not message buyers outside the platform.
