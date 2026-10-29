@@ -4,7 +4,7 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-> Template to refine. The menu hints below are not a proven click-path. On the first supervised run, if a label does not match, stop, screenshot, and ask. Do not keep opening other menus.
+Classification: **write**. Use `affiliate-plan.mjs` with the approved shortlist. Manifest `affiliate.invite`. Lazada coverage in the policy files is still incomplete, so do not invent a missing rule. If a menu label does not match, stop and ask. Do not keep opening other menus.
 
 Bản mẫu, cần người phụ trách chỉnh lại. Lần đầu có người xem: nhãn không khớp thì dừng, chụp màn hình, và hỏi.
 

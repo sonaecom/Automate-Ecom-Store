@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.40.0
+
+- TikTok Shop and Lazada listing edits use the existing listing and stock plans. Platform ads pages use the ads plan. TikTok and Lazada invites use the affiliate plan. Click paths still stop when a label does not match.
+
 ## 1.39.0
 
 - Orders are marked shipped only after a pickup time is present. Review replies that ask for stars or a reward are blocked.
