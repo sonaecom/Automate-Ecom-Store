@@ -4,4 +4,7 @@ config.yaml
 .env.*
 data/
 invited_kol.csv
+invited.csv
+captcha_log.csv
+session-state.json
 screenshots/

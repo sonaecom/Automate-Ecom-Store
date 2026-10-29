@@ -1,20 +1,24 @@
 #!/usr/bin/env node
 /**
- * Compare affiliate handles with the private invited CSV.
+ * Compare values with one column of a private CSV.
  *
- * The CSV header is:
- *   handle,name,campaign_id,commission,invited_date,source
+ * Default column is handle, for affiliate invite lists whose header includes
+ * handle. Pass --column to dedupe another list, such as a column of item labels.
  *
- * A missing file means nobody has been invited yet. A handle already in the
- * file (case-insensitive, trimmed) is SKIP. Any other handle is NEW.
+ * A missing or empty file means nothing is recorded yet. A value already in
+ * the column (trimmed, case-insensitive) is SKIP. Any other value is NEW.
  *
  * Usage:
- *   node check-invited.mjs --csv path [--handle h]...
- *   node check-invited.mjs --csv path --handles-file handles.txt
- *   node check-invited.mjs --csv path --list
+ *   node dedupe-csv.mjs --csv path [--handle h]...
+ *   node dedupe-csv.mjs --csv path --column item_label --value <ITEM_LABEL>
+ *   node dedupe-csv.mjs --csv path --values-file path
+ *   node dedupe-csv.mjs --csv path --list
+ *
+ * --handle is shorthand for a value in the handle column.
+ * --handles-file is accepted as an alias of --values-file.
  *
  * Exit 0: the file was read (or is missing / empty). Read SKIP and NEW lines.
- * Exit 2: usage error, unreadable file, or header missing the handle column.
+ * Exit 2: usage error, unreadable file, or header missing the chosen column.
  *
  * This script never writes the CSV and never contacts the network.
  */
@@ -23,15 +27,17 @@ import { readFileSync, existsSync } from "node:fs";
 
 function usage() {
   console.error(
-    "usage: node check-invited.mjs --csv path [--handle h]... [--handles-file path] [--list]",
+    "usage: node dedupe-csv.mjs --csv path [--column name] [--handle h | --value v]... [--values-file path] [--list]",
   );
 }
 
 function parseArgs(argv) {
   let csv = null;
-  const handles = [];
-  let handlesFile = null;
+  let column = "handle";
+  const values = [];
+  let valuesFile = null;
   let list = false;
+  let sawHandle = false;
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -39,14 +45,24 @@ function parseArgs(argv) {
       csv = argv[i + 1];
       if (!csv) return { error: "--csv needs a path" };
       i += 1;
+    } else if (arg === "--column") {
+      column = argv[i + 1];
+      if (!column) return { error: "--column needs a name" };
+      i += 1;
     } else if (arg === "--handle") {
       const handle = argv[i + 1];
       if (!handle) return { error: "--handle needs a value" };
-      handles.push(handle);
+      values.push(handle);
+      sawHandle = true;
       i += 1;
-    } else if (arg === "--handles-file") {
-      handlesFile = argv[i + 1];
-      if (!handlesFile) return { error: "--handles-file needs a path" };
+    } else if (arg === "--value") {
+      const value = argv[i + 1];
+      if (!value) return { error: "--value needs a value" };
+      values.push(value);
+      i += 1;
+    } else if (arg === "--values-file" || arg === "--handles-file") {
+      valuesFile = argv[i + 1];
+      if (!valuesFile) return { error: `${arg} needs a path` };
       i += 1;
     } else if (arg === "--list") {
       list = true;
@@ -58,7 +74,10 @@ function parseArgs(argv) {
   }
 
   if (!csv) return { error: "--csv is required" };
-  return { csv, handles, handlesFile, list };
+  if (sawHandle && column.toLowerCase() !== "handle") {
+    return { error: "--handle only checks the handle column; use --value with --column" };
+  }
+  return { csv, column: column.toLowerCase(), values, valuesFile, list };
 }
 
 function parseCsv(text) {
@@ -121,11 +140,11 @@ function main() {
     process.exit(2);
   }
 
-  const wanted = [...parsed.handles];
-  if (parsed.handlesFile) {
+  const wanted = [...parsed.values];
+  if (parsed.valuesFile) {
     let fileText;
     try {
-      fileText = readFileSync(parsed.handlesFile, "utf8");
+      fileText = readFileSync(parsed.valuesFile, "utf8");
     } catch (error) {
       console.error(`read_error: ${error.message}`);
       process.exit(2);
@@ -140,8 +159,9 @@ function main() {
   console.log(`csv_path: ${parsed.csv}`);
 
   if (!existsSync(parsed.csv)) {
+    console.log(`column: ${parsed.column}`);
     console.log("csv_status: missing");
-    console.log("invited_count: 0");
+    console.log("existing_count: 0");
     for (const handle of wanted) console.log(`NEW ${handle}`);
     console.log(`new_count: ${wanted.length}`);
     console.log("skip_count: 0");
@@ -158,8 +178,9 @@ function main() {
   }
 
   if (text.trim() === "") {
+    console.log(`column: ${parsed.column}`);
     console.log("csv_status: empty");
-    console.log("invited_count: 0");
+    console.log("existing_count: 0");
     for (const handle of wanted) console.log(`NEW ${handle}`);
     console.log(`new_count: ${wanted.length}`);
     console.log("skip_count: 0");
@@ -169,8 +190,9 @@ function main() {
 
   const rows = parseCsv(text).filter((row) => row.some((cell) => cell.trim() !== ""));
   if (rows.length === 0) {
+    console.log(`column: ${parsed.column}`);
     console.log("csv_status: empty");
-    console.log("invited_count: 0");
+    console.log("existing_count: 0");
     for (const handle of wanted) console.log(`NEW ${handle}`);
     console.log(`new_count: ${wanted.length}`);
     console.log("skip_count: 0");
@@ -179,22 +201,23 @@ function main() {
   }
 
   const header = rows[0].map((cell) => cell.trim().toLowerCase());
-  const handleIndex = header.indexOf("handle");
-  if (handleIndex === -1) {
-    console.error("header_error: the first row must include a handle column");
+  const columnIndex = header.indexOf(parsed.column);
+  if (columnIndex === -1) {
+    console.error(`header_error: the first row must include a ${parsed.column} column`);
     process.exit(2);
   }
 
   const invited = new Map();
   for (const row of rows.slice(1)) {
-    const handle = (row[handleIndex] || "").trim();
+    const handle = (row[columnIndex] || "").trim();
     if (!handle) continue;
     const key = keyOf(handle);
     if (!invited.has(key)) invited.set(key, handle);
   }
 
+  console.log(`column: ${parsed.column}`);
   console.log("csv_status: ok");
-  console.log(`invited_count: ${invited.size}`);
+  console.log(`existing_count: ${invited.size}`);
   if (parsed.list) {
     for (const handle of invited.values()) console.log(`INVITED ${handle}`);
   }

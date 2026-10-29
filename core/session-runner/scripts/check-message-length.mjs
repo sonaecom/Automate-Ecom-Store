@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Check a Shopee affiliate invitation against the 200-character limit.
+ * Check a seller message against a character limit. Default 200.
  *
  * Counts Unicode code points and UTF-16 code units. Fails if either count
  * is above the limit, so a web counter that uses JavaScript string length

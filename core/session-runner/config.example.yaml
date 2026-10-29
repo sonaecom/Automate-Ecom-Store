@@ -1,0 +1,56 @@
+# Copy this file to config.yaml in this same folder.
+# config.yaml is gitignored. Fill it only on the shop computer.
+# Do not run a session from this example. If any value still contains a
+# <PLACEHOLDER> token, the agent must stop.
+#
+# ADSPOWER_API_KEY stays in the environment. Do not put the key here.
+# ADSPOWER_API_BASE is the Local API address shown in
+# AdsPower > Automation > API. You may set that same value in the
+# environment instead of adspower.api_base. Never commit the real value.
+# Do not write a host or a port number into this repository.
+
+store:
+  # shopee, tiktokshop, or lazada
+  platform: "<PLATFORM>"
+  profile_id: "<PROFILE_ID>"
+
+adspower:
+  api_base: "<ADSPOWER_API_BASE>"
+  # Visible window only. Do not change this to headless.
+  headless: false
+
+schedule:
+  # Hours between sessions. Use a value from 2 to 3.
+  gap_hours_min: 2
+  gap_hours_max: 3
+  # One session lasts at most this many minutes. Use 30 to 40.
+  session_minutes_max: 40
+
+caps:
+  session:
+    listing_edits: 10
+    affiliate_invites: 30
+    affiliate_batch_size: 10
+    ads_changes: 3
+    chat_replies: 10
+  daily:
+    listing_edits: 10
+    affiliate_invites: 30
+    ads_changes: 3
+    chat_replies: 10
+
+# Any price cut at or above this percent needs a yes in chat first.
+# Leave the placeholder to require a yes for every price cut.
+price_drop_approval_percent: "<PRICE_DROP_APPROVAL_PERCENT>"
+
+# Ads skills must not save a ROAS target below this number.
+roas_floor: "<ROAS_FLOOR>"
+
+paths:
+  invited_csv: "data/invited.csv"
+  captcha_log: "data/captcha_log.csv"
+  session_state: "data/session-state.json"
+  screenshots_dir: "screenshots"
+
+# Small red dot at the click spot so a supervisor can see the click.
+show_click_dot: true
