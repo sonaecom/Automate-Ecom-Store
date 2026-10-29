@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.16.0
+
+- After the AdsPower key and the store list, onboarding asks a short Vietnamese multiple-choice interview. Every question can be skipped. Answers save the store count, platforms, markets, optional goals, team size, and a stage on each store: new, underperforming, or stable. The skill writes a week, month, or quarter roadmap with modules, milestones, and KPIs. Dashboards show it. At the end of a period the skill suggests the next order from results and replaces the roadmap only after a yes. The interview can be run again at any time.
+
 ## 1.15.0
 
 - Affiliate invites on Shopee, TikTok Shop, and Lazada score each creator before anyone is selected. Weights and thresholds are configurable. Inactive, off-category, suspicious views/followers, a 90-day repeat invite, low engagement, zero GMV, and a sample that produced no sales stay off the list. The owner approves the ranked shortlist, then the skill invites the top N. Later results record acceptance, content, orders, GMV, and ROI, and can propose new weights. The live weights change only after a yes.

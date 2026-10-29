@@ -1,0 +1,7 @@
+# synthetic
+period,cadence,stage,store,platform,market,module,milestone,kpi,status
+1,month,A,<STORE_A>,shopee,VN,policies/LAYER.md,Cổng chính sách chạy,Kết quả cổng không phải BLOCK,planned
+1,month,A,<STORE_A>,shopee,VN,modules/listing/method.md,Một listing qua hai lần QC,Listing đã lưu khớp QC,planned
+2,month,B,<STORE_B>,lazada,PH,modules/fees/fee-cap.md,Phí trên GMV được tách từng khoản,Không bấm tham gia chương trình,planned
+2,month,C,<STORE_C>,tiktokshop,TH,modules/scale/ads-scale.md,Bước ads là đề xuất trong trần,Không tăng ngân sách khi chưa có yes,planned
+2,month,C,<STORE_C>,tiktokshop,TH,modules/scale/margin.md,Biên lợi nhuận được đối chiếu doanh thu,Báo khi doanh thu tăng mà biên giảm,suggest

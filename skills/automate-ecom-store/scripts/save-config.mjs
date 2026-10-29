@@ -145,6 +145,9 @@ function status(file) {
   const google = config.google || {};
   console.log(`sheets_reports: ${googleFlag(google.sheets_reports)}`);
   console.log(`inventory_sheet: ${googleFlag(google.inventory_sheet)}`);
+  const context = config.context || {};
+  const contextState = context.asked ? (context.skipped ? "skipped" : "set") : "unset";
+  console.log(`context: ${contextState}`);
   console.log("mode: 600");
   if (ads.headless !== false) {
     console.log("result: BLOCKED");
@@ -198,6 +201,7 @@ function applyPayload(current, payload, { requireKey }) {
         label: typeof store.label === "string" ? store.label.trim() : (previous.label || ""),
         market: typeof store.market === "string" ? store.market.trim() : (previous.market || ""),
         staff: typeof store.staff === "string" ? store.staff.trim() : (previous.staff || ""),
+        stage: store.stage === "A" || store.stage === "B" || store.stage === "C" ? store.stage : (previous.stage || ""),
       };
       if (store.schedule && typeof store.schedule === "object") merged.schedule = store.schedule;
       else if (previous.schedule) merged.schedule = previous.schedule;

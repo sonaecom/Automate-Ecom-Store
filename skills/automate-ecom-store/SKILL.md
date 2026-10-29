@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.15.0"
+version: "1.16.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -73,7 +73,36 @@ JSON
 
 Run `--status` again. Continue only on `result: OK`. Tell them how many stores were saved, which platforms, and that the safety caps are already on. Do not quote the key, the address, or any profile id.
 
-### 3. Two optional Google questions
+### 3. Context interview
+
+Ask this after the AdsPower key is saved and the stores are picked. Ask it again whenever they say "phỏng vấn lại" or "làm lại lộ trình". Read the questions from the script and ask them in Vietnamese, in order. Each question can be skipped. Do not invent an answer for a skip.
+
+```bash
+node {baseDir}/scripts/onboard-context.mjs --questions
+```
+
+Map the replies into JSON. `store_count` is `1` or `many`. Platforms are `shopee`, `tiktokshop`, or `lazada`. Markets are `PH`, `MY`, `ID`, `VN`, `TH`, or `SG`. Stage `A` is a new store, `B` is an existing store that is underperforming, `C` is stable or growing. Goals are `doanh_thu`, `loi_nhuan`, `don`, or `thuong_hieu`. Team size is `1`, `2-5`, or `6+`. Cadence is `week`, `month`, or `quarter`. Omit a skipped field. Match each store by its label, not by profile id.
+
+```bash
+node {baseDir}/scripts/onboard-context.mjs --save <<'JSON'
+{"store_count":"many","platforms":["shopee"],"markets":["VN"],"goals":["loi_nhuan"],"team_size":"2-5","cadence":"month","stores":[{"label":"<STORE_LABEL>","stage":"A","market":"VN"}]}
+JSON
+```
+
+A skip of the whole interview is `{"skip":true}`. That does not delete a roadmap already saved. The script writes stage and market onto the saved stores, then writes `roadmap.md`, `roadmap.yaml`, and `roadmap.csv` under `~/.automate-ecom-store/`. Recommendations follow the stage: A is policy, listing, first affiliates, vouchers, and first ads. B is health, fees, ads ROAS, listing fixes, and cancel or return rates. C is ads under the cap, margin, stock, expansion, team SLA, and Mall. The roadmap lists those modules in order, with a milestone and a KPI, for the cadence they picked.
+
+Do not print the key, the address, or any profile id. If `unknown_store` is printed, the label did not match a saved store. Ask once, then continue with the stores that matched.
+
+At the end of a period, re-suggest from results. Do not replace the roadmap until they accept.
+
+```bash
+node {baseDir}/scripts/onboard-context.mjs --resuggest --as-of <YYYY-MM-DD> --results <RESULTS_CSV>
+node {baseDir}/scripts/onboard-context.mjs --accept
+```
+
+`--resuggest` writes `roadmap-suggestion.md` and `roadmap-suggestion.yaml`. `WAIT` means the period has not ended. `NEED_RESULTS` means a current KPI has no row. `SUGGEST` means a missed KPI is repeated and later modules move back. `--accept` copies that suggestion over the live roadmap.
+
+### 4. Two optional Google questions
 
 Ask these after the AdsPower key is saved. Ask both. Each answer is yes or no. Neither is required. Do not ask a general "connect Gmail and Drive?" question.
 
@@ -131,7 +160,7 @@ node {baseDir}/scripts/apply-stores.mjs
 ```
 
 `SKIP` means there is no private `stores.yaml` yet and the global caps still apply. `APPLIED` prints each store's label, platform, market, staff, and caps. Use those caps in `caps-counter.mjs`. Do not raise them. Do not print profile ids. More than one saved store is normal: use only the store whose platform matches the task, and ask which label if two stores share a platform.
-If `sheets_reports` or `inventory_sheet` is `unset`, ask the two questions in first-run step 3 before any seller click, then save the answers. If both are `no`, do not connect Google.
+If `context` is `unset`, ask the interview in first-run step 3 before any seller click. `skipped` means do not ask again until they want to re-run it. If `sheets_reports` or `inventory_sheet` is `unset`, ask the two questions in first-run step 4 before any seller click, then save the answers. If both are `no`, do not connect Google. When a roadmap period has ended, run `--resuggest` and show the suggestion. Do not `--accept` until they say yes.
 
 2. Policy preflight, before the module. Read `{baseDir}/policies/LAYER.md` and `{baseDir}/policy/GATE.md`. Run the gate for this platform and market. Pass the title, image text, chat draft, or voucher text in `--text` when the module will type it:
 

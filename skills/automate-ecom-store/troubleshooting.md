@@ -5,6 +5,7 @@ Work on the shop computer, in the visible AdsPower window. Do not switch the sto
 | What you see | What to do |
 | --- | --- |
 | `--status` says `MISSING` | Ask for the AdsPower API key only. Do not ask for an address yet. |
+| `context` is `unset` | Ask the Vietnamese interview. A skip is allowed on every question. Say "phỏng vấn lại" to run it again. |
 | Profile list fails and `api_base` is `default` | Ask once for the address in AdsPower, Automation, API. Save it. Retry once. Do not invent a host or a port. |
 | Profile list fails and `api_base` is `custom` | Stop. Ask the person to open the AdsPower app. |
 | `NEED_STORES` | List profiles by name and number. Do not show profile ids. |

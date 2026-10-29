@@ -10,7 +10,7 @@ Policy gate action is `read`.
 
 ## When to use
 
-The owner wants overview, platform, market, store, staff, SKU profit, ads, wallet, cancellation and return rates, inventory, platform fee percent, and alerts.
+The owner wants overview, platform, market, store, staff, SKU profit, ads, wallet, cancellation and return rates, inventory, platform fee percent, alerts, and the automation roadmap.
 
 ## Choose a surface
 
@@ -36,6 +36,7 @@ Set `DASHBOARD_PASSWORD` before pointing the app at real exports. On Vercel, als
 - SKU profit uses `SkuPnl`. Inventory uses `Inventory`. Those two files are examples until a module writes them. The page says so.
 - Platform fee percent uses `FeeFacts`, `FeeOrders`, `FeeComponents`, and `FeeWhatIf` from `{baseDir}/modules/fees/fee-cap.md`. The page shows each component as a percent of GMV and the join or leave simulation. It does not opt in, opt out, change a price, or stop a promotion.
 - Alerts use the thresholds tab. If the label is `example`, say the threshold is an example.
+- The roadmap page reads `roadmap.csv`: period, stage, store, module, milestone, KPI, and status. `suggest` or `repeat` is a period-end proposal, not a change. Push a `Roadmap` tab only when `sheets_reports` is yes. Otherwise keep the local file. Do not connect Google for the roadmap.
 - AI cost uses `AiCost`, one row per run and store. A blank cost stays blank.
 
 ## QC

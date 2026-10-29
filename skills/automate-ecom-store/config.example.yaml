@@ -18,6 +18,8 @@ stores:
     label: "<STORE_LABEL>"
     market: "<MARKET>"
     staff: "<STAFF>"
+    # A new, B underperforming, C stable or growing. Empty until the interview.
+    stage: ""
 
 schedule:
   gap_hours_min: 2
@@ -50,6 +52,18 @@ show_click_dot: true
 
 # When true, modules report the plan and do not publish, submit, or send mail.
 dry_run: false
+
+# Context interview after the AdsPower key. Every answer can be skipped.
+# stage on each store is A, B, or C. The roadmap files live next to this config, not in git.
+context:
+  asked: false
+  skipped: false
+  store_count: ""
+  platforms: []
+  markets: []
+  goals: []
+  team_size: ""
+  cadence: ""
 
 # Asked once after the AdsPower key. Each value is yes (true) or no (false).
 # Neither is required. Both no skips Gmail, Drive, and Sheets.

@@ -229,6 +229,19 @@ export type FeeRow = {
   qc: string
 }
 
+export type RoadmapStep = {
+  period: string
+  cadence: string
+  stage: string
+  store: string
+  platform: string
+  market: string
+  module: string
+  milestone: string
+  kpi: string
+  status: string
+}
+
 export type Bundle = {
   example: boolean
   sourceLabel: string
@@ -248,6 +261,7 @@ export type Bundle = {
   feeComponents: FeeComponent[]
   feeWhatIfs: FeeWhatIf[]
   thresholds: Thresholds
+  roadmap: RoadmapStep[]
 }
 
 export type Filters = {
