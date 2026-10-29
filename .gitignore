@@ -1,5 +1,7 @@
 config.yaml
 .automate-ecom-store/
+__pycache__/
+*.pyc
 *.env
 .env
 .env.*
