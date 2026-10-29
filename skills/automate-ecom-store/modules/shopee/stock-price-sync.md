@@ -4,7 +4,11 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-> Skeleton. `shopee-affiliate-invite` is the proven Shopee path. This file is the safe order of work. On a supervised run, if an on-screen label does not match the hint below, stop and ask. Do not wander through other menus.
+Classification: **write**. Manifest `inventory.stock-price`. Plan first. Apply only `APPLY` rows. A price cut stays `HOLD_PRICE` until the owner approved it under the percent. Match the variation's own name. If a menu label does not match, stop and ask. The hourly listing ceiling still applies.
+
+```bash
+node {baseDir}/scripts/stock-price.mjs --changes ~/.automate-ecom-store/data/stock-price.csv --platform shopee --out-dir ~/.automate-ecom-store/data/inventory/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl --hourly-done <COUNT> --target <LISTING_EDITS_PER_HOUR>
+```
 
 Khung an toàn cho Shopee. Lần chạy có người xem: nhãn menu không khớp thì dừng và hỏi.
 

@@ -1,0 +1,13 @@
+{
+  "id": "inventory.stock-price",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": true,
+  "money": false,
+  "priority": 1,
+  "cost": { "actions": 6, "captchaRisk": "medium" },
+  "input": "stock and price change list",
+  "output": "stock-plan.csv",
+  "policyTags": ["stock_write"],
+  "schema": "InventoryItem"
+}

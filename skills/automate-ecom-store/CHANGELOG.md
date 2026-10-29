@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.33.0
+
+- Stock and price sync on Shopee, TikTok Shop, and Lazada plans through `stock-price.mjs`. A price cut stays a proposal. The variation name is required. The hourly listing ceiling still applies.
+
 ## 1.32.0
 
 - Customer chat on Shopee, TikTok Shop, and Lazada plans through `customer-chat.mjs` before Send. A refund or an off-platform contact is blocked. The reply ceiling is 10 a day and is not a quota.
