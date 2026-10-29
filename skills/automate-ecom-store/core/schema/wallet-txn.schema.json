@@ -1,0 +1,12 @@
+{
+  "$id": "WalletTxn",
+  "type": "object",
+  "required": ["id", "storeId", "amount", "kind"],
+  "properties": {
+    "id": { "type": "string" },
+    "storeId": { "type": "string" },
+    "kind": { "enum": ["balance", "withdrawal", "credit"] },
+    "amount": { "$ref": "money.schema.json" },
+    "bankLast4": { "type": "string" }
+  }
+}

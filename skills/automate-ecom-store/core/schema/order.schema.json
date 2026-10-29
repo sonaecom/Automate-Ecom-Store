@@ -1,0 +1,12 @@
+{
+  "$id": "Order",
+  "type": "object",
+  "required": ["id", "storeId", "gmv", "shipped"],
+  "properties": {
+    "id": { "type": "string" },
+    "storeId": { "type": "string" },
+    "sku": { "type": "string" },
+    "gmv": { "$ref": "money.schema.json" },
+    "shipped": { "type": "boolean", "description": "True only after carrier pickup." }
+  }
+}

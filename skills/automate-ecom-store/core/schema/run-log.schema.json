@@ -1,0 +1,12 @@
+{
+  "$id": "RunLog",
+  "type": "object",
+  "required": ["actionKey", "status"],
+  "properties": {
+    "actionKey": { "type": "string" },
+    "storeId": { "type": "string" },
+    "module": { "type": "string" },
+    "status": { "enum": ["pending", "done"] },
+    "day": { "type": "string" }
+  }
+}

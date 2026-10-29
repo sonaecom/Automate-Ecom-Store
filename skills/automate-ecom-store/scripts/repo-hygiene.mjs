@@ -59,6 +59,13 @@ if (denied.length) {
   }
 }
 
+const names = [];
+walk(root, names);
+for (const path of names) {
+  const base = path.split("/").pop();
+  if (base.endsWith(".")) hits.push(`${path} trailing_dot`);
+}
+
 console.log(`samples: ${samples.length}`);
 console.log(`denylist: ${existsSync(denyPath) ? "loaded" : "absent"}`);
 if (hits.length) {

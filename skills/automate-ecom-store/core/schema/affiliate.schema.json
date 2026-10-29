@@ -1,0 +1,10 @@
+{
+  "$id": "Affiliate",
+  "type": "object",
+  "required": ["storeId", "handle"],
+  "properties": {
+    "storeId": { "type": "string" },
+    "handle": { "type": "string" },
+    "eligible": { "type": "boolean" }
+  }
+}

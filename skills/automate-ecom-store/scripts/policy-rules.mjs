@@ -1,14 +1,13 @@
 /**
- * Load policies/rules.yaml. The file is the researched rule list.
+ * Load the single policy list via core/policy.
  * This module does not fetch a page and does not change a seller setting.
  */
 
 import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 import { findForbidden } from "./review-phrases.mjs";
+import { RULES_PATH } from "../core/policy/index.mjs";
 
-const rulesPath = join(dirname(fileURLToPath(import.meta.url)), "..", "policies", "rules.yaml");
+const rulesPath = RULES_PATH;
 
 export function canonicalPlatform(value) {
   const name = String(value || "").toLowerCase().replace(/[\s-]+/g, "");

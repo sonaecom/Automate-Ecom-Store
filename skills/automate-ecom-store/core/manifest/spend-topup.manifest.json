@@ -1,0 +1,12 @@
+{
+  "id": "ads.spend-topup",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": false,
+  "money": false,
+  "priority": 3,
+  "cost": { "actions": 4, "captchaRisk": "low" },
+  "input": "in-store ads export",
+  "output": "normalized-spend.csv",
+  "policyTags": ["read"]
+}

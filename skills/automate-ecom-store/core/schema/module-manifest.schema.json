@@ -1,0 +1,24 @@
+{
+  "$id": "ModuleManifest",
+  "type": "object",
+  "required": ["id", "platforms", "markets", "writes", "money", "priority", "cost", "input", "output", "policyTags"],
+  "properties": {
+    "id": { "type": "string" },
+    "platforms": { "type": "array", "items": { "enum": ["shopee", "tiktokshop", "lazada"] } },
+    "markets": { "type": "array", "items": { "type": "string" } },
+    "writes": { "type": "boolean" },
+    "money": { "type": "boolean" },
+    "priority": { "type": "integer", "minimum": 0, "maximum": 4 },
+    "cost": {
+      "type": "object",
+      "required": ["actions", "captchaRisk"],
+      "properties": {
+        "actions": { "type": "integer" },
+        "captchaRisk": { "enum": ["low", "medium", "high"] }
+      }
+    },
+    "input": { "type": "string" },
+    "output": { "type": "string" },
+    "policyTags": { "type": "array", "items": { "type": "string" } }
+  }
+}

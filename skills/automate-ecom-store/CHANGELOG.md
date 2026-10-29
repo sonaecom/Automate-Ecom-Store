@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.23.0
+
+- Core runner checks a module manifest, the read-only guard, the policy result, and the action_key journal before a module starts. Policy text stays the single file `policies/rules.yaml`. A filename that ends with a dot fails the repo hygiene check. No tracked file ends with a dot.
+
 ## 1.22.0
 
 - Ads top-ups and wallet withdrawals reconcile only against the seller centre: the screen, the official export, or the in-store transaction history. Gmail card charges and Drive statement files are not sources. Sheets, Drive, and Gmail stay available for reports and inventory. A card or bank last-4 is kept only when the store page shows it.

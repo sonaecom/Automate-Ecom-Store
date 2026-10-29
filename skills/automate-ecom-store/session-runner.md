@@ -10,6 +10,8 @@ Use these scripts during every store session: before start, between actions, aft
 
 On a host that stays up, run `{baseDir}/scripts/unattended-tick.mjs` before `open-browser`. `WAIT` means do not open a profile. Pace commands below still apply inside a session that does start. A restart of the agent does not cancel the gap.
 
+Before the module types, `{baseDir}/core/runner.mjs` checks the manifest, the read-only guard, the policy result, and the action_key journal. A done key is not repeated that day. Policy text is only `policies/rules.yaml`.
+
 ## Prerequisites
 
 - Private `~/.automate-ecom-store/config.yaml` exists (`save-config.mjs --status` says the key is set).

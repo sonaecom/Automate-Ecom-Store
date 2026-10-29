@@ -1,0 +1,10 @@
+{
+  "$id": "Settlement",
+  "type": "object",
+  "required": ["orderId", "payout"],
+  "properties": {
+    "orderId": { "type": "string" },
+    "payout": { "$ref": "money.schema.json" },
+    "fees": { "$ref": "money.schema.json" }
+  }
+}
