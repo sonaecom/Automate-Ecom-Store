@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.37.0
+
+- Daily reports on Shopee, TikTok Shop, and Lazada compare two in-store sources. A blank figure is not zero, and a mismatch is not averaged.
+
 ## 1.36.0
 
 - Shop decoration plans through shop-plan.mjs. A size marked verify is not uploaded. A slot is saved only after the owner approves it.
