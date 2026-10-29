@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.6.0"
+version: "1.6.1"
 user-invocable: true
 metadata:
   openclaw:
@@ -146,7 +146,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Shopee new listing or full rebuild | `{baseDir}/modules/shopee/product-listing.md` |
 | Shopee listing edit | `{baseDir}/modules/shopee/listing-update.md` |
 | Shopee stock or price sync | `{baseDir}/modules/shopee/stock-price-sync.md` |
-| Inventory sync, manual or auto | `{baseDir}/modules/inventory/sync.md` |
+| Inventory sync, manual set or auto | `{baseDir}/modules/inventory/sync.md` |
 | Shopee voucher or promotion | `{baseDir}/modules/shopee/vouchers-promotions.md` |
 | Shopee ads or GMV Max settings | `{baseDir}/modules/shopee/ads-gmv-max.md` |
 | Ads spend and top-up tracking, any platform | `{baseDir}/modules/ads/spend-topup.md` |

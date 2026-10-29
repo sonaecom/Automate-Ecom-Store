@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.6.1
+
+- Manual inventory mode sets one selling variation, or a small batch, to the quantity the owner typed. The skill previews it, pushes only after confirmation, reads the saved stock back, and writes an audit row. It never goes below reserved plus pending. A large jump stays a preview until the owner confirms it. Auto mode is unchanged.
+
 ## 1.6.0
 
 - Inventory sync has a manual alert mode and an auto mode. Auto pushes only inside the owner's clock, in batches, under the session cap, and never below reserved plus pending. A large jump is skipped and alerted. BigSeller or a Google Sheet can be the source per store and SKU.

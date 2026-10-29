@@ -1,20 +1,31 @@
 #!/usr/bin/env node
 /**
- * Preview or list a stock push. Does not open a seller site and does not
- * type a quantity. Manual mode only alerts. Auto mode marks PUSH only inside
- * an owner time window and never below reserved plus pending.
+ * Classify a stock change. Does not open a seller site and does not type.
+ * Manual mode previews an exact variation quantity and marks PUSH only after
+ * --confirm. Auto mode marks PUSH only inside an owner time window, after
+ * buffer, and never below reserved plus pending.
  *
- *   node inventory-sync.mjs --platform-stock file --source file --map file \
- *     --now HH:MM [--mode manual|auto] [--apply] [--config file] [--out-dir DIR]
+ *   node inventory-sync.mjs --platform-stock file --set <SKU>=50 --store <STORE> --platform shopee [--confirm] [--readback file]
+ *   node inventory-sync.mjs --platform-stock file --sets file [--confirm] [--readback file]
+ *   node inventory-sync.mjs --platform-stock file --source file --map file --now HH:MM --mode auto [--apply]
  */
 
-import { mkdirSync, writeFileSync } from "node:fs";
-import { readFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 function arg(name) {
   const index = process.argv.indexOf(name);
   return index >= 0 ? process.argv[index + 1] || "" : "";
+}
+
+function argsAll(name) {
+  const out = [];
+  for (let i = 0; i < process.argv.length; i += 1) {
+    if (process.argv[i] === name && process.argv[i + 1] && !process.argv[i + 1].startsWith("--")) {
+      out.push(process.argv[i + 1]);
+    }
+  }
+  return out;
 }
 
 function parseCsv(text) {
@@ -105,90 +116,185 @@ function windowOpen(now, times, tolerance) {
   });
 }
 
-const platformPath = arg("--platform-stock");
-const sourcePath = arg("--source");
-const mapPath = arg("--map");
-const now = arg("--now");
-if (!platformPath || !sourcePath || !mapPath || !now) {
-  console.error("usage: node inventory-sync.mjs --platform-stock file --source file --map file --now HH:MM [--mode manual|auto] [--apply] [--config file] [--out-dir DIR]");
+function csvCell(value) {
+  const text = value == null ? "" : String(value);
+  if (/[",\n]/.test(text)) return `"${text.replace(/"/g, '""')}"`;
+  return text;
+}
+
+function usage() {
+  console.error("usage: node inventory-sync.mjs --platform-stock file (--set <SKU>=<QTY> --store <STORE> --platform <PLATFORM> | --sets file) [--confirm] [--readback file] [--mode manual] [--config file] [--out-dir DIR]");
+  console.error("   or: node inventory-sync.mjs --platform-stock file --source file --map file --now HH:MM --mode auto [--apply] [--config file] [--out-dir DIR]");
   process.exit(2);
 }
 
+const platformPath = arg("--platform-stock");
+const sourcePath = arg("--source");
+const mapPath = arg("--map");
+const setsPath = arg("--sets");
+const setArgs = argsAll("--set");
+const now = arg("--now");
+const readbackPath = arg("--readback");
 const cfg = configMap(arg("--config"));
 const mode = (arg("--mode") || cfg.mode || "manual").toLowerCase();
+const manual = mode !== "auto";
+if (mode !== "auto" && mode !== "manual") usage();
+if (!platformPath) usage();
+if (manual && setArgs.length === 0 && !setsPath) usage();
+if (!manual && (!sourcePath || !mapPath || !now)) usage();
+
 const apply = process.argv.includes("--apply");
+const confirm = process.argv.includes("--confirm");
 const buffer = num(arg("--buffer") || cfg.buffer) ?? 0;
 const skipPercent = num(arg("--skip-change-percent") || cfg.skip_change_percent);
 const batchSize = num(arg("--batch-size") || cfg.batch_size) ?? 10;
 const sessionMax = num(arg("--session-max") || cfg.session_max) ?? 10;
 const tolerance = num(arg("--tolerance-minutes") || cfg.tolerance_minutes) ?? 0;
 const times = (arg("--times") || cfg.times || "").split(",").map((item) => item.trim()).filter(Boolean);
-const open = windowOpen(now, times, tolerance);
+const open = manual ? false : windowOpen(now, times, tolerance);
 const skuColumn = (cfg.sku_column || "sku").toLowerCase();
 const qtyColumn = (cfg.qty_column || "qty").toLowerCase();
-
-const sourceBySku = new Map();
-for (const row of records(sourcePath)) {
-  const key = row[skuColumn] || row.sku || row.source_sku;
-  if (key) sourceBySku.set(key, num(row[qtyColumn] || row.qty));
-}
-const mapBySeller = new Map();
-for (const row of records(mapPath)) {
-  if (row.seller_sku) mapBySeller.set(`${row.store}|${row.platform}|${row.seller_sku}`, row);
-}
+const manualSku = (cfg.manual_sku_column || "sku").toLowerCase();
+const manualQty = (cfg.manual_qty_column || "qty").toLowerCase();
+const manualStore = (cfg.manual_store_column || "store").toLowerCase();
+const manualPlatform = (cfg.manual_platform_column || "platform").toLowerCase();
 
 const decisions = [];
-for (const row of records(platformPath)) {
-  const key = `${row.store}|${row.platform}|${row.sku}`;
-  const mapped = mapBySeller.get(key);
-  const onHand = num(row.on_hand);
-  const reserved = num(row.reserved) ?? 0;
-  const pending = num(row.pending) ?? 0;
-  const floor = reserved + pending;
-  const base = {
-    sku: row.sku || "",
-    store: row.store || "",
-    platform: row.platform || "",
-    on_hand: show(onHand),
-    floor: String(floor),
-    proposed: "",
-    source: mapped ? mapped.source : "",
-    reason: "",
-    decision: "SKIP",
-  };
-  if (!mapped) {
-    decisions.push({ ...base, reason: "unmapped" });
-    continue;
+
+if (manual) {
+  const store = arg("--store");
+  const platform = arg("--platform");
+  const rawSets = [];
+  for (const text of setArgs) {
+    const match = /^(.*)=([^=]+)$/.exec(text.trim());
+    if (!match || !store || !platform) usage();
+    rawSets.push({ sku: match[1].trim(), qty: match[2].trim(), store, platform });
   }
-  const sourceQty = sourceBySku.get(mapped.source_sku);
-  if (onHand === null || sourceQty === null) {
-    decisions.push({ ...base, reason: "missing_qty" });
-    continue;
+  if (setsPath) {
+    for (const row of records(setsPath)) {
+      rawSets.push({
+        sku: row[manualSku] || row.sku || "",
+        qty: row[manualQty] || row.qty || "",
+        store: row[manualStore] || row.store || "",
+        platform: row[manualPlatform] || row.platform || "",
+      });
+    }
   }
-  const raw = sourceQty - buffer;
-  const proposed = Math.max(raw, floor);
-  const floored = raw < floor;
-  base.proposed = String(proposed);
-  if (proposed === onHand) {
-    decisions.push({ ...base, decision: "UNCHANGED", reason: floored ? "floored" : "" });
-    continue;
+  const setMap = new Map();
+  for (const item of rawSets) {
+    if (!item.sku || !item.store || !item.platform) usage();
+    setMap.set(`${item.store}|${item.platform}|${item.sku}`, item);
   }
-  const changePercent = onHand === 0 ? null : Math.abs(proposed - onHand) / onHand * 100;
-  if (onHand === 0 || (skipPercent !== null && changePercent !== null && changePercent >= skipPercent)) {
-    decisions.push({ ...base, decision: "SKIP", reason: onHand === 0 ? "from_zero" : "large_change" });
-    continue;
+  const platformByKey = new Map();
+  for (const row of records(platformPath)) {
+    platformByKey.set(`${row.store}|${row.platform}|${row.sku}`, row);
   }
-  decisions.push({ ...base, decision: "ELIGIBLE", reason: floored ? "floored" : "" });
+  for (const item of setMap.values()) {
+    const row = platformByKey.get(`${item.store}|${item.platform}|${item.sku}`);
+    const requested = num(item.qty);
+    const base = {
+      sku: item.sku,
+      store: item.store,
+      platform: item.platform,
+      on_hand: "",
+      floor: "",
+      proposed: "",
+      source: "manual",
+      reason: "",
+      decision: "SKIP",
+    };
+    if (!row) {
+      decisions.push({ ...base, reason: "not_on_export" });
+      continue;
+    }
+    const onHand = num(row.on_hand);
+    const reserved = num(row.reserved) ?? 0;
+    const pending = num(row.pending) ?? 0;
+    const floor = reserved + pending;
+    base.on_hand = show(onHand);
+    base.floor = String(floor);
+    if (onHand === null || requested === null) {
+      decisions.push({ ...base, reason: "missing_qty" });
+      continue;
+    }
+    const proposed = Math.max(requested, floor);
+    const reasons = [];
+    if (requested < floor) reasons.push("floored");
+    base.proposed = String(proposed);
+    if (proposed === onHand) {
+      decisions.push({ ...base, decision: "UNCHANGED", reason: reasons.join(",") });
+      continue;
+    }
+    if (onHand === 0) reasons.push("from_zero");
+    else if (skipPercent !== null) {
+      const changePercent = Math.abs(proposed - onHand) / onHand * 100;
+      if (changePercent >= skipPercent) reasons.push("large_change");
+    }
+    decisions.push({ ...base, decision: "ELIGIBLE", reason: reasons.join(",") });
+  }
+} else {
+  const sourceBySku = new Map();
+  for (const row of records(sourcePath)) {
+    const key = row[skuColumn] || row.sku || row.source_sku;
+    if (key) sourceBySku.set(key, num(row[qtyColumn] || row.qty));
+  }
+  const mapBySeller = new Map();
+  for (const row of records(mapPath)) {
+    if (row.seller_sku) mapBySeller.set(`${row.store}|${row.platform}|${row.seller_sku}`, row);
+  }
+  for (const row of records(platformPath)) {
+    const key = `${row.store}|${row.platform}|${row.sku}`;
+    const mapped = mapBySeller.get(key);
+    const onHand = num(row.on_hand);
+    const reserved = num(row.reserved) ?? 0;
+    const pending = num(row.pending) ?? 0;
+    const floor = reserved + pending;
+    const base = {
+      sku: row.sku || "",
+      store: row.store || "",
+      platform: row.platform || "",
+      on_hand: show(onHand),
+      floor: String(floor),
+      proposed: "",
+      source: mapped ? mapped.source : "",
+      reason: "",
+      decision: "SKIP",
+    };
+    if (!mapped) {
+      decisions.push({ ...base, reason: "unmapped" });
+      continue;
+    }
+    const sourceQty = sourceBySku.get(mapped.source_sku);
+    if (onHand === null || sourceQty === null) {
+      decisions.push({ ...base, reason: "missing_qty" });
+      continue;
+    }
+    const raw = sourceQty - buffer;
+    const proposed = Math.max(raw, floor);
+    const floored = raw < floor;
+    base.proposed = String(proposed);
+    if (proposed === onHand) {
+      decisions.push({ ...base, decision: "UNCHANGED", reason: floored ? "floored" : "" });
+      continue;
+    }
+    const changePercent = onHand === 0 ? null : Math.abs(proposed - onHand) / onHand * 100;
+    if (onHand === 0 || (skipPercent !== null && changePercent !== null && changePercent >= skipPercent)) {
+      decisions.push({ ...base, decision: "SKIP", reason: onHand === 0 ? "from_zero" : "large_change" });
+      continue;
+    }
+    decisions.push({ ...base, decision: "ELIGIBLE", reason: floored ? "floored" : "" });
+  }
 }
 
 let pushes = 0;
 for (const row of decisions) {
   if (row.decision !== "ELIGIBLE") continue;
-  if (mode !== "auto") {
-    row.decision = "ALERT_ONLY";
-    continue;
-  }
-  if (!apply || !open) {
+  if (manual) {
+    if (!confirm) {
+      row.decision = "PREVIEW";
+      continue;
+    }
+  } else if (!apply || !open) {
     row.decision = "PREVIEW";
     if (!open) row.reason = row.reason ? `${row.reason},window_closed` : "window_closed";
     continue;
@@ -209,17 +315,32 @@ if (outDir) {
   const header = ["sku", "store", "platform", "on_hand", "floor", "proposed", "source", "decision", "reason", "batch"];
   const lines = [header.join(",")];
   for (const row of decisions) {
-    lines.push(header.map((key) => row[key] || "").join(","));
+    lines.push(header.map((key) => csvCell(row[key] || "")).join(","));
   }
   writeFileSync(join(outDir, "inventory-audit.csv"), `${lines.join("\n")}\n`);
 }
 
 console.log(`mode: ${mode}`);
-console.log(`window: ${open ? "open" : "closed"}`);
+console.log(`window: ${manual ? "n/a" : open ? "open" : "closed"}`);
 console.log(`apply: ${apply ? "yes" : "no"}`);
-console.log(`buffer: ${buffer}`);
+console.log(`confirm: ${confirm ? "yes" : "no"}`);
+console.log(`buffer: ${manual ? "off" : buffer}`);
 for (const row of decisions) {
   console.log(`sku ${row.sku} store ${row.store} platform ${row.platform} on_hand ${row.on_hand} floor ${row.floor} proposed ${row.proposed} source ${row.source} decision ${row.decision} reason ${row.reason} batch ${row.batch || ""}`);
+}
+if (readbackPath) {
+  const back = new Map();
+  for (const row of records(readbackPath)) {
+    back.set(`${row.store}|${row.platform}|${row.sku}`, num(row.on_hand));
+  }
+  for (const row of decisions) {
+    const seen = back.get(`${row.store}|${row.platform}|${row.sku}`);
+    const proposed = num(row.proposed);
+    let status = "MISMATCH";
+    if (seen === undefined || seen === null) status = "MISSING";
+    else if (proposed !== null && seen === proposed) status = "MATCH";
+    console.log(`readback sku ${row.sku} store ${row.store} platform ${row.platform} proposed ${row.proposed} on_hand ${seen === undefined || seen === null ? "" : seen} ${status}`);
+  }
 }
 const counts = decisions.reduce((map, row) => {
   map[row.decision] = (map[row.decision] || 0) + 1;

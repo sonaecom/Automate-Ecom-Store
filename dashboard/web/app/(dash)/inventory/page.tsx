@@ -17,7 +17,7 @@ export default function InventoryPage() {
     <div className="grid gap-4">
       <div>
         <h1 className="text-2xl font-semibold">Tồn kho và đặt lại</h1>
-        <p className="text-sm text-muted-foreground">Bảng ví dụ. Không tự đặt hàng. Hết hàng và dưới điểm đặt lại nằm ở trang cảnh báo.</p>
+        <p className="text-sm text-muted-foreground">Bảng ví dụ. Không tự đặt hàng. Hết hàng và dưới điểm đặt lại nằm ở trang cảnh báo. Số tồn từng biến thể được đặt bằng lệnh skill hoặc một Google Sheet, có xem trước và xác nhận. Trang này không ghi lên sàn.</p>
       </div>
       <DataTable
         columns={[

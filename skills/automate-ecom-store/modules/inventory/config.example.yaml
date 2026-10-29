@@ -1,6 +1,7 @@
 # Shape only. Copy to ~/.automate-ecom-store/inventory.yaml on the shop computer.
 # Do not put a real shop name, sheet id, or BigSeller password here.
-# mode manual: show and alert only. mode auto: push only inside the time windows.
+# mode manual: the owner sets an exact variation quantity. Preview, then push only after confirmation.
+# mode auto: push warehouse stock only inside the time windows.
 
 mode: manual
 
@@ -14,6 +15,13 @@ session_max: 10
 buffer: 2
 skip_change_percent: 50
 
-# Header names on the downloaded sheet or BigSeller export.
+# Header names on the downloaded warehouse sheet or BigSeller export. Auto mode only.
 sku_column: sku
 qty_column: qty
+
+# Manual sets. Export this tab to a CSV and pass it as --sets. Do not put a real sheet id here.
+manual_tab: Manual
+manual_sku_column: sku
+manual_qty_column: qty
+manual_store_column: store
+manual_platform_column: platform
