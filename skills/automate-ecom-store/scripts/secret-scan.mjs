@@ -8,7 +8,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.argv[2] || join(import.meta.dirname, "..", "..", "..");
-const skip = new Set([".git", "node_modules", "__pycache__", "data", "screenshots"]);
+const skip = new Set([".git", "node_modules", "__pycache__", "data", "screenshots", ".next"]);
 const patterns = [
   [/127\.0\.0\.1/, "loopback"],
   [/\b50325\b/, "local_api_port"],

@@ -45,6 +45,7 @@ Lần đầu, agent chỉ hỏi API Key. Địa chỉ Local API chỉ được h
 4. `@playwright/mcp` gắn websocket đó, một tab.
 5. Script trong `scripts/` canh nhịp, cap, log captcha, và CSV.
 6. File trong `modules/<sàn>/` là các bước của từng việc.
+7. Bảng số mặc định là Google Sheets. Muốn xem trên web: `cd dashboard/web && pnpm i && pnpm dev`. Dữ liệu trong `sample/` chỉ là ví dụ.
 
 ### An toàn
 
@@ -78,6 +79,7 @@ On first use the skill asks only for the AdsPower API key. It uses the official 
 4. `@playwright/mcp` attaches to that websocket and stays on one tab.
 5. Scripts in `scripts/` handle pace, caps, the captcha log, and CSV checks.
 6. Files in `modules/<platform>/` are the steps for each task.
+7. The default dashboard is Google Sheets. The optional web app is `cd dashboard/web && pnpm i && pnpm dev`. Files in `sample/` are examples.
 
 ### Safety
 
@@ -98,6 +100,7 @@ skills/automate-ecom-store/scripts/
 skills/automate-ecom-store/modules/shopee/
 skills/automate-ecom-store/modules/lazada/
 skills/automate-ecom-store/modules/tiktokshop/
+dashboard/web/
 ```
 
 ## License

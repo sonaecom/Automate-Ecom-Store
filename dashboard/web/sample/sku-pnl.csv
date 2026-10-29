@@ -1,0 +1,6 @@
+date,store,platform,market,staff,category,product,sku,units_sold,revenue,cogs,ads_allocated,fees,refunds,currency,source
+2026-10-02,<STORE_A>,shopee,<MARKET_PH>,<STAFF_A>,<CATEGORY_A>,<PRODUCT_A>,<SKU_A>,6,600,200,6,40,0,PHP,example
+2026-10-02,<STORE_A>,shopee,<MARKET_PH>,<STAFF_B>,<CATEGORY_A>,<PRODUCT_B>,<SKU_B>,2,400,180,4,20,50,PHP,example
+2026-10-15,<STORE_A>,shopee,<MARKET_PH>,<STAFF_A>,<CATEGORY_A>,<PRODUCT_A>,<SKU_A>,4,500,220,8,30,0,PHP,example
+2026-09-15,<STORE_B>,lazada,<MARKET_MY>,<STAFF_B>,<CATEGORY_B>,<PRODUCT_C>,<SKU_C>,3,20,8,1,2,0,MYR,example
+2026-10-08,<STORE_C>,tiktokshop,<MARKET_VN>,<STAFF_A>,<CATEGORY_C>,<PRODUCT_D>,<SKU_D>,10,50000,20000,0,1500,0,VND,example
