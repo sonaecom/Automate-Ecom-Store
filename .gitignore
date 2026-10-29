@@ -11,3 +11,5 @@ invited.csv
 captcha_log.csv
 session-state.json
 screenshots/
+google-token.json
+google-tokens.json

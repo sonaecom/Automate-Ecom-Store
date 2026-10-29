@@ -72,6 +72,20 @@ JSON
 
 Run `--status` again. Continue only on `result: OK`. Tell them how many stores were saved, which platforms, and that the safety caps are already on. Do not quote the key, the address, or any profile id.
 
+### 3. Offer Gmail and Drive once
+
+Ask one question: connect Gmail and Google Drive now, or later? A "later" or "no" ends this step.
+
+If they say yes, use the OpenClaw Google connectors when those are available. Otherwise ask them to complete Google's own sign-in, then save the resulting token only with:
+
+```bash
+node {baseDir}/scripts/push-sheets.mjs --save-token
+```
+
+The token is read from stdin and written to `~/.automate-ecom-store/google-token.json` (mode 600). Do not echo it. Then create the Drive folders named in account-safety "Mail and Drive". Exports, reports, images, and the dashboard file live there.
+
+Gmail is for penalty mail, campaign invitations, one-time codes while the person is here, and reports to the owner. Never auto-reply to a customer email.
+
 Later task details (campaign text, prices, ROAS floor) are asked when that task starts. A later stdin write may set `tasks` or `roas_floor` and must omit `api_key`. Still do not print the key.
 
 ## Reset config
@@ -82,7 +96,7 @@ When the person says "reset config" (or the same request in Vietnamese: "x√≥a c·
 node {baseDir}/scripts/save-config.mjs --reset
 ```
 
-Say only that the local config was removed. Do not print what was in it. Do not delete `~/.automate-ecom-store/data/` unless they also ask to wipe runtime logs. Then start at first run.
+Say only that the local config was removed. Do not print what was in it. Do not delete `~/.automate-ecom-store/data/` unless they also ask to wipe runtime logs. Do not delete the Google token unless they say "reset google". Then start at first run.
 
 ## Every run
 

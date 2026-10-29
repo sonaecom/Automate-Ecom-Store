@@ -138,6 +138,16 @@ Every edit has two checks:
 
 If either check fails, do not submit a correction in a hurry and do not create a second record. Stop and ask.
 
+## Mail and Drive
+
+Gmail and Google Drive are optional. After the AdsPower key is saved, offer them once. A "no" or "later" is final until the person asks again.
+
+- Tokens stay only in `~/.automate-ecom-store/google-token.json`, mode 600. Never print a token, and never put one in this repository.
+- Prefer the OpenClaw Google connectors when they are already connected. Do not ask the person to paste a client secret into the repo.
+- On the first Drive connection, create this folder tree under a folder named `Automate-Ecom-Store`: `exports/`, `reports/weekly/`, `reports/monthly/`, `images/listings/`, `images/homepage/`, `dashboard/`, `research/`. Split exports by platform inside `exports/`.
+- Gmail may be read for penalty notices, campaign invitations, and one-time codes. Read a one-time code only while the person is present, show it to them, and do not store it. Type it into a site only if they are watching and they asked.
+- Send a report only to the owner address in the dashboard Settings. Never auto-reply to a customer email. Never email the API key or a one-time code.
+
 ## Secrets
 
 Do not write API keys, the Local API address, ports, profile ids, the CDP websocket, shop names, product names, creator handles, or personal emails into this repository. The live chat report may repeat figures and handles the person needs. Do not commit that report. If config and env `ADSPOWER_API_BASE` are both set and differ, stop without printing either value. If any private value still contains a `<PLACEHOLDER>` token, stop.
