@@ -1,29 +1,111 @@
 {
+  "home": "https://sellercenter.lazada.com.ph/",
   "affiliate": {
-    "nav": { "role": "link", "name": "Affiliate" },
-    "search": { "role": "textbox", "name": "Search" },
-    "invite": { "role": "button", "name": "Invite" }
+    "nav": {
+      "role": "link",
+      "name": "Affiliate"
+    },
+    "search": {
+      "role": "textbox",
+      "name": "Search"
+    },
+    "invite": {
+      "role": "button",
+      "name": "Invite"
+    }
   },
   "listing": {
-    "nav": { "role": "link", "name": "Products" },
-    "search": { "role": "textbox", "name": "Search" },
-    "edit": { "role": "button", "name": "Edit" },
-    "field": { "role": "textbox", "name": "Product Name" },
-    "save": { "role": "button", "name": "Submit" }
+    "nav": {
+      "role": "link",
+      "name": "Products"
+    },
+    "search": {
+      "role": "textbox",
+      "name": "Search"
+    },
+    "edit": {
+      "role": "button",
+      "name": "Edit"
+    },
+    "field": {
+      "role": "textbox",
+      "name": "Product Name"
+    },
+    "save": {
+      "role": "button",
+      "name": "Submit"
+    }
   },
   "ads": {
-    "nav": { "role": "link", "name": "Sponsored Solutions" },
-    "spend": { "role": "text", "name": "Spend" },
-    "toggle": { "role": "switch", "name": "Campaign" },
-    "save": { "role": "button", "name": "Save" }
+    "nav": {
+      "role": "link",
+      "name": "Sponsored Solutions"
+    },
+    "spend": {
+      "role": "text",
+      "name": "Spend"
+    },
+    "toggle": {
+      "role": "switch",
+      "name": "Campaign"
+    },
+    "save": {
+      "role": "button",
+      "name": "Save"
+    }
   },
-  "chat": { "nav": { "role": "link", "name": "Chat" } },
-  "promo": { "nav": { "role": "link", "name": "Promotions" } },
-  "orders": { "nav": { "role": "link", "name": "Orders" } },
-  "reviews": { "nav": { "role": "link", "name": "Reviews" } },
-  "report": { "nav": { "role": "link", "name": "Business Advisor" } },
-  "shop": { "nav": { "role": "link", "name": "Store Decoration" } },
-  "video": { "nav": { "role": "link", "name": "Video" } },
-  "captcha": { "slider": { "role": "slider", "name": "slider" }, "text": "Verify" },
-  "unavailable": ["page unavailable", "verify your identity", "unusual traffic"]
+  "chat": {
+    "nav": {
+      "role": "link",
+      "name": "Chat"
+    }
+  },
+  "promo": {
+    "nav": {
+      "role": "link",
+      "name": "Promotions"
+    }
+  },
+  "orders": {
+    "nav": {
+      "role": "link",
+      "name": "Orders"
+    }
+  },
+  "reviews": {
+    "nav": {
+      "role": "link",
+      "name": "Reviews"
+    }
+  },
+  "report": {
+    "nav": {
+      "role": "link",
+      "name": "Business Advisor"
+    }
+  },
+  "shop": {
+    "nav": {
+      "role": "link",
+      "name": "Store Decoration"
+    }
+  },
+  "video": {
+    "nav": {
+      "role": "link",
+      "name": "Video"
+    }
+  },
+  "captcha": {
+    "slider": {
+      "role": "slider",
+      "name": "slider"
+    },
+    "text": "Verify"
+  },
+  "unavailable": [
+    "page unavailable",
+    "verify your identity",
+    "unusual traffic"
+  ]
 }

@@ -1,29 +1,111 @@
 {
+  "home": "https://seller.shopee.ph/",
   "affiliate": {
-    "nav": { "role": "link", "name": "Affiliate" },
-    "search": { "role": "textbox", "name": "Search creators" },
-    "invite": { "role": "button", "name": "Invite" }
+    "nav": {
+      "role": "link",
+      "name": "Affiliate"
+    },
+    "search": {
+      "role": "textbox",
+      "name": "Search creators"
+    },
+    "invite": {
+      "role": "button",
+      "name": "Invite"
+    }
   },
   "listing": {
-    "nav": { "role": "link", "name": "My Products" },
-    "search": { "role": "textbox", "name": "Search" },
-    "edit": { "role": "button", "name": "Edit" },
-    "field": { "role": "textbox", "name": "Product Name" },
-    "save": { "role": "button", "name": "Update" }
+    "nav": {
+      "role": "link",
+      "name": "My Products"
+    },
+    "search": {
+      "role": "textbox",
+      "name": "Search"
+    },
+    "edit": {
+      "role": "button",
+      "name": "Edit"
+    },
+    "field": {
+      "role": "textbox",
+      "name": "Product Name"
+    },
+    "save": {
+      "role": "button",
+      "name": "Update"
+    }
   },
   "ads": {
-    "nav": { "role": "link", "name": "Ads" },
-    "spend": { "role": "text", "name": "Spend" },
-    "toggle": { "role": "switch", "name": "Campaign" },
-    "save": { "role": "button", "name": "Save" }
+    "nav": {
+      "role": "link",
+      "name": "Ads"
+    },
+    "spend": {
+      "role": "text",
+      "name": "Spend"
+    },
+    "toggle": {
+      "role": "switch",
+      "name": "Campaign"
+    },
+    "save": {
+      "role": "button",
+      "name": "Save"
+    }
   },
-  "chat": { "nav": { "role": "link", "name": "Chat" } },
-  "promo": { "nav": { "role": "link", "name": "Marketing" } },
-  "orders": { "nav": { "role": "link", "name": "Orders" } },
-  "reviews": { "nav": { "role": "link", "name": "Reviews" } },
-  "report": { "nav": { "role": "link", "name": "Business Insights" } },
-  "shop": { "nav": { "role": "link", "name": "Shop Decoration" } },
-  "video": { "nav": { "role": "link", "name": "Video" } },
-  "captcha": { "slider": { "role": "slider", "name": "slider" }, "text": "Verify" },
-  "unavailable": ["page unavailable", "verify your identity", "unusual traffic"]
+  "chat": {
+    "nav": {
+      "role": "link",
+      "name": "Chat"
+    }
+  },
+  "promo": {
+    "nav": {
+      "role": "link",
+      "name": "Marketing"
+    }
+  },
+  "orders": {
+    "nav": {
+      "role": "link",
+      "name": "Orders"
+    }
+  },
+  "reviews": {
+    "nav": {
+      "role": "link",
+      "name": "Reviews"
+    }
+  },
+  "report": {
+    "nav": {
+      "role": "link",
+      "name": "Business Insights"
+    }
+  },
+  "shop": {
+    "nav": {
+      "role": "link",
+      "name": "Shop Decoration"
+    }
+  },
+  "video": {
+    "nav": {
+      "role": "link",
+      "name": "Video"
+    }
+  },
+  "captcha": {
+    "slider": {
+      "role": "slider",
+      "name": "slider"
+    },
+    "text": "Verify"
+  },
+  "unavailable": [
+    "page unavailable",
+    "verify your identity",
+    "unusual traffic"
+  ]
 }

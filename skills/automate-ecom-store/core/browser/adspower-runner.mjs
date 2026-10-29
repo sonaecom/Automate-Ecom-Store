@@ -67,18 +67,67 @@ export function curvePoints(from, to, random, steps = 8) {
   return points;
 }
 
+export function authHeaders(apiKey) {
+  // The local API accepts a bearer token; the api-key header alone is refused.
+  return { Authorization: `Bearer ${apiKey}`, "api-key": apiKey };
+}
+
+export function looksLikeLogin(url, text) {
+  return /\/(account|seller)\/login|\/apps\/seller\/login|\/apps\/register\//i.test(String(url || ""));
+}
+
+function locate(page, spec) {
+  if (typeof spec === "string") return page.locator(spec).first();
+  if (spec.css) return page.locator(spec.css).first();
+  if (spec.role === "text") return page.getByText(spec.name, { exact: false }).first();
+  return page.getByRole(spec.role, { name: spec.name, exact: false }).first();
+}
+
+/** Give actions.mjs the small page surface it needs on top of a Playwright page. */
+export function wrapPage(page, timeout = 8000) {
+  const visible = async (spec) => {
+    const target = locate(page, spec);
+    try { await target.waitFor({ state: "visible", timeout }); return target; } catch { return null; }
+  };
+  return {
+    raw: page,
+    mouse: page.mouse,
+    keyboard: page.keyboard,
+    url: () => page.url(),
+    goto: async (url) => { await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 }); await page.waitForTimeout(5000); },
+    text: async () => (await page.innerText("body").catch(() => "")).slice(0, 20000),
+    box: async (spec) => { const t = await visible(spec); return t ? t.boundingBox() : null; },
+    click: async (spec) => { const t = await visible(spec); if (!t) return false; await t.click(); await page.waitForLoadState("domcontentloaded").catch(() => {}); await page.waitForTimeout(2500); return true; },
+    fill: async (spec, value) => { const t = await visible(spec); if (!t) return false; await t.fill(value); return true; },
+    value: async (spec) => { const t = await visible(spec); return t ? t.inputValue().catch(() => null) : null; },
+    textOf: async (spec) => { const t = await visible(spec); return t ? (await t.innerText()).slice(0, 200) : null; },
+    screenshot: (path) => page.screenshot(path ? { path } : {}),
+    drag: async () => {
+      const handle = await visible({ css: ".secsdk-captcha-drag-icon, [class*=slider] [class*=btn], [class*=captcha] [draggable]" });
+      if (!handle) return false;
+      const b = await handle.boundingBox();
+      await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+      await page.mouse.down();
+      await page.mouse.move(b.x + 180, b.y + b.height / 2, { steps: 25 });
+      await page.mouse.up();
+      await page.waitForTimeout(3000);
+      return true;
+    },
+  };
+}
+
 export function storeHash(storeId) {
   return createHash("sha256").update(String(storeId)).digest("hex").slice(0, 12);
 }
 
 export async function startProfile({ base, apiKey, profileId, fetchImpl = fetch }) {
-  const response = await fetchImpl(browserStartUrl(base, profileId), { headers: { "api-key": apiKey } });
+  const response = await fetchImpl(browserStartUrl(base, profileId), { headers: authHeaders(apiKey) });
   const body = await response.json();
   return { ws: wsFromStart(body) };
 }
 
 export async function stopProfile({ base, apiKey, profileId, fetchImpl = fetch }) {
-  await fetchImpl(browserStopUrl(base, profileId), { headers: { "api-key": apiKey } });
+  await fetchImpl(browserStopUrl(base, profileId), { headers: authHeaders(apiKey) });
 }
 
 export async function connectOverCDP(ws, deps = {}) {

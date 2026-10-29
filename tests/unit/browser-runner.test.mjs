@@ -3,7 +3,9 @@ import { createHash } from "node:crypto";
 import test from "node:test";
 import { runModule } from "../../skills/automate-ecom-store/core/browser/actions.mjs";
 import {
+  authHeaders,
   browserStartUrl,
+  looksLikeLogin,
   curvePoints,
   guardWrite,
   handleCaptcha,
@@ -105,7 +107,8 @@ test("a listing edit reverts and the round log hides the store id", async () => 
   }, hooks);
   assert.equal(edited.result, "EDITED");
   assert.equal(edited.previous, "Original title");
-  assert.deepEqual(events.filter((event) => event[0] === "fill").map((event) => event[1]), ["Temp title", "Original title"]);
+  assert.deepEqual(events.filter((event) => event[0] === "fill").map((event) => event[1]), ["", "Original title"]);
+  assert.deepEqual(events.filter((event) => event[0] === "type").map((event) => event[1]), ["ITEM_1", "Temp title"]);
   const log = roundLog({
     round: 1,
     module: "listing.edit",
@@ -116,4 +119,20 @@ test("a listing edit reverts and the round log hides the store id", async () => 
   }, edited);
   assert.equal(JSON.stringify(log).includes("secret-profile"), false);
   assert.equal(log.store_hash, storeHash("secret-profile"));
+});
+
+test("the start call sends a bearer token and a login page stops the module", async () => {
+  assert.equal(authHeaders("k").Authorization, "Bearer k");
+  assert.equal(looksLikeLogin("https://accounts.shopee.ph/seller/login?next=x", ""), true);
+  assert.equal(looksLikeLogin("https://seller.shopee.ph/portal/product/list", "My Products"), false);
+  const page = {
+    url: () => "https://seller-ph.tiktok.com/account/login",
+    goto: async () => {},
+    text: async () => "Log in",
+    box: async () => ({ x: 1, y: 1 }),
+    click: async () => { throw new Error("must not click on a login page"); },
+  };
+  const out = await runModule(page, { platform: "tiktokshop", module: "ads.read", maxActions: 3, mode: "read_only", store: { id: "<STORE_A>", mode: "read_only" }, manifest }, { actions: 0, move: async () => {}, alert: async () => {} });
+  assert.equal(out.result, "LOGIN_REQUIRED");
+  assert.equal(out.actions, 0);
 });

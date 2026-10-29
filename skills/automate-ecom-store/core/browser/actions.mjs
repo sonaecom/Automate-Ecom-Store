@@ -6,7 +6,7 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { guardWrite, handleCaptcha, looksUnavailable } from "./adspower-runner.mjs";
+import { guardWrite, handleCaptcha, looksLikeLogin, looksUnavailable } from "./adspower-runner.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -33,6 +33,10 @@ export function loadSelectors(platform) {
 
 async function gatePage(page, hooks) {
   const text = await page.text();
+  if (looksLikeLogin(page.url ? page.url() : "", text)) {
+    await hooks.alert({ kind: "login" });
+    return "login";
+  }
   if (looksUnavailable(text)) {
     await hooks.alert({ kind: "unavailable" });
     return "pause";
@@ -44,8 +48,11 @@ async function gatePage(page, hooks) {
 
 async function clickNamed(page, spec, hooks) {
   const box = await page.box(spec);
-  if (!box) return false;
-  await hooks.move(box);
+  if (!box) {
+    hooks.missing = [...(hooks.missing || []), spec.name || String(spec)];
+    return false;
+  }
+  await hooks.move({ x: box.x + (box.width || 0) / 2, y: box.y + (box.height || 0) / 2 });
   await page.click(spec);
   hooks.actions += 1;
   return true;
@@ -55,7 +62,9 @@ export async function runModule(page, request, hooks) {
   const selectors = loadSelectors(request.platform);
   hooks.actions = hooks.actions || 0;
   hooks.dragged = false;
+  if (page.goto && selectors.home && request.openHome !== false) await page.goto(request.home || selectors.home);
   const status = await gatePage(page, hooks);
+  if (status === "login") return { result: "LOGIN_REQUIRED", actions: hooks.actions };
   if (status === "pause") return { result: "PAUSE", actions: hooks.actions };
   const limit = request.maxActions;
   const write = (action, target) => guardWrite({
@@ -97,7 +106,7 @@ export async function runModule(page, request, hooks) {
     const gate = write("publish", request.query || request.day);
     if (gate.result !== "RUN") return { result: gate.result, actions: hooks.actions, previous };
     if (hooks.actions + 1 > limit) return { result: "LIMIT", actions: hooks.actions, actionKey: gate.actionKey, previous };
-    await page.fill(selectors.listing.field, request.value || "");
+    await page.fill(selectors.listing.field, "");
     await hooks.type(request.value || "");
     hooks.actions += 1;
     if (request.revert !== false) {

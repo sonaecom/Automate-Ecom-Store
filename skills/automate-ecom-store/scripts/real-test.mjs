@@ -13,7 +13,7 @@ import { dirname, join } from "node:path";
 import { homedir } from "node:os";
 import { pathToFileURL } from "node:url";
 import { readFileSync } from "node:fs";
-import { adsPowerConfig, connectOverCDP, finishWrite, moveMouse, readKeys, scrollBy, startProfile, stopProfile, storeHash, typeWithJitter } from "../core/browser/adspower-runner.mjs";
+import { adsPowerConfig, connectOverCDP, finishWrite, moveMouse, wrapPage, readKeys, scrollBy, startProfile, stopProfile, storeHash, typeWithJitter } from "../core/browser/adspower-runner.mjs";
 import { runModule } from "../core/browser/actions.mjs";
 
 const MANIFESTS = {
@@ -42,6 +42,8 @@ export function roundLog(options, result) {
     max_actions: Number(options.maxActions),
     actions: result.actions || 0,
     result: result.result,
+    missing: result.missing?.length ? result.missing : undefined,
+    error: result.error || undefined,
     store_hash: storeHash(options.store),
     at: options.now || new Date().toISOString(),
   };
@@ -81,7 +83,7 @@ export async function executeRealTest(options, deps) {
   }
   const started = await startProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl });
   const connected = await connectOverCDP(started.ws, deps);
-  const page = connected.page;
+  const page = deps.wrap === false ? connected.page : wrapPage(connected.page);
   const random = deps.random || Math.random;
   const hooks = {
     actions: 0,
@@ -89,7 +91,7 @@ export async function executeRealTest(options, deps) {
     move: (box) => moveMouse(page, { x: 0, y: 0 }, box, random, deps.sleep),
     type: (text) => typeWithJitter(page, text, random, deps.sleep),
     drag: () => deps.drag ? deps.drag(page) : page.drag(),
-    screenshot: () => page.screenshot(),
+    screenshot: () => page.screenshot(options.shot || undefined),
     alert: (payload) => deps.alert ? deps.alert(payload) : undefined,
   };
   let outcome;
@@ -110,14 +112,18 @@ export async function executeRealTest(options, deps) {
       value: options.value || "",
       revert: options.revert !== false,
     }, hooks);
+  } catch (error) {
+    outcome = { result: "ERROR", actions: hooks.actions, error: String(error.message || error).slice(0, 200) };
   } finally {
+    if (options.shot) await page.screenshot(options.shot).catch(() => {});
     await connected.browser.close().catch(() => {});
     await stopProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl }).catch(() => {});
   }
   if (outcome.actionKey && options.journal) finishWrite(options.journal, outcome.actionKey, outcome.result === "PAUSE" ? "pending" : "done");
+  outcome.missing = outcome.missing || hooks.missing;
   const body = roundLog(options, outcome);
   write(body);
-  return { code: outcome.result === "PAUSE" ? 1 : 0, log: body };
+  return { code: ["PAUSE", "LOGIN_REQUIRED", "ERROR"].includes(outcome.result) ? 1 : 0, log: body };
 }
 
 async function main() {
@@ -144,11 +150,14 @@ async function main() {
     query: arg("--query"),
     value: arg("--value"),
     policyResult: arg("--policy") || "ALLOW",
+    shot: arg("--shot"),
   }, { env: process.env, fetchImpl: fetch });
   console.log(`round: ${outcome.log.round}`);
   console.log(`module: ${outcome.log.module}`);
   console.log(`result: ${outcome.log.result}`);
   console.log(`actions: ${outcome.log.actions}`);
+  if (outcome.log.missing) console.log(`missing: ${outcome.log.missing.join(", ")}`);
+  if (outcome.log.error) console.log(`error: ${outcome.log.error}`);
   console.log(`store_hash: ${outcome.log.store_hash}`);
   process.exit(outcome.code);
 }
