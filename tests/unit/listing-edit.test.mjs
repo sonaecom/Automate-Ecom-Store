@@ -4,9 +4,16 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
-import { planListing } from "../../skills/automate-ecom-store/scripts/listing-edit.mjs";
+import { listingRoom, planListing } from "../../skills/automate-ecom-store/scripts/listing-edit.mjs";
 
 const script = new URL("../../skills/automate-ecom-store/scripts/listing-edit.mjs", import.meta.url);
+
+test("the hourly listing ceiling is not a target", () => {
+  assert.equal(listingRoom(10, 0, "").allowed, 10);
+  assert.equal(listingRoom(50, 0, "").allowed, 40);
+  assert.equal(listingRoom(10, 40, "").allowed, 0);
+  assert.equal(listingRoom(10, 0, "4").allowed, 4);
+});
 
 test("a price cut and a delete stay proposals, and the cap is a ceiling", () => {
   const rows = planListing([

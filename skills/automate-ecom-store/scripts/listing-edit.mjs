@@ -15,6 +15,7 @@ import { dirname, join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { appendJournal, readJournal } from "../core/journal/action-key.mjs";
 import { beginRun } from "../core/runner.mjs";
+import { CEILINGS, clipWork } from "../core/targets.mjs";
 
 const MANIFEST = JSON.parse(readFileSync(new URL("../core/manifest/shopee-listing-update.manifest.json", import.meta.url), "utf8"));
 const TOKEN = /<[A-Za-z0-9_]+>/;
@@ -83,6 +84,12 @@ function priceDecision(current, next, approved, dropPercent) {
   const drop = ((from - to) / from) * 100;
   if (drop >= dropPercent) return "HOLD_PRICE";
   return "APPLY";
+}
+
+export function listingRoom(sessionLimit, hourlyDone, target) {
+  const done = Number.isInteger(hourlyDone) && hourlyDone > 0 ? hourlyDone : 0;
+  const remaining = Math.max(0, CEILINGS.listingEditsPerHour - done);
+  return clipWork(sessionLimit, target, remaining);
 }
 
 export function planListing(rows, savedLabels, options = {}) {
@@ -191,8 +198,17 @@ function main() {
       if (row.item_label) saved.add(row.item_label.toLowerCase());
     }
   }
+  const hourlyDone = arg("--hourly-done") === "" ? 0 : Number(arg("--hourly-done"));
+  if (!Number.isInteger(hourlyDone) || hourlyDone < 0) {
+    console.error("--hourly-done must be a whole number");
+    process.exit(2);
+  }
+  const room = listingRoom(sessionLimit, hourlyDone, arg("--target"));
+  console.log(`ceiling: ${CEILINGS.listingEditsPerHour}`);
+  console.log(`target: ${room.target}`);
+  console.log("cap_is: ceiling");
   const planned = planListing(records(readFileSync(changesPath, "utf8")), saved, {
-    sessionLimit,
+    sessionLimit: room.allowed,
     priceApproved: arg("--price-approved") === "yes",
     priceDropPercent,
   });

@@ -30,7 +30,7 @@ The person has a private change list for existing Shopee listings. A new product
 node {baseDir}/scripts/listing-edit.mjs --changes ~/.automate-ecom-store/data/listing-changes.csv --log ~/.automate-ecom-store/data/listing-edits.csv --out-dir ~/.automate-ecom-store/data/listing/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl --session-limit <LISTING_EDITS_CAP>
 ```
 
-Pass `--price-approved yes` only after the owner says yes to that price change. Also pass `--price-drop-percent` from `price_drop_approval_percent` when that value is a real number. Omit it while it is still a placeholder. A cut at or above that percent stays `HOLD_PRICE`. `HOLD_DELETE` is never typed. `OVER_CAP` waits. The ceiling is not a target: `apply_count` may be lower than `--session-limit`.
+The hourly ceiling is 40 listing edits. `--session-limit` is the work in front of you, not a reason to edit 40. `--hourly-done` is how many already saved this hour. `--target` is the owner's number when they typed one. Omit it when they did not. Pass `--price-approved yes` only after the owner says yes to that price change. Also pass `--price-drop-percent` from `price_drop_approval_percent` when that value is a real number. Omit it while it is still a placeholder. A cut at or above that percent stays `HOLD_PRICE`. `HOLD_DELETE` is never typed. `OVER_CAP` waits. The ceiling is not a target: `apply_count` may be lower than `--session-limit`.
 
 3. Read `listing-plan.csv`. Edit only `APPLY` rows. Skip `SKIP`. Do not type `HOLD_PRICE` or `HOLD_DELETE`.
 4. Check duration. `--add` the `apply_count` on `listing_edits` before save. On `CAP`, do not save. Do not add more than `apply_count`.
