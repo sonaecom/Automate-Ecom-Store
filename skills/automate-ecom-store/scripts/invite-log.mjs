@@ -79,9 +79,13 @@ function load(path) {
   });
 }
 
-function known(rows, handle) {
+function isChat(row) {
+  return String(row.terms || "").startsWith("chat;");
+}
+
+function knownInvite(rows, handle) {
   const key = handle.trim().toLowerCase();
-  return rows.some((row) => row.handle.toLowerCase() === key);
+  return rows.some((row) => row.handle.toLowerCase() === key && !isChat(row));
 }
 
 function validTime(value) {
@@ -92,15 +96,24 @@ const csv = arg("--csv");
 const handle = arg("--handle");
 const list = process.argv.includes("--list");
 const append = process.argv.includes("--append");
-if (!csv || (!list && !handle)) {
-  console.error("usage: node invite-log.mjs --csv path (--list | --handle <HANDLE> [--append --campaign <NAME> --time <TIME> --terms <TERMS>])");
+const countOnly = process.argv.includes("--count");
+if (!csv || (!list && !handle && !countOnly)) {
+  console.error("usage: node invite-log.mjs --csv path (--list | --count [--terms-prefix text] [--since TIME] | --handle <HANDLE> [--append --campaign <NAME> --time <TIME> --terms <TERMS>])");
   process.exit(2);
 }
 
 const rows = load(csv);
-if (list && !handle) {
+if (list && !handle && !countOnly) {
   for (const row of rows) console.log(row.handle);
   console.log(`count: ${rows.length}`);
+  console.log("result: OK");
+  process.exit(0);
+}
+if (countOnly) {
+  const prefix = arg("--terms-prefix");
+  const since = arg("--since");
+  const count = rows.filter((row) => (!prefix || String(row.terms || "").startsWith(prefix)) && (!since || String(row.invited_time) >= since)).length;
+  console.log(`count: ${count}`);
   console.log("result: OK");
   process.exit(0);
 }
@@ -108,15 +121,10 @@ if (!handle.trim()) {
   console.error("handle is empty");
   process.exit(2);
 }
-
-const seen = known(rows, handle);
+const seen = knownInvite(rows, handle);
 if (!append) {
   console.log(seen ? "result: SKIP" : "result: NEW");
   process.exit(0);
-}
-if (seen) {
-  console.log("result: SKIP");
-  process.exit(1);
 }
 const campaign = arg("--campaign");
 const time = arg("--time");
@@ -124,6 +132,10 @@ const terms = arg("--terms");
 if (!campaign.trim() || !terms.trim() || !validTime(time)) {
   console.error("append needs --campaign, --time YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS, and --terms");
   process.exit(2);
+}
+if (seen && !terms.trim().startsWith("chat;")) {
+  console.log("result: SKIP");
+  process.exit(1);
 }
 const next = rows.concat([{ handle: handle.trim(), campaign_name: campaign.trim(), invited_time: time, terms: terms.trim() }]);
 mkdirSync(dirname(csv), { recursive: true });

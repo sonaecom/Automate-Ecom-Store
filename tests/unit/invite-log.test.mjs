@@ -40,6 +40,19 @@ test("a new handle appends once and a repeat is refused", () => {
   assert.equal(text.trim().split("\n").length, 2);
   const check = run(["--csv", csv, "--handle", "<HANDLE_A>"]);
   assert.match(check.stdout, /result: SKIP/);
+  const chat = run([
+    "--csv", csv, "--append",
+    "--handle", "<HANDLE_A>",
+    "--campaign", "<CHAT>",
+    "--time", "2026-10-29T11:00:00",
+    "--terms", "chat;sample_no_invite;fixed_all_products;expiry_30;sample_manual",
+  ]);
+  assert.equal(chat.status, 0, chat.stderr);
+  assert.match(chat.stdout, /result: APPENDED/);
+  const counted = run(["--csv", csv, "--count", "--terms-prefix", "chat;sample_no_invite", "--since", "2026-10-29T00:00:00"]);
+  assert.match(counted.stdout, /count: 1/);
+  const stillInvite = run(["--csv", csv, "--handle", "<HANDLE_A>"]);
+  assert.match(stillInvite.stdout, /result: SKIP/);
   rmSync(dir, { recursive: true, force: true });
 });
 

@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.19.0
+
+- KOL chat after an invite stays on the platform. PH and MY default to English. A creator who asks for a sample and has no invite gets one custom target invite from the standard template and one fixed sentence. Other sizes are declined in favour of the allowlisted size. Automated sample approval is set to manual or no sample. Every chat action is written to that shop's invite log. Content and deadline follow-up is still for the owner to define.
+
 ## 1.18.0
 
 - Owner requests and scheduled jobs enter one queue per store profile. The same action, target, and params inside the window merge. A different param on the same SKU or setting is flagged. The policy gate runs before the item is runnable. Owner pins come first, then P0 urgent, P1 revenue, P2 growth, and P3 reports. Long work splits into chunks inside the 30–40 minute session so an urgent item is not stuck. The daily plan shows what fits today and what moves to tomorrow. The end of the day reports done and pending. The dashboard shows the queue.
