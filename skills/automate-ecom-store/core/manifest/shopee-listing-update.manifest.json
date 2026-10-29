@@ -1,0 +1,13 @@
+{
+  "id": "shopee.listing-update",
+  "platforms": ["shopee"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": true,
+  "money": false,
+  "priority": 2,
+  "cost": { "actions": 8, "captchaRisk": "high" },
+  "input": "listing-changes.csv",
+  "output": "listing-plan.csv",
+  "policyTags": ["publish"],
+  "schema": "RunLog"
+}

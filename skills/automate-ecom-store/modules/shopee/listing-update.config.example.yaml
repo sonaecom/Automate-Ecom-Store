@@ -1,0 +1,15 @@
+# Copy the private change list to ~/.automate-ecom-store/data/listing-changes.csv
+# Columns: item_label, field, new_value, current_value
+# field is title, description, price, stock, or variation.
+# A <PLACEHOLDER> token stops the plan. Do not put a real shop name in this file.
+# price_drop_approval_percent comes from the private config. Leave it unset to hold every price cut.
+# The session limit is a ceiling from caps.listing_edits. It is not a target.
+
+store_label: "<STORE_LABEL>"
+platform: shopee
+changes: "~/.automate-ecom-store/data/listing-changes.csv"
+log: "~/.automate-ecom-store/data/listing-edits.csv"
+out_dir: "~/.automate-ecom-store/data/listing/"
+journal: "~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl"
+session_limit: 10
+price_drop_approval_percent: "<PRICE_DROP_APPROVAL_PERCENT>"
