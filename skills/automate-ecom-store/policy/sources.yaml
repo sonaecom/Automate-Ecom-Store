@@ -1,0 +1,35 @@
+# Official pages the weekly updater is allowed to read.
+# It records a hash change and alerts the owner. It does not change a seller setting.
+# Rules for each market are filled from the policy pack. Until then the gate stays pending.
+
+sources:
+  - id: shopee-decoration-sg
+    platform: shopee
+    market: SG
+    topic: shop_decoration
+    url: https://seller.shopee.sg/edu/article/2416
+    retrieved: "2026-10-29"
+  - id: shopee-decoration-my
+    platform: shopee
+    market: MY
+    topic: shop_decoration
+    url: https://seller.shopee.com.my/edu/article/1928
+    retrieved: "2026-10-29"
+  - id: tiktokshop-page-design-us
+    platform: tiktokshop
+    market: US
+    topic: shop_decoration
+    url: https://seller-us.tiktok.com/university/essay?knowledge_id=3029412015458091
+    retrieved: "2026-10-29"
+  - id: tiktokshop-page-design-th
+    platform: tiktokshop
+    market: TH
+    topic: shop_decoration
+    url: https://seller-th.tiktok.com/university/essay?knowledge_id=10014701
+    retrieved: "2026-10-29"
+  - id: lazada-store-builder
+    platform: lazada
+    market: "<MARKET>"
+    topic: shop_decoration
+    url: "<OFFICIAL_URL>"
+    retrieved: "<YYYY-MM-DD>"

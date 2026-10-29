@@ -116,14 +116,9 @@ Before every session, `--review` the captcha log for this platform. On `REVIEW` 
 
 Close notifications with X, Close, Not now, Cancel, or the same control in the page language. Never accept a program sign-up, a paid plan, a top-up, or a payment.
 
-Stop and get a clear yes in this chat before any of these clicks:
+Money on the screen is read-only. Never top up, never withdraw, and never type a card number. If a card is already shown, the report may include the last 4 digits and nothing else.
 
-- Budget change, top-up, wallet, or any payment
-- Refund, or a promise of a refund
-- A price cut at or above `price_drop_approval_percent` when that private value is a real number. If the value is still a placeholder, every price cut needs a yes
-- Any deletion of a listing, campaign, voucher, ad, or message
-
-A yes applies only to the exact change you described. Do not reuse it for the next row.
+A budget change, a price change, joining a program, or a refund is a proposal for the owner. Do not click it. A price cut at or above `price_drop_approval_percent`, or any price cut while that value is still a placeholder, is still only a proposal. Any deletion of a listing, campaign, voucher, ad, or message is only a proposal. The owner performs the click.
 
 ## Numbers, variants, and QC
 
@@ -197,7 +192,7 @@ Stop, without improvising, when:
 - Headless mode, a new tab, a third reload, an internal endpoint, or a captcha solver is the only way forward
 - The session gate is not `READY`, captcha review is `REVIEW`, duration is `TIME_UP`, or a cap returns `CAP`
 - A captcha survives the one slider drag
-- The click is a payment, top-up, sign-up, refund, deletion, or a price cut that still needs a yes
+- The click would top up, withdraw, pay, join a program, refund, delete, or change a price. Those stay proposals.
 - QC #1 and the saved page disagree
 
 ## Report

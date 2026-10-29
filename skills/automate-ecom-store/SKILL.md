@@ -1,6 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
+version: "1.1.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -100,11 +101,21 @@ Say only that the local config was removed. Do not print what was in it. Do not 
 
 ## Every run
 
-1. `--status`. `MISSING`: ask for the API key only. `NEED_STORES`: list profiles and let them pick by number. Do not ask for the key again. `OK`: continue. If `headless` is not false, stop.
-2. Read `{baseDir}/account-safety.md` from the first heading through session start. Obey it.
-3. Read `{baseDir}/session-runner.md` and use those scripts for pace, caps, captcha log, dedupe, and message length. `data/` and `screenshots/` paths are inside `~/.automate-ecom-store/`.
-4. Pick one module from the table. Read that file and follow it top to bottom.
-5. Finish with account-safety session end.
+1. `--status`. `MISSING`: ask for the API key only. `NEED_STORES`: list profiles and let them pick by number. Do not ask for the key again. `OK`: continue. If `headless` is not false, stop. More than one saved store is normal: use only the store whose platform matches the task, and ask which label if two stores share a platform. Do not print profile ids.
+2. Policy gate, before the module. Read `{baseDir}/policy/GATE.md` and run:
+
+```bash
+node {baseDir}/scripts/policy-gate.mjs --platform <PLATFORM> --market <MARKET> --action <ACTION>
+```
+
+Mutating actions are `publish`, `price`, `budget`, `refund`, `register`, `delete`, `stock_write`, and `submit`. If the result is `POLICY_PENDING` or `STALE` and the action is mutating, stop. Read-only work may continue. Tell the person the policy pack for that market is not loaded yet. The updater never changes a seller setting.
+
+3. Dry run: if the person said "dry run", or `--status` printed `dry_run: true`, do not publish, submit, register, pay, or send mail. Report the plan only.
+4. Read `{baseDir}/account-safety.md` from the first heading through session start. Obey it.
+5. Read `{baseDir}/session-runner.md` and use those scripts for pace, caps, captcha log, dedupe, and message length. `data/` and `screenshots/` paths are inside `~/.automate-ecom-store/`.
+6. Pick one module from the table. Read that file and follow it top to bottom.
+7. Append a run log with `{baseDir}/scripts/run-log.mjs`. If the result is not ok, add a lesson. Do not change seller settings from a lesson.
+8. Finish with account-safety session end.
 
 If the request matches more than one row, ask which platform and which task. One task per session unless they explicitly ask for a second and the clock and caps still allow it.
 
@@ -139,6 +150,10 @@ If the request matches more than one row, ask which platform and which task. One
 | Lazada chat | `{baseDir}/modules/lazada/customer-chat-reply.md` |
 | Lazada daily report | `{baseDir}/modules/lazada/daily-report.md` |
 | Lazada shop homepage / Store Builder | `{baseDir}/modules/lazada/shop-decoration.md` |
+| Policy gate, every task | `{baseDir}/policy/GATE.md` |
+| Staff roles and audit log | `{baseDir}/modules/ops/staff-audit.md` |
+| Owner alerts | `{baseDir}/modules/ops/alerts.md` |
+| Session plan / scheduler | `{baseDir}/modules/ops/scheduler.md` |
 
 Shopee affiliate invite is the proven path. The other Shopee modules are skeletons. TikTok Shop and Lazada modules are templates: on the first supervised visit, if a menu label does not match, stop and ask.
 

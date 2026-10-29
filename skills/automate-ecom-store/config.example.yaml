@@ -42,3 +42,6 @@ paths:
   screenshots_dir: "screenshots"
 
 show_click_dot: true
+
+# When true, modules report the plan and do not publish, submit, or send mail.
+dry_run: false

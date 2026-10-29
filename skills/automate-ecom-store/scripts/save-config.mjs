@@ -74,6 +74,7 @@ function blank() {
     roas_floor: "",
     paths: structuredClone(DEFAULTS.paths),
     show_click_dot: true,
+    dry_run: false,
     tasks: {},
   };
 }
@@ -127,6 +128,7 @@ function status(file) {
   console.log(`store_count: ${stores.length}`);
   console.log(`platforms: ${platforms.join(" ")}`);
   console.log(`headless: ${ads.headless === false ? "false" : "blocked"}`);
+  console.log(`dry_run: ${config.dry_run === true ? "true" : "false"}`);
   console.log("mode: 600");
   if (ads.headless !== false) {
     console.log("result: BLOCKED");
@@ -168,6 +170,7 @@ function applyPayload(current, payload, { requireKey }) {
     next.adspower.api_base = String(payload.api_base).trim();
   }
   next.adspower.headless = false;
+  if (typeof payload.dry_run === "boolean") next.dry_run = payload.dry_run;
   if (payload.stores !== undefined) {
     const error = validateStores(payload.stores);
     if (error) return error;
