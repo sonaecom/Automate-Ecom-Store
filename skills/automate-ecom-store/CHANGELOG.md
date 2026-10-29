@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.31.0
+
+- The orchestrator plans up to 10 stores for a machine that stays on. Batches are 40–50 minutes, breaks are 10–20 minutes, and four night hours stay closed. Starts are staggered. A captcha pauses only that store. A hung profile is restarted. A finished action key is not run again. The script does not open AdsPower itself.
+
 ## 1.30.0
 
 - Ads setting changes plan through the core runner. The hourly ceiling is 10. A top-up uses the saved card only after owner approval or standing authorization, never adds a card, and then sends the bill. An example such as 10% of GMV is not a target.

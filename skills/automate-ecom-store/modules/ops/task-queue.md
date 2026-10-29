@@ -4,7 +4,13 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Every owner request and every scheduled job is one item in that store's queue. One store label is one AdsPower profile. One browser session runs at a time. Do not open a second profile while this queue says `BUSY`.
+Every owner request and every scheduled job is one item in that store's queue. One store label is one AdsPower profile. The day plan holds at most 10 stores. A captcha pauses only that store. A hung profile is closed and opened again. A done action key is resumed, not repeated.
+
+```bash
+node {baseDir}/scripts/orchestrator.mjs --stores ~/.automate-ecom-store/data/orchestrator-stores.json --now <HH:MM> --night-start 01:00 --day-start 08:00 --stagger 20 --out-dir ~/.automate-ecom-store/data/orchestrator/
+```
+
+`OPEN` and `RESTART` use official AdsPower `open-browser` with `"headless":"0"`. `CLOSE` closes that profile. Batches stay inside 40–50 minutes, then a 10–20 minute break. 01:00–05:00 is off. Starts are staggered. Do not open an eleventh store.
 
 Config is `{baseDir}/tasks.example.yaml`, copied to `~/.automate-ecom-store/tasks.yaml`. The queue file stays under `~/.automate-ecom-store/data/queues/`. Do not put a profile id in either file.
 
