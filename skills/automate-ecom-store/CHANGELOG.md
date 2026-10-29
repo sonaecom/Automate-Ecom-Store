@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.12.0
+
+- Selling operations are mapped in `modules/selling/README.md`. Added order handling, creator chat replies, public review replies, video and livestream publishing, competitor monitoring, and a per-market price step. Listing, homepage, inventory, restock, post-delivery, retention, and the growth and growth-stage modules stay the paths they already were.
+
 ## 1.11.0
 
 - Platform fee cap lists every component as a percent of GMV: affiliate, free shipping, platform voucher, seller voucher, coins, mega sale, flash sale, platform commission, payment fee, and other service fees. A join or leave simulation shows the next total. Joining is blocked with an alert when that total would near or pass the cap. The owner approves any opt-in or opt-out.

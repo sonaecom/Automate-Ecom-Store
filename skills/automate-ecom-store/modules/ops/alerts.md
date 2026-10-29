@@ -14,6 +14,7 @@ Send an alert when:
 - A captcha was shown. Hand the screen to a person after the one allowed slider try in account safety.
 - A SKU in the stock export is zero and the spec still lists it for sale.
 - Inventory sync skipped an auto row for `large_change` or `from_zero`. Do not type that quantity. A manual set stays `PREVIEW` until the owner confirms it. Do not type an unconfirmed quantity. A confirmed manual set may be typed, then read back.
+- Restock from `modules/scale/stock.md` is `ALERT`. Name the SKU, days of cover, and the suggested quantity. Do not place the purchase order and do not type stock unless inventory sync is approved for that SKU.
 - Days of ads balance left, from `modules/ads/spend-topup.md`, are under 3. Propose a top-up. Do not perform it.
 - A withdrawal from `modules/wallet/balance-payouts.md` is missing, pending too long, or the bank amount does not match. Do not start a withdrawal.
 - An order from `modules/orders/settlement.md` is `UNDERPAID`. Do not file the dispute yourself.
