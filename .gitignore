@@ -1,4 +1,5 @@
 config.yaml
+.automate-ecom-store/
 *.env
 .env
 .env.*

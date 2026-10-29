@@ -1,0 +1,44 @@
+# Shape only. Do not put a real key, address, profile id, or store name here.
+# First run of the skill writes the live file to:
+#   ~/.automate-ecom-store/config.yaml
+# with mode 600. That file is outside this repository.
+
+adspower:
+  api_key: ""
+  # Empty means the marketer uses the usual address in AdsPower > Automation > API.
+  api_base: ""
+  headless: false
+
+stores:
+  - platform: "<PLATFORM>"
+    profile_id: "<PROFILE_ID>"
+    label: "<STORE_LABEL>"
+
+schedule:
+  gap_hours_min: 2
+  gap_hours_max: 3
+  session_minutes_max: 40
+
+caps:
+  session:
+    listing_edits: 10
+    affiliate_invites: 30
+    affiliate_batch_size: 10
+    ads_changes: 3
+    chat_replies: 10
+  daily:
+    listing_edits: 10
+    affiliate_invites: 30
+    ads_changes: 3
+    chat_replies: 10
+
+price_drop_approval_percent: "<PRICE_DROP_APPROVAL_PERCENT>"
+roas_floor: "<ROAS_FLOOR>"
+
+paths:
+  invited_csv: "data/invited.csv"
+  captcha_log: "data/captcha_log.csv"
+  session_state: "data/session-state.json"
+  screenshots_dir: "screenshots"
+
+show_click_dot: true
