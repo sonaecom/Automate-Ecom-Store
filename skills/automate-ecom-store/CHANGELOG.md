@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.38.0
+
+- KOL follow-up labels creators keep, remind, or review. No GMV threshold means review, not a reminder, and this does not send a new invite.
+
 ## 1.37.0
 
 - Daily reports on Shopee, TikTok Shop, and Lazada compare two in-store sources. A blank figure is not zero, and a mismatch is not averaged.

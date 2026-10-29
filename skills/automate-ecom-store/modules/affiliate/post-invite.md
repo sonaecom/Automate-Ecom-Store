@@ -4,7 +4,13 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Follow creators you already invited. Record acceptance, content posted, orders, GMV, and ROI per creator. Feed that result back as a weight proposal. Do not change weights until the owner says yes. Reminders go through the platform chat only. Do not email a creator. Do not promise a refund or an off-platform deal.
+Classification: **write** for a reminder, **read** for the status. Manifest `affiliate.post-invite`. No GMV threshold means `REVIEW`, not `REMIND`. Do not send a new invite. Do not change weights until the owner says yes.
+
+```bash
+node {baseDir}/scripts/kol-follow.mjs --creators ~/.automate-ecom-store/data/affiliate/creators.csv --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl --threshold <GMV_THRESHOLD>
+```
+
+Omit `--threshold` when the owner has not set one. Follow creators you already invited. Record acceptance, content posted, orders, GMV, and ROI per creator. Reminders go through the platform chat only. Do not email a creator. Do not promise a refund or an off-platform deal.
 
 This continues `{baseDir}/modules/shopee/affiliate-invite.md` and the TikTok Shop and Lazada invite modules. It does not send a new invite batch.
 
