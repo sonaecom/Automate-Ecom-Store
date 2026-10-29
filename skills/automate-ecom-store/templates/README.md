@@ -5,6 +5,7 @@
 | `listing_images.py` | Square listing images from a private spec. Refuses placeholders unless `--allow-placeholders`. |
 | `homepage_assets.py` | Homepage banners at the draft sizes in `modules/homepage/sizes.md`. |
 | `sample-ads-*.csv` | Placeholder spend, top-up, charge, and balance rows for the reconciler. |
+| `sample-wallet-*.csv` | Placeholder wallet, withdrawal, and bank-credit rows. Last 4 digits only. |
 | `../modules/listing/spec.example.yaml` | Listing content plan. |
 | `../modules/listing/research-sheet.md` | Competitor notes. |
 | `../modules/homepage/style.example.yaml` | Brand colors and tone. |

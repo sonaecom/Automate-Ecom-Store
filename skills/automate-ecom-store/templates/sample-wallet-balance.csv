@@ -1,0 +1,2 @@
+store,platform,market,available,pending,incoming,currency,source,read_time,timezone
+<STORE_LABEL>,shopee,<MARKET>,200.00,50.00,10.00,USD,sample_screen,2026-10-29T09:00:00,<TIMEZONE>

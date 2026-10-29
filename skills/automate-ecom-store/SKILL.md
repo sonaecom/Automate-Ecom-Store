@@ -130,6 +130,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Shopee voucher or promotion | `{baseDir}/modules/shopee/vouchers-promotions.md` |
 | Shopee ads or GMV Max settings | `{baseDir}/modules/shopee/ads-gmv-max.md` |
 | Ads spend and top-up tracking, any platform | `{baseDir}/modules/ads/spend-topup.md` |
+| Seller wallet and withdrawals, any platform | `{baseDir}/modules/wallet/balance-payouts.md` |
 | Shopee customer chat | `{baseDir}/modules/shopee/customer-chat-reply.md` |
 | Shopee orders, GMV, or ad-spend report | `{baseDir}/modules/shopee/daily-report.md` |
 | Shopee shop homepage / Shop Decoration | `{baseDir}/modules/shopee/shop-decoration.md` |

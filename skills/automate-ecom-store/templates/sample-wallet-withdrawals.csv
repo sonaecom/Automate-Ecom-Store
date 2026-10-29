@@ -1,0 +1,5 @@
+date,store,platform,market,amount,fee,currency,bank_last4,status,source,read_time
+2026-10-20,<STORE_LABEL>,shopee,<MARKET>,100.00,1.00,USD,6789,completed,wallet,2026-10-29T09:00:00
+2026-09-01,<STORE_LABEL>,shopee,<MARKET>,50.00,0,USD,6789,pending,wallet,2026-10-29T09:00:00
+2026-10-25,<STORE_LABEL>,shopee,<MARKET>,20.00,0,USD,6789,completed,wallet,2026-10-29T09:00:00
+2026-10-18,<STORE_LABEL>,shopee,<MARKET>,40.00,0,USD,6789,completed,wallet,2026-10-29T09:00:00
