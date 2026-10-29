@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.26.0
+
+- A product video or livestream is not published until `video-scan.mjs` returns `PASS`. The scan checks the title, caption, hashtags, on-screen text, and transcript against `policies/rules.yaml` for that platform and market, then the file details and the cover or keyframes. `BLOCK` and `REVIEW` both stop the post and alert the owner. Checks stay on this machine. The script does not upload the video.
+
 ## 1.25.0
 
 - Shopee listing edits plan through `listing-edit.mjs` before any save. The module is a write. `read_only` does not start it. Price changes and deletions stay proposals. The `listing_edits` cap is a ceiling, not a quota. The journal closes only after the saved page matches the plan.
