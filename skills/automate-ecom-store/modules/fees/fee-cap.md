@@ -16,15 +16,21 @@ The owner wants the total platform fee, as a percent of GMV, kept under a cap fo
 
 The cap file is a private CSV copied from `{baseDir}/templates/sample-fee-caps.csv`. Each row is `level` `store`, `sku`, or `category`, plus store, platform, market, and `cap_percent`. The sample store cap is 28. Placeholders are not numbers.
 
-Fees copied from the export, and only those columns:
+Fees copied from the export, and only those columns. Each one is also shown as a percent of GMV:
 
-- `commission`
-- `payment_fee` for the transaction or payment fee
-- `free_shipping`, `coins`, and `voucher` for service programs
-- `affiliate` for affiliate commission
+- `affiliate` — affiliate commission
+- `free_shipping` — free-shipping program fee
+- `platform_voucher` — platform co-funded voucher program
+- `seller_voucher` — seller voucher cost
+- `coins` — coins cashback program
+- `mega_sale` — mega sale participation
+- `flash_sale` — flash sale
+- `commission` — platform commission
+- `payment_fee` — payment or transaction fee
+- `other_service` — any other service fee on the export
 - `ads_fee` only when `include_ads` is `yes` or the command has `--include-ads`
 
-A blank cell is missing. It is not zero. Fee percent is the sum of the included fees divided by GMV. GMV of zero is `MISSING`.
+A blank cell is missing. It is not zero. A column that is not on the export is left out. Fee percent is the sum of the included fees divided by GMV. GMV of zero is `MISSING`. The same breakdown is printed for each order, SKU, store, platform, and market.
 
 `NEAR` is at or above `warn_fraction` of the cap and still under the cap. The sample fraction is 0.9, so a 28 percent cap warns at 25.2 percent. `OVER` is at or above the cap. `UNSET` means that row has no cap. Do not copy a cap from another store.
 
@@ -36,13 +42,15 @@ A blank cell is missing. It is not zero. Fee percent is the sum of the included 
 4. Run:
 
 ```bash
-node {baseDir}/scripts/fee-cap.mjs --orders-a <INCOME_CSV> --orders-b <STATEMENT_CSV> --caps ~/.automate-ecom-store/fee-caps.csv --config ~/.automate-ecom-store/fee-cap.yaml --out-dir ~/.automate-ecom-store/data/fee-cap/
+node {baseDir}/scripts/fee-cap.mjs --orders-a <INCOME_CSV> --orders-b <STATEMENT_CSV> --caps ~/.automate-ecom-store/fee-caps.csv --join-file <JOIN_CSV> --config ~/.automate-ecom-store/fee-cap.yaml --out-dir ~/.automate-ecom-store/data/fee-cap/
 ```
 
-5. On `BOTH`, the two sources disagree. Report both figures. Do not average them. That order is `QC_FAIL` and stays out of the store, SKU, category, daily, and monthly totals.
-6. Read order lines, then `sku`, `category`, `store_day`, and `store_month`. Alert the owner on `NEAR` and `OVER`. Name the largest fee program on that row.
-7. A proposal is `OPT_OUT` for free-shipping or affiliate, `STOP_PROMO` for coins or voucher, or `ADJUST_PRICE` when no single program brings the total back under the cap. `approval` is `required` and `applied` is `no`. Stop and wait for the owner. Do not click the program, the price, or the promotion.
-8. Push `fee-rollups.csv` to the `FeeFacts` tab when they want it on the sheet. The dashboard page reads that tab, or `dashboard/web/sample/fee-rollups.csv` for the example.
+The join file quotes a program the owner might turn on. Columns: `store, platform, market, sku, program, fee_percent, amount`. Use `fee_percent` or `amount`, the figure from the program page. Do not invent it. A blank sku applies the quote to that store on that platform and market.
+
+5. On `BOTH`, the two sources disagree. Report both figures. Do not average them. That order is `QC_FAIL` and stays out of the store, SKU, platform, market, daily, and monthly totals.
+6. Read `component` lines. Each is one fee's amount and percent of GMV. Read `whatif leave` for a program already on, and `whatif join` for a program in the join file. `JOIN_BREACH` means joining would meet or pass the cap. `JOIN_NEAR` means it would reach the warn line. Alert the owner before any join. `DO_NOT_JOIN` is the proposal.
+7. A leave proposal is `OPT_OUT` or `STOP_PROMO`, or `ADJUST_PRICE` when no single program brings the total back under the cap. `approval` is `required` and `applied` is `no`. Stop and wait for the owner. Do not click opt-in, opt-out, the price, or the promotion.
+8. Push `fee-rollups.csv`, `fee-components.csv`, and `fee-whatif.csv` when they want them on the sheet. The dashboard page reads `FeeFacts`, `FeeOrders`, `FeeComponents`, and `FeeWhatIf`. The example copies are under `dashboard/web/sample/`.
 
 ```bash
 node {baseDir}/scripts/push-sheets.mjs --push --csv ~/.automate-ecom-store/data/fee-cap/fee-rollups.csv --tab FeeFacts

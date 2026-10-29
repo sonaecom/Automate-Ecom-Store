@@ -9,7 +9,9 @@ import type {
   CustomRate,
   FxFact,
   FxMode,
+  FeeComponent,
   FeeRow,
+  FeeWhatIf,
   InventoryRow,
   MarketRate,
   OrderRow,
@@ -273,6 +275,8 @@ function bundleFrom(tables: Record<string, string>, sourceLabel: string, example
     inventory: mapInventory(parseCsv(tables.inventory || "")),
     aiCosts: mapAi(parseCsv(tables.ai || "")),
     fees: [...mapFeeOrders(parseCsv(tables.feeOrders || "")), ...mapFeeRollups(parseCsv(tables.fees || ""))],
+    feeComponents: mapFeeComponents(parseCsv(tables.feeComponents || "")),
+    feeWhatIfs: mapFeeWhatIfs(parseCsv(tables.feeWhatIfs || "")),
     thresholds,
   }
 }
@@ -321,6 +325,41 @@ function mapFeeRollups(rows: Record<string, string>[]): FeeRow[] {
   }))
 }
 
+function mapFeeComponents(rows: Record<string, string>[]): FeeComponent[] {
+  return rows.map((row) => ({
+    level: row.level || "",
+    key: row.key || "",
+    date: row.date || "",
+    store: row.store || "",
+    platform: row.platform || "",
+    market: row.market || "",
+    component: row.component || "",
+    amount: num(row.amount),
+    pctGmv: num(row.pct_gmv),
+    currency: row.currency || "",
+  }))
+}
+
+function mapFeeWhatIfs(rows: Record<string, string>[]): FeeWhatIf[] {
+  return rows.map((row) => ({
+    action: row.action || "",
+    level: row.level || "",
+    key: row.key || "",
+    program: row.program || "",
+    currentPct: num(row.current_pct),
+    nextPct: num(row.next_pct),
+    cap: num(row.cap_percent),
+    result: row.result || "",
+    store: row.store || "",
+    platform: row.platform || "",
+    market: row.market || "",
+    date: row.date || "",
+    currency: row.currency || "",
+    approval: row.approval || "",
+    applied: row.applied || "",
+  }))
+}
+
 async function sheetValues(spreadsheetId: string, tab: string) {
   const token = process.env.GOOGLE_SHEETS_ACCESS_TOKEN || ""
   const key = process.env.GOOGLE_SHEETS_API_KEY || ""
@@ -347,7 +386,7 @@ export async function loadBundle(): Promise<Bundle> {
   if (source === "sheets") {
     const id = process.env.GOOGLE_SHEETS_ID || ""
     if (!id) throw new Error("Thiếu GOOGLE_SHEETS_ID.")
-    const [fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds, ai, fees, feeOrders] = await Promise.all([
+    const [fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds, ai, fees, feeOrders, feeComponents, feeWhatIfs] = await Promise.all([
       sheetValues(id, "FxFacts"),
       sheetValues(id, "MarketRates"),
       sheetValues(id, "Settings/FX"),
@@ -361,8 +400,10 @@ export async function loadBundle(): Promise<Bundle> {
       sheetValues(id, "AiCost"),
       sheetValues(id, "FeeFacts"),
       sheetValues(id, "FeeOrders"),
+      sheetValues(id, "FeeComponents"),
+      sheetValues(id, "FeeWhatIf"),
     ])
-    return bundleFrom({ fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds, ai, fees, feeOrders }, "Google Sheets", false)
+    return bundleFrom({ fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds, ai, fees, feeOrders, feeComponents, feeWhatIfs }, "Google Sheets", false)
   }
   const dir = source === "csv" ? (process.env.CSV_DIR || SAMPLE) : SAMPLE
   const tables = {
@@ -379,6 +420,8 @@ export async function loadBundle(): Promise<Bundle> {
     ai: readLocal(dir, "ai-cost.csv"),
     fees: readLocal(dir, "fee-rollups.csv"),
     feeOrders: readLocal(dir, "fee-orders.csv"),
+    feeComponents: readLocal(dir, "fee-components.csv"),
+    feeWhatIfs: readLocal(dir, "fee-whatif.csv"),
   }
   if (!tables.fx && !tables.orders && !tables.ads) {
     throw new Error(`Không đọc được CSV trong ${dir}.`)

@@ -34,7 +34,7 @@ Set `DASHBOARD_PASSWORD` before pointing the app at real exports. On Vercel, als
 - Ads uses `AdsFacts`. Wallet uses `WalletFacts`. Last 4 digits only.
 - Cancel and return uses `Orders` when that tab exists, with the same shipped-out rule as `{baseDir}/modules/orders/cancel-return.md`. Otherwise it lists `CancelFacts` by level.
 - SKU profit uses `SkuPnl`. Inventory uses `Inventory`. Those two files are examples until a module writes them. The page says so.
-- Platform fee percent uses `FeeFacts` and `FeeOrders` from `{baseDir}/modules/fees/fee-cap.md`. The page shows the breakdown and the proposal. It does not opt out, change a price, or stop a promotion.
+- Platform fee percent uses `FeeFacts`, `FeeOrders`, `FeeComponents`, and `FeeWhatIf` from `{baseDir}/modules/fees/fee-cap.md`. The page shows each component as a percent of GMV and the join or leave simulation. It does not opt in, opt out, change a price, or stop a promotion.
 - Alerts use the thresholds tab. If the label is `example`, say the threshold is an example.
 - AI cost uses `AiCost`, one row per run and store. A blank cost stays blank.
 

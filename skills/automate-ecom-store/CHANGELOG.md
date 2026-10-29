@@ -2,6 +2,11 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.11.0
+
+- Platform fee cap lists every component as a percent of GMV: affiliate, free shipping, platform voucher, seller voucher, coins, mega sale, flash sale, platform commission, payment fee, and other service fees. A join or leave simulation shows the next total. Joining is blocked with an alert when that total would near or pass the cap. The owner approves any opt-in or opt-out.
+- The attached 153-rule policy pack matches the files already loaded in 1.10.0. Affiliate invite checks and return alerts are unchanged. Voucher rules, official invite limits, and Lazada coverage remain gaps.
+
 ## 1.10.0
 
 - Policy pack replaced with 153 rules. Ids 105–153 add affiliate, returns, and chat rules. Markers `UNVERIFIED`, `snippet only`, `not read`, and `applicability to PH/MY/ID unconfirmed` stay as recorded.

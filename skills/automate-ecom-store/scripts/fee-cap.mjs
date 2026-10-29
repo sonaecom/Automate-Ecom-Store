@@ -3,15 +3,15 @@
  * Compare platform fees with an owner cap. Two exports must agree.
  * Prints proposals. Does not opt out, change a price, or stop a promotion.
  *
- *   node fee-cap.mjs --orders-a file --caps file --out-dir DIR [--orders-b file] [--config file] [--include-ads]
+ *   node fee-cap.mjs --orders-a file --caps file --out-dir DIR [--orders-b file] [--join-file file] [--config file] [--include-ads]
  */
 
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-const PROGRAMS = ["free_shipping", "coins", "voucher", "affiliate"];
-const PROMO = new Set(["coins", "voucher"]);
-const PARTS = ["commission", "payment_fee", "free_shipping", "coins", "voucher", "affiliate"];
+const PARTS = ["affiliate", "free_shipping", "platform_voucher", "seller_voucher", "coins", "mega_sale", "flash_sale", "commission", "payment_fee", "other_service"];
+const PROGRAMS = ["affiliate", "free_shipping", "platform_voucher", "seller_voucher", "coins", "mega_sale", "flash_sale", "other_service"];
+const PROMO = new Set(["coins", "platform_voucher", "seller_voucher", "mega_sale", "flash_sale"]);
 
 function arg(name) {
   const index = process.argv.indexOf(name);
@@ -111,7 +111,7 @@ const ordersAPath = arg("--orders-a");
 const capsPath = arg("--caps");
 const outDir = arg("--out-dir");
 if (!ordersAPath || !capsPath || !outDir) {
-  console.error("usage: node fee-cap.mjs --orders-a file --caps file --out-dir DIR [--orders-b file] [--config file] [--include-ads]");
+  console.error("usage: node fee-cap.mjs --orders-a file --caps file --out-dir DIR [--orders-b file] [--join-file file] [--config file] [--include-ads]");
   process.exit(2);
 }
 
@@ -121,7 +121,8 @@ const warn = money(arg("--warn-fraction") || cfg.warn_fraction) ?? 0.9;
 const ordersB = records(arg("--orders-b"));
 const byId = new Map(ordersB.map((row) => [row.order_id, row]));
 let qc = ordersB.length ? "OK" : "SINGLE_SOURCE";
-const fields = ["gmv", ...PARTS, "ads_fee"];
+const sourceRows = records(ordersAPath);
+const fields = ["gmv", ...PARTS, "voucher", "ads_fee"].filter((key) => sourceRows.some((row) => key in row));
 
 const caps = records(capsPath);
 function findCap(level, row) {
@@ -138,18 +139,30 @@ function capForOrder(row) {
   return findCap("sku", row) ?? findCap("category", row) ?? findCap("store", row);
 }
 
+function componentKeys(row) {
+  const keys = [];
+  const splitVoucher = "platform_voucher" in row || "seller_voucher" in row;
+  for (const key of PARTS) {
+    if ((key === "platform_voucher" || key === "seller_voucher") && !splitVoucher && "voucher" in row) continue;
+    if (key in row) keys.push(key);
+  }
+  if (!splitVoucher && "voucher" in row) keys.push("voucher");
+  if (includeAds && "ads_fee" in row) keys.push("ads");
+  return keys;
+}
+
 function partsOf(row) {
   const parts = {};
   let missing = false;
-  for (const key of PARTS) {
-    const value = money(row[key]);
+  for (const key of componentKeys(row)) {
+    const sourceKey = key === "ads" ? "ads_fee" : key;
+    if (!(sourceKey in row) || row[sourceKey] === "") {
+      missing = true;
+      continue;
+    }
+    const value = money(row[sourceKey]);
     if (value === null) missing = true;
     else parts[key] = value;
-  }
-  if (includeAds) {
-    const ads = money(row.ads_fee);
-    if (ads === null) missing = true;
-    else parts.ads = ads;
   }
   return { parts, missing };
 }
@@ -249,6 +262,9 @@ function addGroup(map, key, order) {
 const groups = {
   sku: new Map(),
   category: new Map(),
+  store: new Map(),
+  platform: new Map(),
+  market: new Map(),
   store_day: new Map(),
   store_month: new Map(),
 };
@@ -256,12 +272,39 @@ for (const order of orders) {
   if (order.result === "QC_FAIL" || order.result === "MISSING") continue;
   addGroup(groups.sku, `${order.store}|${order.platform}|${order.market}|${order.sku}`, order);
   addGroup(groups.category, `${order.store}|${order.platform}|${order.market}|${order.category}`, order);
+  addGroup(groups.store, `${order.store}|${order.platform}|${order.market}`, order);
+  addGroup(groups.platform, `${order.platform}|${order.market}`, order);
+  addGroup(groups.market, order.market, order);
   addGroup(groups.store_day, `${order.date}|${order.store}|${order.platform}|${order.market}`, order);
   addGroup(groups.store_month, `${order.date.slice(0, 7)}|${order.store}|${order.platform}|${order.market}`, order);
 }
 
 const rollups = [];
 const proposals = [];
+const components = [];
+function pushComponents(level, key, row, gmv, parts) {
+  for (const [name, amount] of Object.entries(parts)) {
+    if (amount <= 0) continue;
+    const pct = gmv ? amount / gmv * 100 : null;
+    components.push({
+      level,
+      key,
+      date: row.date || "",
+      store: row.store || "",
+      platform: row.platform || "",
+      market: row.market || "",
+      component: name,
+      amount: show(amount),
+      pct_gmv: show(pct),
+      currency: row.currency || "",
+    });
+    console.log(`component ${level} ${key} ${name} amount ${show(amount)} pct_gmv ${show(pct)}`);
+  }
+}
+for (const order of orders) {
+  if (order.result === "QC_FAIL" || order.result === "MISSING") continue;
+  pushComponents("order", order.order_id, order, Number(order.gmv), order.parts);
+}
 for (const [level, map] of Object.entries(groups)) {
   for (const [key, bucket] of map) {
     const gmv = bucket.orders.reduce((sum, order) => sum + Number(order.gmv), 0);
@@ -271,11 +314,14 @@ for (const [level, map] of Object.entries(groups)) {
       for (const [name, amount] of Object.entries(order.parts)) parts[name] = (parts[name] || 0) + amount;
     }
     const sample = bucket.orders[0];
+    const storeCaps = [...new Set(bucket.orders.map((order) => findCap("store", order)).filter((value) => value !== null))];
     const cap = level === "sku"
       ? (findCap("sku", sample) ?? findCap("store", sample))
       : level === "category"
         ? (findCap("category", sample) ?? findCap("store", sample))
-        : findCap("store", sample);
+        : level === "platform" || level === "market"
+          ? (storeCaps.length === 1 ? storeCaps[0] : null)
+          : findCap("store", sample);
     const pct = gmv === 0 ? null : fee / gmv * 100;
     const result = judge(pct, cap);
     const top = topProgram(parts);
@@ -298,7 +344,7 @@ for (const [level, map] of Object.entries(groups)) {
       });
     }
     const period = level === "store_month" ? sample.date.slice(0, 7) : sample.date;
-    rollups.push({
+    const rollup = {
       level,
       key,
       period,
@@ -315,7 +361,15 @@ for (const [level, map] of Object.entries(groups)) {
       proposal,
       currency: sample.currency,
       qc: qc === "QC_FAIL" ? "PARTIAL" : qc,
-    });
+      parts,
+      gmv_n: gmv,
+      fee_n: fee,
+      cap_n: cap,
+    };
+    rollups.push(rollup);
+    if (["sku", "store", "platform", "market"].includes(level)) {
+      pushComponents(level, key, rollup, gmv, parts);
+    }
     console.log(`${level} ${key} gmv ${show(gmv)} fee ${show(fee)} fee_pct ${show(pct)} cap ${show(cap)} result: ${result} program ${top} proposal ${proposal}`);
   }
 }
@@ -323,10 +377,101 @@ for (const row of proposals) {
   console.log(`proposal ${row.action} program ${row.program} level ${row.level} key ${row.key} approval required applied no`);
 }
 
+const whatifs = [];
+function addWhatIf(row) {
+  whatifs.push(row);
+  console.log(`whatif ${row.action} ${row.level} ${row.key} program ${row.program} current_pct ${row.current_pct} next_pct ${row.next_pct} cap ${row.cap_percent} result: ${row.result}`);
+  if (row.action === "join" && (row.result === "JOIN_BREACH" || row.result === "JOIN_NEAR")) {
+    proposals.push({
+      action: "DO_NOT_JOIN",
+      program: row.program,
+      level: row.level,
+      key: row.key,
+      store: row.store,
+      platform: row.platform,
+      market: row.market,
+      sku: row.level === "sku" ? row.key.split("|").pop() : "",
+      reason: `${row.next_pct} of ${row.cap_percent}`,
+      approval: "required",
+      applied: "no",
+    });
+    console.log(`proposal DO_NOT_JOIN program ${row.program} level ${row.level} key ${row.key} approval required applied no`);
+    console.log(`alert join ${row.program} level ${row.level} key ${row.key} next_pct ${row.next_pct} cap ${row.cap_percent} result ${row.result}`);
+  }
+}
+for (const rollup of rollups) {
+  if (!["sku", "store", "platform", "market"].includes(rollup.level) || rollup.cap_n === null) continue;
+  for (const name of PROGRAMS) {
+    const amount = rollup.parts[name] || 0;
+    if (amount <= 0 || !rollup.gmv_n) continue;
+    const next = (rollup.fee_n - amount) / rollup.gmv_n * 100;
+    addWhatIf({
+      action: "leave",
+      level: rollup.level,
+      key: rollup.key,
+      program: name,
+      current_pct: rollup.fee_pct,
+      next_pct: show(next),
+      cap_percent: rollup.cap_percent,
+      result: judge(next, rollup.cap_n),
+      store: rollup.store,
+      platform: rollup.platform,
+      market: rollup.market,
+      date: rollup.date,
+      currency: rollup.currency,
+      approval: "required",
+      applied: "no",
+    });
+  }
+}
+for (const join of records(arg("--join-file"))) {
+  const program = join.program || "";
+  if (!PROGRAMS.includes(program)) {
+    console.log(`whatif join program ${program} result: UNKNOWN`);
+    continue;
+  }
+  for (const rollup of rollups) {
+    if (rollup.level !== "store" && rollup.level !== "sku") continue;
+    if (rollup.store !== join.store || rollup.platform !== join.platform || rollup.market !== join.market) continue;
+    if (join.sku && rollup.level === "sku" && !rollup.key.endsWith(`|${join.sku}`)) continue;
+    if (join.sku && rollup.level === "store") continue;
+    if (!join.sku && rollup.level !== "store") continue;
+    const quoted = money(join.amount);
+    const percent = money(join.fee_percent);
+    const extra = quoted !== null ? quoted : percent !== null ? rollup.gmv_n * percent / 100 : null;
+    if (extra === null || rollup.cap_n === null || !rollup.gmv_n) {
+      console.log(`whatif join ${rollup.level} ${rollup.key} program ${program} result: MISSING`);
+      continue;
+    }
+    const next = (rollup.fee_n + extra) / rollup.gmv_n * 100;
+    const judged = judge(next, rollup.cap_n);
+    const result = judged === "OVER" ? "JOIN_BREACH" : judged === "NEAR" ? "JOIN_NEAR" : "JOIN_OK";
+    addWhatIf({
+      action: "join",
+      level: rollup.level,
+      key: rollup.key,
+      program,
+      current_pct: rollup.fee_pct,
+      next_pct: show(next),
+      cap_percent: rollup.cap_percent,
+      result,
+      store: rollup.store,
+      platform: rollup.platform,
+      market: rollup.market,
+      date: rollup.date,
+      currency: rollup.currency,
+      approval: "required",
+      applied: "no",
+    });
+  }
+}
+
 mkdirSync(outDir, { recursive: true });
 writeCsv(join(outDir, "fee-orders.csv"), ["order_id", "date", "store", "platform", "market", "sku", "category", "gmv", "fee", "fee_pct", "cap_percent", "result", "top_program", "proposal", "currency", "qc"], orders);
 writeCsv(join(outDir, "fee-rollups.csv"), ["level", "key", "period", "date", "store", "platform", "market", "gmv", "fee", "fee_pct", "cap_percent", "result", "top_program", "proposal", "currency", "qc"], rollups);
 writeCsv(join(outDir, "fee-proposals.csv"), ["action", "program", "level", "key", "store", "platform", "market", "sku", "reason", "approval", "applied"], proposals);
+writeCsv(join(outDir, "fee-components.csv"), ["level", "key", "date", "store", "platform", "market", "component", "amount", "pct_gmv", "currency"], components);
+writeCsv(join(outDir, "fee-whatif.csv"), ["action", "level", "key", "program", "current_pct", "next_pct", "cap_percent", "result", "store", "platform", "market", "date", "currency", "approval", "applied"], whatifs);
 console.log(`include_ads: ${includeAds ? "yes" : "no"}`);
 console.log(`warn_fraction: ${warn}`);
 console.log(`qc: ${qc}`);

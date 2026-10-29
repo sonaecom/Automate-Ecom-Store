@@ -17,7 +17,7 @@ Send an alert when:
 - Days of ads balance left, from `modules/ads/spend-topup.md`, are under 3. Propose a top-up. Do not perform it.
 - A withdrawal from `modules/wallet/balance-payouts.md` is missing, pending too long, or the bank amount does not match. Do not start a withdrawal.
 - An order from `modules/orders/settlement.md` is `UNDERPAID`. Do not file the dispute yourself.
-- Platform fee percent from `modules/fees/fee-cap.md` is `NEAR` or `OVER` the owner's cap. Name the fee program and the SKU. A proposal to opt out, change a price, or stop a promotion waits for the owner. Do not click it. If the two exports disagree, show both numbers.
+- Platform fee percent from `modules/fees/fee-cap.md` is `NEAR` or `OVER` the owner's cap, or a `whatif join` is `JOIN_NEAR` or `JOIN_BREACH`. Name the fee component and its percent of GMV. A proposal to join, opt out, change a price, or stop a promotion waits for the owner. Do not click it. If the two exports disagree, show both numbers.
 - A store cancellation rate or return rate from `modules/orders/cancel-return.md` is above the owner's threshold. Do not cancel orders to change the rate.
 - Shop health from `modules/scale/health.md` is `EARLY` or `BREACH` against the late-shipment, cancellation, chat-reply, or penalty threshold in `policies/rules.yaml` for that same market. An `unverified=yes` Lazada PH, MY, or ID figure is still an alert, and the local page still needs a browser re-check. Do not cancel orders or open a second account to change the number.
 - A sales, ads, or wallet row from `modules/fx/reporting.md` has no rate or the two rate files disagree. Do not invent a rate and do not average the two files.

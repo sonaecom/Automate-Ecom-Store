@@ -178,6 +178,37 @@ export type AiCost = {
   note: string
 }
 
+export type FeeComponent = {
+  level: string
+  key: string
+  date: string
+  store: string
+  platform: string
+  market: string
+  component: string
+  amount: number | null
+  pctGmv: number | null
+  currency: string
+}
+
+export type FeeWhatIf = {
+  action: string
+  level: string
+  key: string
+  program: string
+  currentPct: number | null
+  nextPct: number | null
+  cap: number | null
+  result: string
+  store: string
+  platform: string
+  market: string
+  date: string
+  currency: string
+  approval: string
+  applied: string
+}
+
 export type FeeRow = {
   level: string
   key: string
@@ -214,6 +245,8 @@ export type Bundle = {
   inventory: InventoryRow[]
   aiCosts: AiCost[]
   fees: FeeRow[]
+  feeComponents: FeeComponent[]
+  feeWhatIfs: FeeWhatIf[]
   thresholds: Thresholds
 }
 

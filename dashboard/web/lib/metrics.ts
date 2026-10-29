@@ -7,7 +7,9 @@ import type {
   CustomRate,
   Filters,
   FxFact,
+  FeeComponent,
   FeeRow,
+  FeeWhatIf,
   InventoryRow,
   SkuRow,
   WalletFact,
@@ -46,6 +48,8 @@ export type DashboardView = {
   sku: Array<SkuRow & { profitView: MoneyView; revenueView: MoneyView }>
   inventory: InventoryRow[]
   fees: FeeRow[]
+  feeComponents: FeeComponent[]
+  feeWhatIfs: FeeWhatIf[]
   orders: Classified[]
   rates: Record<"market" | "platform" | "store" | "category" | "product" | "sku" | "staff", RateBucket[]>
   excluded: number
@@ -214,6 +218,8 @@ export function buildView(bundle: Bundle, filters: Filters, rates: CustomRate[],
   })
   const inventory = bundle.inventory.filter((row) => matchPlace(row, filters))
   const fees = bundle.fees.filter((row) => inRange(row.date, filters) && matchPlace(row, filters))
+  const feeComponents = bundle.feeComponents.filter((row) => inRange(row.date, filters) && matchPlace(row, filters))
+  const feeWhatIfs = bundle.feeWhatIfs.filter((row) => inRange(row.date, filters) && matchPlace(row, filters))
   const orders = bundle.orders
     .filter((row) => matchPlace(row, filters))
     .map((row) => classify(row, filters.from, filters.to))
@@ -255,7 +261,7 @@ export function buildView(bundle: Bundle, filters: Filters, rates: CustomRate[],
       }
     }
   }
-  const alerts = buildAlerts(bundle, filters, ads, wallet, levels.store, levels.sku, inventory, fx, fees)
+  const alerts = buildAlerts(bundle, filters, ads, wallet, levels.store, levels.sku, inventory, fx, fees, feeWhatIfs)
   const groupBy = (field: "platform" | "market" | "store") => {
     const map = new Map<string, GroupRow>()
     for (const row of fx) {
@@ -288,6 +294,8 @@ export function buildView(bundle: Bundle, filters: Filters, rates: CustomRate[],
     sku,
     inventory,
     fees,
+    feeComponents,
+    feeWhatIfs,
     orders,
     rates: levels,
     excluded: orders.filter((row) => row.excluded).length,
@@ -322,6 +330,7 @@ function buildAlerts(
   inventory: InventoryRow[],
   fx: DashboardView["fx"],
   fees: FeeRow[],
+  feeWhatIfs: FeeWhatIf[],
 ): AlertItem[] {
   const alerts: AlertItem[] = []
   const { thresholds } = bundle
@@ -440,7 +449,19 @@ function buildAlerts(
         id: `fee-${row.result}-${row.level}-${row.key}`,
         tone: row.result === "OVER" ? "bad" : "warn",
         title: row.result === "OVER" ? "Phí sàn vượt trần" : "Phí sàn sắp chạm trần",
-        detail: `${row.feePct ?? "—"}% / trần ${row.cap ?? "—"}%. Khoản lớn nhất: ${row.topProgram || "—"}. Đề xuất: ${row.proposal || "chỉ theo dõi"}. Không tự tắt chương trình và không đổi giá.`,
+        detail: `${row.feePct ?? "—"}% / trần ${row.cap ?? "—"}%. Khoản lớn nhất: ${row.topProgram || "—"}. Đề xuất: ${row.proposal || "chỉ theo dõi"}. Không tự bật hoặc tắt chương trình và không đổi giá.`,
+        platform: row.platform,
+        market: row.market,
+      })
+    }
+  }
+  for (const row of feeWhatIfs) {
+    if (row.action === "join" && (row.result === "JOIN_BREACH" || row.result === "JOIN_NEAR")) {
+      alerts.push({
+        id: `fee-join-${row.result}-${row.level}-${row.key}-${row.program}`,
+        tone: row.result === "JOIN_BREACH" ? "bad" : "warn",
+        title: row.result === "JOIN_BREACH" ? "Tham gia chương trình sẽ vượt trần phí" : "Tham gia chương trình sẽ sắp chạm trần phí",
+        detail: `${row.program}: ${row.currentPct ?? "—"}% lên ${row.nextPct ?? "—"}% / trần ${row.cap ?? "—"}%. Chưa tham gia. Cần chủ shop duyệt.`,
         platform: row.platform,
         market: row.market,
       })
@@ -471,6 +492,8 @@ export function dateSpan(bundle: Bundle) {
     ...bundle.orders.map((row) => row.createdDate),
     ...bundle.sku.map((row) => row.date),
     ...bundle.fees.map((row) => row.date),
+    ...bundle.feeComponents.map((row) => row.date),
+    ...bundle.feeWhatIfs.map((row) => row.date),
   ].filter(Boolean).sort()
   return { from: dates[0] || "2026-01-01", to: dates[dates.length - 1] || "2026-12-31" }
 }

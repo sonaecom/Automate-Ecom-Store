@@ -4,5 +4,5 @@ order_id,date,store,platform,market,sku,category,gmv,fee,fee_pct,cap_percent,res
 <ORDER_3>,2026-10-07,<STORE_A>,shopee,PH,<SKU_C>,<CATEGORY_A>,100,26,26,28,NEAR,commission,,PHP,OK
 <ORDER_4>,2026-10-08,<STORE_B>,lazada,MY,<SKU_D>,<CATEGORY_B>,100,19,19,20,NEAR,commission,,MYR,OK
 <ORDER_5>,2026-10-08,<STORE_B>,lazada,MY,<SKU_E>,<CATEGORY_B>,100,32,32,20,OVER,commission,ADJUST_PRICE,MYR,OK
-<ORDER_6>,2026-10-08,<STORE_C>,shopee,PH,<SKU_F>,<CATEGORY_A>,50,26,52,28,OVER,voucher,STOP_PROMO voucher,PHP,OK
+<ORDER_6>,2026-10-08,<STORE_C>,shopee,PH,<SKU_F>,<CATEGORY_A>,50,26,52,28,OVER,seller_voucher,STOP_PROMO seller_voucher,PHP,OK
 <ORDER_QC>,2026-10-08,<STORE_A>,shopee,PH,<SKU_A>,<CATEGORY_A>,100,7,7,28,QC_FAIL,,,PHP,QC_FAIL
