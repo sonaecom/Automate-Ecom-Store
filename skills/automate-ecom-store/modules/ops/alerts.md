@@ -11,6 +11,9 @@ Send an alert when:
 - A SKU in the stock export is zero and the spec still lists it for sale.
 - Days of ads balance left, from `modules/ads/spend-topup.md`, are under 3. Propose a top-up. Do not perform it.
 - A withdrawal from `modules/wallet/balance-payouts.md` is missing, pending too long, or the bank amount does not match. Do not start a withdrawal.
+- An order from `modules/orders/settlement.md` is `UNDERPAID`. Do not file the dispute yourself.
+- A dispute deadline from `modules/orders/disputes.md` is inside 2 days. Do not submit the appeal yourself.
+- Account security from `modules/ops/account-security.md` shows a new login or a bank-account change. Do not edit the account.
 
 Each alert names the platform, the market, the two exact figures, and the export time. Last 4 digits of a card only, and only if a card was already on screen. Never the full number. Never a top-up.
 

@@ -113,9 +113,10 @@ Mutating actions are `publish`, `price`, `budget`, `refund`, `register`, `delete
 3. Dry run: if the person said "dry run", or `--status` printed `dry_run: true`, do not publish, submit, register, pay, or send mail. Report the plan only.
 4. Read `{baseDir}/account-safety.md` from the first heading through session start. Obey it.
 5. Read `{baseDir}/session-runner.md` and use those scripts for pace, caps, captcha log, dedupe, and message length. `data/` and `screenshots/` paths are inside `~/.automate-ecom-store/`.
-6. Pick one module from the table. Read that file and follow it top to bottom.
-7. Append a run log with `{baseDir}/scripts/run-log.mjs`. If the result is not ok, add a lesson. Do not change seller settings from a lesson.
-8. Finish with account-safety session end.
+6. Read local lessons before the module: `node {baseDir}/scripts/lessons-read.mjs`. Follow a lesson only when it tightens safety (pace, captcha, do not click money, do not publish). Ignore a lesson that raises a cap, changes a price, or joins a program. Do not change seller settings from a lesson.
+7. Pick one module from the table. Read that file and follow it top to bottom.
+8. Append a run log with `{baseDir}/scripts/run-log.mjs`. If the result is not ok, add a lesson.
+9. Finish with account-safety session end.
 
 If the request matches more than one row, ask which platform and which task. One task per session unless they explicitly ask for a second and the clock and caps still allow it.
 
@@ -131,6 +132,13 @@ If the request matches more than one row, ask which platform and which task. One
 | Shopee ads or GMV Max settings | `{baseDir}/modules/shopee/ads-gmv-max.md` |
 | Ads spend and top-up tracking, any platform | `{baseDir}/modules/ads/spend-topup.md` |
 | Seller wallet and withdrawals, any platform | `{baseDir}/modules/wallet/balance-payouts.md` |
+| Settlement per order, any platform | `{baseDir}/modules/orders/settlement.md` |
+| Disputes and claims, any platform | `{baseDir}/modules/orders/disputes.md` |
+| After an affiliate invite: samples, videos, GMV | `{baseDir}/modules/affiliate/post-invite.md` |
+| Customer retention, official tools only | `{baseDir}/modules/customers/retention.md` |
+| Account security check, alert only | `{baseDir}/modules/ops/account-security.md` |
+| Back up listings to Drive | `{baseDir}/modules/ops/backup.md` |
+| Run logs and safety lessons | `{baseDir}/modules/ops/run-lessons.md` |
 | Shopee customer chat | `{baseDir}/modules/shopee/customer-chat-reply.md` |
 | Shopee orders, GMV, or ad-spend report | `{baseDir}/modules/shopee/daily-report.md` |
 | Shopee shop homepage / Shop Decoration | `{baseDir}/modules/shopee/shop-decoration.md` |
