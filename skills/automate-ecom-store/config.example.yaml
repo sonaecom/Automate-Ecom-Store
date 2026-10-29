@@ -50,6 +50,9 @@ paths:
 
 show_click_dot: true
 
+# safe, normal, or fast. normal is the default. fast stays at or above 300ms.
+pace_profile: normal
+
 # When true, modules report the plan and do not publish, submit, or send mail.
 dry_run: false
 

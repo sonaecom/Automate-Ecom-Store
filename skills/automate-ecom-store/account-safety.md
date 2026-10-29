@@ -47,20 +47,9 @@ After attach, list tabs and close every tab except one. Later moves stay in that
 
 Reload a page at most twice. A third reload means stop and ask. Navigating to the same URL counts as a reload.
 
-Optional supervisor dot: when `show_click_dot` is true, before a direct click place an 8px red circle at the element center with `browser_evaluate`, then click, then remove the dot. Skip the dot if evaluate is unavailable. Run no other page script.
+Optional supervisor dot: when `show_click_dot` is true, pass `--red-dot on` with the click point. `delay-range.mjs` prints `marker_script`, a 14px `#e10600` circle with `pointer-events: none` that removes itself after about 180ms. Run that script with Playwright `browser_evaluate`, then click. Skip the dot if evaluate is unavailable. Run no other page script.
 
-```javascript
-([x, y]) => {
-  const id = "__supervisor_click_dot";
-  document.getElementById(id)?.remove();
-  const dot = document.createElement("div");
-  dot.id = id;
-  dot.style.cssText = "position:fixed;left:" + (x - 4) + "px;top:" + (y - 4) + "px;width:8px;height:8px;border-radius:50%;background:red;z-index:2147483647;pointer-events:none;";
-  document.documentElement.appendChild(dot);
-}
-```
-
-Click with `browser_click`. Do not hover and do not animate the pointer across the screen.
+Click with `browser_click`. Do not hover and do not animate the pointer across the screen. `mouse_steps` stays 0.
 
 ## Session batching
 
@@ -75,17 +64,20 @@ A session is one visible visit.
 
 An action is a finished field edit, a click that changes the page, a menu move, a list page change, or a pop-up dismiss. Snapshots, screenshots, and helper scripts are not actions.
 
-Use `delay-range.mjs` so the wait is random. Do not invent a shorter wait.
+Use `delay-range.mjs`. Do not invent a shorter wait and do not use a fixed sleep. The profile is `pace_profile` in the private config: `safe`, `normal`, or `fast`. `normal` is the default. Clicks are faster than the old multi-second floor so a session finishes more work, and the gaps stay uneven so the rhythm is not a bot pattern on Shopee, TikTok Shop, or Lazada. `fast` never goes under the 300ms human floor.
 
 | When | Command |
 | --- | --- |
-| After each action | `--min 3 --max 8` |
-| After each item edit (listing, stock, price, one chat reply) | `--min 20 --max 60` |
-| After every 10–15 actions | `--min 120 --max 300` |
+| After each click | `--profile normal --kind click` |
+| After typing | `--profile normal --kind type --text "<TEXT>"` |
+| After a page load or between listings | `--profile normal --kind page-load` |
+| After every 10–15 actions | `--kind batch-rest` |
 
-Pick the burst length once per cycle, a whole number from 10 to 15, and pause when `action_count` reaches it. Do not pause in the middle of select-all and type on the same field. During a long pause, leave the page alone. Do not reload to keep the session warm.
+Pass the saved profile name instead of `normal` when it is `safe` or `fast`. `--red-dot on` only when `show_click_dot` is true, and then pass `--x` and `--y`. `--min` and `--max` in whole seconds still work for an older note. Do not use them to go under the profile floor.
 
-After any captcha, run `caps-counter.mjs --set-multiplier 2` and pass `--multiplier` from `pace_multiplier` on every later wait in that session. That doubles 3–8 into 6–16, 20–60 into 40–120, and 120–300 into 240–600.
+Pick the burst length once per cycle, a whole number from 10 to 15, and pause when `action_count` reaches it. Do not pause in the middle of select-all and type on the same field. During a batch rest, leave the page alone. Do not reload to keep the session warm. A batch rest is 120–300 seconds before the captcha multiplier.
+
+After any captcha, run `caps-counter.mjs --set-multiplier 2` and pass `--multiplier` from `pace_multiplier` on every later wait in that session. The multiplier only lengthens gaps. It never goes under that profile's minimum.
 
 ## Caps
 

@@ -59,6 +59,7 @@ const DEFAULTS = {
     screenshots_dir: "screenshots",
   },
   show_click_dot: true,
+  pace_profile: "normal",
 };
 
 function homePaths() {
@@ -80,6 +81,7 @@ function blank() {
     roas_floor: "",
     paths: structuredClone(DEFAULTS.paths),
     show_click_dot: true,
+    pace_profile: "normal",
     dry_run: false,
     tasks: {},
     google: { sheets_reports: null, inventory_sheet: null },
@@ -190,6 +192,12 @@ function applyPayload(current, payload, { requireKey }) {
   }
   next.adspower.headless = false;
   if (typeof payload.dry_run === "boolean") next.dry_run = payload.dry_run;
+  if (payload.pace_profile !== undefined) {
+    const profile = String(payload.pace_profile).toLowerCase();
+    if (!["safe", "normal", "fast"].includes(profile)) return "pace_profile must be safe, normal, or fast";
+    next.pace_profile = profile;
+  }
+  if (typeof payload.show_click_dot === "boolean") next.show_click_dot = payload.show_click_dot;
   if (payload.stores !== undefined) {
     const error = validateStores(payload.stores);
     if (error) return error;

@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.24.0
+
+- Click pace is a profile: `safe`, `normal`, or `fast`, with `normal` as the default. Clicks land on the target with no mouse-move animation. Gaps are uneven and stay at or above a human floor (300ms on `normal` and `fast`) so a session does more work without a fixed rhythm on Shopee, TikTok Shop, or Lazada. Typing varies per character. Page-load settles and the 120–300 second batch rest stay. A captcha multiplier only lengthens waits. `show_click_dot` turns on a 14px red marker for about 180ms. The older `--min` and `--max` second range still runs.
+
 ## 1.23.0
 
 - Core runner checks a module manifest, the read-only guard, the policy result, and the action_key journal before a module starts. Policy text stays the single file `policies/rules.yaml`. A filename that ends with a dot fails the repo hygiene check. No tracked file ends with a dot.

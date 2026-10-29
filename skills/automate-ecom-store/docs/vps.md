@@ -79,7 +79,7 @@ node <SKILL_DIR>/scripts/unattended-tick.mjs --state <STATE_FILE> --gap-hours <G
 | `BUSY` | Another profile is in a session. Do not open a second one. |
 | `TIME_UP` | Checkpoint the chunk, `--end-session`, idle on seller home. |
 
-Pace inside the session is unchanged: `delay-range.mjs` at 3–8 seconds after an action, 20–60 after an item edit, and 120–300 after 10–15 actions. A captcha sets the pace multiplier to 2 for the rest of that session.
+Pace inside the session uses `delay-range.mjs` profiles `safe`, `normal`, and `fast` (`normal` by default). Clicks are direct and uneven, with a 300ms floor on `normal` and `fast`. Page-load settles stay. A batch rest after 10–15 actions is still 120–300 seconds. A captcha sets the pace multiplier to 2 for the rest of that session and never shortens a gap. An optional red dot follows `show_click_dot`.
 
 The queue's daily plan still says what fits today and what moves to tomorrow. A restart does not clear that queue and does not skip a checkpoint.
 

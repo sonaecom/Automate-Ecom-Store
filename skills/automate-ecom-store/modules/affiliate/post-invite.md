@@ -17,7 +17,7 @@ The owner wants to know who received the sample, who posted, and who produced GM
 1. Read the invited CSV from the affiliate module. Do not add a handle that is not already in that file.
 2. On the affiliate or sample page, read status for each handle: sample shipped, sample received, video posted, GMV. Copy the numbers. Record `read_time` and the column names.
 3. Label only from those fields. A posted video and GMV above the owner's private threshold is `keep`. No video after the date they set is `remind`. No threshold in the private note means do not invent one. List them as `review` instead of `remind`. The numeric score and ROI are step 5.
-4. A reminder is one platform chat message from the approved text, inside the `chat_replies` cap, with the 20–60 second pause. No second channel.
+4. A reminder is one platform chat message from the approved text, inside the `chat_replies` cap, with `delay-range.mjs --kind page-load`. No second channel.
 5. Write one results row per invited handle. Copy acceptance, whether content was posted, orders, GMV, sample cost, and commission cost from the seller-centre page or its official export. Leave a cost blank when the page does not show it. Do not invent it.
 
 ```text

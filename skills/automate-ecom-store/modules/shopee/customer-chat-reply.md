@@ -26,7 +26,7 @@ The person wants polite replies sent in Shopee chat from text they already appro
 3. Open only threads the person listed. If the list is "unanswered threads on the first screen", take that screen in order and stop at the `chat_replies` cap (default 10 session and 10 daily). Do not search the whole history.
 4. Read the buyer message before you reply. If it asks for a refund, a partial refund, money back, an off-platform payment, or a contact channel outside the shop, do not answer that request. Stop and ask. No refund promise. No deal outside the platform. No personal email or phone number.
 5. Send the approved text only, unchanged, polite, and no longer than the check allows. `--add 1` on `chat_replies` before each send. On `CAP`, stop.
-6. Wait 20–60 seconds after each reply. Check duration before the next thread.
+6. Wait with `delay-range.mjs --kind page-load` after each reply. Check duration before the next thread.
 7. QC before send: the text in the box matches the approved text, and the thread is one the person allowed. Screenshot `screenshots/qc1-chat.png` for the first reply and whenever the text changes.
 8. After send, QC on the thread: screenshot `screenshots/qc2-chat.png`. The sent bubble must match the approved text. If the platform shows a failure, do not retry in a loop. One retry after the normal wait is allowed, then stop.
 9. Follow account-safety session end. Idle on seller home.

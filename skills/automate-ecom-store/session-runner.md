@@ -51,13 +51,15 @@ node {baseDir}/scripts/caps-counter.mjs --state <SESSION_STATE> --check-duration
 
 On `TIME_UP`, end the session.
 
-5. Wait with the pacer. Pass `--multiplier` equal to `pace_multiplier` from `--show` (1 until a captcha, then 2):
+5. Wait with the pacer. Pass `--multiplier` equal to `pace_multiplier` from `--show` (1 until a captcha, then 2). Pass `--profile` from `pace_profile` (`normal` when unset). Pass `--red-dot on` only when `show_click_dot` is true.
 
 ```bash
-node {baseDir}/scripts/delay-range.mjs --min 3 --max 8 --multiplier 1
-node {baseDir}/scripts/delay-range.mjs --min 20 --max 60 --multiplier 1
-node {baseDir}/scripts/delay-range.mjs --min 120 --max 300 --multiplier 1
+node {baseDir}/scripts/delay-range.mjs --profile normal --kind click --multiplier 1
+node {baseDir}/scripts/delay-range.mjs --profile normal --kind page-load --multiplier 1
+node {baseDir}/scripts/delay-range.mjs --kind batch-rest --multiplier 1
 ```
+
+`--min` and `--max` in whole seconds still run. Do not use them in place of the profile.
 
 6. Dedupe a private CSV before inviting or editing a row that might already be done:
 

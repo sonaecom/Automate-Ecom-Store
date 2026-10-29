@@ -39,7 +39,7 @@ python3 {baseDir}/templates/homepage_assets.py --style <STYLE_JSON> --platform s
 6. **Preview.** Screenshot desktop and mobile. QC in method section 6. Publish only after every line passes.
 7. **Live QC** from the other browser. Screenshot. Report.
 
-Take the 3–8 second pause between uploads. After a carousel of several images, take the longer pause.
+Take `delay-range.mjs --kind click` between uploads. After a carousel of several images, take the batch rest.
 
 ## QC
 

@@ -25,7 +25,7 @@ The person wants live Shopee stock or price to match a private sheet. Numbers co
 2. In the same tab, download the official product or stock export. Do not page through the catalog and do not call a private endpoint.
 3. Compare that export to the private stock sheet under `data/` on this computer. Build a change list of rows whose stock or price actually differs. Copy figures exactly. Do not estimate.
 4. Cross-check the export row count against the count shown by the export tool. If they differ, stop and report both counts.
-5. Stock rows: push only a `PUSH` line from `{baseDir}/modules/inventory/sync.md`. Do not type a `SKIP`, `PREVIEW`, or `DEFER` quantity. Price rows: apply with the official bulk tool when it exists. If it does not, edit one item at a time under the `listing_edits` cap, with a 20–60 second wait after each item. Match variations by the variation's own name, never the title.
+5. Stock rows: push only a `PUSH` line from `{baseDir}/modules/inventory/sync.md`. Do not type a `SKIP`, `PREVIEW`, or `DEFER` quantity. Price rows: apply with the official bulk tool when it exists. If it does not, edit one item at a time under the `listing_edits` cap, with `delay-range.mjs --kind page-load` after each item. Match variations by the variation's own name, never the title.
 6. Any price decrease needs the account-safety approval before it is typed. A stock push still needs `stock_write` allowed and the inventory script's `PUSH` mark. Deletions need a yes.
 7. QC before save: screenshot `screenshots/qc1-stock.png` showing how many stock rows and how many price rows will change.
 8. `--add` the number of listings you are about to change, using the `listing_edits` limits. On `CAP` or `TIME_UP`, do not save.

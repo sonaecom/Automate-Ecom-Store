@@ -33,7 +33,7 @@ Write `yes` or `no` for category match and past collaboration. Empty means the c
 2. Stay in the affiliate picker. Open one creator card, copy the fields, close it, then run the pacer before the next card.
 
 ```bash
-node {baseDir}/scripts/delay-range.mjs --min 3 --max 8
+node {baseDir}/scripts/delay-range.mjs --profile normal --kind click
 ```
 
 Check the session clock before the next card. On `TIME_UP`, stop. A read is not an invite. Do not add to `affiliate_invites` for a card you only read.

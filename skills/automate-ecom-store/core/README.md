@@ -9,4 +9,6 @@ The runner decides if one module action may start. It does not open a browser.
 
 `runner.mjs` applies those four checks and returns `RUN`, `SKIP`, `READ_ONLY`, `MONEY_BLOCKED`, `POLICY`, or `MANIFEST`.
 
+`pace.mjs` is the human pace for every module. Profiles are `safe`, `normal`, and `fast`. `normal` is the default. Clicks are direct. Gaps are uneven and stay at or above the profile floor. `delay-range.mjs` is the clock. An optional red dot is `--red-dot on`.
+
 A filename must not end with a dot. `scripts/repo-hygiene.mjs` rejects one. No tracked file currently ends with a dot.

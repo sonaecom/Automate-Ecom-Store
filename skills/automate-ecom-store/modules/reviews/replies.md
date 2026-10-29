@@ -18,7 +18,7 @@ A public review is waiting for a seller reply. A buyer problem in chat goes to t
 2. Draft the reply. If the review describes a fault, apologize and say a person will follow up in the order chat. Do not ask them to edit the review.
 3. Run the policy gate on the draft. Any hit for a star ask, a reward, or an off-platform contact is a stop.
 4. QC #1: screenshot `screenshots/qc1-review-reply.png` with the draft visible. Send once if dry run is off and the gate is `ALLOW`. QC #2: screenshot `screenshots/qc2-review-reply.png` of the published reply.
-5. One reply per review. Pause 20–60 seconds. Stay inside `chat_replies`.
+5. One reply per review. Pause with `delay-range.mjs --kind page-load`. Stay inside `chat_replies`.
 
 ## QC
 

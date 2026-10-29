@@ -74,7 +74,7 @@ Use the label on screen. Do not open Open Campaign, Quick Create, a paid program
 
 Order: **name, start time, end time, commission, products, free sample, affiliates, message.** If commission appears only after a product is chosen, choose the product, set commission, verify it, then continue. Do not set samples or affiliates before the visible commission matches.
 
-Between actions, run the 3–8 second pacer (with the session multiplier). Between groups of affiliates, take the 2–5 minute pause. A group is `affiliate_batch_size` (default 10).
+Between actions, run `delay-range.mjs --kind click` (with the session multiplier). Between groups of affiliates, take the batch rest. A group is `affiliate_batch_size` (default 10).
 
 1. **Name.** Type `campaign.name`.
 2. **Start.** It must be in the future against the Seller Centre clock, or the computer clock if the page has none. If the configured start has passed, move it forward 5 minutes and move the end by the same amount. Report both times. If the page rejects the end, stop.

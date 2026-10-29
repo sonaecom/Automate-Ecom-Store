@@ -27,7 +27,7 @@ The person has a private change list for existing Shopee listings. A new product
 4. Check duration. Edit only `NEW` rows, and never more than the remaining `listing_edits` cap (default 10 session and 10 daily). `--add` that many before save. On `CAP`, do not save.
 5. For each row, find one matching item. If zero or several match, stop on that row. If `field` is a variation, match the variation row's own name, never the product title. A nearby size is not a match.
 6. If `new_value` lowers a price, follow the account-safety approval rule before typing. Never delete a listing, variation, or image.
-7. Wait 20–60 seconds after each item edit (pace multiplier included). Use the 3–8 second wait for other actions, and the 2–5 minute pause every 10–15 actions.
+7. Wait with `delay-range.mjs --kind page-load` after each item edit (pace multiplier included). Use `--kind click` for other actions, and `--kind batch-rest` every 10–15 actions.
 8. QC before save: screenshot `screenshots/qc1-listing.png`. Read the preview. The count and the new values must match the change file.
 9. Save once in the same tab. QC on the saved result: screenshot `screenshots/qc2-listing.png`. Cross-check the saved values against QC #1. On a mismatch, stop. Do not save a second time.
 10. Append saved rows to `data/listing-edits.csv` with columns `item_label,field,new_value,edited_date,source`. Then follow account-safety session end and idle on seller home.
