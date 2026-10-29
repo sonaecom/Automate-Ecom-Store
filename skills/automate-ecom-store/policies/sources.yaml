@@ -1,3 +1,5 @@
+# Research pack last_checked 2026-10-29. recheck: weekly.
+# Lazada PH, MY, and ID coverage is incomplete and needs a browser re-check.
 # Official policy and seller-education URLs. The weekly checker reads these.
 # A hash change alerts the owner. It does not change a seller setting.
 retrieved: "2026-10-29"
@@ -153,3 +155,262 @@ sources:
     topic: penalty_points
     url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145984
     retrieved: "2026-10-29"
+
+# Research sources read 2026-10-29. Status text is unchanged.
+research_sources:
+  - id: research-shopee-ph-01
+    platform: shopee
+    market: PH
+    topic: research
+    url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+    retrieved: "2026-10-29"
+    title: "Shopee PH - How are penalty points issued (updated May 21, 2025)"
+    status: "snippet: official URL via search index; page is JS-rendered, direct fetch not possible"
+  - id: research-shopee-ph-02
+    platform: shopee
+    market: PH
+    topic: research
+    url: https://seller.shopee.ph/edu/article/275
+    retrieved: "2026-10-29"
+    title: "Shopee PH - Overview of Seller Penalty Points System"
+    status: "snippet: official URL via search index; direct fetch/curl returns empty JS shell"
+  - id: research-shopee-ph-03
+    platform: shopee
+    market: PH
+    topic: research
+    url: https://seller.shopee.ph/edu/article/15939/seller-penalty-points-system-faq
+    retrieved: "2026-10-29"
+    title: "Shopee PH - FAQs on Penalty Points system"
+    status: "snippet: official URL via search index"
+  - id: research-shopee-ph-04
+    platform: shopee
+    market: PH
+    topic: research
+    url: https://seller.shopee.ph/edu/article/3135
+    retrieved: "2026-10-29"
+    title: "Shopee PH - How is LSR calculated"
+    status: "snippet: official URL via search index"
+  - id: research-shopee-ph-05
+    platform: shopee
+    market: PH
+    topic: research
+    url: https://seller.shopee.ph/edu/article/3096
+    retrieved: "2026-10-29"
+    title: "Shopee PH - What is a misleading discount (updated Aug 5, 2026)"
+    status: "read in full"
+  - id: research-shopee-ph-06
+    platform: shopee
+    market: PH
+    topic: research
+    url: https://seller.shopee.ph/edu/article/6897
+    retrieved: "2026-10-29"
+    title: "Shopee PH - penalty points system (SG article id)"
+    status: "not read: HTTP 404"
+  - id: research-shopee-my-07
+    platform: shopee
+    market: MY
+    topic: research
+    url: https://seller.shopee.com.my/edu/article/2082/calculate-seller-penalty-points-issued
+    retrieved: "2026-10-29"
+    title: "Shopee MY - Seller Penalty System Overview (20-04-2026)"
+    status: "read in full (point table not rendered in fetch)"
+  - id: research-shopee-my-08
+    platform: shopee
+    market: MY
+    topic: research
+    url: https://seller.shopee.com.my/edu/article/2153/high-late-shipment-rate-LSR-penalty-points-violation
+    retrieved: "2026-10-29"
+    title: "Shopee MY - High Late Shipment Rate (02-07-2026)"
+    status: "read in full"
+  - id: research-shopee-my-09
+    platform: shopee
+    market: MY
+    topic: research
+    url: https://seller.shopee.com.my/edu/article/1553/misleading-discount-prohibited-listing-
+    retrieved: "2026-10-29"
+    title: "Shopee MY - Misleading discounts (02-04-2026)"
+    status: "read in full"
+  - id: research-shopee-id-10
+    platform: shopee
+    market: ID
+    topic: research
+    url: https://seller.shopee.co.id/edu/article/7070
+    retrieved: "2026-10-29"
+    title: "Shopee ID - Sistem & Ketentuan Poin Penalti"
+    status: "snippet: official URL via search index; direct fetch/curl returns empty JS shell"
+  - id: research-shopee-id-11
+    platform: shopee
+    market: ID
+    topic: research
+    url: https://seller.shopee.co.id/edu/article/6868
+    retrieved: "2026-10-29"
+    title: "Shopee ID - Kebijakan Pemenuhan Pesanan"
+    status: "snippet: official URL via search index; direct fetch empty"
+  - id: research-shopee-id-12
+    platform: shopee
+    market: ID
+    topic: research
+    url: https://seller.shopee.co.id/edu/article/339
+    retrieved: "2026-10-29"
+    title: "Shopee ID - Bagaimana Tingkat Keterlambatan Pengiriman Dihitung"
+    status: "snippet: official URL via search index"
+  - id: research-tiktokshop-ph-13
+    platform: tiktokshop
+    market: PH
+    topic: research
+    url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+    retrieved: "2026-10-29"
+    title: "TikTok Shop Seller Enforcement Policy (10/01/2026; 'Applies to: Indonesia, Malaysia, Philippines, Singapore, Thailand, Vietnam')"
+    status: "read in full (hosted on SG Seller University; seller-ph / seller-my mirrors with same id returned HTTP 404)"
+  - id: research-tiktokshop-ph-14
+    platform: tiktokshop
+    market: PH
+    topic: research
+    url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+    retrieved: "2026-10-29"
+    title: "TikTok Shop Customer Communication Policy (07/01/2026), ID Seller University"
+    status: "read in full (page shows no 'Applies to' country list in fetch)"
+  - id: research-tiktokshop-ph-15
+    platform: tiktokshop
+    market: PH
+    topic: research
+    url: https://seller-id.tokopedia.com/university/essay?knowledge_id=4153003565336337&lang=en
+    retrieved: "2026-10-29"
+    title: "TikTok Shop Violation Points & Milestones (08/19/2026; Applies to ID, PH, SG, TH, VN - not MY)"
+    status: "snippet only: title/date/applicability seen, body not read"
+  - id: research-tiktokshop-my-16
+    platform: tiktokshop
+    market: MY
+    topic: research
+    url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+    retrieved: "2026-10-29"
+    title: "TikTok Shop Seller Enforcement Policy (10/01/2026; 'Applies to: Indonesia, Malaysia, Philippines, Singapore, Thailand, Vietnam')"
+    status: "read in full (hosted on SG Seller University; seller-ph / seller-my mirrors with same id returned HTTP 404)"
+  - id: research-tiktokshop-my-17
+    platform: tiktokshop
+    market: MY
+    topic: research
+    url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+    retrieved: "2026-10-29"
+    title: "TikTok Shop Customer Communication Policy (07/01/2026), ID Seller University"
+    status: "read in full (page shows no 'Applies to' country list in fetch)"
+  - id: research-tiktokshop-id-18
+    platform: tiktokshop
+    market: ID
+    topic: research
+    url: https://seller-id.tokopedia.com/university/essay?knowledge_id=10012508&lang=en
+    retrieved: "2026-10-29"
+    title: "TikTok Shop|Tokopedia ID Seller Enforcement Policy (10/01/2026)"
+    status: "snippet: official URL via search index; same table as TT_ENF"
+  - id: research-tiktokshop-id-19
+    platform: tiktokshop
+    market: ID
+    topic: research
+    url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+    retrieved: "2026-10-29"
+    title: "TikTok Shop Seller Enforcement Policy (10/01/2026; 'Applies to: Indonesia, Malaysia, Philippines, Singapore, Thailand, Vietnam')"
+    status: "read in full (hosted on SG Seller University; seller-ph / seller-my mirrors with same id returned HTTP 404)"
+  - id: research-tiktokshop-id-20
+    platform: tiktokshop
+    market: ID
+    topic: research
+    url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+    retrieved: "2026-10-29"
+    title: "TikTok Shop Customer Communication Policy (07/01/2026), ID Seller University"
+    status: "read in full (page shows no 'Applies to' country list in fetch)"
+  - id: research-tiktokshop-id-21
+    platform: tiktokshop
+    market: ID
+    topic: research
+    url: https://seller-id.tokopedia.com/university/essay?knowledge_id=4153003565336337&lang=en
+    retrieved: "2026-10-29"
+    title: "TikTok Shop Violation Points & Milestones (08/19/2026; Applies to ID, PH, SG, TH, VN - not MY)"
+    status: "snippet only: title/date/applicability seen, body not read"
+  - id: research-lazada-ph-22
+    platform: lazada
+    market: PH
+    topic: research
+    url: https://sellercenter.lazada.com.ph/helpcenter/s/faq/knowledge?questionId=1000145984
+    retrieved: "2026-10-29"
+    title: "Lazada PH - non-compliance (same questionId)"
+    status: "not read: fetch timed out"
+  - id: research-lazada-ph-23
+    platform: lazada
+    market: PH
+    topic: research
+    url: https://sellercenter.lazada.com.ph/seller/helpcenter/campaign-policy-5567.html
+    retrieved: "2026-10-29"
+    title: "Lazada PH - Campaign Policy"
+    status: "not read: fetch timed out; only search snippet seen"
+  - id: research-lazada-ph-24
+    platform: lazada
+    market: PH
+    topic: research
+    url: https://www.lazada.com.ph/terms-conditions/
+    retrieved: "2026-10-29"
+    title: "Lazada PH - Terms of Use & Terms and Conditions of Sale (buyer-facing)"
+    status: "read in full"
+  - id: research-lazada-ph-25
+    platform: lazada
+    market: PH
+    topic: research
+    url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145984
+    retrieved: "2026-10-29"
+    title: "Lazada - Consequences of Sellers' Non-Compliance Actions (updated 2024-11-26) - SG help centre"
+    status: "snippet only: direct fetch returns 'No Results' (JS app); SG venture, not PH/MY/ID"
+  - id: research-lazada-ph-26
+    platform: lazada
+    market: PH
+    topic: research
+    url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145968
+    retrieved: "2026-10-29"
+    title: "Lazada - Overview of Prohibited and Controlled Products Policy (updated 2025-02-21) - SG help centre"
+    status: "snippet only; SG venture"
+  - id: research-lazada-my-27
+    platform: lazada
+    market: MY
+    topic: research
+    url: https://sellercenter.lazada.com.my/helpcenter/s/faq/knowledge?questionId=1000145984
+    retrieved: "2026-10-29"
+    title: "Lazada MY - non-compliance (same questionId)"
+    status: "not read: page returns 404 Error"
+  - id: research-lazada-my-28
+    platform: lazada
+    market: MY
+    topic: research
+    url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145984
+    retrieved: "2026-10-29"
+    title: "Lazada - Consequences of Sellers' Non-Compliance Actions (updated 2024-11-26) - SG help centre"
+    status: "snippet only: direct fetch returns 'No Results' (JS app); SG venture, not PH/MY/ID"
+  - id: research-lazada-my-29
+    platform: lazada
+    market: MY
+    topic: research
+    url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145968
+    retrieved: "2026-10-29"
+    title: "Lazada - Overview of Prohibited and Controlled Products Policy (updated 2025-02-21) - SG help centre"
+    status: "snippet only; SG venture"
+  - id: research-lazada-id-30
+    platform: lazada
+    market: ID
+    topic: research
+    url: https://sellercenter.lazada.co.id/helpcenter/s/faq/knowledge?questionId=1000145984
+    retrieved: "2026-10-29"
+    title: "Lazada ID - non-compliance (same questionId)"
+    status: "not read: returns only claims-centre banner (JS app)"
+  - id: research-lazada-id-31
+    platform: lazada
+    market: ID
+    topic: research
+    url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145984
+    retrieved: "2026-10-29"
+    title: "Lazada - Consequences of Sellers' Non-Compliance Actions (updated 2024-11-26) - SG help centre"
+    status: "snippet only: direct fetch returns 'No Results' (JS app); SG venture, not PH/MY/ID"
+  - id: research-lazada-id-32
+    platform: lazada
+    market: ID
+    topic: research
+    url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145968
+    retrieved: "2026-10-29"
+    title: "Lazada - Overview of Prohibited and Controlled Products Policy (updated 2025-02-21) - SG help centre"
+    status: "snippet only; SG venture"

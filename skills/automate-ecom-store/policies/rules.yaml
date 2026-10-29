@@ -1,0 +1,945 @@
+- id: SH-PH-001
+  platform: shopee
+  market: ph
+  category: fulfilment
+  rule: MUST keep Late Shipment Rate below 10% (7-day window, assessed weekly on Monday)
+  threshold: LSR ≥ 10% = 2 points; LSR ≥ 10% and late-shipped orders ≥ 30 = 3 points (effective June 3, 2024)
+  action: warn
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-002
+  platform: shopee
+  market: ph
+  category: fulfilment
+  rule: MUST keep Non-Fulfilment Rate (seller cancellations/returns, 7 days) below 10%
+  threshold: NFR ≥ 10% = 2 points; NFR ≥ 10% and non-fulfilled orders ≥ 30 = 3 points
+  action: warn
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-003
+  platform: shopee
+  market: ph
+  category: fulfilment
+  rule: MUST ship non-pre-order items within 2 days (Ship-by Date based on Days to Ship, excl. holidays)
+  threshold: '"For non-pre-order products, you should ship your orders out within 2 days."'
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/3135
+  retrieved: '2026-10-29'
+- id: SH-PH-004
+  platform: shopee
+  market: ph
+  category: fulfilment
+  rule: MUST comply with Shopee Packaging Guidelines
+  threshold: 2 points per violation (effective February 17, 2025)
+  action: warn
+  source_url: https://seller.shopee.ph/edu/article/15939/seller-penalty-points-system-faq
+  retrieved: '2026-10-29'
+- id: SH-PH-005
+  platform: shopee
+  market: ph
+  category: fulfilment
+  rule: MUST NOT ship wrong/missing items
+  threshold: 2 points
+  action: warn
+  source_url: https://seller.shopee.ph/edu/article/15939/seller-penalty-points-system-faq
+  retrieved: '2026-10-29'
+- id: SH-PH-006
+  platform: shopee
+  market: ph
+  category: fraud
+  rule: MUST NOT send empty parcels
+  threshold: 3 points (first offence), 6 points (second offence), Account freeze (third offence onwards)
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-007
+  platform: shopee
+  market: ph
+  category: fraud
+  rule: MUST NOT use a fake return address
+  threshold: 2 points
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-008
+  platform: shopee
+  market: ph
+  category: reviews
+  rule: MUST NOT brush orders (incl. fake orders to inflate sales/reviews)
+  threshold: Up to 9 points per violation; accumulation of 15 points within 30 days due to Order Brushing will result in account freezing
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-009
+  platform: shopee
+  market: ph
+  category: reviews
+  rule: MUST NOT brush orders, reviews, followers or likes
+  threshold: Account restrictions; may include account freeze
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-010
+  platform: shopee
+  market: ph
+  category: fraud
+  rule: MUST NOT make false transaction attempts (buying from own shop)
+  threshold: Up to 2 points
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-011
+  platform: shopee
+  market: ph
+  category: automation
+  rule: MUST NOT crawl or scrape data on Shopee
+  threshold: Account restrictions
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-012
+  platform: shopee
+  market: ph
+  category: automation
+  rule: MUST NOT generate fake web traffic
+  threshold: Account restrictions
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-013
+  platform: shopee
+  market: ph
+  category: ads
+  rule: MUST NOT run Unfair Boosting Ads
+  threshold: Removal of affected sold count/reviews/ratings and/or Account freeze
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/275
+  retrieved: '2026-10-29'
+- id: SH-PH-014
+  platform: shopee
+  market: ph
+  category: chat
+  rule: MUST NOT direct transactions outside of Shopee
+  threshold: Up to 2 penalty points
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/275
+  retrieved: '2026-10-29'
+- id: SH-PH-015
+  platform: shopee
+  market: ph
+  category: chat
+  rule: MUST NOT ask buyers to cancel orders (Chat to Cancel)
+  threshold: Up to 2 penalty points
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/275
+  retrieved: '2026-10-29'
+- id: SH-PH-016
+  platform: shopee
+  market: ph
+  category: chat
+  rule: MUST NOT send offensive/rude/abusive chat messages or review replies
+  threshold: Up to 2 penalty points
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/275
+  retrieved: '2026-10-29'
+- id: SH-PH-017
+  platform: shopee
+  market: ph
+  category: chat
+  rule: MUST NOT send prohibited items or pornographic/obscene content via chat
+  threshold: 'Prohibited item: Warning / 2 penalty points / Account freeze; pornographic content: Account freeze'
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/275
+  retrieved: '2026-10-29'
+- id: SH-PH-018
+  platform: shopee
+  market: ph
+  category: listing
+  rule: MUST NOT place non-Shopee ads on products
+  threshold: 2 penalty points
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/275
+  retrieved: '2026-10-29'
+- id: SH-PH-019
+  platform: shopee
+  market: ph
+  category: listing
+  rule: MUST NOT list prohibited items, spam (keyword spam, duplicates) or misleading-pricing listings
+  threshold: Up to 6 points per violation
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-020
+  platform: shopee
+  market: ph
+  category: ip
+  rule: MUST NOT list IP-infringing or counterfeit items
+  threshold: Up to 15 points for IP infringement or counterfeit
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-021
+  platform: shopee
+  market: ph
+  category: listing
+  rule: MUST avoid poor-quality listings that get deleted
+  threshold: 3 to 4 deleted listings = 1 point; ≥5 deleted listings = 3 points (effective June 2, 2025)
+  action: warn
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-022
+  platform: shopee
+  market: ph
+  category: livestream
+  rule: MUST NOT stream in wrong category or with explicit/harassing content on Shopee Live
+  threshold: 'Wrong category: up to 15 points per violation; severe content: 3 points + Shopee Live ban; repeat: account freeze'
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/2945/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-PH-023
+  platform: shopee
+  market: ph
+  category: pricing
+  rule: MUST NOT raise price just before a promotion to exaggerate the discount
+  threshold: '"Please allow two (2) weeks lead time for price changes before applying discounts and promotions"; violation may lead to permanent listing deletion (incl. reviews, sold count) and penalties'
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/3096
+  retrieved: '2026-10-29'
+- id: SH-PH-024
+  platform: shopee
+  market: ph
+  category: scam
+  rule: MUST NOT engage in scams
+  threshold: Confirmed Scam = Account ban; Potential Scam = Warning, up to 3 penalty points
+  action: block
+  source_url: https://seller.shopee.ph/edu/article/275
+  retrieved: '2026-10-29'
+- id: SH-PH-025
+  platform: shopee
+  market: ph
+  category: penalty
+  rule: Penalty points reset on the last Monday of each quarter
+  threshold: Reset last Monday of March, June, September, December
+  action: warn
+  source_url: https://seller.shopee.ph/edu/article/15939/seller-penalty-points-system-faq
+  retrieved: '2026-10-29'
+- id: SH-MY-026
+  platform: shopee
+  market: my
+  category: fulfilment
+  rule: MUST keep LSR below 10%
+  threshold: LSR exceeds 10% = 1 penalty point; +1 additional point if LSR exceeds 10% and ≥ 50 late-shipped orders
+  action: warn
+  source_url: https://seller.shopee.com.my/edu/article/2153/high-late-shipment-rate-LSR-penalty-points-violation
+  retrieved: '2026-10-29'
+- id: SH-MY-027
+  platform: shopee
+  market: my
+  category: fraud
+  rule: MUST NOT buy or attempt to buy from own shop (seller or staff), incl. to test checkout/vouchers
+  threshold: Penalty points under fraud for false transactions (points not stated in rendered text)
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/2082/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-MY-028
+  platform: shopee
+  market: my
+  category: fraud
+  rule: MUST NOT send empty parcels or irrelevant/lower-value items (Shipping Fraud)
+  threshold: null
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/2082/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-MY-029
+  platform: shopee
+  market: my
+  category: listing
+  rule: MUST NOT list switched listings, advertisements or misleading discounts
+  threshold: null
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/2082/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-MY-030
+  platform: shopee
+  market: my
+  category: listing
+  rule: MUST NOT post spam or duplicate listings
+  threshold: All spam listings will be removed
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/2082/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-MY-031
+  platform: shopee
+  market: my
+  category: ip
+  rule: MUST NOT list IP-infringing or counterfeit items
+  threshold: Listings will be deleted
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/2082/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-MY-032
+  platform: shopee
+  market: my
+  category: listing
+  rule: MUST NOT use vulgar words, platform names (e.g. 'Shopee') or brand/flagship/official keywords for non-official shops in shop name
+  threshold: null
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/2082/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-MY-033
+  platform: shopee
+  market: my
+  category: livestream
+  rule: MUST NOT show explicit/sensitive content, harassment or prohibited items on Shopee Live
+  threshold: null
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/2082/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-MY-034
+  platform: shopee
+  market: my
+  category: pricing
+  rule: MUST NOT raise original price before a sale to exaggerate discount; MUST hold brand/manufacturer/distributor price-change proof before increasing price
+  threshold: If listing banned, provide proof within 3 working days or listing may be permanently deleted
+  action: block
+  source_url: https://seller.shopee.com.my/edu/article/1553/misleading-discount-prohibited-listing-
+  retrieved: '2026-10-29'
+- id: SH-MY-035
+  platform: shopee
+  market: my
+  category: penalty
+  rule: Penalty points updated weekly on Mondays; appeal allowed up to 7 days before punishment period (from 20 April 2026)
+  threshold: null
+  action: warn
+  source_url: https://seller.shopee.com.my/edu/article/2082/calculate-seller-penalty-points-issued
+  retrieved: '2026-10-29'
+- id: SH-ID-036
+  platform: shopee
+  market: id
+  category: fulfilment
+  rule: MUST keep Late Shipment Rate below 10% (ideal < 2%)
+  threshold: ≥10% = 1 Poin; ≥10% and ≥50 late orders = 2 Poin
+  action: warn
+  source_url: https://seller.shopee.co.id/edu/article/6868
+  retrieved: '2026-10-29'
+- id: SH-ID-037
+  platform: shopee
+  market: id
+  category: fulfilment
+  rule: MUST keep Non-Fulfilment Rate below 10%
+  threshold: ≥10% = 1 Poin; ≥10% & ≥30 = 2 Poin; ≥60% & <30 = 3 Poin; ≥60% & ≥30 = 4 Poin
+  action: warn
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: SH-ID-038
+  platform: shopee
+  market: id
+  category: listing
+  rule: MUST NOT upload prohibited products
+  threshold: '1 Poin/2 Poin + product removed; severe: 3 Poin/6 Poin + account restriction/block'
+  action: block
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: SH-ID-039
+  platform: shopee
+  market: id
+  category: listing
+  rule: MUST NOT use foreign languages other than English in product name/description
+  threshold: 1 Poin + product removed
+  action: block
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: SH-ID-040
+  platform: shopee
+  market: id
+  category: listing
+  rule: MUST NOT reuse an old product page for a new product changing model/brand/function/material
+  threshold: 3 Poin/6 Poin + product removed
+  action: block
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: SH-ID-041
+  platform: shopee
+  market: id
+  category: listing
+  rule: MUST NOT re-upload blocked products without changes or re-upload deleted products
+  threshold: 1 Poin + product removed
+  action: block
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: SH-ID-042
+  platform: shopee
+  market: id
+  category: pricing
+  rule: MUST NOT raise product price before a promotion to give a larger discount
+  threshold: Listed in penalty table (point value not visible in snippet)
+  action: block
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: SH-ID-043
+  platform: shopee
+  market: id
+  category: listing
+  rule: MUST NOT promote infant milk/formula products in any form
+  threshold: 1 Poin/2 Poin + product removed
+  action: block
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: SH-ID-044
+  platform: shopee
+  market: id
+  category: listing
+  rule: Pre-order products MUST NOT exceed 20% (assessed only when ≥300 pre-order products)
+  threshold: Restriction of displayed products
+  action: warn
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: SH-ID-045
+  platform: shopee
+  market: id
+  category: vouchers
+  rule: MUST NOT abuse Free Shipping subsidy or vouchers
+  threshold: 1 Poin
+  action: block
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: SH-ID-046
+  platform: shopee
+  market: id
+  category: fraud
+  rule: MUST NOT send empty or significantly different parcels
+  threshold: 6 Poin first, 9 Poin second violation
+  action: block
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: SH-ID-047
+  platform: shopee
+  market: id
+  category: listing
+  rule: MUST NOT violate shop-name rules
+  threshold: 2 Poin
+  action: block
+  source_url: https://seller.shopee.co.id/edu/article/7070
+  retrieved: '2026-10-29'
+- id: TI-PH-048
+  platform: tiktok_shop
+  market: ph
+  category: penalty
+  rule: 'AHR milestones: <150 no campaigns/affiliate enrolment 7 days; <100 14-day restrictions incl. listing freeze; <50 shop deactivated 28 days; 0 permanent suspension. Points cleared every 90 calendar
+    days'
+  threshold: Formal warning 20 points before each threshold
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-049
+  platform: tiktok_shop
+  market: ph
+  category: ip
+  rule: MUST NOT sell counterfeit or IP-infringing products
+  threshold: 'IP infringement: 5 AHR point deduction up to shop closure; Counterfeit: 15; Knockoff: up to 15'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-050
+  platform: tiktok_shop
+  market: ph
+  category: listing
+  rule: MUST NOT list or ship prohibited products
+  threshold: 25 AHR point deduction up to shop closure
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-051
+  platform: tiktok_shop
+  market: ph
+  category: listing
+  rule: MUST NOT display false information in listings
+  threshold: Up to 20 AHR point deduction and product suspension
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-052
+  platform: tiktok_shop
+  market: ph
+  category: chat
+  rule: MUST reply to buyer messages within 12 hours
+  threshold: 'Low 12-Hour Response Rate: up to 20 AHR point deduction'
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-053
+  platform: tiktok_shop
+  market: ph
+  category: chat
+  rule: MUST NOT send inappropriate/prohibited customer communication
+  threshold: Up to 50 AHR point deduction
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-054
+  platform: tiktok_shop
+  market: ph
+  category: fulfilment
+  rule: MUST keep seller-fault cancellation, late dispatch and seller-fault return rates low
+  threshold: 'SFCR: up to 25 / up to 15 AHR; LDR: up to 10 AHR; seller-fault return/refund: 5 AHR; SNAD: 5 AHR up to shop closure'
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-055
+  platform: tiktok_shop
+  market: ph
+  category: content
+  rule: MUST NOT post reproduced content; MUST NOT promote inconsistent/prohibited products in videos/LIVE (linked creator violations can bring joint penalties)
+  threshold: 'Reproduced content: shop closure; prohibited promotion: 25 AHR; inconsistent promotion: 5 AHR'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-056
+  platform: tiktok_shop
+  market: ph
+  category: privacy
+  rule: MUST NOT redirect buyers off-platform or share phone/email/social handles/URLs in any seller-to-buyer communication, listing or fulfilment material
+  threshold: 'Buyer PII violations: account suspension and permanent deactivation'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-057
+  platform: tiktok_shop
+  market: ph
+  category: privacy
+  rule: MUST NOT solicit, reuse, retain or share buyer PII beyond the specific order; MUST delete/anonymise after return/dispute window
+  threshold: null
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-058
+  platform: tiktok_shop
+  market: ph
+  category: security
+  rule: MUST activate 2-Step Verification
+  threshold: Non-activation listed as ground to withhold balance
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-PH-059
+  platform: tiktok_shop
+  market: ph
+  category: reviews
+  rule: MUST NOT solicit positive reviews or offer any reward (money, vouchers, free/discounted products, refunds) for positive/altered feedback, e.g. 'voucher if you give me 5 stars'
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-PH-060
+  platform: tiktok_shop
+  market: ph
+  category: reviews
+  rule: MUST NOT pressure buyers to change reviews or threaten refunds (e.g. 'No return and refund for 1–3 stars')
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-PH-061
+  platform: tiktok_shop
+  market: ph
+  category: chat
+  rule: MUST NOT send unsolicited marketing messages (spam)
+  threshold: Message block; chat restriction in severe cases
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-PH-062
+  platform: tiktok_shop
+  market: ph
+  category: chat
+  rule: MUST NOT send external links, QR codes, offline store addresses or personal contacts; MUST NOT process refunds off-platform or ask buyers to cancel
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-PH-063
+  platform: tiktok_shop
+  market: ph
+  category: automation
+  rule: MUST NOT tamper with Buyer Messages or use unauthorised plug-ins/third-party tools to access the platform
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-MY-064
+  platform: tiktok_shop
+  market: my
+  category: penalty
+  rule: 'AHR milestones: <150 no campaigns/affiliate enrolment 7 days; <100 14-day restrictions incl. listing freeze; <50 shop deactivated 28 days; 0 permanent suspension. Points cleared every 90 calendar
+    days'
+  threshold: Formal warning 20 points before each threshold
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-065
+  platform: tiktok_shop
+  market: my
+  category: ip
+  rule: MUST NOT sell counterfeit or IP-infringing products
+  threshold: 'IP infringement: 5 AHR point deduction up to shop closure; Counterfeit: 15; Knockoff: up to 15'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-066
+  platform: tiktok_shop
+  market: my
+  category: listing
+  rule: MUST NOT list or ship prohibited products
+  threshold: 25 AHR point deduction up to shop closure
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-067
+  platform: tiktok_shop
+  market: my
+  category: listing
+  rule: MUST NOT display false information in listings
+  threshold: Up to 20 AHR point deduction and product suspension
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-068
+  platform: tiktok_shop
+  market: my
+  category: chat
+  rule: MUST reply to buyer messages within 12 hours
+  threshold: 'Low 12-Hour Response Rate: up to 20 AHR point deduction'
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-069
+  platform: tiktok_shop
+  market: my
+  category: chat
+  rule: MUST NOT send inappropriate/prohibited customer communication
+  threshold: Up to 50 AHR point deduction
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-070
+  platform: tiktok_shop
+  market: my
+  category: fulfilment
+  rule: MUST keep seller-fault cancellation, late dispatch and seller-fault return rates low
+  threshold: 'SFCR: up to 25 / up to 15 AHR; LDR: up to 10 AHR; seller-fault return/refund: 5 AHR; SNAD: 5 AHR up to shop closure'
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-071
+  platform: tiktok_shop
+  market: my
+  category: content
+  rule: MUST NOT post reproduced content; MUST NOT promote inconsistent/prohibited products in videos/LIVE (linked creator violations can bring joint penalties)
+  threshold: 'Reproduced content: shop closure; prohibited promotion: 25 AHR; inconsistent promotion: 5 AHR'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-072
+  platform: tiktok_shop
+  market: my
+  category: privacy
+  rule: MUST NOT redirect buyers off-platform or share phone/email/social handles/URLs in any seller-to-buyer communication, listing or fulfilment material
+  threshold: 'Buyer PII violations: account suspension and permanent deactivation'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-073
+  platform: tiktok_shop
+  market: my
+  category: privacy
+  rule: MUST NOT solicit, reuse, retain or share buyer PII beyond the specific order; MUST delete/anonymise after return/dispute window
+  threshold: null
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-074
+  platform: tiktok_shop
+  market: my
+  category: security
+  rule: MUST activate 2-Step Verification
+  threshold: Non-activation listed as ground to withhold balance
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-MY-075
+  platform: tiktok_shop
+  market: my
+  category: reviews
+  rule: MUST NOT solicit positive reviews or offer any reward (money, vouchers, free/discounted products, refunds) for positive/altered feedback, e.g. 'voucher if you give me 5 stars'
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-MY-076
+  platform: tiktok_shop
+  market: my
+  category: reviews
+  rule: MUST NOT pressure buyers to change reviews or threaten refunds (e.g. 'No return and refund for 1–3 stars')
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-MY-077
+  platform: tiktok_shop
+  market: my
+  category: chat
+  rule: MUST NOT send unsolicited marketing messages (spam)
+  threshold: Message block; chat restriction in severe cases
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-MY-078
+  platform: tiktok_shop
+  market: my
+  category: chat
+  rule: MUST NOT send external links, QR codes, offline store addresses or personal contacts; MUST NOT process refunds off-platform or ask buyers to cancel
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-MY-079
+  platform: tiktok_shop
+  market: my
+  category: automation
+  rule: MUST NOT tamper with Buyer Messages or use unauthorised plug-ins/third-party tools to access the platform
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-080
+  platform: tiktok_shop
+  market: id
+  category: penalty
+  rule: 'AHR milestones: <150 no campaigns/affiliate enrolment 7 days; <100 14-day restrictions incl. listing freeze; <50 shop deactivated 28 days; 0 permanent suspension. Points cleared every 90 calendar
+    days'
+  threshold: Formal warning 20 points before each threshold; listing-freeze at <100 "[Does not apply to ID]"
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-081
+  platform: tiktok_shop
+  market: id
+  category: ip
+  rule: MUST NOT sell counterfeit or IP-infringing products
+  threshold: 'IP infringement: 5 AHR point deduction up to shop closure; Counterfeit: 15; Knockoff: up to 15'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-082
+  platform: tiktok_shop
+  market: id
+  category: listing
+  rule: MUST NOT list or ship prohibited products
+  threshold: 25 AHR point deduction up to shop closure
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-083
+  platform: tiktok_shop
+  market: id
+  category: listing
+  rule: MUST NOT display false information in listings
+  threshold: Up to 20 AHR point deduction and product suspension
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-084
+  platform: tiktok_shop
+  market: id
+  category: chat
+  rule: MUST reply to buyer messages within 12 hours
+  threshold: 'Low 12-Hour Response Rate: up to 20 AHR point deduction'
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-085
+  platform: tiktok_shop
+  market: id
+  category: chat
+  rule: MUST NOT send inappropriate/prohibited customer communication
+  threshold: Up to 50 AHR point deduction
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-086
+  platform: tiktok_shop
+  market: id
+  category: fulfilment
+  rule: MUST keep seller-fault cancellation, late dispatch and seller-fault return rates low
+  threshold: 'SFCR: up to 25 / up to 15 AHR; LDR: up to 10 AHR; seller-fault return/refund: 5 AHR; SNAD: 5 AHR up to shop closure'
+  action: warn
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-087
+  platform: tiktok_shop
+  market: id
+  category: content
+  rule: MUST NOT post reproduced content; MUST NOT promote inconsistent/prohibited products in videos/LIVE (linked creator violations can bring joint penalties)
+  threshold: 'Reproduced content: shop closure; prohibited promotion: 25 AHR; inconsistent promotion: 5 AHR'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-088
+  platform: tiktok_shop
+  market: id
+  category: privacy
+  rule: MUST NOT redirect buyers off-platform or share phone/email/social handles/URLs in any seller-to-buyer communication, listing or fulfilment material
+  threshold: 'Buyer PII violations: account suspension and permanent deactivation'
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-089
+  platform: tiktok_shop
+  market: id
+  category: privacy
+  rule: MUST NOT solicit, reuse, retain or share buyer PII beyond the specific order; MUST delete/anonymise after return/dispute window
+  threshold: null
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-090
+  platform: tiktok_shop
+  market: id
+  category: security
+  rule: MUST activate 2-Step Verification
+  threshold: Non-activation listed as ground to withhold balance
+  action: block
+  source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+  retrieved: '2026-10-29'
+- id: TI-ID-091
+  platform: tiktok_shop
+  market: id
+  category: reviews
+  rule: MUST NOT solicit positive reviews or offer any reward (money, vouchers, free/discounted products, refunds) for positive/altered feedback, e.g. 'voucher if you give me 5 stars'
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-092
+  platform: tiktok_shop
+  market: id
+  category: reviews
+  rule: MUST NOT pressure buyers to change reviews or threaten refunds (e.g. 'No return and refund for 1–3 stars')
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-093
+  platform: tiktok_shop
+  market: id
+  category: chat
+  rule: MUST NOT send unsolicited marketing messages (spam)
+  threshold: Message block; chat restriction in severe cases
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-094
+  platform: tiktok_shop
+  market: id
+  category: chat
+  rule: MUST NOT send external links, QR codes, offline store addresses or personal contacts; MUST NOT process refunds off-platform or ask buyers to cancel
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: TI-ID-095
+  platform: tiktok_shop
+  market: id
+  category: automation
+  rule: MUST NOT tamper with Buyer Messages or use unauthorised plug-ins/third-party tools to access the platform
+  threshold: null
+  action: block
+  source_url: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+  retrieved: '2026-10-29'
+- id: LA-PH-096
+  platform: lazada
+  market: ph
+  category: penalty
+  rule: 48 non-compliance points = account deactivation; max 16 points per 7 days (except 48-point issues); points reset 365 days after issue; appeal within 60 days (IPR 14 days)
+  threshold: 48 points
+  action: warn
+  source_url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145984
+  retrieved: '2026-10-29'
+  note: 'UNVERIFIED for this market: read from Lazada SG help-centre snippet; PH/MY/ID page not readable'
+- id: LA-PH-097
+  platform: lazada
+  market: ph
+  category: listing
+  rule: MUST NOT list prohibited/controlled products (e.g. adult, firearms, illicit drugs, illegal services, controlled products)
+  threshold: 'Locked product and up to 48 points (category-dependent: up to 2/6/48)'
+  action: block
+  source_url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145968
+  retrieved: '2026-10-29'
+  note: 'UNVERIFIED for this market: SG snippet'
+- id: LA-MY-098
+  platform: lazada
+  market: my
+  category: penalty
+  rule: 48 non-compliance points = account deactivation; max 16 points per 7 days (except 48-point issues); points reset 365 days after issue; appeal within 60 days (IPR 14 days)
+  threshold: 48 points
+  action: warn
+  source_url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145984
+  retrieved: '2026-10-29'
+  note: 'UNVERIFIED for this market: read from Lazada SG help-centre snippet; PH/MY/ID page not readable'
+- id: LA-MY-099
+  platform: lazada
+  market: my
+  category: listing
+  rule: MUST NOT list prohibited/controlled products (e.g. adult, firearms, illicit drugs, illegal services, controlled products)
+  threshold: 'Locked product and up to 48 points (category-dependent: up to 2/6/48)'
+  action: block
+  source_url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145968
+  retrieved: '2026-10-29'
+  note: 'UNVERIFIED for this market: SG snippet'
+- id: LA-ID-100
+  platform: lazada
+  market: id
+  category: penalty
+  rule: 48 non-compliance points = account deactivation; max 16 points per 7 days (except 48-point issues); points reset 365 days after issue; appeal within 60 days (IPR 14 days)
+  threshold: 48 points
+  action: warn
+  source_url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145984
+  retrieved: '2026-10-29'
+  note: 'UNVERIFIED for this market: read from Lazada SG help-centre snippet; PH/MY/ID page not readable'
+- id: LA-ID-101
+  platform: lazada
+  market: id
+  category: listing
+  rule: MUST NOT list prohibited/controlled products (e.g. adult, firearms, illicit drugs, illegal services, controlled products)
+  threshold: 'Locked product and up to 48 points (category-dependent: up to 2/6/48)'
+  action: block
+  source_url: https://sellercenter.lazada.sg/helpcenter/s/faq/knowledge?questionId=1000145968
+  retrieved: '2026-10-29'
+  note: 'UNVERIFIED for this market: SG snippet'
+- id: LA-PH-102
+  platform: lazada
+  market: ph
+  category: returns
+  rule: Buyer may return within 14 and/or 7 days of delivery (depending on product) for wrong/faulty/not-as-advertised/missing parts/doesn't fit
+  threshold: 14 days and/or 7 days
+  action: warn
+  source_url: https://www.lazada.com.ph/terms-conditions/
+  retrieved: '2026-10-29'
+- id: LA-PH-103
+  platform: lazada
+  market: ph
+  category: listing
+  rule: MUST NOT upload Prohibited Material (IP-infringing, counterfeit, fraudulent, obscene, malware)
+  threshold: null
+  action: block
+  source_url: https://www.lazada.com.ph/terms-conditions/
+  retrieved: '2026-10-29'
+- id: LA-PH-104
+  platform: lazada
+  market: ph
+  category: automation
+  rule: MUST NOT attempt unauthorised access to or interfere with/disrupt the Platform
+  threshold: null
+  action: block
+  source_url: https://www.lazada.com.ph/terms-conditions/
+  retrieved: '2026-10-29'

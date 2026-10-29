@@ -15,7 +15,7 @@ Policy gate action is `read`.
 ## Workflow
 
 1. Read each metric once from Account Health or the official performance export. Do not poll.
-2. Rows: `metric, value, threshold, direction`. Leave `threshold` blank until you have copied the on-screen or policy number.
+2. Rows: `metric, value, threshold, direction`. Leave `threshold` blank to use the number in `policies/rules.yaml` for this platform and market. Pass `--platform` and `--market`. Late shipment, cancellation or non-fulfilment, chat reply hours, and a penalty cap are the metrics that file can fill. A filled CSV threshold wins, because that is the number on screen. `unverified=yes` means the local page was not read. Show that alert and say the page still needs a browser re-check. Do not copy a threshold from another country.
 3. Run:
 
 ```bash

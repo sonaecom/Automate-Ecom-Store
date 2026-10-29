@@ -2,6 +2,12 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.7.0
+
+- Shopee, TikTok Shop, and Lazada policy notes for PH, MY, and ID, read 2026-10-29, are in the market files. `policies/rules.yaml` has 104 rules. Every source URL, date, and `UNVERIFIED`, `snippet only`, or `not read` marker is kept.
+- The policy gate loads those rules before a module types. A review request cannot ask for a positive or 5-star review or offer a reward. Chat cannot carry a contact, a URL, or an off-platform deal. A scrape or a request flood is blocked. A fake discount must respect the printed lead time. Late-shipment and cancellation thresholds from the same file feed shop-health alerts.
+- Lazada PH, MY, and ID coverage is incomplete. The weekly updater flags those pages for a browser re-check and does not treat a timed-out fetch as the local rule.
+
 ## 1.6.1
 
 - Manual inventory mode sets one selling variation, or a small batch, to the quantity the owner typed. The skill previews it, pushes only after confirmation, reads the saved stock back, and writes an audit row. It never goes below reserved plus pending. A large jump stays a preview until the owner confirms it. Auto mode is unchanged.

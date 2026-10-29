@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
- * Read official pages listed in policy/sources.yaml, hash them, and alert
+ * Read official pages listed in policies/sources.yaml, hash them, and alert
  * when a hash changes. Does not open a seller account and does not change
- * prices, budgets, listings, or programs.
+ * prices, budgets, listings, or programs. A source marked snippet only,
+ * not read, or UNVERIFIED is a browser re-check, not a curl hash.
  *
  *   node policy-update.mjs --dry-run
  *   node policy-update.mjs
@@ -31,7 +32,7 @@ function parseSources(text) {
       continue;
     }
     if (!current) continue;
-    const field = line.match(/^\s+(platform|market|topic|url|retrieved):\s*(.*?)\s*$/);
+    const field = line.match(/^\s+(platform|market|topic|url|retrieved|title|status):\s*(.*?)\s*$/);
     if (field) current[field[1]] = field[2].replace(/^["']|["']$/g, "");
   }
   if (current) items.push(current);
@@ -78,6 +79,10 @@ function usable(url) {
   return typeof url === "string" && url.startsWith("https://") && !url.includes("<");
 }
 
+function needsBrowser(source) {
+  return /not read|snippet only|snippet:|UNVERIFIED/i.test(source.status || "");
+}
+
 async function bodyFor(source, fixtureDir) {
   if (fixtureDir) {
     const path = join(fixtureDir, `${source.id}.txt`);
@@ -102,6 +107,9 @@ if (fixtureFlag >= 0 && !fixtureDir) {
 }
 
 const sources = parseSources(readFileSync(sourcesPath, "utf8"));
+if (sources.some((source) => source.platform === "lazada" && ["PH", "MY", "ID"].includes(source.market) && needsBrowser(source))) {
+  console.log("note: Lazada PH/MY/ID coverage is incomplete and needs a browser re-check. A timed-out or empty fetch is not the local rule.");
+}
 const cacheDir = join(homedir(), ".automate-ecom-store", "policy-cache");
 const changelog = join(homedir(), ".automate-ecom-store", "policy-changelog.md");
 let alerts = 0;
@@ -109,6 +117,11 @@ let alerts = 0;
 for (const source of sources) {
   if (!usable(source.url)) {
     console.log(`SKIP ${source.id} url_placeholder`);
+    continue;
+  }
+  if (needsBrowser(source)) {
+    console.log(`${dryRun ? "PLAN" : "ALERT"} browser_recheck id=${source.id} platform=${source.platform} market=${source.market}`);
+    if (!dryRun) alerts += 1;
     continue;
   }
   if (dryRun) {

@@ -15,7 +15,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { findForbidden } from "./review-phrases.mjs";
+import { discountRules, healthThresholds, loadRules, rulesFor, textHits } from "./policy-rules.mjs";
 
 const MUTATING = new Set([
   "publish",
@@ -78,18 +78,12 @@ function parseRules(markdown) {
   });
 }
 
-function scanText(text, rules) {
-  const hits = [];
-  const phrases = findForbidden(text);
-  if (phrases.length) hits.push({ id: "review_no_star_ask", status: "block", verify: "no", source: "policies", why: phrases.join(" ") });
-  const offPlatform = /whatsapp|wa\.me|telegram|t\.me\/|zalo|wechat|line\.me/i;
-  if (offPlatform.test(text)) hits.push({ id: "chat_off_platform", status: "block", verify: "no", source: "policies", why: "off_platform" });
+function scanText(text, rules, yamlRules) {
+  const hits = textHits(text, yamlRules);
   for (const rule of rules) {
     if (!rule.match) continue;
     const needles = rule.match.split(";").map((item) => item.trim()).filter(Boolean);
-    if (needles.some((needle) => text.toLowerCase().includes(needle.toLowerCase()))) {
-      hits.push(rule);
-    }
+    if (needles.some((needle) => text.toLowerCase().includes(needle.toLowerCase()))) hits.push(rule);
   }
   const seen = new Map();
   for (const hit of hits) {
@@ -128,7 +122,18 @@ console.log(`mutating: ${mutating ? "yes" : "no"}`);
 
 const text = file ? readFileSync(file, "utf8") : "";
 const rules = text ? parseRules(text) : [];
-const hits = parsed.text ? scanText(parsed.text, rules) : [];
+const yamlRules = rulesFor(loadRules(), parsed.platform, parsed.market);
+console.log(`rules_loaded: ${yamlRules.length}`);
+for (const rule of yamlRules) {
+  console.log(`policy_rule ${rule.id} action=${rule.action || ""} category=${rule.category || ""}`);
+}
+for (const row of healthThresholds(yamlRules)) {
+  console.log(`health_threshold metric=${row.metric} max=${row.max} direction=${row.direction} rule=${row.id} action=${row.action} unverified=${row.unverified ? "yes" : "no"}`);
+}
+for (const row of discountRules(yamlRules)) {
+  console.log(`discount_rule ${row.id} action=${row.action} lead_days=${row.lead_days || ""} unverified=${row.unverified ? "yes" : "no"}`);
+}
+const hits = parsed.text ? scanText(parsed.text, rules, yamlRules) : [];
 for (const hit of hits) {
   console.log(`${hit.status === "block" ? "VIOLATION" : "FLAG"} ${hit.id} verify=${hit.verify || "yes"} source=${hit.source || "policy"}`);
 }

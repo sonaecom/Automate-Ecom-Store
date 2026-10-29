@@ -1,23 +1,13 @@
-# Incoming official policy files
+# Policy research drop-in
 
-A later research pass will bring official Shopee, TikTok Shop, and Lazada policy pages for PH, MY, and ID. Drop them onto the files that are already here. The gate and the weekly checker do not need a code change.
+The 2026-10-29 research pass is in the market files and in `policies/rules.yaml` (104 rules) and `policies/sources.yaml`. Source URLs, retrieved dates, and the markers `UNVERIFIED`, `snippet only`, and `not read` stay as recorded.
 
-Replace only these paths:
+Files:
 
-- `policies/shopee/PH.md`
-- `policies/shopee/MY.md`
-- `policies/shopee/ID.md`
-- `policies/tiktokshop/PH.md`
-- `policies/tiktokshop/MY.md`
-- `policies/tiktokshop/ID.md`
-- `policies/lazada/PH.md`
-- `policies/lazada/MY.md`
-- `policies/lazada/ID.md`
+- `policies/shopee/PH.md`, `MY.md`, `ID.md`
+- `policies/tiktokshop/PH.md`, `MY.md`, `ID.md`
+- `policies/lazada/PH.md`, `MY.md`, `ID.md`
 
-Keep the front matter keys `platform`, `market`, `retrieved`, and `source_url`. Keep the `### rule_id` headings the gate already parses:
+The gate reads `rules.yaml` for the platform and market on every module. A review request cannot ask for a positive or 5-star review or offer a reward. Chat cannot carry a contact, a URL, or an off-platform deal. A scrape or a request flood is blocked. A fake discount must wait out the lead time printed as `lead_days`. Late-shipment and cancellation numbers from that file feed shop-health alerts for the same market.
 
-`prohibited_restricted`, `listing_titles`, `listing_images`, `keyword_spam`, `misleading_claims`, `pricing_promotion`, `review_rating`, `chat_off_platform`, `affiliate_creator`, `ads`, `shipping_sla`, `penalty_points`, `returns_refunds`, `account_automation`, `data_privacy`, `local_hub`.
-
-Each rule still needs `status`, `verify`, `source`, `retrieved`, `modules`, `match`, and `summary`. Set `verify: no` only for a page that was actually opened. Add new official URLs to `policies/sources.yaml` with the same `id`, `platform`, `market`, `topic`, `url`, and `retrieved` fields.
-
-Do not rename the market code. Do not remove the star-rating or off-platform blocks. A research file does not change a price, a budget, or a listing by itself.
+Lazada PH, MY, and ID coverage is incomplete. The weekly updater must browser re-check those pages. It must not treat a timed-out or empty fetch as the local rule.

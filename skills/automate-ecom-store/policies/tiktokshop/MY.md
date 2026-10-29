@@ -2,157 +2,37 @@
 platform: tiktokshop
 market: MY
 retrieved: 2026-10-29
-source_url: https://seller-my.tiktok.com/university
+source_url: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
 ---
 
-# TikTok Shop MY policy summary
+# tiktok_shop / MY seller policy rules (retrieved 2026-10-29)
 
-Retrieved 2026-10-29. These are summaries of public seller pages, not a replacement for them. A rule with verify: yes must be opened on the official page before a mutating action. The gate still blocks a star-rating ask and an off-platform contact.
+## Sources
 
-### prohibited_restricted
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: product-listing, prelaunch
-- match: firearm; narcotic; counterfeit; replica
-- summary: TikTok Shop prohibits prohibited, restricted, and counterfeit goods. The full list is on the local seller education or Seller Center page. Do not list an item the page names. This match list is only a few obvious words, not the whole catalogue.
+| URL | Title | Read date | Status |
+|---|---|---|---|
+| https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434 | TikTok Shop Seller Enforcement Policy (10/01/2026; 'Applies to: Indonesia, Malaysia, Philippines, Singapore, Thailand, Vietnam') | 2026-10-29 | read in full (hosted on SG Seller University; seller-ph / seller-my mirrors with same id returned HTTP 404) |
+| https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en | TikTok Shop Customer Communication Policy (07/01/2026), ID Seller University | 2026-10-29 | read in full (page shows no 'Applies to' country list in fetch) |
 
-### listing_titles
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: product-listing, ab-test
-- match: 
-- summary: Titles must describe the product the buyer receives. Do not stuff keywords, competitor names, or claims the spec does not allow. The in-app counter wins over any draft length.
+## Rules
 
-### listing_images
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: product-listing, ab-test
-- match: before and after; 100% cure; whatsapp; zalo
-- summary: Images must show the real product. Do not put a phone number, a chat app, a price that contradicts the listing, or a medical before-and-after on the picture. Exact crop and text limits differ by market. Re-read the local page before publish.
+- **[TI-MY-064] (penalty, warn)** AHR milestones: <150 no campaigns/affiliate enrolment 7 days; <100 14-day restrictions incl. listing freeze; <50 shop deactivated 28 days; 0 permanent suspension. Points cleared every 90 calendar days — threshold: Formal warning 20 points before each threshold — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-065] (ip, block)** MUST NOT sell counterfeit or IP-infringing products — threshold: IP infringement: 5 AHR point deduction up to shop closure; Counterfeit: 15; Knockoff: up to 15 — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-066] (listing, block)** MUST NOT list or ship prohibited products — threshold: 25 AHR point deduction up to shop closure — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-067] (listing, block)** MUST NOT display false information in listings — threshold: Up to 20 AHR point deduction and product suspension — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-068] (chat, warn)** MUST reply to buyer messages within 12 hours — threshold: Low 12-Hour Response Rate: up to 20 AHR point deduction — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-069] (chat, block)** MUST NOT send inappropriate/prohibited customer communication — threshold: Up to 50 AHR point deduction — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-070] (fulfilment, warn)** MUST keep seller-fault cancellation, late dispatch and seller-fault return rates low — threshold: SFCR: up to 25 / up to 15 AHR; LDR: up to 10 AHR; seller-fault return/refund: 5 AHR; SNAD: 5 AHR up to shop closure — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-071] (content, block)** MUST NOT post reproduced content; MUST NOT promote inconsistent/prohibited products in videos/LIVE (linked creator violations can bring joint penalties) — threshold: Reproduced content: shop closure; prohibited promotion: 25 AHR; inconsistent promotion: 5 AHR — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-072] (privacy, block)** MUST NOT redirect buyers off-platform or share phone/email/social handles/URLs in any seller-to-buyer communication, listing or fulfilment material — threshold: Buyer PII violations: account suspension and permanent deactivation — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-073] (privacy, block)** MUST NOT solicit, reuse, retain or share buyer PII beyond the specific order; MUST delete/anonymise after return/dispute window — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-074] (security, block)** MUST activate 2-Step Verification — threshold: Non-activation listed as ground to withhold balance — source: https://seller-sg.tiktok.com/university/essay?knowledge_id=7654182014322434
+- **[TI-MY-075] (reviews, block)** MUST NOT solicit positive reviews or offer any reward (money, vouchers, free/discounted products, refunds) for positive/altered feedback, e.g. 'voucher if you give me 5 stars' — source: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+- **[TI-MY-076] (reviews, block)** MUST NOT pressure buyers to change reviews or threaten refunds (e.g. 'No return and refund for 1–3 stars') — source: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+- **[TI-MY-077] (chat, block)** MUST NOT send unsolicited marketing messages (spam) — threshold: Message block; chat restriction in severe cases — source: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+- **[TI-MY-078] (chat, block)** MUST NOT send external links, QR codes, offline store addresses or personal contacts; MUST NOT process refunds off-platform or ask buyers to cancel — source: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
+- **[TI-MY-079] (automation, block)** MUST NOT tamper with Buyer Messages or use unauthorised plug-ins/third-party tools to access the platform — source: https://seller-id.tokopedia.com/university/essay?knowledge_id=1536982430189328&lang=en
 
-### keyword_spam
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: product-listing
-- match: 
-- summary: Do not repeat keywords, hide text, or add unrelated brands to win search. If the form warns about spam, stop and shorten the title.
+## Gaps (not researched / not readable)
 
-### misleading_claims
-- status: block
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: product-listing, reviews-trust
-- match: cures cancer; guaranteed cure; 100% effective
-- summary: Do not claim a cure, a guaranteed result, or an official approval that is not in the spec and on the official page. verify is yes because the banned-claim list is market specific. The three phrases above are blocked anyway.
-
-### pricing_promotion
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: vouchers-promotions, ab-test, ads-kickstart
-- match: 
-- summary: A price, a voucher, or a discount needs the owner's yes and the policy gate action price or publish. Do not show a crossed-out price the product never used. Do not invent a percent.
-
-### review_rating
-- status: block
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: post-delivery, reviews-trust, customer-chat
-- match: 5 stars; five stars; 5 sao; năm sao; bintang 5; 5 bintang; ห้าดาว; 5 ดาว
-- summary: Do not ask for a star count, do not pay for a rating, and do not ask only happy buyers. One honest thank-you after delivery is allowed in the post-delivery module. A platform review reward, if the screen has one, must apply to any qualifying review.
-
-### chat_off_platform
-- status: block
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: post-delivery, customer-chat, affiliate-invite
-- match: whatsapp; wa.me; telegram; t.me/; zalo; wechat; line.me
-- summary: Keep buyer and creator messages inside the platform chat. Do not send a phone number, a personal chat app, or a link that takes the conversation off the platform.
-
-### affiliate_creator
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: affiliate-invite, creator-outreach
-- match: 
-- summary: Invite creators only with the platform's own affiliate or creator tool. Do not promise income. Do not ask a creator to post a false review. Commission changes are proposals.
-
-### ads
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: ads-kickstart, ads
-- match: 
-- summary: Ad claims must match the listing. A budget increase needs the owner's yes for that amount. Do not top up from this skill. A prohibited product must not be advertised.
-
-### shipping_sla
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: prelaunch, daily-report
-- match: 
-- summary: Ship by the SLA shown in Seller Center for this market. The number of days is not copied here because it changes by channel and programme. Read the on-screen SLA before promising a date. verify: yes.
-
-### penalty_points
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: account-security, alerts
-- match: 
-- summary: Penalty or non-compliance points are read from Account Health. Do not guess the threshold. A rise in points is an owner alert, not a licence to change settings. Lazada SG's help page describes point milestones. Other markets must be re-read.
-
-### returns_refunds
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: disputes, settlement, cancel-return
-- match: 
-- summary: Follow the on-screen return and refund window. Do not refuse a case the page says is the seller's to accept. Filing a dispute is a proposal. Do not invent a deadline.
-
-### account_automation
-- status: block
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: account-safety, session-runner
-- match: new-fingerprint; delete-cache
-- summary: One profile per store. Do not run a second account to avoid a limit, do not share a login, and do not use an unofficial bot. This skill's visible paced browser is the allowed path. Headless mode and fingerprint changes stay forbidden.
-
-### data_privacy
-- status: block
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: post-delivery, retention, backup
-- match: 
-- summary: Do not copy a buyer's address, phone, or full name into git, chat logs, or a sheet. Order ids and store labels are enough. Do not pretend to be the buyer or misstate who wrote a review.
-
-### local_hub
-- status: flag
-- verify: yes
-- source: https://seller-my.tiktok.com/university
-- retrieved: 2026-10-29
-- modules: prelaunch
-- match: 
-- summary: Local seller education or terms entry for TikTok Shop MY. Re-read it before the first mutating action in this market.
-
-## Update log
-
-The weekly checker appends a row here when the official page hash changes. That row is a flag. It does not change a price, a budget, a listing, or a programme.
+- Not covered from official pages this pass: affiliate/KOL rules, voucher T&Cs, detailed return/refund SLAs, shop-health metric targets beyond those above, full prohibited-items lists. Add on next re-check.

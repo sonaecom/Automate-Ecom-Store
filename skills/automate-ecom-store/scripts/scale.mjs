@@ -6,7 +6,7 @@
  *   node scale.mjs --margin file
  *   node scale.mjs --ads file [--step-percent n]
  *   node scale.mjs --stock file [--cover-days n]
- *   node scale.mjs --health file [--warn-fraction 0.9]
+ *   node scale.mjs --health file [--warn-fraction 0.9] [--platform name --market CODE]
  *   node scale.mjs --expand file
  *   node scale.mjs --repeat file --as-of YYYY-MM-DD [--min-orders 2]
  *   node scale.mjs --sla file --as-of YYYY-MM-DDTHH:MM:SSZ
@@ -14,6 +14,7 @@
  */
 
 import { readFileSync } from "node:fs";
+import { healthMetricKey, healthThresholds, loadRules, rulesFor } from "./policy-rules.mjs";
 
 function arg(name) {
   const index = process.argv.indexOf(name);
@@ -177,9 +178,15 @@ function stock(path) {
 
 function health(path) {
   const warn = optionNumber("--warn-fraction", "health.warn_fraction") ?? 0.9;
+  const platform = arg("--platform");
+  const market = arg("--market");
+  const policy = platform && market ? healthThresholds(rulesFor(loadRules(), platform, market)) : [];
+  const byMetric = new Map(policy.map((item) => [item.metric, item]));
   for (const row of records(path)) {
     const value = num(row.value);
-    const threshold = num(row.threshold);
+    let threshold = num(row.threshold);
+    const fromPolicy = threshold === null ? byMetric.get(healthMetricKey(row.metric)) : null;
+    if (threshold === null && fromPolicy) threshold = Number(fromPolicy.max);
     const direction = (row.direction || "lower").toLowerCase();
     if (value === null) {
       console.log(`metric ${row.metric || ""} result: MISSING`);
@@ -195,7 +202,8 @@ function health(path) {
       else if (value < threshold * (2 - warn)) result = "EARLY";
     } else if (value >= threshold) result = "BREACH";
     else if (value >= threshold * warn) result = "EARLY";
-    console.log(`metric ${row.metric || ""} value ${show(value)} threshold ${show(threshold)} result: ${result}`);
+    const cited = fromPolicy ? ` rule ${fromPolicy.id} unverified=${fromPolicy.unverified ? "yes" : "no"}` : "";
+    console.log(`metric ${row.metric || ""} value ${show(value)} threshold ${show(threshold)} result: ${result}${cited}`);
   }
 }
 
