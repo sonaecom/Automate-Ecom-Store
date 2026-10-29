@@ -6,7 +6,11 @@ Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the scr
 
 New Shopee listing, or a full rebuild of one (new pack, new size, new gallery). For a small field change on a listing that already matches its spec, use `listing-update.md` instead.
 
-This is the primary listing path. TikTok Shop and Lazada follow the same gates with their own limits.
+Classification: **write**. Manifest `listing.product`. Plan first and create only `CREATE` rows. A missing variation or image is `REJECT`. TikTok Shop and Lazada use the same plan with their own `--platform`. If a menu label does not match, stop and ask.
+
+```bash
+node {baseDir}/scripts/listing-create.mjs --specs ~/.automate-ecom-store/data/listing-specs.csv --platform shopee --out-dir ~/.automate-ecom-store/data/listing/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl --target <LISTING_EDITS_PER_HOUR> --hourly-done <COUNT>
+```
 
 ## When to use
 

@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.35.0
+
+- New product listings on Shopee, TikTok Shop, and Lazada plan through listing-create.mjs. A row without a variation or an image is not created. The hourly listing ceiling still applies.
+
 ## 1.34.0
 
 - Vouchers and promotions on Shopee, TikTok Shop, and Lazada stay proposals until the owner approves that row. A placeholder or a budget field does not get saved.

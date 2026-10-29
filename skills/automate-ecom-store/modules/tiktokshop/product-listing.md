@@ -4,7 +4,11 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Template to refine. Same gates as `{baseDir}/modules/shopee/product-listing.md` and `{baseDir}/modules/listing/method.md`. Use only the limits and menu hints in this file. Do not type a Shopee-only label if this form does not show it. If a label does not match, stop and ask.
+Classification: **write**. Same plan as Shopee product listing, with `--platform tiktokshop`. Manifest `listing.product`. If a label does not match, stop and ask.
+
+```bash
+node {baseDir}/scripts/listing-create.mjs --specs ~/.automate-ecom-store/data/listing-specs.csv --platform tiktokshop --out-dir ~/.automate-ecom-store/data/listing/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl
+```
 
 ## When to use
 
