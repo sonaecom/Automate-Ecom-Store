@@ -4,7 +4,11 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-> Template to refine. The menu hints below are not a proven click-path. On the first supervised run, if a label does not match, stop, screenshot, and ask. Do not keep opening other menus.
+Classification: **write**. Same plan as Shopee customer chat, with `--platform lazada`. Manifest `customers.chat`. Send only `SEND` rows. If a menu label does not match, stop and ask.
+
+```bash
+node {baseDir}/scripts/customer-chat.mjs --threads ~/.automate-ecom-store/data/chat-threads.csv --platform lazada --market <MARKET> --out-dir ~/.automate-ecom-store/data/chat/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl
+```
 
 Bản mẫu, cần người phụ trách chỉnh lại. Lần đầu có người xem: nhãn không khớp thì dừng, chụp màn hình, và hỏi.
 

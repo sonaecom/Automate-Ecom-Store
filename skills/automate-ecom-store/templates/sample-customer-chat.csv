@@ -1,0 +1,4 @@
+# synthetic
+thread,text,buyer_message
+THREAD_1,Your order is packed and will ship today.,When will this ship?
+THREAD_2,I can help with the size on the product page.,Can I get a refund?

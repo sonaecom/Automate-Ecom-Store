@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.32.0
+
+- Customer chat on Shopee, TikTok Shop, and Lazada plans through `customer-chat.mjs` before Send. A refund or an off-platform contact is blocked. The reply ceiling is 10 a day and is not a quota.
+
 ## 1.31.0
 
 - The orchestrator plans up to 10 stores for a machine that stays on. Batches are 40–50 minutes, breaks are 10–20 minutes, and four night hours stay closed. Starts are staggered. A captcha pauses only that store. A hung profile is restarted. A finished action key is not run again. The script does not open AdsPower itself.

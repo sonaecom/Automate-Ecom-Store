@@ -9,6 +9,7 @@ export const CEILINGS = {
   invitesPerHour: 100,
   listingEditsPerHour: 40,
   adsChangesPerHour: 10,
+  chatRepliesPerDay: 10,
   maxStores: 10,
   batchMinutesMin: 40,
   batchMinutesMax: 50,
