@@ -39,7 +39,7 @@ openclaw mcp set playwright '{"command":"npx","args":["-y","@playwright/mcp@late
 
 Do not use AdsPower page tools (`navigate`, `click-element`, `fill-input`, `open-new-page`, `connect-browser-with-ws`, `drag-element`, `hover-element`, and the rest of that page set). Do not launch Playwright's own browser. Do not pass headless to either tool.
 
-**Never use headless mode for store work.** The AdsPower window stays visible so a person can watch it. Some AdsPower docs show a headless client switch. Do not use it.
+**Never use headless mode for store work.** The AdsPower window stays headed so a person can watch it. On the Linux VPS in `{baseDir}/docs/vps.md` that window is drawn on a virtual display. That is not the headless client switch. `headless` stays false, and `open-browser` still uses `"headless":"0"`. Some AdsPower docs show a headless client switch. Do not use it.
 
 ## One tab
 

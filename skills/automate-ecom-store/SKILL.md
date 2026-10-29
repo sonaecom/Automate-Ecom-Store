@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.20.0"
+version: "1.21.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -203,6 +203,7 @@ If the request matches more than one row, ask which platform and which task. One
 
 | They want | Read |
 | --- | --- |
+| Linux VPS with OpenClaw or Hermes Agent | `{baseDir}/docs/vps.md` |
 | Task queue, daily plan, one store at a time | `{baseDir}/modules/ops/task-queue.md` |
 | Selling operations map | `{baseDir}/modules/selling/README.md` |
 | Shopee affiliate / KOL / Targeted Campaign invite | `{baseDir}/modules/shopee/affiliate-invite.md` (lessons `{baseDir}/modules/affiliate/invite-lessons.md`, then audit) |

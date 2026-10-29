@@ -19,6 +19,8 @@ A block is at most `session_minutes_max` minutes (30–40). Inside it:
 
 Leave at least `gap_hours_min` hours between blocks for the same store. Do not plan two stores in the same hour. Money actions are not scheduled. They stay proposals.
 
+On the VPS in `{baseDir}/docs/vps.md` the host stays on all day. A wake is `unattended-tick.mjs`. Only `READY` may become one block, and that block is still at most `session_minutes_max`. `WAIT` is not a block. OpenClaw and Hermes Agent both use this rule. They do not open the same profile together.
+
 Write the plan in the chat: time window, store label, platform, modules, and which cap remains. Do not include profile ids.
 
 ## Platform notes

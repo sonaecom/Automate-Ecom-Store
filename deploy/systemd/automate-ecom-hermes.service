@@ -1,0 +1,14 @@
+[Unit]
+Description=Hermes Agent for this skill
+After=automate-ecom-adspower.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/automate-ecom-store/adspower.env
+WorkingDirectory=<REPO_DIR>
+ExecStart=<HERMES_BIN>
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target

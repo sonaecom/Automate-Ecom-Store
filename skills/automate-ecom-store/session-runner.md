@@ -8,6 +8,8 @@
 
 Use these scripts during every store session: before start, between actions, after a captcha, and at the end. The task queue in `{baseDir}/modules/ops/task-queue.md` decides which chunk runs. Platform skills name the action (`listing_edits`, `affiliate_invites`, or `ads_changes`) and the message or CSV they need checked. One profile at a time.
 
+On a host that stays up, run `{baseDir}/scripts/unattended-tick.mjs` before `open-browser`. `WAIT` means do not open a profile. Pace commands below still apply inside a session that does start. A restart of the agent does not cancel the gap.
+
 ## Prerequisites
 
 - Private `~/.automate-ecom-store/config.yaml` exists (`save-config.mjs --status` says the key is set).

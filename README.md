@@ -17,7 +17,7 @@ git clone https://github.com/sonaecom/Automate-Ecom-Store.git && openclaw skills
 
 Muốn nhập lại key từ đầu, nhắn `reset config`.
 
-One OpenClaw skill for staff who operate their **own** Shopee, Lazada, and TikTok Shop stores. A visible AdsPower profile opens the store. Playwright MCP works in one tab, at a human pace, so the account is less likely to hit captchas, restrictions, or a ban.
+One skill for staff who operate their **own** Shopee, Lazada, and TikTok Shop stores. The usual host is a Linux VPS with OpenClaw or Hermes Agent, and AdsPower, on that same machine. A headed AdsPower profile opens the store on a virtual display. Playwright MCP works in one tab, at a human pace, so the account is less likely to hit captchas, restrictions, or a ban. The VPS stays on. A seller session does not.
 
 This repository is public. The API key stays on the shop computer in `~/.automate-ecom-store/config.yaml` (mode 600). The first run asks for that key, then a short skippable interview (store count, platforms, markets, and a stage per store) and two optional yes/no questions: Sheets reports, and an existing real-time inventory file on Google Sheets. If both Google answers are no, Google is skipped.
 
@@ -99,6 +99,7 @@ Internal test profiles, notes, and store-specific config stay on the shop comput
 
 | Read this | For |
 | --- | --- |
+| `skills/automate-ecom-store/docs/vps.md` | Linux VPS: headed AdsPower, OpenClaw, Hermes Agent, systemd, update |
 | `skills/automate-ecom-store/SKILL.md` | Route from a job to one module |
 | `skills/automate-ecom-store/account-safety.md` | Pace, caps, captcha, one visible tab |
 | `skills/automate-ecom-store/policies/LAYER.md` | Policy gate, fee and chat blocks, weekly re-check gaps |

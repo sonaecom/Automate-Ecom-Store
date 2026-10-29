@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.21.0
+
+- The primary host is a Linux VPS with OpenClaw, Hermes Agent, and headed AdsPower on one machine. A virtual display is not headless mode. systemd restarts a dead process and does not skip the session gap. The wake script stays idle until the gap and the captcha review allow one store. OpenClaw and Hermes Agent share this skill and must not drive the same profile at once. The update path still fast-forwards git and leaves local config in place.
+
 ## 1.20.0
 
 - The approved KOL chat flow is the affiliate doc. Shop config holds templates, FAQ, and follow-ups, and follow-ups stay off until the owner sets them. Chat is logged in `kol_chat_log.csv`. One open thread per creator is deduped in the task queue at P0 through P4. A draft is checked by the policy gate and a forbidden-content match before Send.
