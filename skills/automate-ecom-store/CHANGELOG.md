@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.36.0
+
+- Shop decoration plans through shop-plan.mjs. A size marked verify is not uploaded. A slot is saved only after the owner approves it.
+
 ## 1.35.0
 
 - New product listings on Shopee, TikTok Shop, and Lazada plan through listing-create.mjs. A row without a variation or an image is not created. The hourly listing ceiling still applies.

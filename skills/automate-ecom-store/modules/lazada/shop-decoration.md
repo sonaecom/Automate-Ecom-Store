@@ -4,7 +4,11 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Template to refine. Same gates as `{baseDir}/modules/shopee/shop-decoration.md` and `{baseDir}/modules/homepage/method.md`. Every Lazada size in `{baseDir}/modules/homepage/sizes.md` is marked verify-in-app. The crop tool after you click the header is the spec.
+Classification: **write**. Same plan as Shopee shop decoration. Manifest `homepage.decoration`. Every Lazada size in `{baseDir}/modules/homepage/sizes.md` stays `verify` until the crop tool on the header confirms it.
+
+```bash
+node {baseDir}/scripts/shop-plan.mjs --slots ~/.automate-ecom-store/data/shop-slots.csv --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl --approved yes
+```
 
 ## When to use
 

@@ -4,7 +4,11 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Redesign the public shop homepage in Shopee Shop Decoration. Read `{baseDir}/modules/homepage/method.md` and `{baseDir}/modules/homepage/sizes.md` before you draw or upload.
+Classification: **write**. Manifest `homepage.decoration`. A size of `verify` is `HOLD_VERIFY` and is not uploaded. Save only `APPLY` rows after `--approved yes`. Read `{baseDir}/modules/homepage/method.md` and `{baseDir}/modules/homepage/sizes.md` before you draw or upload.
+
+```bash
+node {baseDir}/scripts/shop-plan.mjs --slots ~/.automate-ecom-store/data/shop-slots.csv --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl --approved yes
+```
 
 ## When to use
 
