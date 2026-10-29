@@ -40,7 +40,7 @@ node {baseDir}/scripts/wallet-reconcile.mjs --balance-a <SCREEN> --balance-b <EX
 node {baseDir}/scripts/push-sheets.mjs --push --csv <OUT_DIR>/normalized-wallet.csv --tab WalletFacts
 ```
 
-If the Google token is missing, keep the local CSV and say the sheet was not updated.
+Push only when `save-config.mjs --status` prints `sheets_reports: yes`. If it prints `no` or `unset`, or the Google token is missing, keep the local CSV and do not connect Google. Say the sheet was not updated.
 
 ## Platform notes
 

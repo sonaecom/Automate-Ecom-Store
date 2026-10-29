@@ -77,7 +77,7 @@ Log `--result ok` only when every pushed row prints `MATCH`. `MISMATCH` or `MISS
 
 ## Config
 
-`{baseDir}/modules/inventory/config.example.yaml`. Placeholders are not numbers. The private file holds the real buffer, percent, clock, manual sheet columns, and live sheet settings (`poll_minutes`, `push_asap`, `live_tab`). `poll_minutes` is clamped to 5–15. The read-only token is saved during onboarding and is not written in this file.
+`{baseDir}/modules/inventory/config.example.yaml`. Placeholders are not numbers. The private file holds the real buffer, percent, clock, manual sheet columns, and live sheet settings (`poll_minutes`, `push_asap`, `live_tab`). `poll_minutes` is clamped to 5–15. The read-only token is saved only when onboarding question 2 is yes: they already have a real-time inventory tracking file on Google Sheets. It is not written in this file. If `inventory_sheet` is no, do not call Google and do not save that token. Manual and auto still run.
 
 ## Docs
 

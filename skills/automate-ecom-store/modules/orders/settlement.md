@@ -28,7 +28,7 @@ node {baseDir}/scripts/settlement-reconcile.mjs --orders-a <INCOME> --orders-b <
 
 Expected payout is `sale_price - platform_fee - shipping_fee - voucher - refund`. Do not add a fee the export does not show. On `QC_FAIL`, report both payouts and stop. On `UNDERPAID`, list the order label, the gap, the currency, and both sources. Alert the owner. Do not file a dispute from this module. That is `disputes.md`, and submission needs a person.
 
-4. Push `normalized-settlement.csv` to the `SettlementFacts` tab.
+4. Push `normalized-settlement.csv` to the `SettlementFacts` tab only when `sheets_reports` is yes. If it is no, keep the local CSV and do not connect Google.
 
 ```bash
 node {baseDir}/scripts/push-sheets.mjs --push --csv ~/.automate-ecom-store/data/settlement/normalized-settlement.csv --tab SettlementFacts

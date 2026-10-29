@@ -4,7 +4,7 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Read-only. The default view is Google Sheets. The optional web app is the same numbers in a browser. Do not type a rate that is not already in the sheet or the rate ledger. Do not average two sources.
+Read-only. Google Sheets is used only when `sheets_reports` is yes. Otherwise keep the local CSV files or use the optional web app. Do not connect Google when that answer is no. Do not type a rate that is not already in the sheet or the rate ledger. Do not average two sources.
 
 Policy gate action is `read`.
 
@@ -16,7 +16,7 @@ The owner wants overview, platform, market, store, staff, SKU profit, ads, walle
 
 Ask once if they did not name one.
 
-1. **Google Sheets, the default.** Push the fact tabs from the module that produced them: `FxFacts`, `AdsFacts`, `WalletFacts`, `CancelFacts`. The owner edits `Settings/FX`. The owner tabs use QUERY so a later push does not wipe formulas. See each module's `sheets-tab.md`.
+1. **Google Sheets.** Only if they said yes to reports on Google Sheets. Push the fact tabs from the module that produced them: `FxFacts`, `AdsFacts`, `WalletFacts`, `CancelFacts`. The owner edits `Settings/FX`. The owner tabs use QUERY so a later push does not wipe formulas. See each module's `sheets-tab.md`. If `sheets_reports` is no, do not connect Google and do not push.
 2. **Web dashboard.** Optional. Vietnamese labels, light and dark, phone layout. It reads those same tabs, or the same CSV files.
 
 ```bash

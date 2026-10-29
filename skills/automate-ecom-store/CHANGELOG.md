@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.14.0
+
+- After the AdsPower key, onboarding asks two optional yes/no questions: reports on Google Sheets, and an existing real-time inventory file on Google Sheets. Neither is required. If both answers are no, Gmail, Drive, and Sheets are not connected. Sheet pushes and the inventory read-only token run only for the case they accepted.
+
 ## 1.13.0
 
 - The 2026-10-29 policy pack is the 153-rule file already in `policies/`. Markers stay as recorded. The weekly check now repeats the open gaps: voucher pages, invite limits, and Lazada PH, MY, and ID, for a browser re-check.

@@ -3,6 +3,12 @@
  * Store a Google token locally, or say whether one is present.
  * Does not print the token.
  *
+ * Connect Google only for one of these optional cases, after the AdsPower key:
+ *   1. The owner wants reports on Google Sheets (this token).
+ *   2. The owner already has a real-time inventory file on Google Sheets
+ *      (the read-only token in inventory-sync.mjs, not this file).
+ * If both answers are no, do not call --save-token. Neither case is required.
+ *
  *   node push-sheets.mjs --status
  *   node push-sheets.mjs --save-token < token.json
  *   node push-sheets.mjs --reset-token

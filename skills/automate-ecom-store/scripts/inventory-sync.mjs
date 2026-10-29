@@ -12,6 +12,10 @@
  *
  * Live sheet reads use a read-only Google token. The script does not print it.
  * Near-realtime: poll every 5 to 15 minutes, then push at human pace.
+ *
+ * --save-readonly-token is only for onboarding case 2: the owner already has
+ * a real-time inventory tracking file on Google Sheets. Case 1 (Sheets reports)
+ * uses push-sheets.mjs. If both answers are no, do not save this token.
  */
 
 import { createHash } from "node:crypto";
@@ -136,6 +140,7 @@ function usage() {
   console.error("   or: node inventory-sync.mjs --platform-stock file --source file --map file --now HH:MM --mode auto [--apply] [--config file] [--out-dir DIR]");
   console.error("   or: node inventory-sync.mjs --platform-stock file --source file --map file --now HH:MM --mode live [--apply] [--push-asap] [--last-pushed file] [--state file] [--commit] [--readback file]");
   console.error("   or: node inventory-sync.mjs (--save-readonly-token | --readonly-status | --reset-readonly-token)");
+  console.error("readonly token: only when the owner already has a real-time inventory file on Google Sheets");
   process.exit(2);
 }
 

@@ -12,7 +12,7 @@ The owner asks for a backup, or the scheduler puts one backup in a session that 
 
 ## Steps
 
-1. Drive must be connected. If it is not, say so and stop. Do not ask for the AdsPower key again.
+1. Drive folders exist only when the owner said yes to Sheets reports. Run `push-sheets.mjs --status`. On `MISSING`, save the export under `~/.automate-ecom-store/data/backup/` and say Drive was not connected. Do not ask them to connect Google for a backup. Do not ask for the AdsPower key again.
 2. Use the official product export. Save the file to Drive `Automate-Ecom-Store/exports/<platform>/`. The file name is the date and the platform, not a shop name, for example `2026-10-29-shopee-listings`.
 3. Images and description text from that export, or the files already produced by the listing module, go to `Automate-Ecom-Store/images/listings/`. Do not re-download the whole gallery if the export already contains the image links and the person has the image files.
 4. Write a one-line manifest next to the export: file name, row count, read time. The row count must match the export's own count. If it does not, keep both numbers and do not call the backup complete.
@@ -30,7 +30,7 @@ The file opens and the row count matches. A second look at the export page shows
 
 ## Stop
 
-The export would require a private API. The count does not match. Drive is not connected.
+The export would require a private API. The count does not match. Drive was not connected because Sheets reports were declined, and you would open a Google sign-in anyway.
 
 ## Report
 

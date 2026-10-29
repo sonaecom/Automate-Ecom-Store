@@ -39,7 +39,7 @@ Omit a threshold that is still a placeholder. The script then prints `threshold:
 4. Read `order-qc.csv`. Every mismatch has a reason. A row that says returned but has no pickup time is `excluded_not_shipped` and is not in the return rate.
 5. Read `rates.csv` from `sku` up through `market`, plus `staff` and `period`. Top offending SKUs are the highest return rate, then the highest cancellation rate, with at least one shipped order or one created order so a zero denominator is `undefined`.
 6. If a store rate is above a set threshold, alert the owner. Do not cancel orders to "fix" the rate.
-7. Push `rates.csv` to `CancelFacts`. The owner tab is `Cancel & Return`.
+7. Push `rates.csv` to `CancelFacts` only when `sheets_reports` is yes. If it is no, keep the local CSV and do not connect Google. The owner tab is `Cancel & Return`.
 
 ```bash
 node {baseDir}/scripts/push-sheets.mjs --push --csv ~/.automate-ecom-store/data/cancel-return/rates.csv --tab CancelFacts

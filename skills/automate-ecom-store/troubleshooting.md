@@ -17,7 +17,7 @@ Work on the shop computer, in the visible AdsPower window. Do not switch the sto
 | A second captcha in the same day, or captcha review is `REVIEW` | Do not start. Do not open another store to "use up" the captchas. Do not change the proxy. |
 | Two exports disagree | Report both figures. Do not pick one and do not publish. |
 | Headless is requested | Stop. The window stays visible. |
-| Google token missing | Offer the connection again only if they ask. The rest of the skill still runs. |
+| Google token missing | Check `sheets_reports` and `inventory_sheet` from `save-config.mjs --status`. Both `no` means skip Google. The rest of the skill still runs. Connect only the case they already answered yes, and only if that token is missing. |
 | Viewer tried to publish | `audit-log.mjs` returns `DENIED`. Do not publish. |
 
 Do not clear cookies, change the proxy, or open a second seller tab to get past any row in this table.

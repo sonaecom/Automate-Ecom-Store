@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.13.0"
+version: "1.14.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -73,27 +73,42 @@ JSON
 
 Run `--status` again. Continue only on `result: OK`. Tell them how many stores were saved, which platforms, and that the safety caps are already on. Do not quote the key, the address, or any profile id.
 
-### 3. Offer Gmail and Drive once
+### 3. Two optional Google questions
 
-Ask one question: connect Gmail and Google Drive now, or later? A "later" or "no" ends this step.
+Ask these after the AdsPower key is saved. Ask both. Each answer is yes or no. Neither is required. Do not ask a general "connect Gmail and Drive?" question.
 
-If they say yes, use the OpenClaw Google connectors when those are available. Otherwise ask them to complete Google's own sign-in, then save the resulting token only with:
+1. Do you want reports on Google Sheets?
+2. Do you already have a real-time inventory tracking file on Google Sheets?
+
+Save the answers. Omit the key. `true` is yes. `false` is no.
+
+```bash
+node {baseDir}/scripts/save-config.mjs <<'JSON'
+{"google":{"sheets_reports":false,"inventory_sheet":false}}
+JSON
+```
+
+If both are no, skip Google entirely. Do not open a sign-in. Do not create Drive folders. Do not save a token. Manual and auto inventory still run. Local CSV reports still run.
+
+Google (Gmail, Drive, and Sheets) is connected only for a yes:
+
+1. Sheets reports. Use the OpenClaw Google connectors when those are available. Otherwise ask them to complete Google's own sign-in, then save the token only with:
 
 ```bash
 node {baseDir}/scripts/push-sheets.mjs --save-token
 ```
 
-The token is read from stdin and written to `~/.automate-ecom-store/google-token.json` (mode 600). Do not echo it. Then create the Drive folders named in account-safety "Mail and Drive". Exports, reports, images, and the dashboard file live there.
+The token is read from stdin and written to `~/.automate-ecom-store/google-token.json` (mode 600). Do not echo it. Then create the Drive folders named in account-safety "Mail and Drive". Exports, reports, images, and the dashboard file live there. Gmail on that connection is for penalty mail, campaign invitations, one-time codes while the person is here, and reports to the owner. Never auto-reply to a customer email.
 
-If they also want inventory live mode, ask them to sign in again with Google's read-only Sheets scope `https://www.googleapis.com/auth/spreadsheets.readonly`. An optional Drive metadata scope may be added only to read the file's modified time. Do not accept the read-write Sheets scope for this file. Save it with:
+2. An existing real-time inventory file on Google Sheets. Sign in again with Google's read-only Sheets scope `https://www.googleapis.com/auth/spreadsheets.readonly`. An optional Drive metadata scope may be added only to read the file's modified time. Do not accept the read-write Sheets scope for this file. Save it with:
 
 ```bash
 node {baseDir}/scripts/inventory-sync.mjs --save-readonly-token
 ```
 
-Stdin is JSON with `access_token`, `spreadsheet_id`, and `scope`. The file is `~/.automate-ecom-store/google-sheets-readonly.json` (mode 600). Do not echo the token or the sheet id. A "later" leaves live mode off. Manual and auto inventory still run.
+Stdin is JSON with `access_token`, `spreadsheet_id`, and `scope`. The file is `~/.automate-ecom-store/google-sheets-readonly.json` (mode 600). Do not echo the token or the sheet id.
 
-Gmail is for penalty mail, campaign invitations, one-time codes while the person is here, and reports to the owner. Never auto-reply to a customer email.
+A yes to one question does not turn the other on. Do not connect the case they declined.
 
 Later task details (campaign text, prices, ROAS floor) are asked when that task starts. A later stdin write may set `tasks` or `roas_floor` and must omit `api_key`. Still do not print the key.
 
@@ -116,6 +131,8 @@ node {baseDir}/scripts/apply-stores.mjs
 ```
 
 `SKIP` means there is no private `stores.yaml` yet and the global caps still apply. `APPLIED` prints each store's label, platform, market, staff, and caps. Use those caps in `caps-counter.mjs`. Do not raise them. Do not print profile ids. More than one saved store is normal: use only the store whose platform matches the task, and ask which label if two stores share a platform.
+If `sheets_reports` or `inventory_sheet` is `unset`, ask the two questions in first-run step 3 before any seller click, then save the answers. If both are `no`, do not connect Google.
+
 2. Policy preflight, before the module. Read `{baseDir}/policies/LAYER.md` and `{baseDir}/policy/GATE.md`. Run the gate for this platform and market. Pass the title, image text, chat draft, or voucher text in `--text` when the module will type it:
 
 ```bash

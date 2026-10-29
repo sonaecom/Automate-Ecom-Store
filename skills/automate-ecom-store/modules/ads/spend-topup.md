@@ -40,7 +40,7 @@ node {baseDir}/scripts/ads-reconcile.mjs --spend-a <SCREEN_OR_EXPORT_A> --spend-
 node {baseDir}/scripts/push-sheets.mjs --push --csv <OUT_DIR>/normalized-spend.csv --tab AdsFacts
 ```
 
-If the Google token is missing, keep the local CSV and say the sheet was not updated.
+Push only when `save-config.mjs --status` prints `sheets_reports: yes`. If it prints `no` or `unset`, or the Google token is missing, keep the local CSV and do not connect Google. Say the sheet was not updated.
 
 ## Platform notes
 

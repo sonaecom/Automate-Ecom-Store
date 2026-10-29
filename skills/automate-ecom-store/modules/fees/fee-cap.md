@@ -50,7 +50,7 @@ The join file quotes a program the owner might turn on. Columns: `store, platfor
 5. On `BOTH`, the two sources disagree. Report both figures. Do not average them. That order is `QC_FAIL` and stays out of the store, SKU, platform, market, daily, and monthly totals.
 6. Read `component` lines. Each is one fee's amount and percent of GMV. Read `whatif leave` for a program already on, and `whatif join` for a program in the join file. `JOIN_BREACH` means joining would meet or pass the cap. `JOIN_NEAR` means it would reach the warn line. Alert the owner before any join. `DO_NOT_JOIN` is the proposal.
 7. A leave proposal is `OPT_OUT` or `STOP_PROMO`, or `ADJUST_PRICE` when no single program brings the total back under the cap. `approval` is `required` and `applied` is `no`. Stop and wait for the owner. Do not click opt-in, opt-out, the price, or the promotion.
-8. Push `fee-rollups.csv`, `fee-components.csv`, and `fee-whatif.csv` when they want them on the sheet. The dashboard page reads `FeeFacts`, `FeeOrders`, `FeeComponents`, and `FeeWhatIf`. The example copies are under `dashboard/web/sample/`.
+8. Push `fee-rollups.csv`, `fee-components.csv`, and `fee-whatif.csv` only when `sheets_reports` is yes. If it is no, keep the local CSV and do not connect Google. The dashboard page reads `FeeFacts`, `FeeOrders`, `FeeComponents`, and `FeeWhatIf`. The example copies are under `dashboard/web/sample/`.
 
 ```bash
 node {baseDir}/scripts/push-sheets.mjs --push --csv ~/.automate-ecom-store/data/fee-cap/fee-rollups.csv --tab FeeFacts

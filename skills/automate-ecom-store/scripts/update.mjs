@@ -5,7 +5,9 @@
  *   node update.mjs
  *   node update.mjs --check
  *
- * Preserves ~/.automate-ecom-store/config.yaml, stores.yaml, and google-token.json.
+ * Preserves ~/.automate-ecom-store/config.yaml, stores.yaml, google-token.json,
+ * and google-sheets-readonly.json. Google tokens exist only after a yes to
+ * Sheets reports or an existing Sheets inventory file.
  * Does not print those files.
  */
 
@@ -40,6 +42,7 @@ const protectedFiles = [
   join(homedir(), ".automate-ecom-store", "config.yaml"),
   join(homedir(), ".automate-ecom-store", "stores.yaml"),
   join(homedir(), ".automate-ecom-store", "google-token.json"),
+  join(homedir(), ".automate-ecom-store", "google-sheets-readonly.json"),
 ];
 const before = Object.fromEntries(protectedFiles.map((file) => [file, hashFile(file)]));
 const versionBefore = versionOf(skillDir);

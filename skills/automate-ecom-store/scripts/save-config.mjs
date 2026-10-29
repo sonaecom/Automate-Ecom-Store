@@ -16,6 +16,12 @@
  *   roas_floor       optional number or ""
  *   price_drop_approval_percent  optional number or ""
  *   tasks            optional object merged by key
+ *   google           optional answers, each true or false:
+ *                    sheets_reports    owner wants reports on Google Sheets
+ *                    inventory_sheet   owner already has a real-time inventory
+ *                                      tracking file on Google Sheets
+ *                    Both false skips Gmail, Drive, and Sheets. Neither is required.
+ *                    Asked once after the AdsPower key. Do not connect Google otherwise.
  *
  * Stdin is required for a write. Values are never echoed.
  * Exit 0: SAVED, RESET, or a present config.
@@ -76,7 +82,14 @@ function blank() {
     show_click_dot: true,
     dry_run: false,
     tasks: {},
+    google: { sheets_reports: null, inventory_sheet: null },
   };
+}
+
+function googleFlag(value) {
+  if (value === true) return "yes";
+  if (value === false) return "no";
+  return "unset";
 }
 
 function readConfig(file) {
@@ -129,6 +142,9 @@ function status(file) {
   console.log(`platforms: ${platforms.join(" ")}`);
   console.log(`headless: ${ads.headless === false ? "false" : "blocked"}`);
   console.log(`dry_run: ${config.dry_run === true ? "true" : "false"}`);
+  const google = config.google || {};
+  console.log(`sheets_reports: ${googleFlag(google.sheets_reports)}`);
+  console.log(`inventory_sheet: ${googleFlag(google.inventory_sheet)}`);
   console.log("mode: 600");
   if (ads.headless !== false) {
     console.log("result: BLOCKED");
@@ -197,6 +213,20 @@ function applyPayload(current, payload, { requireKey }) {
   if (payload.tasks && typeof payload.tasks === "object" && !Array.isArray(payload.tasks)) {
     next.tasks = { ...next.tasks, ...payload.tasks };
   }
+  if (payload.google !== undefined) {
+    if (!payload.google || typeof payload.google !== "object" || Array.isArray(payload.google)) {
+      return "google must be an object";
+    }
+    if (!next.google || typeof next.google !== "object") next.google = { sheets_reports: null, inventory_sheet: null };
+    if (payload.google.sheets_reports !== undefined) {
+      if (typeof payload.google.sheets_reports !== "boolean") return "sheets_reports must be true or false";
+      next.google.sheets_reports = payload.google.sheets_reports;
+    }
+    if (payload.google.inventory_sheet !== undefined) {
+      if (typeof payload.google.inventory_sheet !== "boolean") return "inventory_sheet must be true or false";
+      next.google.inventory_sheet = payload.google.inventory_sheet;
+    }
+  }
   return "";
 }
 
@@ -246,6 +276,10 @@ function main() {
         ...loaded,
         adspower: { ...blank().adspower, ...(loaded.adspower || {}) },
         tasks: { ...(loaded.tasks || {}) },
+        google: {
+          ...blank().google,
+          ...(loaded.google && typeof loaded.google === "object" ? loaded.google : {}),
+        },
       };
     } catch (error) {
       console.error(error.message);
@@ -273,6 +307,8 @@ function main() {
   console.log("api_key: set");
   console.log(`api_base: ${isSet(current.adspower.api_base) ? "custom" : "default"}`);
   console.log(`store_count: ${current.stores.length}`);
+  console.log(`sheets_reports: ${googleFlag(current.google && current.google.sheets_reports)}`);
+  console.log(`inventory_sheet: ${googleFlag(current.google && current.google.inventory_sheet)}`);
   console.log("mode: 600");
   console.log("result: SAVED");
 }

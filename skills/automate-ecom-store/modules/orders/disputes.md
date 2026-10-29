@@ -22,12 +22,12 @@ node {baseDir}/scripts/return-alerts.mjs --platform <PLATFORM> --market <MARKET>
 ```
 
 Columns: `case_id,kind,opened_on`. `kind` is `return_review` or `evidence`.
-3. Evidence lives in Drive under `Automate-Ecom-Store/images/` or a packing photo the person already saved. Name the file. Do not fabricate a photo or a tracking event. A packing video is useful only if it exists.
+3. Evidence is a packing photo the person already saved. Name the file. If they said yes to Sheets reports, a copy may also sit in Drive under `Automate-Ecom-Store/images/`. Do not connect Google to look for a photo. Do not fabricate a photo or a tracking event. A packing video is useful only if it exists.
 4. Draft the reply in the platform case form. Do not send it. The draft states facts from the order export: ship date, carrier status as printed, and the items. No refund promise. No off-platform payment.
 5. Show the draft and the deadline to the owner. Submit only after they say yes for that case, and only if dry-run is off.
 6. After submit, read the case page again and screenshot it.
 
-Write rows to `DisputeFacts` with `push-sheets.mjs --tab DisputeFacts`. The owner tab `Disputes` is:
+Write rows to `DisputeFacts` with `push-sheets.mjs --tab DisputeFacts` only when `sheets_reports` is yes. If it is no, keep the local CSV and do not connect Google. The owner tab `Disputes` is:
 
 ```text
 =QUERY(DisputeFacts!A1:H, "select * where A is not null", 1)

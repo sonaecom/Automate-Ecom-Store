@@ -2,7 +2,7 @@
 
 Giao diện tuỳ chọn cho chủ shop. Nhãn tiếng Việt. Dữ liệu mẫu trong `sample/` là ví dụ, không phải số cửa hàng thật.
 
-Mặc định trong skill vẫn là Google Sheets. App này đọc cùng các cột đã chuẩn hoá.
+Google Sheets chỉ dùng khi chủ shop đã trả lời có với báo cáo trên Sheets. App này đọc cùng các cột đã chuẩn hoá, hoặc CSV local khi không kết nối Google.
 
 ## Chạy local
 

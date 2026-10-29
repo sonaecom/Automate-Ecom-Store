@@ -61,7 +61,7 @@ node {baseDir}/scripts/fx-convert.mjs --amounts <AMOUNTS> --market-rates <LEDGER
 
 4. Read `converted.csv`. Each row has the native amount, both rates, the rate date, the rate month, the mode, and the fallback. `qc` is the reason a row did not convert.
 5. `rates-used.csv` is the rate stored for each date or month the run actually applied. `recomputed: YYYY-MM CUR` means that custom rate changed versus `--previous`.
-6. Push facts. Do not push `Settings/FX` again after the owner has edited it.
+6. Push facts only when `sheets_reports` is yes. If it is no, keep the local CSV and do not connect Google. Do not push `Settings/FX` again after the owner has edited it.
 
 ```bash
 node {baseDir}/scripts/push-sheets.mjs --push --csv ~/.automate-ecom-store/data/fx/converted.csv --tab FxFacts

@@ -29,7 +29,8 @@ manual_qty_column: qty
 manual_store_column: store
 manual_platform_column: platform
 
-# Live sheet. Read-only scope, set up in onboarding. Do not put a token or a real sheet id here.
+# Live sheet. Read-only scope, saved only when onboarding question 2 is yes
+# (they already have a real-time inventory file on Google Sheets). Do not put a token or a real sheet id here.
 poll_minutes: 10
 push_asap: no
 live_tab: Stock

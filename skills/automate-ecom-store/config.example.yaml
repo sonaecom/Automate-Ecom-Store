@@ -51,6 +51,14 @@ show_click_dot: true
 # When true, modules report the plan and do not publish, submit, or send mail.
 dry_run: false
 
+# Asked once after the AdsPower key. Each value is yes (true) or no (false).
+# Neither is required. Both no skips Gmail, Drive, and Sheets.
+# sheets_reports: the owner wants reports on Google Sheets.
+# inventory_sheet: the owner already has a real-time inventory tracking file on Google Sheets.
+google:
+  sheets_reports: false
+  inventory_sheet: false
+
 # Base currency for multi-currency reports. View is market or custom.
 fx:
   base_currency: VND

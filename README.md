@@ -11,7 +11,7 @@ git clone https://github.com/sonaecom/Automate-Ecom-Store.git && openclaw skills
 ```
 
 2. **Mở AdsPower** như mọi khi. Cửa sổ trình duyệt phải hiện trên màn hình. Đừng bật chế độ ẩn.
-3. **Chỉ dán API Key.** Nhắn agent, ví dụ "làm shop". Khi được hỏi, vào AdsPower → Automation → API, copy API Key và dán vào chat. Không cần gửi địa chỉ mạng hay mã profile. Sau đó agent hỏi một lần có kết nối Gmail và Google Drive không. Không kết nối cũng vẫn dùng được. Agent không tự trả lời email của khách.
+3. **Chỉ dán API Key.** Nhắn agent, ví dụ "làm shop". Khi được hỏi, vào AdsPower → Automation → API, copy API Key và dán vào chat. Không cần gửi địa chỉ mạng hay mã profile. Sau khi key đã lưu, agent hỏi hai câu, mỗi câu chỉ cần có hoặc không. Cả hai đều không bắt buộc. (1) Có muốn báo cáo trên Google Sheets không? (2) Đã có file theo dõi tồn kho thời gian thực trên Google Sheets chưa? Cả hai đều không thì bỏ qua Google: không kết nối Gmail, Drive, hay Sheets. Agent không tự trả lời email của khách.
 4. **Chọn profile theo số.** Agent liệt kê profile và đoán sàn từ tên (Shopee, Lazada, TikTok Shop). Đúng thì trả lời `ok`. Sai thì sửa theo số, ví dụ `1 shopee, 2 tiktok`. Giới hạn an toàn mỗi phiên đã có sẵn (10 lần sửa listing, 30 lời mời, 3 lần đổi ads, 10 tin chat). Không cần điền.
 5. **Nói việc cần làm.** Ví dụ: "mời affiliate Shopee", "đăng sản phẩm mới", hoặc "làm lại trang chủ shop". Agent làm chậm, một tab, và dừng gọi bạn nếu gặp captcha.
 
@@ -19,7 +19,7 @@ Muốn nhập lại key từ đầu, nhắn `reset config`.
 
 One OpenClaw skill for staff who operate their **own** Shopee, Lazada, and TikTok Shop stores. A visible AdsPower profile opens the store. Playwright MCP works in one tab, at a human pace, so the account is less likely to hit captchas, restrictions, or a ban.
 
-This repository is public. The API key stays on the shop computer in `~/.automate-ecom-store/config.yaml` (mode 600). The first run asks for that key only.
+This repository is public. The API key stays on the shop computer in `~/.automate-ecom-store/config.yaml` (mode 600). The first run asks for that key, then two optional yes/no questions: Sheets reports, and an existing real-time inventory file on Google Sheets. If both answers are no, Google is skipped.
 
 ## Tiếng Việt
 
@@ -35,7 +35,7 @@ Trong bản clone của repo này:
 git clone https://github.com/sonaecom/Automate-Ecom-Store.git && openclaw skills install ./Automate-Ecom-Store/skills/automate-ecom-store
 ```
 
-Lần đầu, agent chỉ hỏi API Key. Địa chỉ Local API chỉ được hỏi khi không kết nối được. Profile thì agent tự liệt kê để bạn chọn theo số. Giới hạn an toàn đã điền sẵn. Key được ghi trên máy, không in lại. Nhắn `reset config` khi muốn nhập lại key.
+Lần đầu, agent hỏi API Key, rồi hai câu không bắt buộc: có muốn báo cáo trên Google Sheets không, và đã có file tồn kho thời gian thực trên Google Sheets chưa. Cả hai đều không thì bỏ qua Google. Địa chỉ Local API chỉ được hỏi khi không kết nối được. Profile thì agent tự liệt kê để bạn chọn theo số. Giới hạn an toàn đã điền sẵn. Key được ghi trên máy, không in lại. Nhắn `reset config` khi muốn nhập lại key.
 
 ### Kiến trúc
 
@@ -45,7 +45,7 @@ Lần đầu, agent chỉ hỏi API Key. Địa chỉ Local API chỉ được h
 4. `@playwright/mcp` gắn websocket đó, một tab.
 5. Script trong `scripts/` canh nhịp, cap, log captcha, và CSV.
 6. File trong `modules/<sàn>/` là các bước của từng việc.
-7. Bảng số mặc định là Google Sheets. Muốn xem trên web: `cd dashboard/web && pnpm i && pnpm dev`. Dữ liệu trong `sample/` chỉ là ví dụ.
+7. Báo cáo Google Sheets chỉ khi chủ shop đã trả lời có. Không thì giữ CSV trên máy. Muốn xem trên web: `cd dashboard/web && pnpm i && pnpm dev`. Dữ liệu trong `sample/` chỉ là ví dụ.
 8. Cập nhật skill mà không đụng cấu hình trên máy: `node skills/automate-ecom-store/scripts/update.mjs`.
 
 ### An toàn
@@ -70,7 +70,7 @@ From a clone of this repository:
 git clone https://github.com/sonaecom/Automate-Ecom-Store.git && openclaw skills install ./Automate-Ecom-Store/skills/automate-ecom-store
 ```
 
-On first use the skill asks only for the AdsPower API key. It uses the official tool's usual Local API address, and asks for an address only if that connection fails. It lists AdsPower profiles and the marketer picks by number; platform is guessed from the profile name when the name is clear. Safety caps are already filled in. The key is stored in `~/.automate-ecom-store/config.yaml` with mode 600 and is not printed back. Say "reset config" to delete that file and paste the key again.
+On first use the skill asks for the AdsPower API key, then two optional yes/no questions: whether the owner wants reports on Google Sheets, and whether they already have a real-time inventory tracking file on Google Sheets. Neither is required. If both answers are no, Gmail, Drive, and Sheets are not connected. It uses the official tool's usual Local API address, and asks for an address only if that connection fails. It lists AdsPower profiles and the marketer picks by number; platform is guessed from the profile name when the name is clear. Safety caps are already filled in. The key is stored in `~/.automate-ecom-store/config.yaml` with mode 600 and is not printed back. Say "reset config" to delete that file and paste the key again.
 
 ### Architecture
 
@@ -80,7 +80,7 @@ On first use the skill asks only for the AdsPower API key. It uses the official 
 4. `@playwright/mcp` attaches to that websocket and stays on one tab.
 5. Scripts in `scripts/` handle pace, caps, the captcha log, and CSV checks.
 6. Files in `modules/<platform>/` are the steps for each task.
-7. The default dashboard is Google Sheets. The optional web app is `cd dashboard/web && pnpm i && pnpm dev`. Files in `sample/` are examples.
+7. Google Sheets reports are used only when the owner said yes. Otherwise the CSV stays on the shop computer. The optional web app is `cd dashboard/web && pnpm i && pnpm dev`. Files in `sample/` are examples.
 8. Update the skill without touching local config: `node skills/automate-ecom-store/scripts/update.mjs`.
 
 ### Safety
