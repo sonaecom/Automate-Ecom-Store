@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.20.0
+
+- The approved KOL chat flow is the affiliate doc. Shop config holds templates, FAQ, and follow-ups, and follow-ups stay off until the owner sets them. Chat is logged in `kol_chat_log.csv`. One open thread per creator is deduped in the task queue at P0 through P4. A draft is checked by the policy gate and a forbidden-content match before Send.
+
 ## 1.19.0
 
 - KOL chat after an invite stays on the platform. PH and MY default to English. A creator who asks for a sample and has no invite gets one custom target invite from the standard template and one fixed sentence. Other sizes are declined in favour of the allowlisted size. Automated sample approval is set to manual or no sample. Every chat action is written to that shop's invite log. Content and deadline follow-up is still for the owner to define.

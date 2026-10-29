@@ -7,3 +7,6 @@ dedupe_window_hours: 24
 session_minutes: 40
 chunk_minutes: 10
 daily_sessions: 1
+# KOL chat. Owner pins still sort first. The rest of a session rolls forward.
+kol_messages_per_session: 30
+kol_custom_invites_per_session: 10

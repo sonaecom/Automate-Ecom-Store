@@ -23,11 +23,31 @@ shops:
       # This shop's own log. Another shop does not share the file.
       log_csv: "data/invite-log-<STORE_LABEL>.csv"
     chat:
-      # English is the default for PH and MY. Another market needs a language code here.
-      # Do not translate the sample sentence in the skill. Paste the owner's sentence if it is not English.
+      # Same keys as config/shops/shop.example.yaml. That file is the shop copy.
       language: en
-      shop_label: "<SHOP>"
-      custom_invites_per_session: 10
+      shop_name: "<SHOP_NAME>"
+      templates:
+        intro: "Hi <creator>! We just sent you a collaboration invite from <shop_name>: <commission>% on all products, free <sample_size> sample. Happy to work long-term!"
+        sample_other_size: "Thanks for your interest! For samples we offer the <sample_size> pack. Could you request that one?"
+        no_invite: "Hi! We've sent you a collaboration invite from <shop_name>. Please check your invitations and request the <sample_size> sample there. Thank you!"
+        faq_miss: "Let me check and get back to you"
+        decline_thanks: ""
+      faq:
+        commission: ""
+        product_facts: ""
+        shipping_time: ""
+        content_brief: ""
+      followups:
+        enabled: false
+        no_reply:
+          after_hours: ""
+          text: ""
+        content_reminder:
+          after_hours: ""
+          text: ""
+    sample_allowlist:
+      - sku: "<SKU>"
+        size: "<SMALLEST_SIZE>"
     samples:
       # Only these SKUs and sizes may be offered. Size is the variation name.
       # The usual rule is the smallest size. Do not read the size from the title.

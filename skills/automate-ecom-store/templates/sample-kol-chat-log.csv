@@ -1,0 +1,5 @@
+# synthetic
+# kol_chat_log.csv: time,creator,thread,template_id,priority,result
+time,creator,thread,template_id,priority,result
+2026-10-29T09:00:00,<CREATOR>,<THREAD>,no_invite,P3,sent
+2026-10-29T09:05:00,<CREATOR>,<THREAD>,no_invite,P3,received

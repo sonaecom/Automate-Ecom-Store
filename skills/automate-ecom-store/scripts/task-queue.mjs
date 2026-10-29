@@ -28,6 +28,12 @@ export const LEVEL_OF = {
   listing: "P2",
   campaign: "P2",
   report: "P3",
+  kol_problem: "P0",
+  kol_deadline: "P0",
+  kol_sample: "P1",
+  kol_question: "P2",
+  kol_collaborate: "P3",
+  kol_followup: "P4",
 };
 
 export const GATE_ACTION = {
@@ -44,6 +50,12 @@ export const GATE_ACTION = {
   listing: "publish",
   campaign: "submit",
   report: "read",
+  kol_problem: "submit",
+  kol_deadline: "submit",
+  kol_sample: "submit",
+  kol_question: "submit",
+  kol_collaborate: "submit",
+  kol_followup: "submit",
 };
 
 const MUTATING = new Set(["publish", "price", "budget", "refund", "register", "delete", "stock_write", "submit"]);
@@ -54,6 +66,8 @@ export const DEFAULTS = {
   session_minutes: 40,
   chunk_minutes: 10,
   daily_sessions: 1,
+  kol_messages_per_session: 30,
+  kol_custom_invites_per_session: 10,
 };
 
 function arg(name) {
@@ -81,7 +95,7 @@ export function splitMinutes(total, cap) {
 }
 
 function levelRank(level) {
-  return { P0: 0, P1: 1, P2: 2, P3: 3 }[level] ?? 9;
+  return { P0: 0, P1: 1, P2: 2, P3: 3, P4: 4 }[level] ?? 9;
 }
 
 export function compareTasks(a, b) {
@@ -91,6 +105,8 @@ export function compareTasks(a, b) {
   if (pinA !== pinB) return pinB - pinA;
   const level = levelRank(a.level) - levelRank(b.level);
   if (level !== 0) return level;
+  const score = (Number(b.score) || 0) - (Number(a.score) || 0);
+  if (score !== 0) return score;
   return String(a.created).localeCompare(String(b.created));
 }
 
@@ -105,7 +121,19 @@ export function enqueueTask(queue, input, now, config, gateResult) {
   const action = input.action;
   if (!LEVEL_OF[action] && !input.level) return { error: "unknown action" };
   const level = input.level || LEVEL_OF[action];
-  if (!["P0", "P1", "P2", "P3"].includes(level)) return { error: "level must be P0, P1, P2, or P3" };
+  if (!["P0", "P1", "P2", "P3", "P4"].includes(level)) return { error: "level must be P0, P1, P2, P3, or P4" };
+  if (String(action).startsWith("kol_")) {
+    const open = queue.find((task) => task.target === input.target && String(task.action).startsWith("kol_") && (task.status === "pending" || task.status === "running"));
+    if (open) {
+      if (levelRank(level) < levelRank(open.level)) {
+        open.level = level;
+        open.action = action;
+      }
+      if (input.score != null && input.score !== "") open.score = Number(input.score);
+      open.merged = (open.merged || 1) + 1;
+      return { result: "MERGE", task: open };
+    }
+  }
   const params = canonicalParams(input.params);
   const windowHours = config.dedupe_window_hours;
   const sameTarget = queue.filter((task) => task.action === action && task.target === input.target && withinWindow(task.created, now, windowHours));
@@ -136,6 +164,7 @@ export function enqueueTask(queue, input, now, config, gateResult) {
     conflict: "",
     gate: gateResult,
     created: now,
+    score: input.score == null || input.score === "" ? 0 : Number(input.score),
     source: input.source || "owner",
     merged: 1,
     done_on: "",
@@ -202,7 +231,28 @@ export function planDay(tasks, config) {
       chunks: task.chunks,
       minutes: task.chunk_sizes.slice(task.cursor - 1).reduce((sum, value) => sum + value, 0),
     }));
-  return { today, tomorrow, minutes_left: left, budget };
+  const messageCap = Number(config.kol_messages_per_session) || 30;
+  const inviteCap = Number(config.kol_custom_invites_per_session) || 10;
+  let messages = 0;
+  let invites = 0;
+  const kept = [];
+  const rolled = [];
+  for (const row of today) {
+    const kol = String(row.action).startsWith("kol_");
+    const custom = row.action === "kol_collaborate";
+    if ((kol && messages >= messageCap) || (custom && invites >= inviteCap)) {
+      rolled.push(row);
+      continue;
+    }
+    if (kol) messages += 1;
+    if (custom) invites += 1;
+    kept.push(row);
+  }
+  const seen = new Set(tomorrow.map((row) => row.id));
+  for (const row of rolled) {
+    if (!seen.has(row.id)) tomorrow.push({ ...row, minutes: row.minutes });
+  }
+  return { today: kept, tomorrow, minutes_left: left, budget };
 }
 
 export function summarize(tasks, date) {
@@ -361,6 +411,7 @@ function main() {
       module: arg("--module"),
       level: arg("--level"),
       pin: arg("--pin") || 0,
+      score: arg("--score"),
       minutes: arg("--minutes") ? Number(arg("--minutes")) : config.chunk_minutes,
       source: arg("--source") || "owner",
     }, arg("--now") || new Date().toISOString(), config, gateResult);

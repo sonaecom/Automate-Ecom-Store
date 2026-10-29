@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.19.0"
+version: "1.20.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -206,7 +206,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Task queue, daily plan, one store at a time | `{baseDir}/modules/ops/task-queue.md` |
 | Selling operations map | `{baseDir}/modules/selling/README.md` |
 | Shopee affiliate / KOL / Targeted Campaign invite | `{baseDir}/modules/shopee/affiliate-invite.md` (lessons `{baseDir}/modules/affiliate/invite-lessons.md`, then audit) |
-| KOL chat after an invite, or a sample ask with no invite | `{baseDir}/modules/affiliate/chat-reply.md` |
+| KOL chat after an invite | `{baseDir}/docs/affiliate/kol-chat-flow.md` then `{baseDir}/modules/affiliate/chat-reply.md` |
 | Shopee new listing or full rebuild | `{baseDir}/modules/shopee/product-listing.md` |
 | Shopee listing edit | `{baseDir}/modules/shopee/listing-update.md` |
 | Competitor watch, public pages only | `{baseDir}/modules/listing/competitor-monitor.md` |

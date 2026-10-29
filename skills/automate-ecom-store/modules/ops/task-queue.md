@@ -10,7 +10,7 @@ Config is `{baseDir}/tasks.example.yaml`, copied to `~/.automate-ecom-store/task
 
 ## Before it is queued
 
-1. Dedupe. The same action, target, and params inside `dedupe_window_hours` (default 24) merge into the open item. A finished copy inside that window is `SKIP`. Do not add a second one.
+1. Dedupe. The same action, target, and params inside `dedupe_window_hours` (default 24) merge into the open item. A finished copy inside that window is `SKIP`. Do not add a second one. A KOL chat is one open thread per creator: a new message on that thread updates the task. The same template is not sent twice in 24 hours. Nothing is sent while the shop's last message is unanswered, except a scheduled follow-up.
 2. Conflict. The same action and target with different params, including two stock writes or two settings for one SKU, is `CONFLICT`. Leave both for the owner. Do not pick one.
 3. Policy gate. The script runs `policy-gate.mjs`. A read may stay queued on `POLICY_PENDING` or `STALE`. A mutating action with `POLICY_PENDING`, `STALE`, `VIOLATION`, or `FLAG` is `BLOCKED` and is not in today's plan. `VIOLATION` blocks a read too.
 
@@ -23,13 +23,14 @@ The owner's pin and reorder come first. Then the default level:
 | P0 | Captcha or handover, shop-health penalties, stockouts, disputes with a 1–2 day evidence or return-review deadline, customer chat inside the SLA |
 | P1 | Orders, stock sync, ads guard under the cap |
 | P2 | Affiliate invites, listings, campaigns |
-| P3 | Reports and analytics |
+| P3 | Reports and analytics. For KOL chat: a creator with no invite who asks to collaborate |
+| P4 | KOL scheduled follow-ups only. Other work has no P4 |
 
 ```bash
 node {baseDir}/scripts/task-queue.mjs --store <STORE_LABEL> --reorder t2,t1
 ```
 
-The first id is the pin. A pinned P3 runs before an unpinned P0.
+The first id is the pin. A pinned P3 runs before an unpinned P0. Inside one KOL level, a higher creator score comes before an older thread. KOL chat actions are `kol_problem`, `kol_deadline`, `kol_sample`, `kol_question`, `kol_collaborate`, and `kol_followup`. A session holds at most `kol_messages_per_session` (30) of those, and at most `kol_custom_invites_per_session` (10) `kol_collaborate` items. The rest move to the next session.
 
 ## Session budget
 
