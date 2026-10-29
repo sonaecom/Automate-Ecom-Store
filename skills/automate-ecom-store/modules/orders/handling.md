@@ -4,7 +4,13 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Pack and hand orders to the courier from the official to-ship list. Do not mark an order shipped before the courier pickup time is on the page. Do not cancel an order to change a rate.
+Classification: **write**. Manifest `orders.handling`. `SHIP` only when the row has a variation and a pickup time. Otherwise `HOLD` or `REJECT`. Do not cancel an order to change a rate.
+
+```bash
+node {baseDir}/scripts/order-plan.mjs --orders ~/.automate-ecom-store/data/to-ship.csv --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl
+```
+
+Pack and hand orders to the courier from the official to-ship list. Do not mark an order shipped before the courier pickup time is on the page.
 
 Policy gate action is `read` for the list. Marking shipped is `submit` and needs `ALLOW`. Dry run stops before that click.
 

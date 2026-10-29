@@ -4,7 +4,11 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Reply in the official review box. Thank the buyer or offer help with a real problem. Do not ask for a star count, a positive review, or a changed rating. Do not offer a coin, voucher, or refund in exchange for a rating.
+Classification: **write**. Manifest `reviews.replies`. A star ask or a reward is `BLOCK`. Reply in the official review box. Thank the buyer or offer help with a real problem. Do not ask for a star count, a positive review, or a changed rating. Do not offer a coin, voucher, or refund in exchange for a rating.
+
+```bash
+node {baseDir}/scripts/review-plan.mjs --reviews ~/.automate-ecom-store/data/review-replies.csv --platform shopee --market <MARKET> --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl
+```
 
 Policy gate action is `submit` on the reply text. The one post-delivery chat is `{baseDir}/modules/customers/post-delivery.md`, not this file.
 

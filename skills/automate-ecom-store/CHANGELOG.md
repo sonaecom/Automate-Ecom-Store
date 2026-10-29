@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.39.0
+
+- Orders are marked shipped only after a pickup time is present. Review replies that ask for stars or a reward are blocked.
+
 ## 1.38.0
 
 - KOL follow-up labels creators keep, remind, or review. No GMV threshold means review, not a reminder, and this does not send a new invite.

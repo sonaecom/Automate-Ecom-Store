@@ -1,0 +1,13 @@
+{
+  "id": "reviews.replies",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": true,
+  "money": false,
+  "priority": 2,
+  "cost": { "actions": 4, "captchaRisk": "low" },
+  "input": "review reply draft",
+  "output": "review-plan.csv",
+  "policyTags": ["submit"],
+  "schema": "RunLog"
+}
