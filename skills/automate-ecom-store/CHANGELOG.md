@@ -2,6 +2,11 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.5.0
+
+- Growth-stage modules for a store that is already selling: margin guard, controlled ads steps, restock forecast, shop-health warnings, fee-adjusted expansion, repeat-buyer reminders, team SLAs, and Mall or brand checklists.
+- Budget, price, and top-up changes stay proposals. PH, MY, and ID policy files stay in place for a later official research drop-in.
+
 ## 1.4.0
 
 - Platform policy layer in `policies/`, loaded with account safety. Eighteen market summaries for Shopee, TikTok Shop, and Lazada across PH, VN, MY, ID, TH, and SG. Each rule has a source, a retrieved date, and a verify flag.

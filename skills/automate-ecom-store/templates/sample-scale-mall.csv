@@ -1,0 +1,7 @@
+program,item,required,met,source
+shopee_mall,account_health,yes,yes,example
+shopee_mall,brand_authorisation,yes,yes,example
+laz_mall,account_health,yes,yes,example
+laz_mall,brand_authorisation,yes,unknown,example
+tiktok_brand,account_health,yes,no,example
+tiktok_brand,brand_authorisation,yes,yes,example

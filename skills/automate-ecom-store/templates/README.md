@@ -16,6 +16,7 @@
 | `sample-break-even.csv` | Example costs. One SKU cannot cover its costs. |
 | `sample-ab.csv` | Example before and after counts. One test is inconclusive. |
 | `sample-follow-up.csv` | Example orders. A not-yet-delivered row must not be messaged. |
+| `sample-scale-*.csv` | Example rows for a store that is already selling. One SKU shows sales up and margin down. One expansion is on hold. |
 | `../modules/listing/spec.example.yaml` | Listing content plan. |
 | `../modules/listing/research-sheet.md` | Competitor notes. |
 | `../modules/homepage/style.example.yaml` | Brand colors and tone. |

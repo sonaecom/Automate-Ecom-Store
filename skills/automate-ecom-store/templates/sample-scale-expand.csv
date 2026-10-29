@@ -1,0 +1,4 @@
+sku,dest_platform,dest_market,price,unit_cost,source_fee_rate,dest_fee_rate,shipping_net,other_cost,currency,compliant,source
+<SKU_A>,lazada,MY,100,40,0.1,0.2,5,0,PHP,yes,example
+<SKU_B>,tiktokshop,PH,20,18,0.1,0.2,5,0,PHP,yes,example
+<SKU_C>,shopee,ID,100,40,0.1,0.2,5,0,PHP,no,example

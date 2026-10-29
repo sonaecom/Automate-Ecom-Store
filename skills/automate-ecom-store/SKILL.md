@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.4.0"
+version: "1.5.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -171,6 +171,15 @@ If the request matches more than one row, ask which platform and which task. One
 | Sequential cover, title, or price test | `{baseDir}/modules/growth/ab-test.md` |
 | Break-even ROAS | `{baseDir}/modules/growth/break-even.md` |
 | New platform or market pre-launch check | `{baseDir}/modules/growth/prelaunch.md` |
+| Growing store, margin, stock, and health | `{baseDir}/modules/scale/README.md` |
+| Margin falls while sales rise | `{baseDir}/modules/scale/margin.md` |
+| Controlled ads scaling | `{baseDir}/modules/scale/ads-scale.md` |
+| Restock before a stockout | `{baseDir}/modules/scale/stock.md` |
+| Shop health at volume | `{baseDir}/modules/scale/health.md` |
+| Clone a best seller to another market | `{baseDir}/modules/scale/expand.md` |
+| Repeat buyers and refill reminders | `{baseDir}/modules/scale/repeat.md` |
+| Team tasks, approvals, and SLAs | `{baseDir}/modules/scale/team.md` |
+| Mall or brand eligibility | `{baseDir}/modules/scale/mall.md` |
 | Post-delivery thank-you, one chat per order | `{baseDir}/modules/customers/post-delivery.md` |
 | Account security check, alert only | `{baseDir}/modules/ops/account-security.md` |
 | Back up listings to Drive | `{baseDir}/modules/ops/backup.md` |

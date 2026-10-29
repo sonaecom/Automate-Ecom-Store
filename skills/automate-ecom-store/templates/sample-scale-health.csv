@@ -1,0 +1,6 @@
+metric,value,threshold,direction,source
+late_shipment_rate,0.046,0.05,lower,example
+cancellation_rate,0.02,0.05,lower,example
+chat_response_rate,0.88,0.85,higher,example
+penalty_points,11,12,lower,example
+unconfigured_metric,3,,lower,example

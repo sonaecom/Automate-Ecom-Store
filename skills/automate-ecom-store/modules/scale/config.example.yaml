@@ -1,0 +1,26 @@
+# Shape only. Copy numbers into ~/.automate-ecom-store/scale.yaml on the shop computer.
+# Do not put a real shop name, fee schedule, or budget here.
+# Placeholders are ignored by scale.mjs. The owner types the real number in the private file.
+
+margin:
+  alert_when_sales_up_and_margin_down: true
+
+ads:
+  step_percent: "<ADS_STEP_PERCENT>"
+  roas_floor: "<ROAS_FLOOR>"
+
+stock:
+  cover_days_alert: "<COVER_DAYS>"
+
+health:
+  warn_fraction: "0.9"
+
+repeat:
+  min_orders: 2
+
+team:
+  chat_reply_hours: "<CHAT_SLA_HOURS>"
+  order_handle_hours: "<ORDER_SLA_HOURS>"
+
+expand:
+  require_policy_allow: true

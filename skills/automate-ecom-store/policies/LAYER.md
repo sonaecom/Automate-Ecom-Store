@@ -25,3 +25,5 @@ node {baseDir}/scripts/policy-update.mjs
 It fetches `policies/sources.yaml` from the public pages, diffs the snapshot, appends `## Update log` on the market file, and writes `~/.automate-ecom-store/policy-changelog.md`. It prints `ALERT`. It does not change a price, a budget, a listing, a message, or a programme. `--dry-run` does not write. `--no-apply-changelog` alerts without editing the market file.
 
 Official URLs are listed in `{baseDir}/policies/sources.yaml`.
+
+PH, MY, and ID files are the slots for a later research pass. Keep the same headings when those official pages are dropped in. The shape is `{baseDir}/policies/incoming/README.md`.

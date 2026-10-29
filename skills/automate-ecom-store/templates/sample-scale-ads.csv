@@ -1,0 +1,4 @@
+sku,roas,target_roas,current_budget,source
+<SKU_A>,5,4,10,example
+<SKU_B>,2,4,10,example
+<SKU_C>,,4,10,example

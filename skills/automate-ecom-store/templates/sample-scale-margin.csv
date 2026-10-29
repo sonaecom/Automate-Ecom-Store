@@ -1,0 +1,4 @@
+sku,revenue,platform_fee,ads,shipping,returns_cost,prior_revenue,prior_margin_pct,currency,source
+<SKU_A>,1000,100,200,50,50,800,0.7,PHP,example
+<SKU_B>,500,50,80,20,50,600,0.4,PHP,example
+<SKU_C>,300,30,,10,0,200,0.5,PHP,example

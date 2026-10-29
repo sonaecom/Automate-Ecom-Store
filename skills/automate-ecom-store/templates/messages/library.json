@@ -57,5 +57,12 @@
     "id": "Terima kasih untuk pesanan <ORDER_ID>. Jika ada masalah, balas di sini agar kami bantu. Ulasan jujur, jika sempat, membantu pembeli lain.",
     "ms": "Terima kasih untuk pesanan <ORDER_ID>. Jika ada masalah, balas di sini supaya kami bantu. Ulasan jujur, jika sempat, membantu pembeli lain.",
     "th": "ขอบคุณสำหรับออเดอร์ <ORDER_ID> หากมีปัญหา ตอบที่นี่เพื่อให้ร้านช่วย หากสะดวก รีวิวตามประสบการณ์จริงจะช่วยผู้ซื้อคนอื่น"
+  },
+  "replenishment": {
+    "en": "Hello. You bought <PRODUCT> before. Reply in this chat if you want help reordering. We will not message you outside this shop.",
+    "vi": "Chào bạn. Bạn đã mua <PRODUCT>. Nếu muốn đặt lại, nhắn trong khung chat này. Shop không nhắn ngoài sàn.",
+    "id": "Halo. Anda pernah membeli <PRODUCT>. Jika ingin pesan lagi, balas di chat toko ini. Kami tidak menghubungi di luar platform.",
+    "ms": "Hai. Anda pernah membeli <PRODUCT>. Jika mahu pesan semula, balas di chat kedai ini. Kami tidak menghubungi di luar platform.",
+    "th": "สวัสดี คุณเคยซื้อ <PRODUCT> หากต้องการสั่งอีกครั้ง ตอบในแชทร้านนี้ ร้านไม่ทักนอกแพลตฟอร์ม"
   }
 }
