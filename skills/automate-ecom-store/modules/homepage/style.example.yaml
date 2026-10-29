@@ -1,0 +1,30 @@
+# Brand style for the shop homepage. Fill a private copy under
+# ~/.automate-ecom-store/data/homepage/. Do not commit the filled copy.
+
+brand: "<BRAND>"
+tone: "<TONE>"
+logo: "<LOGO_FILE>"
+packaging: "<PACKAGING_FILE>"
+
+# Leave colors empty to sample them from the logo file.
+# Otherwise use hex from the pack, not from a competitor.
+colors:
+  background: ""
+  ink: ""
+  accent: ""
+
+font_note: "Use the same family as the listing images. Do not introduce a second display font."
+
+# Only lines that are true today. No ended voucher, no old price.
+hero_line: "<HERO_LINE>"
+trust_line: "<TRUST_LINE>"
+
+sections:
+  - hero
+  - categories
+  - best_sellers
+  - combos
+  - vouchers
+  - new_arrivals
+  - trust
+  - video

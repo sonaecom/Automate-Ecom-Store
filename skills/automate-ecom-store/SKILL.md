@@ -106,6 +106,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Shopee ads or GMV Max | `{baseDir}/modules/shopee/ads-gmv-max.md` |
 | Shopee customer chat | `{baseDir}/modules/shopee/customer-chat-reply.md` |
 | Shopee orders, GMV, or ad-spend report | `{baseDir}/modules/shopee/daily-report.md` |
+| Shopee shop homepage / Shop Decoration | `{baseDir}/modules/shopee/shop-decoration.md` |
 | TikTok Shop creator or affiliate invite | `{baseDir}/modules/tiktokshop/creator-outreach.md` |
 | TikTok Shop new listing or full rebuild | `{baseDir}/modules/tiktokshop/product-listing.md` |
 | TikTok Shop listing edit | `{baseDir}/modules/tiktokshop/listing-update.md` |
@@ -114,6 +115,7 @@ If the request matches more than one row, ask which platform and which task. One
 | TikTok Shop ads | `{baseDir}/modules/tiktokshop/ads.md` |
 | TikTok Shop chat | `{baseDir}/modules/tiktokshop/customer-chat-reply.md` |
 | TikTok Shop daily report | `{baseDir}/modules/tiktokshop/daily-report.md` |
+| TikTok Shop homepage / shop page | `{baseDir}/modules/tiktokshop/shop-decoration.md` |
 | Lazada affiliate invite | `{baseDir}/modules/lazada/affiliate-invite.md` |
 | Lazada new listing or full rebuild | `{baseDir}/modules/lazada/product-listing.md` |
 | Lazada listing edit | `{baseDir}/modules/lazada/listing-update.md` |
@@ -122,6 +124,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Lazada ads | `{baseDir}/modules/lazada/ads.md` |
 | Lazada chat | `{baseDir}/modules/lazada/customer-chat-reply.md` |
 | Lazada daily report | `{baseDir}/modules/lazada/daily-report.md` |
+| Lazada shop homepage / Store Builder | `{baseDir}/modules/lazada/shop-decoration.md` |
 
 Shopee affiliate invite is the proven path. The other Shopee modules are skeletons. TikTok Shop and Lazada modules are templates: on the first supervised visit, if a menu label does not match, stop and ask.
 
