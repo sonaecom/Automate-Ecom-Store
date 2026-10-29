@@ -4,7 +4,14 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Read-only across every saved store. Owners use this for actual ad spend and actual card top-ups. Never top up. Never withdraw. Never type or save a card number. Last 4 digits only.
+The spend read is read-only. A top-up is a separate write. It uses the card already saved on the store, never a new card, and only after the owner says yes or a standing authorization is already on the store file. Then send the bill. Ten ads setting changes in one hour is the ceiling. A figure such as 10% of GMV is an example target, not a number this module chases.
+
+```bash
+node {baseDir}/scripts/ads-plan.mjs --count <CHANGE_COUNT> --out-dir ~/.automate-ecom-store/data/ads/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl --target <ADS_CHANGES_PER_HOUR> --hourly-done <ALREADY>
+node {baseDir}/scripts/ads-plan.mjs --topup --saved-card yes --approved yes --out-dir ~/.automate-ecom-store/data/ads/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl
+```
+
+Omit `--target` when the owner has not set one. `--add-card yes` is refused. Without approval or standing authorization the result is `HOLD_APPROVAL` and no bill is sent. The spend reconcile below stays a read and still does not click a top-up by itself.
 
 Policy gate action is `read`. Do not use `budget`.
 

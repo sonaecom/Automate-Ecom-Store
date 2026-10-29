@@ -2,6 +2,14 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.30.0
+
+- Ads setting changes plan through the core runner. The hourly ceiling is 10. A top-up uses the saved card only after owner approval or standing authorization, never adds a card, and then sends the bill. An example such as 10% of GMV is not a target.
+
+## 1.29.0
+
+- Listing edits stay on the core runner. The hourly ceiling is 40. The number of rows in the change file is the work. An empty owner target is not padded up to 40.
+
 ## 1.28.0
 
 - Affiliate and KOL invites plan through `affiliate-plan.mjs` on the core runner. The store target is whatever the owner typed. Empty means the approved list only. The ceiling is 2,000 invites a day and 100 an hour, with a ramp for a new store. The ceiling is not a quota.

@@ -10,10 +10,10 @@ import { actionKey, journalState } from "./journal/action-key.mjs";
 
 const BLOCKS_WRITE = new Set(["POLICY_PENDING", "STALE", "FLAG", "VIOLATION"]);
 
-export function beginRun({ store, manifest, action, target, day, journalRows, policyResult }) {
+export function beginRun({ store, manifest, action, target, day, journalRows, policyResult, intent }) {
   const manifestError = checkManifest(manifest);
   if (manifestError) return { result: "MANIFEST", detail: manifestError };
-  const guard = guardReadOnly(store, { writes: manifest.writes, money: manifest.money, action });
+  const guard = guardReadOnly(store, { writes: manifest.writes, money: manifest.money, action, ...(intent || {}) });
   if (!guard.ok) return { result: guard.result };
   if (policyResult === "VIOLATION" || (manifest.writes && BLOCKS_WRITE.has(policyResult))) {
     return { result: "POLICY", detail: policyResult };

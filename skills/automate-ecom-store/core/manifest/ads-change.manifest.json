@@ -1,0 +1,13 @@
+{
+  "id": "ads.change",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": true,
+  "money": false,
+  "priority": 1,
+  "cost": { "actions": 3, "captchaRisk": "medium" },
+  "input": "ads change list",
+  "output": "ads-plan.csv",
+  "policyTags": ["publish"],
+  "schema": "AdSpend"
+}
