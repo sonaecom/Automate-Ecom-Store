@@ -1,0 +1,6 @@
+#!/bin/sh
+# Enable with: git config core.hooksPath .githooks
+root=$(git rev-parse --show-toplevel)
+node "$root/skills/automate-ecom-store/scripts/secret-scan.mjs" "$root" || exit 1
+node "$root/skills/automate-ecom-store/scripts/repo-hygiene.mjs" "$root" || exit 1
+node "$root/skills/automate-ecom-store/scripts/pre-push-private.mjs" || exit 1

@@ -13,3 +13,11 @@ session-state.json
 screenshots/
 google-token.json
 google-tokens.json
+node_modules/
+.next/
+
+# Internal test tooling. Stays on the shop computer. Never publish.
+/local/
+*.local
+*.local.*
+test-profiles.local.yaml

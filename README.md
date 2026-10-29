@@ -91,6 +91,10 @@ The full rules are in `skills/automate-ecom-store/account-safety.md`: one profil
 
 Edit a module under `skills/automate-ecom-store/modules/`. Do not add a second `SKILL.md`. Do not put keys, hosts, ports, profile ids, shop names, product names, or creator handles in git. The Shopee affiliate invite module is the proven path. Other Shopee modules are skeletons. TikTok Shop and Lazada modules are templates to refine after a supervised run.
 
+## Local only
+
+Internal test profiles, notes, and store-specific config stay on the shop computer. Put them in `local/` or in a `*.local` / `*.local.*` file. Those paths are gitignored. The public tree keeps placeholders and synthetic samples. Before a push, `.githooks/pre-push` rejects a tracked file that names an internal test store. Turn the hook on with `git config core.hooksPath .githooks`.
+
 ## Layout
 
 ```text
