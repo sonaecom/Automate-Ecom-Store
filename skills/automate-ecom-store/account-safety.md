@@ -114,7 +114,7 @@ Before every session, `--review` the captcha log for this platform. On `REVIEW` 
 
 ## Pop-ups and approvals
 
-Close notifications with X, Close, Not now, Cancel, or the same control in the page language. Never accept a program sign-up, a paid plan, a top-up, or a payment.
+Close notifications with X, Close, Not now, Cancel, or the same control in the page language. If the browser asks to open `xdg-open`, an external app, or a prompt named Open app, click Cancel. Never click Allow. Never accept a program sign-up, a paid plan, a top-up, or a payment.
 
 Money on the screen is read-only. Never top up, never withdraw, and never type a card number. If a card is already shown, the report may include the last 4 digits and nothing else.
 

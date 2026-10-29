@@ -18,10 +18,11 @@ The person wants TikTok Shop creators invited from the official affiliate or cre
 2. Read `{baseDir}/session-runner.md`. Pace, caps, the captcha log, dedupe, and message length go through those scripts.
 3. Use the saved store whose `platform` is `tiktokshop`. `headless` in `~/.automate-ecom-store/config.yaml` must be false. Do not print the profile id.
 4. The gate result is `READY`, captcha review is not `REVIEW`, and one visible tab is on seller home.
+5. Read `{baseDir}/modules/affiliate/invite-lessons.md` and this shop's block in `~/.automate-ecom-store/invite.yaml` before the first click.
 
 ## Steps
 
-1. Finish account-safety session start. Hint for the invite screen: TikTok Shop Affiliate or creator invites. If that area is not on screen, stop and screenshot. Do not tour the rest of TikTok Shop.
+1. Finish account-safety session start for this TikTok Shop profile only. Do not hunt other windows. Hint for the invite screen: TikTok Shop Affiliate or creator invites. If that area is not on screen, stop and screenshot. Do not tour the rest of TikTok Shop. A browser prompt to open `xdg-open` or an app is Cancel, never Allow.
 2. First supervised run: stop on the invite screen, save `screenshots/template-invite-screen.png`, and ask the person to confirm this is the creator or affiliate invite form. Do not type and do not send on that first visit.
 3. After the person confirms the screen in this chat, run the affiliate gate. Shop rating under 2, a counterfeit deduction in 60 days, or a disqualified shop is `BLOCK`. A product over the negative-review or seller-fault return threshold is `SKIP`. Invite only `ALLOW` products. The qualification page marker stays `applicability to PH/MY/ID unconfirmed`. Do not treat a skipped product as eligible. Voucher rules and an official invite limit were not captured. Keep the skill cap.
 
@@ -31,12 +32,12 @@ node {baseDir}/scripts/affiliate-gate.mjs --platform tiktokshop --market <MARKET
 
 Continue in the same tab. Fill top to bottom only the fields that are actually on the form: name, start, end, commission or reward, products, sample, creators, message. Skip a field the form does not have. Do not invent a Shopee-only control. Do not add a `SKIP` product.
 4. Start time must be in the future. Commission fields: select all, then type, then read the value back. If the field appended digits, select all and type once more. If it still mismatches, stop.
-5. If a sample control exists, choose the variation by its own name (`<VARIATION_NAME>` from private task config). Never trust the product title. If the exact name is missing, stop. If no sample control exists, do not add a sample. Ask if the person expected one.
-6. Audit creators with `{baseDir}/modules/affiliate/creator-audit.md` before any select. Dedupe handles against `paths.invited_csv` with `dedupe-csv.mjs`. Invite only handles the owner approved whose shortlist row is `PASS` and `proposed` `yes`, in rank order, in batches of `affiliate_batch_size` (default 10), up to `kol_count` and the remaining `affiliate_invites` cap (default 30). Long pause between batches. Do not invite `EXCLUDE` or `HOLD`. If the approved list ends early, do not submit.
+5. If a sample control exists, choose only a variation whose SKU and size are on this shop's allowlist. Never trust the product title. Manual approval only. Do not turn on auto-approve. If the exact size is missing, stop. If no sample control exists, do not add a sample. Ask if the person expected one. Commission is the one fixed percent on every product. Expiry is `expiry_days` (default 30). A contact field comes from `contact`. Do not open an old invitation, including one hidden under Expiring.
+6. Audit creators with `{baseDir}/modules/affiliate/creator-audit.md` before any select. Check this shop's invite log with `invite-log.mjs` before the run and again before the batch. One invitation holds about 10 approved creators (`PASS` and `proposed` `yes`), not one creator each. Long pause between invitations. Do not invite `EXCLUDE`, `HOLD`, or a log `SKIP`. If the approved list ends early, do not submit.
 7. Length-check the message (default 200, or the lower on-screen limit). It must be the private `<INVITE_MESSAGE>`. Do not rewrite it.
 8. QC before submit: screenshot `screenshots/qc1-invite.png`. Read every filled field from the screen. `--add` the invite count. On `CAP`, do not submit.
 9. Submit once. Ignore any payment or program-join dialog (close it and stop). QC on the saved detail page: screenshot `screenshots/qc2-invite.png`. Visible fields must match QC #1.
-10. Append invited rows to the CSV (`handle,name,campaign_id,commission,invited_date,source`) only after QC #2 passes. Then follow account-safety session end.
+10. After QC #2, append this shop's log with `invite-log.mjs --append` (`handle,campaign_name,invited_time,terms`). Each new handle must then be `SKIP`. Then follow account-safety session end.
 
 **Done when:** the saved invite matches both checks, or you stopped on the first visit for label confirmation.
 

@@ -16,6 +16,7 @@ The person asks to invite affiliates (KOLs) to a Shopee Targeted Campaign with a
 
 1. Read and follow `{baseDir}/account-safety.md` through session start. `{baseDir}` is the skill folder that contains `account-safety.md`.
 2. Read `{baseDir}/session-runner.md` and use its scripts for pace, caps, captcha log, dedupe, and message length.
+2a. Read `{baseDir}/modules/affiliate/invite-lessons.md` and this shop's block in `~/.automate-ecom-store/invite.yaml`. Contact fields, the profile, one tab, app popups, the 10-creator template, and the per-shop log follow that file.
 3. Read `~/.automate-ecom-store/config.yaml` and, for campaign fields, the task section saved there (see `{baseDir}/modules/shopee/affiliate-invite.config.example.yaml`). The saved store you open must have `platform: shopee`. `headless` must be false.
 4. Session gate is `READY`, captcha review is not `REVIEW`, and one visible tab is on Seller Centre home.
 
@@ -40,7 +41,7 @@ Write the message into a file under `data/` before the length check. Continue on
 
 1. Reject leftover placeholders in either config file.
 2. Length-check `campaign.message`. It must ask for a reply and a free-sample request, and it must mention a long-term partnership with a new shop.
-3. `dedupe-csv.mjs --list` on `paths.invited_csv`. Remember the existing set.
+3. `invite-log.mjs --list` on this shop's `log_csv`. A handle already there is not invited. Do not open old campaigns to build that list.
 4. Read remaining invite room from caps: session limit and daily limit minus counts already used. `kol_count` must be a positive integer no higher than that room and no higher than the session cap (default 30). If it is higher, stop and ask. Do not raise the cap.
 5. Check duration. On `TIME_UP`, end the session without opening the form.
 6. Run the affiliate gate before the form. A Targeted offer in MY needs an ongoing store-wide campaign (`--store-wide yes`). On `BLOCK` or `SKIP_ALL`, do not open the form and do not invite. On `WARN`, show the owner and wait. Voucher rules and an official invite limit were not in the pages read on 2026-10-29. Keep the skill cap. Do not invent either number.
@@ -77,17 +78,17 @@ Between actions, run the 3–8 second pacer (with the session multiplier). Betwe
 
 1. **Name.** Type `campaign.name`.
 2. **Start.** It must be in the future against the Seller Centre clock, or the computer clock if the page has none. If the configured start has passed, move it forward 5 minutes and move the end by the same amount. Report both times. If the page rejects the end, stop.
-3. **End.** After the start. Change it only by the rule above.
-4. **Commission.** Focus the field, select all, then type `commission_percent`. The field appends to the default if you skip select-all, so a default `1` plus typed `10` becomes `110`. Read the visible value. It must equal the configured percent. One retry of select-all and type is allowed. If it still mismatches, stop. Do this for every visible rate field.
+3. **End.** `expiry_days` after the start (default 30). If the page maximum is lower, use that maximum and report both. If the task file names a different end, stop and ask. Do not copy an end date from an old campaign.
+4. **Commission.** One fixed percent from invite config, on every product. Focus the field, select all, then type it. The field appends to the default if you skip select-all, so a default `1` plus typed `10` becomes `110`. Read the visible value. It must equal the configured percent. One retry of select-all and type is allowed. If it still mismatches, stop. Do this for every visible rate field. Do not copy a rate from an old campaign.
 5. **Products.** Add each configured product. Use `label` only to recognize the row. If you cannot tell which row it is, stop. Do not invent an id.
-6. **Free sample.** For each product:
+6. **Free sample.** Manual approval only. Do not turn on auto-approve. For each product, offer a sample only when the SKU and the variation name are on this shop's allowlist:
    - Open the variation list before you trust the title and before you type a quantity.
    - Read each variation's own name. Ignore the product title.
-   - Select only the row whose name is exactly `sample_variation_name`.
+   - Select only the row whose name is exactly the allowlist `size` for that SKU.
    - If that exact name is not in the list, stop. Do not pick a nearby size. A title that contains the same size text is not a match.
    - Set quantity to `sample_quantity` on that variation only. If the page maximum is lower, enter the maximum and report the configured quantity, the maximum, and the number you entered.
    - Leave every other variation without a sample and without a quantity.
-7. **Affiliates.** Do not select anyone yet. Refresh dedupe if this step took a long time. Open the picker in this tab or in a drawer on this page. The handle is the username, not the display name. Read each visible card with `{baseDir}/modules/affiliate/creator-audit.md`, one card at a time, with the pacer between cards. Do not search, sort, or jump. Do not open a second tab. Run `creator-score.mjs` with `--top` set to `kol_count`. On `EMPTY`, stop. Show the shortlist and wait for the owner to approve it. Then select only approved handles whose shortlist row is `PASS` and `proposed` `yes`, in rank order, in batches of `affiliate_batch_size`, with the long pause between batches. Skip empty handles, `SKIP` handles, `EXCLUDE`, and `HOLD`. If an approved handle is not on the list, skip it. Do not fill the gap with the next person. If the selected count is under `kol_count`, do not submit. Tell the person the count and wait. Check duration before each batch.
+7. **Affiliates.** Do not select anyone yet. Open the picker in this tab or in a drawer on this page. The handle is the username, not the display name. Read each visible card with `{baseDir}/modules/affiliate/creator-audit.md`, one card at a time, with the pacer between cards. Do not search, sort, or jump. Do not open a second tab. Pass this shop's log as `--invited`. Run `creator-score.mjs` with `--top` set to `kol_count`. On `EMPTY`, stop. Show the shortlist and wait for the owner to approve it. Check `invite-log.mjs --handle` again before the batch. Then put about `batch_size` approved handles (`PASS` and `proposed` `yes`) on this one invitation, in rank order. Do not make one invitation per creator. Skip empty handles, log `SKIP`, `EXCLUDE`, and `HOLD`. If an approved handle is not on the list, skip it. Do not fill the gap with the next person. The next invitation, if the cap and the clock allow, waits for the long pause. If the selected count is under the batch and the owner has not accepted that, do not submit. Check duration before each batch. If the form asks for a contact field, type this shop's `contact` value. Do not open an old invitation.
 8. **Message.** Length-check again. Type the config message only. Match the on-screen counter to 200 or less.
 
 **Done when:** the form is complete, every selected handle is on the approved shortlist, the selected count equals `kol_count` or the smaller count the owner accepted in this chat, and you have not submitted.
@@ -124,15 +125,9 @@ Screenshot `screenshots/qc2-detail.png`. Read the campaign id from the page. Do 
 
 ### 7. Append the CSV
 
-Append one row per affiliate this submit actually invited.
+Append one row per affiliate this submit actually invited, with `invite-log.mjs --append`, to this shop's log only. `terms` is `fixed_all_products;expiry_<DAYS>;sample_manual`. Do not write the social link into the log.
 
-```text
-handle,name,campaign_id,commission,invited_date,source
-```
-
-`invited_date` is `YYYY-MM-DD` from the Seller Centre clock, else the computer's local date. `source` is `targeted-campaign`. Quote a field that contains a comma, quote, or line break, and double quotes inside it. If unsure, stop.
-
-Run dedupe again. Each new handle must be `SKIP`. If any is `NEW`, the append missed. Fix the file. Do not create another campaign.
+Run `--handle` again. Each new handle must be `SKIP`. If any is `NEW`, the append missed. Fix the file. Do not create another campaign.
 
 **Done when:** every invited handle from this run is `SKIP`.
 

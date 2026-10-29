@@ -22,6 +22,7 @@
 | `sample-fee-*.csv` | Example settlement fee components, caps, and one quoted program join. One order disagrees on purpose. No real shop. |
 | `sample-affiliate-products.csv` | Example TikTok affiliate eligibility rows. One product is over the negative-review line. |
 | `sample-creators.csv` | Example creator cards for the invite audit. One row is inactive, one is off-category, one looks like fake followers. |
+| `sample-invite-log.csv` | Example per-shop invite log. One handle is already invited. No real link or shop. |
 | `sample-creator-results.csv` | Example acceptance, content, orders, and GMV after an invite. Two winners and two losers. |
 | `../modules/listing/spec.example.yaml` | Listing content plan. |
 | `../modules/listing/research-sheet.md` | Competitor notes. |

@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.17.0
+
+- Affiliate invites on Shopee, TikTok Shop, and Lazada take fixed contact details from that shop's config, not from an old invitation. The session opens only that shop's AdsPower profile. One tab stays open, and an xdg-open or Open app prompt is Cancel. One invitation holds about 10 creators on one commission, about 30 days, with manual sample approval and a SKU or size allowlist. Each shop has its own invite log, checked before the run.
+
 ## 1.16.0
 
 - After the AdsPower key and the store list, onboarding asks a short Vietnamese multiple-choice interview. Every question can be skipped. Answers save the store count, platforms, markets, optional goals, team size, and a stage on each store: new, underperforming, or stable. The skill writes a week, month, or quarter roadmap with modules, milestones, and KPIs. Dashboards show it. At the end of a period the skill suggests the next order from results and replaces the roadmap only after a yes. The interview can be run again at any time.

@@ -16,7 +16,7 @@ The invite module is about to choose creators. Run this first. The later result 
 
 1. Account safety and the session runner. One visible tab. Human pace between creator cards.
 2. `{baseDir}/modules/affiliate/creator-score.example.yaml` copied to `~/.automate-ecom-store/creator-score.yaml` when the owner wants different weights. The defaults apply when that file is absent.
-3. `paths.invited_csv` so a handle invited in the last 90 days is excluded.
+3. This shop's invite log from `{baseDir}/modules/affiliate/invite-lessons.md`, so a handle invited in the last 90 days is excluded. Pass that file as `--invited`. `invited_time` counts. Do not rebuild the log by opening old invitations.
 4. The shop category and the commission you intend to offer. Pass them if the config still has a placeholder.
 
 ## What to copy

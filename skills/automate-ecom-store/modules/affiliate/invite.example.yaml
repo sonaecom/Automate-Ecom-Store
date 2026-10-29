@@ -1,0 +1,30 @@
+# synthetic
+# Copy to ~/.automate-ecom-store/invite.yaml on the shop computer.
+# One block per saved store label. Do not put a real link, shop name, handle, or SKU here.
+# If a value still contains a <PLACEHOLDER>, stop and ask. Do not guess it.
+
+shops:
+  - label: "<STORE_LABEL>"
+    platform: "<PLATFORM>"
+    contact:
+      # Fixed details this shop's invite form asks for. Type these.
+      # Do not open an old invitation to copy them.
+      social_url: "<SOCIAL_URL>"
+    invite:
+      # One rate for every product on the invitation.
+      commission_mode: fixed_all_products
+      commission_percent: "<COMMISSION_PERCENT>"
+      # End date is this many days after the start, unless the page maximum is lower.
+      expiry_days: 30
+      # Leave auto-approve off. Samples wait for a person.
+      sample_approval: manual
+      # One invitation holds about this many creators, not one creator per invitation.
+      batch_size: 10
+      # This shop's own log. Another shop does not share the file.
+      log_csv: "data/invite-log-<STORE_LABEL>.csv"
+    samples:
+      # Only these SKUs and sizes may be offered. Size is the variation name.
+      # The usual rule is the smallest size. Do not read the size from the title.
+      - sku: "<SKU>"
+        size: "<SMALLEST_SIZE>"
+        quantity: "<SAMPLE_QUANTITY>"

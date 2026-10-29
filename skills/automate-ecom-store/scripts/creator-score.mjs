@@ -539,7 +539,7 @@ function loadInvited(path) {
   for (const row of records(path)) {
     const key = String(row.handle || "").trim().toLowerCase();
     if (!key) continue;
-    const date = row.invited_date || row.date || "";
+    const date = String(row.invited_time || row.invited_date || row.date || "").slice(0, 10);
     const previous = map.get(key);
     if (!previous || (date && date > previous)) map.set(key, date);
   }
