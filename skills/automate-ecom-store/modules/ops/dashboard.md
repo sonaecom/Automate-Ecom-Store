@@ -10,7 +10,7 @@ Policy gate action is `read`.
 
 ## When to use
 
-The owner wants overview, platform, market, store, staff, SKU profit, ads, wallet, cancellation and return rates, inventory, platform fee percent, alerts, and the automation roadmap.
+The owner wants overview, platform, market, store, staff, SKU profit, ads, wallet, cancellation and return rates, inventory, platform fee percent, alerts, the automation roadmap, and the task queue.
 
 ## Choose a surface
 

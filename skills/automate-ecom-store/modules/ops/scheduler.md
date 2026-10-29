@@ -4,7 +4,7 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Build a plan. Do not start the work until the person says to run the next block.
+Build a plan through `{baseDir}/modules/ops/task-queue.md`. Enqueue the block first. Do not start the work until the person says to run the next row, and do not start while another store is `BUSY`.
 
 For each saved store, one block only if `caps-counter.mjs --show --gap-hours` would be `READY` and the policy gate for that market is not blocking the actions in the block.
 

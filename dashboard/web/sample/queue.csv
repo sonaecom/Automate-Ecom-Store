@@ -1,0 +1,6 @@
+# synthetic
+store,platform,level,pin,action,target,status,chunk,chunks,minutes,gate,day
+<STORE_A>,shopee,P0,1,chat,<THREAD>,pending,1,1,10,ALLOW,today
+<STORE_A>,shopee,P1,0,stock_sync,<SKU_A>,pending,1,2,10,ALLOW,today
+<STORE_A>,shopee,P2,0,affiliate_invite,<HANDLE>,pending,2,4,20,ALLOW,tomorrow
+<STORE_B>,lazada,P1,0,stock_sync,<SKU_B>,conflict,1,1,10,ALLOW,hold

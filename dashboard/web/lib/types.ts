@@ -242,6 +242,21 @@ export type RoadmapStep = {
   status: string
 }
 
+export type QueueTask = {
+  store: string
+  platform: string
+  level: string
+  pin: string
+  action: string
+  target: string
+  status: string
+  chunk: string
+  chunks: string
+  minutes: string
+  gate: string
+  day: string
+}
+
 export type Bundle = {
   example: boolean
   sourceLabel: string
@@ -262,6 +277,7 @@ export type Bundle = {
   feeWhatIfs: FeeWhatIf[]
   thresholds: Thresholds
   roadmap: RoadmapStep[]
+  queue: QueueTask[]
 }
 
 export type Filters = {

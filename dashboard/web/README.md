@@ -40,6 +40,7 @@ Tab:
 | `Thresholds` | Ngưỡng cảnh báo. |
 | `AiCost` | Chi phí AI theo phiên và cửa hàng. |
 | `Roadmap` | Lộ trình theo tuần, tháng, hoặc quý. Chỉ đẩy khi chủ shop đã bật báo cáo Sheets. |
+| `Queue` | Hàng đợi một hồ sơ một phiên. Chỉ đẩy khi chủ shop đã bật báo cáo Sheets. |
 
 `GOOGLE_SHEETS_API_KEY` chỉ đọc được sheet công khai. Đừng để sheet cửa hàng thành công khai. Dùng access token và mật khẩu bên dưới.
 

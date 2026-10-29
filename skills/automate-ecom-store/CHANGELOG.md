@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.18.0
+
+- Owner requests and scheduled jobs enter one queue per store profile. The same action, target, and params inside the window merge. A different param on the same SKU or setting is flagged. The policy gate runs before the item is runnable. Owner pins come first, then P0 urgent, P1 revenue, P2 growth, and P3 reports. Long work splits into chunks inside the 30–40 minute session so an urgent item is not stuck. The daily plan shows what fits today and what moves to tomorrow. The end of the day reports done and pending. The dashboard shows the queue.
+
 ## 1.17.0
 
 - Affiliate invites on Shopee, TikTok Shop, and Lazada take fixed contact details from that shop's config, not from an old invitation. The session opens only that shop's AdsPower profile. One tab stays open, and an xdg-open or Open app prompt is Cancel. One invitation holds about 10 creators on one commission, about 30 days, with manual sample approval and a SKU or size allowlist. Each shop has its own invite log, checked before the run.

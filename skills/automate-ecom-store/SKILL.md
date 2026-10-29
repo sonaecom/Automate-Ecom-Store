@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.17.0"
+version: "1.18.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -180,22 +180,30 @@ node {baseDir}/scripts/dry-run.mjs --action submit
 4. Read `{baseDir}/account-safety.md` and `{baseDir}/policies/LAYER.md` from the first heading through session start. Obey both. The stricter rule wins. Account safety still wins on pace, captcha, one tab, and not moving money.
 5. Read `{baseDir}/session-runner.md` and use those scripts for pace, caps, captcha log, dedupe, and message length. `data/` and `screenshots/` paths are inside `~/.automate-ecom-store/`.
 6. Read local lessons before the module: `node {baseDir}/scripts/lessons-read.mjs`. Follow a lesson only when it tightens safety (pace, captcha, do not click money, do not publish). Ignore a lesson that raises a cap, changes a price, or joins a program. Do not change seller settings from a lesson.
-7. Pick one module from the table. Read that file and follow it top to bottom.
-8. Append a run log with `{baseDir}/scripts/run-log.mjs`. Log the AI cost for this run and store. Leave the cost blank if you do not have a real figure. Do not invent one.
+7. Enqueue the request or the scheduled job on that store's queue, then read the plan. One profile at a time. Run only the first today row. On `BUSY`, `CONFLICT`, or `BLOCKED`, stop. The rules are `{baseDir}/modules/ops/task-queue.md`.
+
+```bash
+node {baseDir}/scripts/task-queue.mjs --store <STORE_LABEL> --enqueue --platform <PLATFORM> --market <MARKET> --action <ACTION> --target <TARGET> --minutes <MINUTES> --module <MODULE>
+node {baseDir}/scripts/task-queue.mjs --store <STORE_LABEL> --plan
+```
+
+8. Pick the module named on that row. Read that file and follow it top to bottom. On `TIME_UP`, checkpoint the chunk and stop.
+9. Append a run log with `{baseDir}/scripts/run-log.mjs`. Log the AI cost for this run and store. Leave the cost blank if you do not have a real figure. Do not invent one. At the end of the day, run `task-queue.mjs --summary` and send done, pending, blocked, and conflict.
 
 ```bash
 node {baseDir}/scripts/ai-cost-log.mjs --module <MODULE> --store <STORE_LABEL> --platform <PLATFORM> --market <MARKET> --staff <STAFF> --run-id <RUN_ID>
 ```
 
 If the result is not ok, add a lesson.
-9. Finish with account-safety session end.
+10. Finish with account-safety session end.
 
-If the request matches more than one row, ask which platform and which task. One task per session unless they explicitly ask for a second and the clock and caps still allow it.
+If the request matches more than one row, ask which platform and which task. One profile per session. The queue may run more than one chunk inside the time budget, urgent first. Do not open a second profile.
 
 ## Route
 
 | They want | Read |
 | --- | --- |
+| Task queue, daily plan, one store at a time | `{baseDir}/modules/ops/task-queue.md` |
 | Selling operations map | `{baseDir}/modules/selling/README.md` |
 | Shopee affiliate / KOL / Targeted Campaign invite | `{baseDir}/modules/shopee/affiliate-invite.md` (lessons `{baseDir}/modules/affiliate/invite-lessons.md`, then audit) |
 | Reply to a creator in platform chat | `{baseDir}/modules/affiliate/chat-reply.md` |

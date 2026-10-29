@@ -1,0 +1,9 @@
+# synthetic
+# Copy to ~/.automate-ecom-store/tasks.yaml. Do not put a profile id or a shop name here.
+# One queue per store label. One browser session at a time.
+# session_minutes must stay from 30 to 40. A longer session is rejected.
+
+dedupe_window_hours: 24
+session_minutes: 40
+chunk_minutes: 10
+daily_sessions: 1
