@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.26.0"
+version: "1.27.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -231,7 +231,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Disputes and claims, any platform | `{baseDir}/modules/orders/disputes.md` |
 | Orders to ship | `{baseDir}/modules/orders/handling.md` |
 | Reply to a public review | `{baseDir}/modules/reviews/replies.md` |
-| Product video or livestream | `{baseDir}/modules/content/video-live.md` after `video-scan.mjs` prints `PASS` |
+| Finished product video | `{baseDir}/modules/content/video-live.md` after `video-scan.mjs` prints `PASS`. Livestream is not developed. |
 | After an affiliate invite: samples, videos, GMV | `{baseDir}/modules/affiliate/post-invite.md` |
 | Customer retention, official tools only | `{baseDir}/modules/customers/retention.md` |
 | New or low-sales store diagnosis | `{baseDir}/modules/growth/scorecard.md` |

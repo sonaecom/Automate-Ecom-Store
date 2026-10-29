@@ -26,6 +26,7 @@
 | `sample-kol-chat-log.csv` | Example KOL chat log: time, creator, thread, template id, priority, result. |
 | `sample-video-pass.json` | Synthetic video spec that can pass the pre-publish scan when the local checks are filled in. |
 | `sample-video-block.json` | Synthetic video spec with an off-platform contact and a price that does not match the listing. |
+| `sample-video-intake.json` | Synthetic finished-video manifest: product, variation, placement, cover, and schedule. |
 | `sample-creator-results.csv` | Example acceptance, content, orders, and GMV after an invite. Two winners and two losers. |
 | `../modules/listing/spec.example.yaml` | Listing content plan. |
 | `../modules/listing/research-sheet.md` | Competitor notes. |

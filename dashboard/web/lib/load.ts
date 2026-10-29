@@ -15,6 +15,7 @@ import type {
   InventoryRow,
   QueueTask,
   RoadmapStep,
+  VideoFact,
   MarketRate,
   OrderRow,
   SkuRow,
@@ -282,7 +283,32 @@ function bundleFrom(tables: Record<string, string>, sourceLabel: string, example
     thresholds,
     roadmap: mapRoadmap(parseCsv(tables.roadmap || "")),
     queue: mapQueue(parseCsv(tables.queue || "")),
+    videos: mapVideos(parseCsv(tables.videos || "")),
   }
+}
+
+function mapVideos(rows: Record<string, string>[]): VideoFact[] {
+  return rows.map((row) => ({
+    videoId: row.video_id || "",
+    date: row.date || "",
+    store: row.store || "",
+    platform: row.platform || "",
+    market: row.market || "",
+    product: row.product || "",
+    variation: row.variation || "",
+    placement: row.placement || "",
+    status: row.status || "",
+    reason: row.reason || "",
+    views: num(row.views),
+    likes: num(row.likes),
+    clicks: num(row.clicks),
+    orders: num(row.orders),
+    gmv: num(row.gmv),
+    currency: (row.currency || "").toUpperCase(),
+    qc: row.qc || "",
+    viewsFloor: num(row.views_floor),
+    readTime: row.read_time || "",
+  }))
 }
 
 function mapQueue(rows: Record<string, string>[]): QueueTask[] {
@@ -422,7 +448,7 @@ export async function loadBundle(): Promise<Bundle> {
   if (source === "sheets") {
     const id = process.env.GOOGLE_SHEETS_ID || ""
     if (!id) throw new Error("Thiếu GOOGLE_SHEETS_ID.")
-    const [fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds, ai, fees, feeOrders, feeComponents, feeWhatIfs, roadmap, queue] = await Promise.all([
+    const [fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds, ai, fees, feeOrders, feeComponents, feeWhatIfs, roadmap, queue, videos] = await Promise.all([
       sheetValues(id, "FxFacts"),
       sheetValues(id, "MarketRates"),
       sheetValues(id, "Settings/FX"),
@@ -440,8 +466,9 @@ export async function loadBundle(): Promise<Bundle> {
       sheetValues(id, "FeeWhatIf"),
       sheetValues(id, "Roadmap"),
       sheetValues(id, "Queue"),
+      sheetValues(id, "VideoFacts"),
     ])
-    return bundleFrom({ fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds, ai, fees, feeOrders, feeComponents, feeWhatIfs, roadmap, queue }, "Google Sheets", false)
+    return bundleFrom({ fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds, ai, fees, feeOrders, feeComponents, feeWhatIfs, roadmap, queue, videos }, "Google Sheets", false)
   }
   const dir = source === "csv" ? (process.env.CSV_DIR || SAMPLE) : SAMPLE
   const tables = {
@@ -462,6 +489,7 @@ export async function loadBundle(): Promise<Bundle> {
     feeWhatIfs: readLocal(dir, "fee-whatif.csv"),
     roadmap: readLocal(dir, "roadmap.csv"),
     queue: readLocal(dir, "queue.csv"),
+    videos: readLocal(dir, "video-performance.csv"),
   }
   if (!tables.fx && !tables.orders && !tables.ads) {
     throw new Error(`Không đọc được CSV trong ${dir}.`)

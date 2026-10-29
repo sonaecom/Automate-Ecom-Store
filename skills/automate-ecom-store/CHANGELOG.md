@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.27.0
+
+- Finished videos can be queued for Shopee, TikTok Shop, and Lazada. Intake is a local folder, or a Drive folder only when Google is already connected. Each file is checked against that placement's format, length, size, and aspect ceiling, then the compliance scan. The daily cap is a ceiling. Posting times are spread, and the same hash is not posted twice for one store and platform. Livestream is not developed. The module does not generate a video. Status and performance come from two in-store sources. A rejection or a two-source mismatch alerts the owner. The dashboard has a Video page.
+
 ## 1.26.0
 
 - A product video or livestream is not published until `video-scan.mjs` returns `PASS`. The scan checks the title, caption, hashtags, on-screen text, and transcript against `policies/rules.yaml` for that platform and market, then the file details and the cover or keyframes. `BLOCK` and `REVIEW` both stop the post and alert the owner. Checks stay on this machine. The script does not upload the video.

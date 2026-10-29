@@ -242,6 +242,28 @@ export type RoadmapStep = {
   status: string
 }
 
+export type VideoFact = {
+  videoId: string
+  date: string
+  store: string
+  platform: string
+  market: string
+  product: string
+  variation: string
+  placement: string
+  status: string
+  reason: string
+  views: number | null
+  likes: number | null
+  clicks: number | null
+  orders: number | null
+  gmv: number | null
+  currency: string
+  qc: string
+  viewsFloor: number | null
+  readTime: string
+}
+
 export type QueueTask = {
   store: string
   platform: string
@@ -278,6 +300,7 @@ export type Bundle = {
   thresholds: Thresholds
   roadmap: RoadmapStep[]
   queue: QueueTask[]
+  videos: VideoFact[]
 }
 
 export type Filters = {

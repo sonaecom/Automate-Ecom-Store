@@ -28,7 +28,7 @@ This is the map for day-to-day selling. Every row is policy-gated and human-pace
 | One thank-you after delivery | `{baseDir}/modules/customers/post-delivery.md` |
 | Disputes and return clocks | `{baseDir}/modules/orders/disputes.md` |
 | Platform campaigns and vouchers | platform `vouchers-promotions.md` or `promotions.md` |
-| Video and livestream | `{baseDir}/modules/content/video-live.md` |
+| Finished product video | `{baseDir}/modules/content/video-live.md`. Livestream is not developed. |
 | Repeat buyers, follower vouchers, replenishment | `{baseDir}/modules/customers/retention.md` and `{baseDir}/modules/scale/repeat.md` |
 | Manual, auto, and live inventory | `{baseDir}/modules/inventory/sync.md` |
 | Restock forecast and stockout alert | `{baseDir}/modules/scale/stock.md` |

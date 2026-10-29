@@ -11,6 +11,7 @@ import type {
   FeeRow,
   FeeWhatIf,
   InventoryRow,
+  VideoFact,
   SkuRow,
   WalletFact,
 } from "@/lib/types"
@@ -50,6 +51,7 @@ export type DashboardView = {
   fees: FeeRow[]
   feeComponents: FeeComponent[]
   feeWhatIfs: FeeWhatIf[]
+  videos: VideoFact[]
   orders: Classified[]
   rates: Record<"market" | "platform" | "store" | "category" | "product" | "sku" | "staff", RateBucket[]>
   excluded: number
@@ -220,6 +222,7 @@ export function buildView(bundle: Bundle, filters: Filters, rates: CustomRate[],
   const fees = bundle.fees.filter((row) => inRange(row.date, filters) && matchPlace(row, filters))
   const feeComponents = bundle.feeComponents.filter((row) => inRange(row.date, filters) && matchPlace(row, filters))
   const feeWhatIfs = bundle.feeWhatIfs.filter((row) => inRange(row.date, filters) && matchPlace(row, filters))
+  const videos = bundle.videos.filter((row) => inRange(row.date, filters) && matchPlace(row, filters))
   const orders = bundle.orders
     .filter((row) => matchPlace(row, filters))
     .map((row) => classify(row, filters.from, filters.to))
@@ -261,7 +264,7 @@ export function buildView(bundle: Bundle, filters: Filters, rates: CustomRate[],
       }
     }
   }
-  const alerts = buildAlerts(bundle, filters, ads, wallet, levels.store, levels.sku, inventory, fx, fees, feeWhatIfs)
+  const alerts = buildAlerts(bundle, filters, ads, wallet, levels.store, levels.sku, inventory, fx, fees, feeWhatIfs, videos)
   const groupBy = (field: "platform" | "market" | "store") => {
     const map = new Map<string, GroupRow>()
     for (const row of fx) {
@@ -296,6 +299,7 @@ export function buildView(bundle: Bundle, filters: Filters, rates: CustomRate[],
     fees,
     feeComponents,
     feeWhatIfs,
+    videos,
     orders,
     rates: levels,
     excluded: orders.filter((row) => row.excluded).length,
@@ -331,6 +335,7 @@ function buildAlerts(
   fx: DashboardView["fx"],
   fees: FeeRow[],
   feeWhatIfs: FeeWhatIf[],
+  videos: VideoFact[],
 ): AlertItem[] {
   const alerts: AlertItem[] = []
   const { thresholds } = bundle
@@ -467,6 +472,38 @@ function buildAlerts(
       })
     }
   }
+  for (const row of videos) {
+    if (row.status === "rejected") {
+      alerts.push({
+        id: `video-rejected-${row.videoId}`,
+        tone: "bad",
+        title: "Video bị từ chối",
+        detail: `${row.videoId}: ${row.reason || "không có lý do"}. Không đăng lại từ bảng này.`,
+        platform: row.platform,
+        market: row.market,
+      })
+    }
+    if (row.qc === "QC_FAIL") {
+      alerts.push({
+        id: `video-qc-${row.videoId}`,
+        tone: "bad",
+        title: "Video hai nguồn không khớp",
+        detail: `${row.videoId}: ${row.reason || "giữ cả hai số"}. Không lấy trung bình.`,
+        platform: row.platform,
+        market: row.market,
+      })
+    }
+    if (row.viewsFloor !== null && row.views !== null && row.qc === "OK" && row.views < row.viewsFloor) {
+      alerts.push({
+        id: `video-low-${row.videoId}`,
+        tone: "warn",
+        title: "Video dưới ngưỡng xem",
+        detail: `${row.videoId}: ${row.views} lượt xem, ngưỡng ${row.viewsFloor}.`,
+        platform: row.platform,
+        market: row.market,
+      })
+    }
+  }
   for (const row of fx) {
     if (row.qc === "NO_RATE" || row.qc === "RATE_MISMATCH") {
       alerts.push({
@@ -494,6 +531,7 @@ export function dateSpan(bundle: Bundle) {
     ...bundle.fees.map((row) => row.date),
     ...bundle.feeComponents.map((row) => row.date),
     ...bundle.feeWhatIfs.map((row) => row.date),
+    ...bundle.videos.map((row) => row.date),
   ].filter(Boolean).sort()
   return { from: dates[0] || "2026-01-01", to: dates[dates.length - 1] || "2026-12-31" }
 }
