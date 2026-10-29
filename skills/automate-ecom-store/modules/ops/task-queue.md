@@ -4,7 +4,7 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Every owner request and every scheduled job is one item in that store's queue. One store label is one AdsPower profile. The day plan holds at most 10 stores. A captcha pauses only that store. A hung profile is closed and opened again. A done action key is resumed, not repeated.
+Every owner request and every scheduled job is one item in that store's queue. One store label is one AdsPower profile. The day plan holds at most 10 stores. A captcha pauses only that store. A hung profile is closed and opened again. A pending action key is resumed. A done key is not run again.
 
 ```bash
 node {baseDir}/scripts/orchestrator.mjs --stores ~/.automate-ecom-store/data/orchestrator-stores.json --now <HH:MM> --night-start 01:00 --day-start 08:00 --stagger 20 --out-dir ~/.automate-ecom-store/data/orchestrator/
