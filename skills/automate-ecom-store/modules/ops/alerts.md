@@ -9,6 +9,7 @@ Send an alert when:
 - Penalty points or a violation count went up versus the last health snapshot.
 - A captcha was shown. Hand the screen to a person after the one allowed slider try in account safety.
 - A SKU in the stock export is zero and the spec still lists it for sale.
+- Days of ads balance left, from `modules/ads/spend-topup.md`, are under 3. Propose a top-up. Do not perform it.
 
 Each alert names the platform, the market, the two exact figures, and the export time. Last 4 digits of a card only, and only if a card was already on screen. Never the full number. Never a top-up.
 

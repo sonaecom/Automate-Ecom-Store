@@ -35,14 +35,94 @@ function status() {
   if (!token) process.exit(1);
 }
 
-const arg = process.argv[2];
-if (arg === "--status") {
+function arg(name) {
+  const index = process.argv.indexOf(name);
+  return index >= 0 ? process.argv[index + 1] || "" : "";
+}
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let field = "";
+  let quoted = false;
+  for (let i = 0; i < text.length; i += 1) {
+    const char = text[i];
+    if (quoted) {
+      if (char === '"') {
+        if (text[i + 1] === '"') {
+          field += '"';
+          i += 1;
+        } else quoted = false;
+      } else field += char;
+      continue;
+    }
+    if (char === '"') quoted = true;
+    else if (char === ",") {
+      row.push(field);
+      field = "";
+    } else if (char === "\n") {
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = "";
+    } else if (char !== "\r") field += char;
+  }
+  if (field.length || row.length) {
+    row.push(field);
+    rows.push(row);
+  }
+  return rows.filter((cells) => cells.some((cell) => cell.trim() !== ""));
+}
+
+async function pushCsv() {
+  const csvPath = arg("--csv");
+  const tab = arg("--tab") || "AdsFacts";
+  if (!csvPath) {
+    console.error("--csv is required");
+    process.exit(2);
+  }
+  if (!existsSync(file)) {
+    console.log("token: missing");
+    console.log("result: MISSING");
+    process.exit(1);
+  }
+  const parsed = JSON.parse(readFileSync(file, "utf8"));
+  const token = typeof parsed.access_token === "string" ? parsed.access_token.trim() : "";
+  const spreadsheetId = typeof parsed.spreadsheet_id === "string" ? parsed.spreadsheet_id.trim() : "";
+  if (!token || !spreadsheetId) {
+    console.log(`token: ${token ? "set" : "missing"}`);
+    console.log(`spreadsheet: ${spreadsheetId ? "set" : "missing"}`);
+    console.log("result: MISSING");
+    process.exit(1);
+  }
+  const values = parseCsv(readFileSync(csvPath, "utf8"));
+  const range = encodeURIComponent(`${tab}!A1`);
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(spreadsheetId)}/values/${range}?valueInputOption=USER_ENTERED`;
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ range: `${tab}!A1`, majorDimension: "ROWS", values }),
+  });
+  if (!response.ok) {
+    console.log(`http_status: ${response.status}`);
+    console.log("result: FAILED");
+    process.exit(1);
+  }
+  console.log(`tab: ${tab}`);
+  console.log(`rows: ${values.length}`);
+  console.log("result: PUSHED");
+}
+
+const arg0 = process.argv[2];
+if (arg0 === "--status") {
   status();
-} else if (arg === "--reset-token") {
+} else if (arg0 === "--push") {
+  await pushCsv();
+} else if (arg0 === "--reset-token") {
   if (existsSync(file)) unlinkSync(file);
   console.log("token: missing");
   console.log("result: RESET");
-} else if (arg === "--save-token") {
+} else if (arg0 === "--save-token") {
   if (process.stdin.isTTY) {
     console.error("stdin JSON required");
     process.exit(2);
@@ -69,6 +149,6 @@ if (arg === "--status") {
   console.log("mode: 600");
   console.log("result: SAVED");
 } else {
-  console.error("usage: node push-sheets.mjs (--status | --save-token | --reset-token)");
+  console.error("usage: node push-sheets.mjs (--status | --save-token | --reset-token | --push --csv path [--tab AdsFacts])");
   process.exit(2);
 }
