@@ -1,3 +1,4 @@
+# synthetic
 # Template library
 
 | File | Use |

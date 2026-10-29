@@ -1,3 +1,4 @@
+# synthetic
 # Shape only. Copy to ~/.automate-ecom-store/inventory.yaml on the shop computer.
 # Do not put a real shop name, sheet id, or BigSeller password here.
 # mode manual: the owner sets an exact variation quantity. Preview, then push only after confirmation.

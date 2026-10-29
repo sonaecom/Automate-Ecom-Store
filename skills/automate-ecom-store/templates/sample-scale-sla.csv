@@ -1,3 +1,4 @@
+# synthetic
 task_id,type,opened_at,due_hours,status,assignee,source
 <TASK_A>,chat,2026-10-28T00:00:00Z,24,open,<STAFF_A>,example
 <TASK_B>,order,2026-10-29T00:00:00Z,48,open,<STAFF_B>,example

@@ -1,3 +1,4 @@
+# synthetic
 # Shape only. Copy numbers into ~/.automate-ecom-store/scale.yaml on the shop computer.
 # Do not put a real shop name, fee schedule, or budget here.
 # Placeholders are ignored by scale.mjs. The owner types the real number in the private file.

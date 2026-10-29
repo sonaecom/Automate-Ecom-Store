@@ -1,3 +1,4 @@
+# synthetic
 action,level,key,program,current_pct,next_pct,cap_percent,result,store,platform,market,date,currency,approval,applied
 leave,sku,<STORE_A>|shopee|PH|<SKU_A>,affiliate,29,28,28,OVER,<STORE_A>,shopee,PH,2026-10-08,PHP,required,no
 leave,sku,<STORE_A>|shopee|PH|<SKU_A>,free_shipping,29,19,28,OK,<STORE_A>,shopee,PH,2026-10-08,PHP,required,no

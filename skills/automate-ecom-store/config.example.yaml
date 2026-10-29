@@ -1,3 +1,4 @@
+# synthetic
 # Shape only. Do not put a real key, address, profile id, or store name here.
 # First run asks for the API key only, leaves the address empty, then fills
 # stores after the marketer picks profile numbers. Caps below are the defaults.

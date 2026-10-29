@@ -1,3 +1,4 @@
+# synthetic
 level,key,period,date,store,platform,market,gmv,fee,fee_pct,cap_percent,result,top_program,proposal,currency,qc
 sku,<STORE_A>|shopee|PH|<SKU_A>,2026-10-08,2026-10-08,<STORE_A>,shopee,PH,100,29,29,28,OVER,commission,OPT_OUT free_shipping,PHP,PARTIAL
 sku,<STORE_A>|shopee|PH|<SKU_B>,2026-10-08,2026-10-08,<STORE_A>,shopee,PH,100,16,16,28,OK,commission,,PHP,PARTIAL

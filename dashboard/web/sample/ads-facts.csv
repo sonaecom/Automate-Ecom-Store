@@ -1,3 +1,4 @@
+# synthetic
 date,store,platform,market,spend,currency,gmv_attributed,roas,spend_pct_gmv,balance,days_left,topup_amount,match_status,source,read_time,timezone
 2026-10-02,<STORE_A>,shopee,<MARKET_PH>,10,PHP,40,4,0.25,100,10,0,MATCH,example,2026-10-29T09:00:00Z,<TIMEZONE>
 2026-10-16,<STORE_A>,shopee,<MARKET_PH>,20,PHP,40,2,0.5,15,2,50,UNMATCHED_TOPUP,example,2026-10-29T09:00:00Z,<TIMEZONE>

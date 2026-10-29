@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Homepage banners from a private style file. No network. No built-in shop data.
+"""Homepage banners from a private style file. synthetic samples only. No network. No built-in shop data.
 
 Uses the same cream, green, and accent language as listing_images.py unless
 the style file gives colors or a logo to sample.

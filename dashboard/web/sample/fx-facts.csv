@@ -1,3 +1,4 @@
+# synthetic
 date,store,platform,market,stream,native_amount,currency,base_currency,market_rate,market_rate_date,market_rate_month,market_fallback,amount_market,custom_rate,custom_rate_date,custom_rate_month,custom_fallback,amount_custom,applied_mode,applied_rate,applied_rate_date,applied_rate_month,applied_fallback,amount_base,qc,source,read_time
 2026-10-02,<STORE_A>,shopee,<MARKET_PH>,sales,1000,PHP,VND,428,2026-10-02,,none,428000,430,,2026-10,none,430000,custom,430,,2026-10,none,430000,OK,example,2026-10-29T09:00:00Z
 2026-10-15,<STORE_A>,shopee,<MARKET_PH>,sales,500,PHP,VND,431,2026-10-15,,none,215500,430,,2026-10,none,215000,custom,430,,2026-10,none,215000,OK,example,2026-10-29T09:00:00Z

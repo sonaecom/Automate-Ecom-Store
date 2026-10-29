@@ -1,3 +1,4 @@
+# synthetic
 date,store,platform,market,staff,category,product,sku,units_sold,revenue,cogs,ads_allocated,fees,refunds,currency,source
 2026-10-02,<STORE_A>,shopee,<MARKET_PH>,<STAFF_A>,<CATEGORY_A>,<PRODUCT_A>,<SKU_A>,6,600,200,6,40,0,PHP,example
 2026-10-02,<STORE_A>,shopee,<MARKET_PH>,<STAFF_B>,<CATEGORY_A>,<PRODUCT_B>,<SKU_B>,2,400,180,4,20,50,PHP,example

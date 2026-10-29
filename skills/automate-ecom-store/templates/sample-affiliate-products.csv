@@ -1,3 +1,4 @@
+# synthetic
 sku,category_group,negative_review_rate,seller_fault_return_rate
 <SKU_OK>,electronics_fashion,0.4,1
 <SKU_BAD>,fmcg_lifestyle,0.9,1

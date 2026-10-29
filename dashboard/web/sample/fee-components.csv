@@ -1,3 +1,4 @@
+# synthetic
 level,key,date,store,platform,market,component,amount,pct_gmv,currency
 order,<ORDER_1>,2026-10-08,<STORE_A>,shopee,PH,affiliate,1,1,PHP
 order,<ORDER_1>,2026-10-08,<STORE_A>,shopee,PH,free_shipping,10,10,PHP

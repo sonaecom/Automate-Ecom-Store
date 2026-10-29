@@ -1,3 +1,4 @@
+# synthetic
 program,item,required,met,source
 shopee_mall,account_health,yes,yes,example
 shopee_mall,brand_authorisation,yes,yes,example

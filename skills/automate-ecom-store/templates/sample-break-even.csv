@@ -1,3 +1,4 @@
+# synthetic
 sku,price,unit_cost,platform_fee,shipping_net,other_cost,currency,source
 <SKU_A>,100,40,10,5,5,PHP,example
 <SKU_LOSS>,20,18,3,2,1,PHP,example

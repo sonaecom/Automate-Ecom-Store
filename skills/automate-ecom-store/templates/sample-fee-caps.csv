@@ -1,3 +1,4 @@
+# synthetic
 level,store,platform,market,sku,category,cap_percent
 store,<STORE_A>,shopee,PH,,,28
 store,<STORE_B>,lazada,MY,,,20

@@ -1,3 +1,4 @@
+# synthetic
 source_sku,seller_sku,store,platform,source
 <SRC_A>,<SKU_A>,<STORE_A>,shopee,bigseller
 <SRC_B>,<SKU_B>,<STORE_A>,shopee,bigseller

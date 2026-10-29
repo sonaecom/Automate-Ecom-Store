@@ -1,3 +1,4 @@
+# synthetic
 order_id,created_date,store,platform,market,category,product,sku,staff,status,cancelled_by,cancel_reason,courier_pickup_time,outcome,source,read_time
 <ORDER_A>,2026-10-02,<STORE_LABEL>,shopee,<MARKET>,<CATEGORY>,<PRODUCT>,<SKU_A>,<STAFF>,cancelled,buyer,change_of_mind,,,sample_list,2026-10-29T09:05:00
 <ORDER_B>,2026-10-03,<STORE_LABEL>,shopee,<MARKET>,<CATEGORY>,<PRODUCT>,<SKU_B>,<STAFF>,to_ship,,,,,sample_list,2026-10-29T09:05:00

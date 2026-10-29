@@ -1,3 +1,4 @@
+# synthetic
 order_id,date,store,platform,market,sku,category,gmv,commission,payment_fee,affiliate,free_shipping,platform_voucher,seller_voucher,coins,mega_sale,flash_sale,other_service,ads_fee,currency
 <ORDER_1>,2026-10-08,<STORE_A>,shopee,PH,<SKU_A>,<CATEGORY_A>,100,12,3,1,10,1,1,1,0,0,0,20,PHP
 <ORDER_2>,2026-10-08,<STORE_A>,shopee,PH,<SKU_B>,<CATEGORY_A>,100,10,2,1,1,0,1,1,0,0,0,0,PHP

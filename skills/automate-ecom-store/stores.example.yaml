@@ -1,3 +1,4 @@
+# synthetic
 # Shape only. Copy to ~/.automate-ecom-store/stores.yaml on the shop computer
 # and fill it there. Do not put a real profile id, shop name, or staff name here.
 # apply-stores.mjs reads the private copy at the start of every run.

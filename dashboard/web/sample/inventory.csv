@@ -1,3 +1,4 @@
+# synthetic
 sku,product,category,store,platform,market,on_hand,inbound,days_cover,reorder_point,status,unit_cost,currency,source
 <SKU_A>,<PRODUCT_A>,<CATEGORY_A>,<STORE_A>,shopee,<MARKET_PH>,24,12,18,10,ok,40,PHP,example
 <SKU_B>,<PRODUCT_B>,<CATEGORY_A>,<STORE_A>,shopee,<MARKET_PH>,0,6,0,8,stockout,55,PHP,example

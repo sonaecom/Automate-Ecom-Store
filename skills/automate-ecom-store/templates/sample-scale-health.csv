@@ -1,3 +1,4 @@
+# synthetic
 metric,value,threshold,direction,source
 late_shipment_rate,0.046,0.05,lower,example
 cancellation_rate,0.02,0.05,lower,example

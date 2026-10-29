@@ -1,3 +1,4 @@
+# synthetic
 sku,revenue,platform_fee,ads,shipping,returns_cost,prior_revenue,prior_margin_pct,currency,source
 <SKU_A>,1000,100,200,50,50,800,0.7,PHP,example
 <SKU_B>,500,50,80,20,50,600,0.4,PHP,example

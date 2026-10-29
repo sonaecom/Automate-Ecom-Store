@@ -1,3 +1,4 @@
+# synthetic
 order_id,date,store,platform,market,sku,category,gmv,fee,fee_pct,cap_percent,result,top_program,proposal,currency,qc
 <ORDER_1>,2026-10-08,<STORE_A>,shopee,PH,<SKU_A>,<CATEGORY_A>,100,29,29,28,OVER,commission,OPT_OUT free_shipping,PHP,OK
 <ORDER_2>,2026-10-08,<STORE_A>,shopee,PH,<SKU_B>,<CATEGORY_A>,100,16,16,28,OK,commission,,PHP,OK

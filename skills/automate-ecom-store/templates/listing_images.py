@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Square listing images from a private spec. No network. No built-in shop data.
+"""Square listing images from a private spec. synthetic samples only. No network. No built-in shop data.
 
 Reads a JSON spec and writes a square JPEG set plus a contact sheet:
   01 cover, 02 variations, 03 benefits, 04 size, 05 usage, 06 store,

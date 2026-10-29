@@ -1,3 +1,4 @@
+# synthetic
 buyer_key,orders,last_order_date,cycle_days,follower,source
 <BUYER_A>,3,2026-09-01,30,no,example
 <BUYER_B>,1,2026-10-01,30,yes,example

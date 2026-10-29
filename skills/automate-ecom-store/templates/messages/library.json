@@ -1,4 +1,5 @@
 {
+  "_label": "synthetic",
   "languages": ["en", "vi", "id", "ms", "th"],
   "kol_invite": {
     "en": "Hi <KOL_NAME>. New shop <BRAND> wants a long-term partnership. Reply to this message for a free sample.",

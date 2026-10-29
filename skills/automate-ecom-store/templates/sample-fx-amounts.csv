@@ -1,3 +1,4 @@
+# synthetic
 date,store,platform,market,stream,native_amount,currency,source,read_time
 2026-10-03,<STORE_LABEL>,shopee,<MARKET>,sales,100,PHP,sample_export,2026-10-29T09:00:00Z
 2026-10-02,<STORE_LABEL>,shopee,<MARKET>,ads,10,PHP,sample_export,2026-10-29T09:00:00Z
