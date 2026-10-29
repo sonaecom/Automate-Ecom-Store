@@ -10,7 +10,7 @@ Policy gate action is `read`. Do not use `budget`.
 
 ## When to use
 
-A daily read of ad spend, attributed GMV, ROAS, ads balance, and top-up history, then a match to card charges from Gmail or a statement file in Drive.
+A daily read of ad spend, attributed GMV, ROAS, ads balance, and top-up history. Both sources are inside the store: the ads screen and an official ads export or the transaction history page. Gmail and Drive are not sources for this module.
 
 ## Prerequisites
 
@@ -26,13 +26,13 @@ A daily read of ad spend, attributed GMV, ROAS, ads balance, and top-up history,
 3. Run two-source QC:
 
 ```bash
-node {baseDir}/scripts/ads-reconcile.mjs --spend-a <SCREEN_OR_EXPORT_A> --spend-b <EXPORT_B> --topups <TOPUPS> --charges <CHARGES> --balances <BALANCES> --roas-floor <ROAS_FLOOR> --out-dir <OUT_DIR>
+node {baseDir}/scripts/ads-reconcile.mjs --spend-a <SCREEN_OR_EXPORT_A> --spend-b <EXPORT_B> --topups <TOPUP_SCREEN> --topups-b <TOPUP_EXPORT_OR_HISTORY> --balances <BALANCES> --roas-floor <ROAS_FLOOR> --out-dir <OUT_DIR>
 ```
 
 `<OUT_DIR>` is under `~/.automate-ecom-store/data/ads/`. If `roas_floor` is still a placeholder, omit `--roas-floor`. On `QC_FAIL`, stop and report both numbers. Do not average them.
 
 4. On the balance page, read the remaining balance and the top-up history. Do not open a payment dialog. If a top-up button is the only control, stop and ask.
-5. Card charges come from Gmail notifications or a statement file already in Drive. The script keeps the last 4 digits and drops a longer number. Do not copy a full card number into the chat, the sheet, or a file. Match a top-up to a charge by amount, currency, a date within 2 days, and a merchant that names the platform. Flag `UNMATCHED_TOPUP`, `UNMATCHED_CHARGE`, and `DUPLICATE`.
+5. Match top-ups only to the other in-store list: the official ads export or the transaction history page. Match on amount, currency, a date within 2 days, and the same store, platform, and market. Record a card last-4 only when that store page already shows it. Do not open Gmail or a Drive statement. Flag `UNMATCHED_TOPUP`, `UNMATCHED_EXPORT`, and `DUPLICATE`. `--charges` is rejected.
 6. Read the script summary: remaining balance, top-up total versus spend, days of balance left, spend as a percent of attributed GMV, and ROAS against the floor. Days left are remaining balance divided by average daily spend on the dates you read. If spend is 0, days left are undefined. If days left are under 3, use `{baseDir}/modules/ops/alerts.md`. The alert proposes a top-up. It does not perform one.
 7. Push `normalized-spend.csv` to the `AdsFacts` tab. Formulas on `Ads & Top-up` read that tab. See `sheets-tab.md`.
 

@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.22.0
+
+- Ads top-ups and wallet withdrawals reconcile only against the seller centre: the screen, the official export, or the in-store transaction history. Gmail card charges and Drive statement files are not sources. Sheets, Drive, and Gmail stay available for reports and inventory. A card or bank last-4 is kept only when the store page shows it.
+
 ## 1.21.0
 
 - The primary host is a Linux VPS with OpenClaw, Hermes Agent, and headed AdsPower on one machine. A virtual display is not headless mode. systemd restarts a dead process and does not skip the session gap. The wake script stays idle until the gap and the captcha review allow one store. OpenClaw and Hermes Agent share this skill and must not drive the same profile at once. The update path still fast-forwards git and leaves local config in place.

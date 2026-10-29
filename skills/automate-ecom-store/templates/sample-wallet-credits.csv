@@ -1,5 +1,5 @@
 # synthetic
 date,amount,currency,bank_last4,source,read_time
-2026-10-22,99.00,USD,6789,gmail,2026-10-29T09:05:00
-2026-10-22,99.00,USD,6789,gmail,2026-10-29T09:05:00
-2026-10-19,30.00,USD,6789,drive_statement,2026-10-29T09:05:00
+2026-10-22,99.00,USD,6789,payout_export,2026-10-29T09:05:00
+2026-10-22,99.00,USD,6789,payout_export,2026-10-29T09:05:00
+2026-10-19,30.00,USD,6789,transaction_history,2026-10-29T09:05:00

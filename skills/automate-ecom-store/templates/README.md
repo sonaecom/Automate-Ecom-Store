@@ -5,8 +5,8 @@
 | --- | --- |
 | `listing_images.py` | Square listing images from a private spec. Refuses placeholders unless `--allow-placeholders`. |
 | `homepage_assets.py` | Homepage banners at the draft sizes in `modules/homepage/sizes.md`. |
-| `sample-ads-*.csv` | Placeholder spend, top-up, charge, and balance rows for the reconciler. |
-| `sample-wallet-*.csv` | Placeholder wallet, withdrawal, and bank-credit rows. Last 4 digits only. |
+| `sample-ads-*.csv` | Placeholder spend, in-store top-up, and balance rows for the reconciler. |
+| `sample-wallet-*.csv` | Placeholder wallet, withdrawal, and in-store payout rows. Last 4 digits only. |
 | `sample-settlement*.csv` | Placeholder order payouts. One row is underpaid on purpose. |
 | `sample-orders-cancel*.csv` | Placeholder orders. One return has no pickup time and must stay out of the return rate. |
 | `sample-fx-*` | Placeholder sales, ads, and wallet amounts with a daily rate ledger and a monthly custom rate table. |

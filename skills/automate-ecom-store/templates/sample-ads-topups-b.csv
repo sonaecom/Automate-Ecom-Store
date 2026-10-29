@@ -1,0 +1,5 @@
+# synthetic
+date,store,platform,market,amount,currency,card_last4,read_time,source
+2026-01-02,<STORE_LABEL>,shopee,<MARKET>,10.00,USD,4242,2026-01-03T09:12:00,ads_export
+2026-01-02,<STORE_LABEL>,shopee,<MARKET>,10.00,USD,4242,2026-01-03T09:12:00,ads_export
+2026-01-04,<STORE_LABEL>,shopee,<MARKET>,7.00,USD,,2026-01-04T09:12:00,transaction_history

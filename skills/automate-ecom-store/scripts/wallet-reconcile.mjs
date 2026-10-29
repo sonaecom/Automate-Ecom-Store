@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Compare wallet balances and match withdrawals to bank credits.
- * Keeps the last 4 digits of a bank account and drops the rest.
- * Does not start a withdrawal and does not call a seller site.
+ * Compare wallet balances and match withdrawals to in-store payout lines.
+ * Keeps the last 4 digits of a bank account only when the store page shows them.
+ * Does not read Gmail or Drive. Does not start a withdrawal. Does not call a seller site.
  *
  *   node wallet-reconcile.mjs --balance-a a.csv [--balance-b b.csv] \
  *     --withdrawals w.csv --credits c.csv --as-of YYYY-MM-DD --out-dir DIR
@@ -115,8 +115,20 @@ const balanceA = records(balanceAPath);
 const balanceB = records(arg("--balance-b"));
 const withdrawals = records(arg("--withdrawals")).map((row) => ({ ...row, bank_last4: last4(row.bank_last4) }));
 const credits = records(arg("--credits")).map((row) => ({ ...row, bank_last4: last4(row.bank_last4) }));
+function outsideStore(source) {
+  const name = String(source || "").trim().toLowerCase();
+  return ["gmail", "drive", "drive_statement", "google", "google_drive"].includes(name);
+}
 
 let qc = balanceB.length ? "OK" : "SINGLE_SOURCE";
+let outside = false;
+for (const row of [...balanceA, ...balanceB, ...withdrawals, ...credits]) {
+  if (outsideStore(row.source)) {
+    outside = true;
+    qc = "QC_FAIL";
+    console.log(`outside_store source=${row.source}`);
+  }
+}
 if (balanceB.length) {
   for (const row of balanceA) {
     const other = balanceB.find((item) => item.store === row.store && item.platform === row.platform && item.market === row.market);
@@ -282,5 +294,5 @@ console.log(`pending_too_long: ${count("PENDING_TOO_LONG")}`);
 console.log(`amount_mismatch: ${count("AMOUNT_MISMATCH")}`);
 console.log(`duplicates: ${recon.filter((row) => row.match_status === "DUPLICATE").length}`);
 console.log(`bank_digits: ${longDigits ? "too_long" : "last4_only"}`);
-console.log(qc === "QC_FAIL" || longDigits ? "result: QC_FAIL" : "result: OK");
-if (qc === "QC_FAIL" || longDigits) process.exit(1);
+console.log(qc === "QC_FAIL" || longDigits || outside ? "result: QC_FAIL" : "result: OK");
+if (qc === "QC_FAIL" || longDigits || outside) process.exit(1);

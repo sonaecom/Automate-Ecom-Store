@@ -32,6 +32,6 @@ ROAS versus the floor in `Settings!B2`:
 
 Conditional format: if that ROAS is a number and it is below `Settings!B2`, mark the cell. Days of balance left are column K. Alert the owner when K is a number and K is below 3.
 
-`match_status` values the script writes: `MATCH`, `UNMATCHED_TOPUP`, `UNMATCHED_CHARGE`, `DUPLICATE`, `QC_FAIL`, `SINGLE_SOURCE`.
+`match_status` values the script writes: `MATCH`, `UNMATCHED_TOPUP`, `UNMATCHED_EXPORT`, `DUPLICATE`, `QC_FAIL`, `SINGLE_SOURCE`. Both sources are in the store.
 
 Filter the tab to `match_status` not equal to `MATCH` for the owner's exception list. A chart of spend by date uses columns A and E on `AdsFacts`.

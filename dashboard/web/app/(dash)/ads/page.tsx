@@ -18,7 +18,7 @@ export default function AdsPage() {
       <div className="grid gap-3 sm:grid-cols-3">
         <KpiCard label="Chi phí" value={view.adSpend.text} hint={view.adSpend.hint} />
         <KpiCard label="ROAS" value={view.roas === null ? "không xác định" : formatNumber(view.roas, 2)} />
-        <KpiCard label="Nạp chưa khớp" value={formatNumber(unmatched)} hint="MATCH là đã khớp sao kê" />
+        <KpiCard label="Nạp chưa khớp" value={formatNumber(unmatched)} hint="MATCH là hai nguồn trong shop đã khớp" />
       </div>
       <DataTable
         columns={[

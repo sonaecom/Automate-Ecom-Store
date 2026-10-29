@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * Normalize ad spend and match top-ups to card charges.
- * Keeps the last 4 digits of a card and drops the rest.
- * Does not top up and does not call a seller site.
+ * Normalize ad spend and match top-ups across two in-store sources.
+ * A card last-4 is kept only when the store page already shows it.
+ * Does not top up, does not read Gmail or Drive, and does not call a seller site.
  *
  *   node ads-reconcile.mjs --spend-a a.csv [--spend-b b.csv] --topups t.csv \
- *     --charges c.csv --balances b.csv [--roas-floor 4] --out-dir DIR
+ *     --topups-b history.csv --balances b.csv [--roas-floor 4] --out-dir DIR
  */
 
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -85,13 +85,9 @@ function daysApart(a, b) {
   return Math.abs(left - right) / 86400000;
 }
 
-function merchantOk(topup, charge) {
-  const merchant = (charge.merchant || "").toLowerCase();
-  const platform = (topup.platform || "").toLowerCase();
-  if (platform === "shopee" && merchant.includes("shopee")) return true;
-  if (platform === "lazada" && merchant.includes("lazada")) return true;
-  if ((platform === "tiktokshop" || platform === "tiktok") && merchant.includes("tiktok")) return true;
-  return false;
+function outsideStore(source) {
+  const name = String(source || "").trim().toLowerCase();
+  return ["gmail", "drive", "drive_statement", "google", "google_drive", "card_charge"].includes(name);
 }
 
 function keyOf(row) {
@@ -113,14 +109,18 @@ function writeCsv(path, header, rows) {
 const spendAPath = arg("--spend-a");
 const outDir = arg("--out-dir");
 if (!spendAPath || !outDir) {
-  console.error("usage: node ads-reconcile.mjs --spend-a file --out-dir DIR [--spend-b file --topups file --charges file --balances file --roas-floor n]");
+  console.error("usage: node ads-reconcile.mjs --spend-a file --out-dir DIR [--spend-b file --topups file --topups-b file --balances file --roas-floor n]");
+  process.exit(2);
+}
+if (process.argv.includes("--charges")) {
+  console.error("charges are not a source; pass --topups-b from the in-store ads export or transaction history");
   process.exit(2);
 }
 
 const spendA = records(spendAPath);
 const spendB = arg("--spend-b") ? records(arg("--spend-b")) : [];
-const topups = arg("--topups") ? records(arg("--topups")) : [];
-const charges = arg("--charges") ? records(arg("--charges")).map((row) => ({ ...row, card_last4: last4(row.card_last4) })) : [];
+const topups = arg("--topups") ? records(arg("--topups")).map((row) => ({ ...row, card_last4: last4(row.card_last4) })) : [];
+const history = arg("--topups-b") ? records(arg("--topups-b")).map((row) => ({ ...row, card_last4: last4(row.card_last4) })) : [];
 const balances = arg("--balances") ? records(arg("--balances")) : [];
 const floorText = arg("--roas-floor");
 const floor = floorText ? Number(floorText) : null;
@@ -137,66 +137,67 @@ if (spendB.length) {
   }
 }
 
+let outside = false;
+for (const row of [...spendA, ...spendB, ...topups, ...history, ...balances]) {
+  if (outsideStore(row.source)) {
+    outside = true;
+    qc = "QC_FAIL";
+    console.log(`outside_store source=${row.source}`);
+  }
+}
+
 const groups = new Map();
-for (const charge of charges) {
-  const id = [charge.date, charge.amount, charge.currency, charge.card_last4, (charge.merchant || "").toLowerCase()].join("|");
+for (const row of history) {
+  const id = [row.date, row.amount, row.currency, row.store, row.platform, row.market].join("|");
   if (!groups.has(id)) groups.set(id, []);
-  groups.get(id).push(charge);
+  groups.get(id).push(row);
 }
 const duplicate = new Set();
 for (const group of groups.values()) {
-  if (group.length > 1) {
-    for (const extra of group.slice(1)) duplicate.add(extra);
-  }
+  if (group.length > 1) for (const extra of group.slice(1)) duplicate.add(extra);
+}
+
+function samePlace(topup, other) {
+  if ((topup.store || "") && (other.store || "") && topup.store !== other.store) return false;
+  if ((topup.platform || "") && (other.platform || "") && topup.platform !== other.platform) return false;
+  if ((topup.market || "") && (other.market || "") && topup.market !== other.market) return false;
+  if (topup.card_last4 && other.card_last4 && topup.card_last4 !== other.card_last4) return false;
+  return true;
 }
 
 const used = new Set();
 const recon = [];
 for (const topup of topups) {
-  const found = charges.find((charge) => {
-    if (used.has(charge) || duplicate.has(charge)) return false;
-    return sameMoney(money(topup.amount), money(charge.amount))
-      && (topup.currency || "").toUpperCase() === (charge.currency || "").toUpperCase()
-      && daysApart(topup.date, charge.date) <= 2
-      && merchantOk(topup, charge);
+  const found = history.find((other) => {
+    if (used.has(other) || duplicate.has(other)) return false;
+    return sameMoney(money(topup.amount), money(other.amount))
+      && (topup.currency || "").toUpperCase() === (other.currency || "").toUpperCase()
+      && daysApart(topup.date, other.date) <= 2
+      && samePlace(topup, other);
   });
   if (found) {
     used.add(found);
-    recon.push({ ...topup, card_last4: found.card_last4, match_status: "MATCH" });
+    recon.push({ ...topup, card_last4: topup.card_last4 || found.card_last4, match_status: "MATCH" });
   } else {
-    recon.push({ ...topup, card_last4: "", match_status: "UNMATCHED_TOPUP" });
+    recon.push({ ...topup, card_last4: topup.card_last4 || "", match_status: "UNMATCHED_TOPUP" });
   }
 }
-for (const charge of charges) {
-  if (duplicate.has(charge)) {
-    recon.push({
-      date: charge.date,
-      store: "",
-      platform: "",
-      market: "",
-      amount: charge.amount,
-      currency: charge.currency,
-      merchant: charge.merchant,
-      card_last4: charge.card_last4,
-      match_status: "DUPLICATE",
-      read_time: charge.read_time || "",
-      source: charge.source || "",
-    });
-  } else if (!used.has(charge) && /shopee|tiktok|lazada|ads/i.test(charge.merchant || "")) {
-    recon.push({
-      date: charge.date,
-      store: "",
-      platform: "",
-      market: "",
-      amount: charge.amount,
-      currency: charge.currency,
-      merchant: charge.merchant,
-      card_last4: charge.card_last4,
-      match_status: "UNMATCHED_CHARGE",
-      read_time: charge.read_time || "",
-      source: charge.source || "",
-    });
-  }
+for (const other of history) {
+  const status = duplicate.has(other) ? "DUPLICATE" : (!used.has(other) ? "UNMATCHED_EXPORT" : "");
+  if (!status) continue;
+  recon.push({
+    date: other.date,
+    store: other.store || "",
+    platform: other.platform || "",
+    market: other.market || "",
+    amount: other.amount,
+    currency: other.currency,
+    merchant: "",
+    card_last4: other.card_last4 || "",
+    match_status: status,
+    read_time: other.read_time || "",
+    source: other.source || "",
+  });
 }
 
 const byStore = new Map();
@@ -267,8 +268,8 @@ for (const [id, bucket] of byStore) {
 console.log(`qc: ${qc}`);
 console.log(`matches: ${recon.filter((row) => row.match_status === "MATCH").length}`);
 console.log(`unmatched_topups: ${recon.filter((row) => row.match_status === "UNMATCHED_TOPUP").length}`);
-console.log(`unmatched_charges: ${recon.filter((row) => row.match_status === "UNMATCHED_CHARGE").length}`);
+console.log(`unmatched_exports: ${recon.filter((row) => row.match_status === "UNMATCHED_EXPORT").length}`);
 console.log(`duplicates: ${recon.filter((row) => row.match_status === "DUPLICATE").length}`);
 console.log(`card_digits: ${longDigits ? "too_long" : "last4_only"}`);
-console.log(qc === "QC_FAIL" || longDigits ? "result: QC_FAIL" : "result: OK");
-if (qc === "QC_FAIL" || longDigits) process.exit(1);
+console.log(qc === "QC_FAIL" || longDigits || outside ? "result: QC_FAIL" : "result: OK");
+if (qc === "QC_FAIL" || longDigits || outside) process.exit(1);

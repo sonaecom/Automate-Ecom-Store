@@ -26,12 +26,12 @@ The owner wants available balance, pending balance, incoming settlements, and a 
 3. Download the official statement for the same moment. Two-source QC:
 
 ```bash
-node {baseDir}/scripts/wallet-reconcile.mjs --balance-a <SCREEN> --balance-b <EXPORT> --withdrawals <WITHDRAWALS> --credits <BANK_CREDITS> --as-of <YYYY-MM-DD> --out-dir <OUT_DIR>
+node {baseDir}/scripts/wallet-reconcile.mjs --balance-a <SCREEN> --balance-b <EXPORT> --withdrawals <WITHDRAWALS> --credits <IN_STORE_PAYOUTS> --as-of <YYYY-MM-DD> --out-dir <OUT_DIR>
 ```
 
 `<OUT_DIR>` is `~/.automate-ecom-store/data/wallet/`. On `QC_FAIL`, stop and report both figures. Do not average them.
 
-4. Bank credits come from Gmail deposit notices or a statement file already in Drive. The script reduces a long account number to the last 4 digits. Match a completed withdrawal to a credit when the currency matches, the credit equals amount minus fee, the credit date is on or after the withdrawal date and within 5 days, and the last 4 digits match. Five days is a default. If the statement page prints a different arrival window, pass `--wait-days` with that number.
+4. The second source for a withdrawal is the seller centre payout or transaction history, not Gmail and not a Drive statement. `--credits` is that in-store file. Record a bank last-4 only when the store page shows it. Match a completed withdrawal when the currency matches, the in-store line equals amount minus fee, the line date is on or after the withdrawal date and within 5 days, and the last 4 digits match when both pages show them. Five days is a default. If the store page prints a different arrival window, pass `--wait-days` with that number. A row whose source is Gmail or Drive fails QC.
 5. A completed withdrawal with no credit is `MISSING`. A pending withdrawal older than 7 days is `PENDING_TOO_LONG` (`--pending-days` if the page names a different limit). A credit that is not amount minus fee is `AMOUNT_MISMATCH`. A repeated bank row is `DUPLICATE`.
 6. Alert the owner for every `MISSING`, `PENDING_TOO_LONG`, and `AMOUNT_MISMATCH`. The alert does not start a withdrawal.
 7. Push `normalized-wallet.csv` to `WalletFacts`. The `Wallet & Payouts` tab reads it. See `sheets-tab.md`.
