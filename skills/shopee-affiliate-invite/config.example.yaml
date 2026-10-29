@@ -1,0 +1,48 @@
+# Copy this file to config.yaml in the same folder as SKILL.md.
+# config.yaml is gitignored. Fill it only on the shop computer.
+# Do not run a live campaign from this example. If any value still
+# contains a <PLACEHOLDER> token, the agent must stop.
+#
+# ADSPOWER_API_KEY stays in the environment. Do not put the key in this file.
+# ADSPOWER_API_BASE is the Local API address shown in
+# AdsPower > Automation > API. You may set that same value in the
+# environment instead of adspower.api_base. Never commit the real value.
+# Do not write a host or a port number into this repository.
+
+adspower:
+  api_base: "<ADSPOWER_API_BASE>"
+  profile_id: "<PROFILE_ID>"
+  # Visible window only. Do not change this to headless.
+  headless: false
+
+campaign:
+  # Public name affiliates will see. "My Shop" in the message is a stand-in.
+  # Replace it in the private copy before a live run.
+  name: "My Shop KOL invite"
+  commission_percent: "<COMMISSION_PERCENT>"
+  kol_count: "<KOL_COUNT>"
+  start: "<START_TIME>"
+  end: "<END_TIME>"
+  # Sent as written, after the length check. Max 200 characters.
+  # Must ask the affiliate to reply and request the free sample, and must
+  # mention a long-term partnership with a new shop.
+  message: "Chào bạn! My Shop là shop mới và mong hợp tác lâu dài. Sample miễn phí đã sẵn sàng cho bạn. Bạn vui lòng trả lời lời mời và yêu cầu nhận sample miễn phí nhé. Cảm ơn bạn!"
+  # English alternative, also under 200 characters. Use one message only.
+  # "Hello! My Shop is a new shop hoping for a long-term partnership. A free sample is ready for you. Please reply to this invite and request the free sample. Thank you!"
+
+products:
+  # label is how staff recognize the product. The sample decision uses
+  # sample_variation_name only. Never choose a sample because the product
+  # title contains the size.
+  - label: "Product A"
+    sample_variation_name: "100g"
+    # Example of a real quantity in private config: 1000.
+    # If Shopee allows fewer, use Shopee's maximum and report both numbers.
+    sample_quantity: "<SAMPLE_QUANTITY>"
+
+# Relative paths are from the skill directory (the folder that contains SKILL.md).
+invited_csv: "data/invited_kol.csv"
+screenshots_dir: "screenshots"
+
+# Small red dot at the click spot so a supervisor can see where the agent clicked.
+show_click_dot: true
