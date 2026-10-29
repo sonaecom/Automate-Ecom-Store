@@ -107,5 +107,9 @@
     "page unavailable",
     "verify your identity",
     "unusual traffic"
+  ],
+  "popupClose": [
+    "[class*=modal] [class*=close]",
+    "[aria-label=Close]"
   ]
 }

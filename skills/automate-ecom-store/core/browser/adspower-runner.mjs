@@ -97,11 +97,21 @@ export function wrapPage(page, timeout = 8000) {
     goto: async (url) => { await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 }); await page.waitForTimeout(5000); },
     text: async () => (await page.innerText("body").catch(() => "")).slice(0, 20000),
     box: async (spec) => { const t = await visible(spec); return t ? t.boundingBox() : null; },
-    click: async (spec) => { const t = await visible(spec); if (!t) return false; await t.click(); await page.waitForLoadState("domcontentloaded").catch(() => {}); await page.waitForTimeout(2500); return true; },
+    click: async (spec) => { const t = await visible(spec); if (!t) return false; await t.scrollIntoViewIfNeeded().catch(() => {}); await t.click({ timeout: 10000 }); await page.waitForLoadState("domcontentloaded").catch(() => {}); await page.waitForTimeout(2500); return true; },
     fill: async (spec, value) => { const t = await visible(spec); if (!t) return false; await t.fill(value); return true; },
     value: async (spec) => { const t = await visible(spec); return t ? t.inputValue().catch(() => null) : null; },
     textOf: async (spec) => { const t = await visible(spec); return t ? (await t.innerText()).slice(0, 200) : null; },
     screenshot: (path) => page.screenshot(path ? { path } : {}),
+    dismiss: async (closers = []) => {
+      // Promo pop-ups cover the sidebar and swallow clicks. Close them, never press their call to action.
+      let closed = 0;
+      for (const css of closers) {
+        const t = page.locator(css).first();
+        if (await t.isVisible().catch(() => false)) { await t.click({ timeout: 3000 }).catch(() => {}); closed += 1; await page.waitForTimeout(800); }
+      }
+      if (!closed) await page.keyboard.press("Escape").catch(() => {});
+      return closed;
+    },
     drag: async () => {
       const handle = await visible({ css: ".secsdk-captcha-drag-icon, [class*=slider] [class*=btn], [class*=captcha] [draggable]" });
       if (!handle) return false;

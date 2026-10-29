@@ -64,6 +64,7 @@ export async function runModule(page, request, hooks) {
   hooks.dragged = false;
   if (page.goto && selectors.home && request.openHome !== false) await page.goto(request.home || selectors.home);
   const status = await gatePage(page, hooks);
+  if (status === "ok" && page.dismiss) await page.dismiss(selectors.popupClose || []);
   if (status === "login") return { result: "LOGIN_REQUIRED", actions: hooks.actions };
   if (status === "pause") return { result: "PAUSE", actions: hooks.actions };
   const limit = request.maxActions;
