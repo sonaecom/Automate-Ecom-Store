@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.8.0"
+version: "1.9.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -167,6 +167,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Official seller API, when the seller has access | `{baseDir}/adapters/README.md` |
 | Something failed | `{baseDir}/troubleshooting.md` |
 | Settlement per order, any platform | `{baseDir}/modules/orders/settlement.md` |
+| Platform fee cap, percent of GMV | `{baseDir}/modules/fees/fee-cap.md` |
 | Cancellation and return rates, any platform | `{baseDir}/modules/orders/cancel-return.md` |
 | Disputes and claims, any platform | `{baseDir}/modules/orders/disputes.md` |
 | After an affiliate invite: samples, videos, GMV | `{baseDir}/modules/affiliate/post-invite.md` |

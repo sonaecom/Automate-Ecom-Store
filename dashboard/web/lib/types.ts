@@ -178,6 +178,26 @@ export type AiCost = {
   note: string
 }
 
+export type FeeRow = {
+  level: string
+  key: string
+  sku: string
+  period: string
+  date: string
+  store: string
+  platform: string
+  market: string
+  gmv: number | null
+  fee: number | null
+  feePct: number | null
+  cap: number | null
+  result: string
+  topProgram: string
+  proposal: string
+  currency: string
+  qc: string
+}
+
 export type Bundle = {
   example: boolean
   sourceLabel: string
@@ -193,6 +213,7 @@ export type Bundle = {
   sku: SkuRow[]
   inventory: InventoryRow[]
   aiCosts: AiCost[]
+  fees: FeeRow[]
   thresholds: Thresholds
 }
 

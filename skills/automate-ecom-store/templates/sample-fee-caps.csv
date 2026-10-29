@@ -1,0 +1,6 @@
+level,store,platform,market,sku,category,cap_percent
+store,<STORE_A>,shopee,PH,,,28
+store,<STORE_B>,lazada,MY,,,20
+store,<STORE_C>,shopee,PH,,,28
+sku,<STORE_A>,shopee,PH,<SKU_A>,,28
+category,<STORE_A>,shopee,PH,,<CATEGORY_A>,28

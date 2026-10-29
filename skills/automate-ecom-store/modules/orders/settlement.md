@@ -10,7 +10,7 @@ Policy gate action is `read`.
 
 ## When to use
 
-The owner wants to know which orders were underpaid after fees and refunds.
+The owner wants to know which orders were underpaid after fees and refunds. A cap on total platform fee as a percent of GMV is `{baseDir}/modules/fees/fee-cap.md`.
 
 ## Prerequisites
 

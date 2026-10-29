@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.9.0
+
+- Platform fee cap. The owner sets a maximum fee percent of GMV per store, platform, and market, and optionally per SKU or category. Settlement exports supply commission, payment fee, service programs, and affiliate commission. Ads are included only when the owner turns that on. The skill computes the percent per order, SKU, and store day or month, alerts near 90 percent of the cap and over the cap, names the program and SKU, and proposes an opt-out, a price change, or stopping a promo. The owner approves. Nothing is changed. Two exports that disagree are both shown.
+
 ## 1.8.0
 
 - Inventory live mode reads the owner's Google Sheet with a read-only token from onboarding. It polls every 5 to 15 minutes, notices a modified time or a row hash, and pushes only variations that differ from the last pushed stock. Buffer, pending orders, max percent change, time windows or push-asap, human pace, session caps, read-back, the audit log, and the policy gate still apply. Near-realtime stops at that safe pace.

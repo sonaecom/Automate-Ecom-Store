@@ -7,6 +7,7 @@ import type {
   CustomRate,
   Filters,
   FxFact,
+  FeeRow,
   InventoryRow,
   SkuRow,
   WalletFact,
@@ -44,6 +45,7 @@ export type DashboardView = {
   wallet: Array<WalletFact & { shownAvailable: MoneyView }>
   sku: Array<SkuRow & { profitView: MoneyView; revenueView: MoneyView }>
   inventory: InventoryRow[]
+  fees: FeeRow[]
   orders: Classified[]
   rates: Record<"market" | "platform" | "store" | "category" | "product" | "sku" | "staff", RateBucket[]>
   excluded: number
@@ -211,6 +213,7 @@ export function buildView(bundle: Bundle, filters: Filters, rates: CustomRate[],
     }
   })
   const inventory = bundle.inventory.filter((row) => matchPlace(row, filters))
+  const fees = bundle.fees.filter((row) => inRange(row.date, filters) && matchPlace(row, filters))
   const orders = bundle.orders
     .filter((row) => matchPlace(row, filters))
     .map((row) => classify(row, filters.from, filters.to))
@@ -252,7 +255,7 @@ export function buildView(bundle: Bundle, filters: Filters, rates: CustomRate[],
       }
     }
   }
-  const alerts = buildAlerts(bundle, filters, ads, wallet, levels.store, levels.sku, inventory, fx)
+  const alerts = buildAlerts(bundle, filters, ads, wallet, levels.store, levels.sku, inventory, fx, fees)
   const groupBy = (field: "platform" | "market" | "store") => {
     const map = new Map<string, GroupRow>()
     for (const row of fx) {
@@ -284,6 +287,7 @@ export function buildView(bundle: Bundle, filters: Filters, rates: CustomRate[],
     wallet,
     sku,
     inventory,
+    fees,
     orders,
     rates: levels,
     excluded: orders.filter((row) => row.excluded).length,
@@ -317,6 +321,7 @@ function buildAlerts(
   skus: RateBucket[],
   inventory: InventoryRow[],
   fx: DashboardView["fx"],
+  fees: FeeRow[],
 ): AlertItem[] {
   const alerts: AlertItem[] = []
   const { thresholds } = bundle
@@ -419,6 +424,28 @@ function buildAlerts(
       })
     }
   }
+  for (const row of fees) {
+    if (row.result === "QC_FAIL") {
+      alerts.push({
+        id: `fee-qc-${row.level}-${row.key}`,
+        tone: "bad",
+        title: "Phí sàn hai nguồn không khớp",
+        detail: `${row.key}: GMV và phí giữ nguyên từng nguồn. Không lấy trung bình. Không đổi giá.`,
+        platform: row.platform,
+        market: row.market,
+      })
+    }
+    if ((row.level === "sku" || row.level === "store_day") && (row.result === "OVER" || row.result === "NEAR")) {
+      alerts.push({
+        id: `fee-${row.result}-${row.level}-${row.key}`,
+        tone: row.result === "OVER" ? "bad" : "warn",
+        title: row.result === "OVER" ? "Phí sàn vượt trần" : "Phí sàn sắp chạm trần",
+        detail: `${row.feePct ?? "—"}% / trần ${row.cap ?? "—"}%. Khoản lớn nhất: ${row.topProgram || "—"}. Đề xuất: ${row.proposal || "chỉ theo dõi"}. Không tự tắt chương trình và không đổi giá.`,
+        platform: row.platform,
+        market: row.market,
+      })
+    }
+  }
   for (const row of fx) {
     if (row.qc === "NO_RATE" || row.qc === "RATE_MISMATCH") {
       alerts.push({
@@ -443,6 +470,7 @@ export function dateSpan(bundle: Bundle) {
     ...bundle.ads.map((row) => row.date),
     ...bundle.orders.map((row) => row.createdDate),
     ...bundle.sku.map((row) => row.date),
+    ...bundle.fees.map((row) => row.date),
   ].filter(Boolean).sort()
   return { from: dates[0] || "2026-01-01", to: dates[dates.length - 1] || "2026-12-31" }
 }

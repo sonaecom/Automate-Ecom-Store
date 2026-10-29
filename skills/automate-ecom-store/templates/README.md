@@ -18,6 +18,7 @@
 | `sample-follow-up.csv` | Example orders. A not-yet-delivered row must not be messaged. |
 | `sample-scale-*.csv` | Example rows for a store that is already selling. One SKU shows sales up and margin down. One expansion is on hold. |
 | `sample-inventory-*.csv` | Example platform stock, warehouse quantities, the SKU map, a manual variation set, and the last pushed quantities. No real shop or sheet. |
+| `sample-fee-*.csv` | Example settlement fees and caps. One order disagrees on purpose. No real shop. |
 | `../modules/listing/spec.example.yaml` | Listing content plan. |
 | `../modules/listing/research-sheet.md` | Competitor notes. |
 | `../modules/homepage/style.example.yaml` | Brand colors and tone. |

@@ -1,0 +1,7 @@
+# Shape only. Copy to ~/.automate-ecom-store/fee-cap.yaml on the shop computer.
+# Do not put a real shop name or a real fee schedule here.
+# warn_fraction 0.9 means alert at 90 percent of the cap.
+# include_ads no: ads stay out of the platform-fee total until the owner turns them on.
+
+warn_fraction: "0.9"
+include_ads: no
