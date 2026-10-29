@@ -1,0 +1,19 @@
+# Shape only. Copy to ~/.automate-ecom-store/inventory.yaml on the shop computer.
+# Do not put a real shop name, sheet id, or BigSeller password here.
+# mode manual: show and alert only. mode auto: push only inside the time windows.
+
+mode: manual
+
+timezone: "<TIMEZONE>"
+times: "08:00,14:00,20:00"
+tolerance_minutes: 15
+
+batch_size: 10
+session_max: 10
+
+buffer: 2
+skip_change_percent: 50
+
+# Header names on the downloaded sheet or BigSeller export.
+sku_column: sku
+qty_column: qty

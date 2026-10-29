@@ -1,0 +1,6 @@
+sku,store,platform,on_hand,reserved,pending,source
+<SKU_A>,<STORE_A>,shopee,20,3,1,example
+<SKU_B>,<STORE_A>,shopee,10,2,0,example
+<SKU_C>,<STORE_A>,shopee,4,0,0,example
+<SKU_D>,<STORE_B>,lazada,8,1,1,example
+<SKU_E>,<STORE_A>,tiktokshop,6,0,0,example

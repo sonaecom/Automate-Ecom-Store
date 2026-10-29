@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.6.0
+
+- Inventory sync has a manual alert mode and an auto mode. Auto pushes only inside the owner's clock, in batches, under the session cap, and never below reserved plus pending. A large jump is skipped and alerted. BigSeller or a Google Sheet can be the source per store and SKU.
+
 ## 1.5.0
 
 - Growth-stage modules for a store that is already selling: margin guard, controlled ads steps, restock forecast, shop-health warnings, fee-adjusted expansion, repeat-buyer reminders, team SLAs, and Mall or brand checklists.
