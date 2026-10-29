@@ -137,7 +137,7 @@ If either check fails, do not submit a correction in a hurry and do not create a
 
 Gmail and Google Drive are optional. After the AdsPower key is saved, offer them once. A "no" or "later" is final until the person asks again.
 
-- Tokens stay only in `~/.automate-ecom-store/google-token.json`, mode 600. Never print a token, and never put one in this repository.
+- Tokens stay only in `~/.automate-ecom-store/google-token.json` and, for inventory live mode, `~/.automate-ecom-store/google-sheets-readonly.json`, mode 600. The inventory file is read-only Sheets scope. Never print a token, and never put one in this repository.
 - Prefer the OpenClaw Google connectors when they are already connected. Do not ask the person to paste a client secret into the repo.
 - On the first Drive connection, create this folder tree under a folder named `Automate-Ecom-Store`: `exports/`, `reports/weekly/`, `reports/monthly/`, `images/listings/`, `images/homepage/`, `dashboard/`, `research/`. Split exports by platform inside `exports/`.
 - Gmail may be read for penalty notices, campaign invitations, and one-time codes. Read a one-time code only while the person is present, show it to them, and do not store it. Type it into a site only if they are watching and they asked.

@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.8.0
+
+- Inventory live mode reads the owner's Google Sheet with a read-only token from onboarding. It polls every 5 to 15 minutes, notices a modified time or a row hash, and pushes only variations that differ from the last pushed stock. Buffer, pending orders, max percent change, time windows or push-asap, human pace, session caps, read-back, the audit log, and the policy gate still apply. Near-realtime stops at that safe pace.
+
 ## 1.7.0
 
 - Shopee, TikTok Shop, and Lazada policy notes for PH, MY, and ID, read 2026-10-29, are in the market files. `policies/rules.yaml` has 104 rules. Every source URL, date, and `UNVERIFIED`, `snippet only`, or `not read` marker is kept.

@@ -2,6 +2,8 @@
 # Do not put a real shop name, sheet id, or BigSeller password here.
 # mode manual: the owner sets an exact variation quantity. Preview, then push only after confirmation.
 # mode auto: push warehouse stock only inside the time windows.
+# mode live: poll a Google Sheet every 5 to 15 minutes and push only changed variations.
+# Realtime means near-realtime. Human pace and the session cap still apply.
 
 mode: manual
 
@@ -25,3 +27,10 @@ manual_sku_column: sku
 manual_qty_column: qty
 manual_store_column: store
 manual_platform_column: platform
+
+# Live sheet. Read-only scope, set up in onboarding. Do not put a token or a real sheet id here.
+poll_minutes: 10
+push_asap: no
+live_tab: Stock
+live_sku_column: sku
+live_qty_column: qty

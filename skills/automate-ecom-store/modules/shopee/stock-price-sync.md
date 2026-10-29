@@ -10,7 +10,7 @@ Khung an toàn cho Shopee. Lần chạy có người xem: nhãn menu không kh�
 
 ## When to use
 
-The person wants live Shopee stock or price to match a private sheet. Numbers come from an official export. Stock quantity pushes follow `{baseDir}/modules/inventory/sync.md` (the owner sets an exact variation quantity, confirms it, then it is pushed, or auto only inside the owner's clock). Price changes stay in the steps below.
+The person wants live Shopee stock or price to match a private sheet. Numbers come from an official export. Stock quantity pushes follow `{baseDir}/modules/inventory/sync.md` (the owner sets an exact variation quantity, confirms it, then it is pushed, auto only inside the owner's clock, or a live Google Sheet that polls every 5 to 15 minutes and pushes only changed variations at human pace). Price changes stay in the steps below.
 
 ## Prerequisites
 

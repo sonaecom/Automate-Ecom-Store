@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.7.0"
+version: "1.8.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -85,6 +85,14 @@ node {baseDir}/scripts/push-sheets.mjs --save-token
 
 The token is read from stdin and written to `~/.automate-ecom-store/google-token.json` (mode 600). Do not echo it. Then create the Drive folders named in account-safety "Mail and Drive". Exports, reports, images, and the dashboard file live there.
 
+If they also want inventory live mode, ask them to sign in again with Google's read-only Sheets scope `https://www.googleapis.com/auth/spreadsheets.readonly`. An optional Drive metadata scope may be added only to read the file's modified time. Do not accept the read-write Sheets scope for this file. Save it with:
+
+```bash
+node {baseDir}/scripts/inventory-sync.mjs --save-readonly-token
+```
+
+Stdin is JSON with `access_token`, `spreadsheet_id`, and `scope`. The file is `~/.automate-ecom-store/google-sheets-readonly.json` (mode 600). Do not echo the token or the sheet id. A "later" leaves live mode off. Manual and auto inventory still run.
+
 Gmail is for penalty mail, campaign invitations, one-time codes while the person is here, and reports to the owner. Never auto-reply to a customer email.
 
 Later task details (campaign text, prices, ROAS floor) are asked when that task starts. A later stdin write may set `tasks` or `roas_floor` and must omit `api_key`. Still do not print the key.
@@ -146,7 +154,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Shopee new listing or full rebuild | `{baseDir}/modules/shopee/product-listing.md` |
 | Shopee listing edit | `{baseDir}/modules/shopee/listing-update.md` |
 | Shopee stock or price sync | `{baseDir}/modules/shopee/stock-price-sync.md` |
-| Inventory sync, manual set or auto | `{baseDir}/modules/inventory/sync.md` |
+| Inventory sync, manual, auto, or live sheet | `{baseDir}/modules/inventory/sync.md` |
 | Shopee voucher or promotion | `{baseDir}/modules/shopee/vouchers-promotions.md` |
 | Shopee ads or GMV Max settings | `{baseDir}/modules/shopee/ads-gmv-max.md` |
 | Ads spend and top-up tracking, any platform | `{baseDir}/modules/ads/spend-topup.md` |
