@@ -2,6 +2,11 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.3.0
+
+- Growth path for a new or low-sales store: scorecard with five fixes, a 30/60/90 plan, funnel playbook, hero SKUs, platform-only review tools, a small ads test with a stop-loss, sequential cover/title/price tests, break-even ROAS, and a pre-launch check.
+- One post-delivery thank-you per order in the platform chat. No star target, no reward for a rating, no second message. A buyer problem goes to a person.
+
 ## 1.2.0
 
 - Per-store config in `stores.example.yaml`: platform, market, profile placeholder, staff, caps, and schedule. `apply-stores.mjs` applies the private copy at the start of a run and will not raise a safety cap.

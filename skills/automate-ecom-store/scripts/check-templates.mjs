@@ -9,6 +9,7 @@
 
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { findForbidden } from "./review-phrases.mjs";
 
 const file = join(import.meta.dirname, "..", "templates", "messages", "library.json");
 const library = JSON.parse(readFileSync(file, "utf8"));
@@ -28,12 +29,16 @@ for (const [group, messages] of Object.entries(library.kol_invite)) {
   if (!required.includes(group)) errors.push(`unexpected kol language ${group}`);
 }
 for (const language of required) {
-  for (const group of ["kol_invite", "chat_reply", "review_reply"]) {
-    const text = library[group][language];
+  for (const group of ["kol_invite", "chat_reply", "review_reply", "post_delivery"]) {
+    const text = library[group]?.[language];
     if (typeof text !== "string" || !text.trim()) errors.push(`${group}.${language} missing`);
     else if (group === "kol_invite" && tooLong(text)) errors.push(`${group}.${language} over 200`);
-    else if (group === "kol_invite") {
-      console.log(`kol_${language}_code_points: ${Array.from(text).length}`);
+    else if (group === "kol_invite") console.log(`kol_${language}_code_points: ${Array.from(text).length}`);
+    else if (group === "post_delivery") {
+      const hits = findForbidden(text);
+      if (hits.length) errors.push(`${group}.${language} ${hits.join(" ")}`);
+      if (Array.from(text).length > 300 || text.length > 300) errors.push(`${group}.${language} over 300`);
+      if (!text.includes("<ORDER_ID>")) errors.push(`${group}.${language} missing order id`);
     }
   }
   for (const [category, titles] of Object.entries(library.titles)) {

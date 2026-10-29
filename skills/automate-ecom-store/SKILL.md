@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.2.0"
+version: "1.3.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -162,6 +162,16 @@ If the request matches more than one row, ask which platform and which task. One
 | Disputes and claims, any platform | `{baseDir}/modules/orders/disputes.md` |
 | After an affiliate invite: samples, videos, GMV | `{baseDir}/modules/affiliate/post-invite.md` |
 | Customer retention, official tools only | `{baseDir}/modules/customers/retention.md` |
+| New or low-sales store diagnosis | `{baseDir}/modules/growth/scorecard.md` |
+| 30/60/90-day launch plan | `{baseDir}/modules/growth/launch-plan.md` |
+| Funnel, impressions to orders | `{baseDir}/modules/growth/funnel.md` |
+| Hero products, one to three | `{baseDir}/modules/growth/hero-product.md` |
+| Early reviews and trust, platform tools only | `{baseDir}/modules/growth/reviews-trust.md` |
+| Safe ads kickstart | `{baseDir}/modules/growth/ads-kickstart.md` |
+| Sequential cover, title, or price test | `{baseDir}/modules/growth/ab-test.md` |
+| Break-even ROAS | `{baseDir}/modules/growth/break-even.md` |
+| New platform or market pre-launch check | `{baseDir}/modules/growth/prelaunch.md` |
+| Post-delivery thank-you, one chat per order | `{baseDir}/modules/customers/post-delivery.md` |
 | Account security check, alert only | `{baseDir}/modules/ops/account-security.md` |
 | Back up listings to Drive | `{baseDir}/modules/ops/backup.md` |
 | Run logs and safety lessons | `{baseDir}/modules/ops/run-lessons.md` |

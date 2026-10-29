@@ -50,5 +50,12 @@
       "ms": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> | <BENEFIT>",
       "th": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> | <BENEFIT>"
     }
+  },
+  "post_delivery": {
+    "en": "Thank you for order <ORDER_ID>. If anything is wrong, reply here and we will help. An honest review, if you have a moment, helps other buyers.",
+    "vi": "Cảm ơn bạn vì đơn <ORDER_ID>. Nếu có vấn đề, nhắn tại đây để shop hỗ trợ. Nếu rảnh, một nhận xét đúng trải nghiệm của bạn sẽ giúp người mua khác.",
+    "id": "Terima kasih untuk pesanan <ORDER_ID>. Jika ada masalah, balas di sini agar kami bantu. Ulasan jujur, jika sempat, membantu pembeli lain.",
+    "ms": "Terima kasih untuk pesanan <ORDER_ID>. Jika ada masalah, balas di sini supaya kami bantu. Ulasan jujur, jika sempat, membantu pembeli lain.",
+    "th": "ขอบคุณสำหรับออเดอร์ <ORDER_ID> หากมีปัญหา ตอบที่นี่เพื่อให้ร้านช่วย หากสะดวก รีวิวตามประสบการณ์จริงจะช่วยผู้ซื้อคนอื่น"
   }
 }

@@ -1,0 +1,2 @@
+store,platform,market,date,impressions,clicks,add_to_cart,orders,bench_ctr,bench_atc,bench_cvr,bench_impressions,source
+<STORE_A>,shopee,<MARKET>,2026-10-01,10000,200,80,40,,,,,example

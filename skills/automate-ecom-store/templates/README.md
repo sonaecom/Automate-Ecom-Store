@@ -9,7 +9,13 @@
 | `sample-settlement*.csv` | Placeholder order payouts. One row is underpaid on purpose. |
 | `sample-orders-cancel*.csv` | Placeholder orders. One return has no pickup time and must stay out of the return rate. |
 | `sample-fx-*` | Placeholder sales, ads, and wallet amounts with a daily rate ledger and a monthly custom rate table. |
-| `messages/library.json` | KOL invite, chat reply, review reply, and title templates in EN, VI, ID, MS, and TH. KOL invites are at most 200 characters. |
+| `messages/library.json` | KOL invite, chat reply, review reply, post-delivery thank-you, and title templates in EN, VI, ID, MS, and TH. KOL invites are at most 200 characters. The thank-you does not ask for a star rating. |
+| `sample-scorecard.csv` | Example store-versus-competitor rows. The script prints five fixes. |
+| `sample-funnel.csv` | Example impressions, clicks, add-to-cart, and orders. |
+| `sample-hero.csv` | Example SKUs. Out-of-stock, non-compliant, and photo-missing rows stay off the hero list. |
+| `sample-break-even.csv` | Example costs. One SKU cannot cover its costs. |
+| `sample-ab.csv` | Example before and after counts. One test is inconclusive. |
+| `sample-follow-up.csv` | Example orders. A not-yet-delivered row must not be messaged. |
 | `../modules/listing/spec.example.yaml` | Listing content plan. |
 | `../modules/listing/research-sheet.md` | Competitor notes. |
 | `../modules/homepage/style.example.yaml` | Brand colors and tone. |
