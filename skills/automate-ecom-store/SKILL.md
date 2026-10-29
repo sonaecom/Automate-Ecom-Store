@@ -23,29 +23,56 @@ Use this when a marketer wants store work done in the seller centre: affiliate o
 
 If the person says "reset config", do the reset section first, then this section.
 
+Safety caps are already filled in by `save-config.mjs` (10 listing edits, 30 affiliate invites in batches of 10, 3 ads changes, 10 chat replies, per session and per day). Do not ask the marketer to type those numbers.
+
+### 1. Ask for the API key only
+
 1. Run `node {baseDir}/scripts/save-config.mjs --status`.
-2. When the result is `OK` and `api_key: set`, skip the questions. Go to "Every run".
-3. When the config is missing, or the key is missing, ask in chat. Ask only for what is missing. Do not suggest a host or a port.
+2. `result: OK` means the key and at least one store are already saved. Go to "Every run".
+3. `result: NEED_STORES` means the key is already saved. Skip the key question. Go to "List profiles".
+4. `result: MISSING` means ask for one thing only: the AdsPower API key. Say it is saved on this computer in `~/.automate-ecom-store/config.yaml` (mode 600) and you will not repeat it. Do not ask for an address, a profile id, a platform, or the caps.
 
-Ask, in this order:
-
-- AdsPower API key. Tell them it is saved only in `~/.automate-ecom-store/config.yaml` on this computer, mode 600, and you will not repeat it.
-- Local API address, only if the address in **AdsPower > Automation > API** is not the one the AdsPower client already uses. If it is the usual one, leave the address empty. If they paste a different address, save it and do not repeat it.
-- For each store: platform (`shopee`, `lazada`, or `tiktokshop`), that store's AdsPower profile id, and a short private label so they can tell stores apart later. One profile per store. They may add more than one store.
-
-4. Write the answers with the script. Pass JSON on stdin. Do not put the JSON in the chat reply, the repo, or a shell command that echoes it.
+Save the key with an empty store list and an empty address, so the official AdsPower tool uses its usual Local API address:
 
 ```bash
 node {baseDir}/scripts/save-config.mjs <<'JSON'
-{"api_key":"<API_KEY>","api_base":"","stores":[{"platform":"<PLATFORM>","profile_id":"<PROFILE_ID>","label":"<STORE_LABEL>"}]}
+{"api_key":"<API_KEY>","api_base":"","stores":[]}
 JSON
 ```
 
-Replace the tokens in the local command only. `api_base` is `""` when they kept the usual address.
+Put the real key only in that local command. Do not copy the command into the chat after it has a real key. Do not suggest a host or a port.
 
-5. Run `--status` again. Continue only on `result: OK`. Tell the person the config is saved, how many stores were saved, and which platforms. Do not read the file back in the reply. Do not quote the key, the address, the profile id, or the label.
+### 2. List profiles
 
-Later task details (campaign text, prices, ROAS floor) are asked when that task starts. Save them with another stdin write that includes `tasks` or `roas_floor`. Omit `api_key` on that later write so the saved key stays in place. Still do not print the key.
+Use the official AdsPower CLI or MCP (`get-browser-list` / `ads get-browser-list`). Do not pass an address. Do not hand-write an HTTP call. Give the CLI the saved key through the environment for that command only, without printing the key.
+
+If the command cannot connect and `api_base` is `default`, ask once for the address shown in **AdsPower > Automation > API**. Save it with another stdin write that sets `api_base` and omits `api_key`. Do not repeat the address. Retry the profile list once. If it still fails, stop and tell them to open the AdsPower app. Do not invent an address.
+
+Read every page of the profile list. Keep each profile id in your notes. Do not show ids in the chat.
+
+Run the names through the guesser:
+
+```bash
+node {baseDir}/scripts/guess-platform.mjs
+```
+
+Show a numbered list: number, profile name, and the guess (Shopee, Lazada, TikTok Shop, or chưa rõ). Nothing else.
+
+- If `unknown_count` is 0, they can reply `ok` to accept every guess, or correct by number, for example `1 shopee, 2 tiktok`.
+- If any line is `unknown`, do not accept a bare `ok`. Ask them to assign those numbers, for example `2 lazada`. They can also correct a guess the same way.
+- They can drop a number by saying so (`bỏ 3`). One profile is one store. Do not change its proxy or fingerprint.
+
+Then save, omitting the key so the saved key stays in place. `label` is the profile name. `profile_id` comes from your notes, not from the chat.
+
+```bash
+node {baseDir}/scripts/save-config.mjs <<'JSON'
+{"stores":[{"platform":"<PLATFORM>","profile_id":"<PROFILE_ID>","label":"<STORE_LABEL>"}]}
+JSON
+```
+
+Run `--status` again. Continue only on `result: OK`. Tell them how many stores were saved, which platforms, and that the safety caps are already on. Do not quote the key, the address, or any profile id.
+
+Later task details (campaign text, prices, ROAS floor) are asked when that task starts. A later stdin write may set `tasks` or `roas_floor` and must omit `api_key`. Still do not print the key.
 
 ## Reset config
 
@@ -59,7 +86,7 @@ Say only that the local config was removed. Do not print what was in it. Do not 
 
 ## Every run
 
-1. `--status`. If the key is missing, do first run. If `headless` is not false, stop.
+1. `--status`. `MISSING`: ask for the API key only. `NEED_STORES`: list profiles and let them pick by number. Do not ask for the key again. `OK`: continue. If `headless` is not false, stop.
 2. Read `{baseDir}/account-safety.md` from the first heading through session start. Obey it.
 3. Read `{baseDir}/session-runner.md` and use those scripts for pace, caps, captcha log, dedupe, and message length. `data/` and `screenshots/` paths are inside `~/.automate-ecom-store/`.
 4. Pick one module from the table. Read that file and follow it top to bottom.

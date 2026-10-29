@@ -132,11 +132,20 @@ function status(file) {
     console.log("result: BLOCKED");
     process.exit(1);
   }
+  if (!isSet(ads.api_key)) {
+    console.log("result: MISSING");
+    process.exit(1);
+  }
+  if (stores.length === 0) {
+    console.log("result: NEED_STORES");
+    return;
+  }
   console.log("result: OK");
 }
 
 function validateStores(stores) {
-  if (!Array.isArray(stores) || stores.length === 0) return "stores must be a non-empty list";
+  if (!Array.isArray(stores)) return "stores must be a list";
+  if (stores.length === 0) return "";
   for (const store of stores) {
     if (!store || typeof store !== "object") return "each store must be an object";
     if (!PLATFORMS.has(store.platform)) return "platform must be shopee, lazada, or tiktokshop";
@@ -167,8 +176,6 @@ function applyPayload(current, payload, { requireKey }) {
       profile_id: store.profile_id.trim(),
       label: typeof store.label === "string" ? store.label.trim() : "",
     }));
-  } else if (requireKey) {
-    return "stores is required";
   }
   if (payload.roas_floor !== undefined) next.roas_floor = payload.roas_floor;
   if (payload.price_drop_approval_percent !== undefined) {
@@ -241,10 +248,12 @@ function main() {
     console.error("payload_error: api_key is required");
     process.exit(2);
   }
-  const storeError = validateStores(current.stores);
-  if (storeError) {
-    console.error(`payload_error: ${storeError}`);
-    process.exit(2);
+  if (current.stores.length > 0) {
+    const storeError = validateStores(current.stores);
+    if (storeError) {
+      console.error(`payload_error: ${storeError}`);
+      process.exit(2);
+    }
   }
   writeConfig(dir, file, current);
   console.log("config: present");

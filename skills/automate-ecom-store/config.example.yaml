@@ -1,7 +1,7 @@
 # Shape only. Do not put a real key, address, profile id, or store name here.
-# First run of the skill writes the live file to:
-#   ~/.automate-ecom-store/config.yaml
-# with mode 600. That file is outside this repository.
+# First run asks for the API key only, leaves the address empty, then fills
+# stores after the marketer picks profile numbers. Caps below are the defaults.
+# The live file is ~/.automate-ecom-store/config.yaml (mode 600), outside git.
 
 adspower:
   api_key: ""

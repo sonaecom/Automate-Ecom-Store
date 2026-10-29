@@ -146,11 +146,11 @@ Do not write API keys, the Local API address, ports, profile ids, the CDP websoc
 
 Do this before the platform skill's own steps.
 
-1. Run `{baseDir}/scripts/save-config.mjs --status`. Continue only when `config: present` and `api_key: set`. If the config is missing, return to the first-run section in `SKILL.md`. Do not read `{baseDir}/config.example.yaml` as the live file. Do not print the key, the Local API address, or any profile id.
+1. Run `{baseDir}/scripts/save-config.mjs --status`. Continue only on `result: OK`. `MISSING` or `NEED_STORES` means return to the first-run section in `SKILL.md` and do not open the seller site yet. Do not read `{baseDir}/config.example.yaml` as the live file. Do not print the key, the Local API address, or any profile id.
 2. `api_base: default` means the marketer kept the client's usual Local API address. `api_base: custom` means a private address is saved. Either is allowed. `headless` must be false.
 3. `{baseDir}/scripts/captcha-log.mjs --review` for the platform of the store you are about to open. On `REVIEW`, stop.
 4. `{baseDir}/scripts/caps-counter.mjs --show --gap-hours` using `schedule.gap_hours_min`, with `--state` pointing at `~/.automate-ecom-store/data/session-state.json`. Continue only on `READY`.
-5. Official `check-status` (MCP, or `ads check-status` if the MCP tool is missing). If it fails, stop. Do not guess a port.
+5. Official `check-status` (MCP, or `ads check-status` if the MCP tool is missing). Do not pass an address when `api_base` is `default`. If that check fails and the saved address is still the default, ask once for the address in **AdsPower > Automation > API**, save it, and retry once. If it still fails, or a custom address fails, stop. Do not invent an address and do not guess a port.
 6. `open-browser` once with `profile_id` from config, `headless` `"0"`, `ip_tab` `"0"`, `proxy_detection` `"0"`, `last_opened_tabs` `"0"`. Prefer the MCP tool. CLI fallback:
 
 ```bash
