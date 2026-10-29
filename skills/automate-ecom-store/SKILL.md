@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.14.0"
+version: "1.15.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -168,7 +168,7 @@ If the request matches more than one row, ask which platform and which task. One
 | They want | Read |
 | --- | --- |
 | Selling operations map | `{baseDir}/modules/selling/README.md` |
-| Shopee affiliate / KOL / Targeted Campaign invite | `{baseDir}/modules/shopee/affiliate-invite.md` |
+| Shopee affiliate / KOL / Targeted Campaign invite | `{baseDir}/modules/shopee/affiliate-invite.md` (audit first: `{baseDir}/modules/affiliate/creator-audit.md`) |
 | Reply to a creator in platform chat | `{baseDir}/modules/affiliate/chat-reply.md` |
 | Shopee new listing or full rebuild | `{baseDir}/modules/shopee/product-listing.md` |
 | Shopee listing edit | `{baseDir}/modules/shopee/listing-update.md` |
@@ -221,7 +221,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Shopee customer chat | `{baseDir}/modules/shopee/customer-chat-reply.md` |
 | Shopee orders, GMV, or ad-spend report | `{baseDir}/modules/shopee/daily-report.md` |
 | Shopee shop homepage / Shop Decoration | `{baseDir}/modules/shopee/shop-decoration.md` |
-| TikTok Shop creator or affiliate invite | `{baseDir}/modules/tiktokshop/creator-outreach.md` |
+| TikTok Shop creator or affiliate invite | `{baseDir}/modules/tiktokshop/creator-outreach.md` (audit first: `{baseDir}/modules/affiliate/creator-audit.md`) |
 | TikTok Shop new listing or full rebuild | `{baseDir}/modules/tiktokshop/product-listing.md` |
 | TikTok Shop listing edit | `{baseDir}/modules/tiktokshop/listing-update.md` |
 | TikTok Shop stock or price | `{baseDir}/modules/tiktokshop/stock-price-sync.md` |
@@ -230,7 +230,7 @@ If the request matches more than one row, ask which platform and which task. One
 | TikTok Shop chat | `{baseDir}/modules/tiktokshop/customer-chat-reply.md` |
 | TikTok Shop daily report | `{baseDir}/modules/tiktokshop/daily-report.md` |
 | TikTok Shop homepage / shop page | `{baseDir}/modules/tiktokshop/shop-decoration.md` |
-| Lazada affiliate invite | `{baseDir}/modules/lazada/affiliate-invite.md` |
+| Lazada affiliate invite | `{baseDir}/modules/lazada/affiliate-invite.md` (audit first: `{baseDir}/modules/affiliate/creator-audit.md`) |
 | Lazada new listing or full rebuild | `{baseDir}/modules/lazada/product-listing.md` |
 | Lazada listing edit | `{baseDir}/modules/lazada/listing-update.md` |
 | Lazada stock or price | `{baseDir}/modules/lazada/stock-price-sync.md` |

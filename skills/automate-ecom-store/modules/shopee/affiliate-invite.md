@@ -4,7 +4,7 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-Create one Targeted Campaign in the shop's own Shopee Seller Centre, offer a free sample on one exact variation, and invite the next new affiliates who are not already in the private invited list.
+Create one Targeted Campaign in the shop's own Shopee Seller Centre, offer a free sample on one exact variation, and invite only creators who pass the audit in `{baseDir}/modules/affiliate/creator-audit.md` and whom the owner approved.
 
 This path was checked on a real supervised run. Follow it in order.
 
@@ -87,16 +87,16 @@ Between actions, run the 3–8 second pacer (with the session multiplier). Betwe
    - If that exact name is not in the list, stop. Do not pick a nearby size. A title that contains the same size text is not a match.
    - Set quantity to `sample_quantity` on that variation only. If the page maximum is lower, enter the maximum and report the configured quantity, the maximum, and the number you entered.
    - Leave every other variation without a sample and without a quantity.
-7. **Affiliates.** Refresh dedupe if this step took a long time. Open the picker in this tab or in a drawer on this page. Walk the list from top to bottom. Do not search, sort, or jump. The handle is the username, not the display name. Skip empty handles and `SKIP` handles. Select only `NEW` handles, in list order, in batches of `affiliate_batch_size`, with the long pause between batches. Stop at `kol_count`. If the list ends first, do not submit. Tell the person the count and wait. Check duration before each batch.
+7. **Affiliates.** Do not select anyone yet. Refresh dedupe if this step took a long time. Open the picker in this tab or in a drawer on this page. The handle is the username, not the display name. Read each visible card with `{baseDir}/modules/affiliate/creator-audit.md`, one card at a time, with the pacer between cards. Do not search, sort, or jump. Do not open a second tab. Run `creator-score.mjs` with `--top` set to `kol_count`. On `EMPTY`, stop. Show the shortlist and wait for the owner to approve it. Then select only approved handles whose shortlist row is `PASS` and `proposed` `yes`, in rank order, in batches of `affiliate_batch_size`, with the long pause between batches. Skip empty handles, `SKIP` handles, `EXCLUDE`, and `HOLD`. If an approved handle is not on the list, skip it. Do not fill the gap with the next person. If the selected count is under `kol_count`, do not submit. Tell the person the count and wait. Check duration before each batch.
 8. **Message.** Length-check again. Type the config message only. Match the on-screen counter to 200 or less.
 
-**Done when:** the form is complete, the selected count equals `kol_count`, and you have not submitted.
+**Done when:** the form is complete, every selected handle is on the approved shortlist, the selected count equals `kol_count` or the smaller count the owner accepted in this chat, and you have not submitted.
 
 ### 4. QC before submit
 
 Screenshot `screenshots/qc1-before-submit.png`. Scroll in the same page for `qc1-products.png`, `qc1-sample.png`, `qc1-affiliates.png`, and `qc1-message.png` if the form is long.
 
-Read the screen. Confirm commission, products, the exact variation name, quantity, affiliate count, message text, message length, and a still-future start. Keystrokes are not proof. On a miss, fix only with the rules above, or stop.
+Read the screen. Confirm commission, products, the exact variation name, quantity, affiliate count, that each selected handle is on the approved shortlist, message text, message length, and a still-future start. Keystrokes are not proof. On a miss, fix only with the rules above, or stop.
 
 Before submit, reserve the cap:
 
@@ -148,7 +148,8 @@ QC #1 and QC #2 above are both required. Also confirm the caps count increased b
 
 - Account-safety says stop (captcha, time, gap, headless, new tab, approval, third reload).
 - The exact variation name is not on the product.
-- Fewer than `kol_count` new affiliates are in the list.
+- The creator audit was skipped, or the owner has not approved this shortlist.
+- Fewer than `kol_count` approved creators are on the list, and the owner has not accepted the smaller count.
 - Either QC fails.
 - A control would take payment or join a program.
 
@@ -156,4 +157,4 @@ Do not finish a failed run by creating a second campaign.
 
 ## Report
 
-Send it in chat. You may also save `data/last-report.md` (gitignored). Include campaign id, name, status, commission, sample variation name, quantities, affiliates just invited (handle and display name), schedule actually saved, duration, captcha count, pace multiplier, invite cap used, screenshot paths, and both QC results. Omit the API key, API address, port, profile id, and websocket.
+Send it in chat. You may also save `data/last-report.md` (gitignored). Include campaign id, name, status, commission, sample variation name, quantities, the approved shortlist (rank, handle, score, reasons), affiliates just invited (handle and display name), schedule actually saved, duration, captcha count, pace multiplier, invite cap used, screenshot paths, and both QC results. Omit the API key, API address, port, profile id, and websocket.

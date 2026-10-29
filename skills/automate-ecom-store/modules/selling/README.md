@@ -10,9 +10,9 @@ This is the map for day-to-day selling. Every row is policy-gated and human-pace
 
 | Work | Module |
 | --- | --- |
-| Shopee affiliate invite | `{baseDir}/modules/shopee/affiliate-invite.md` |
-| TikTok Shop creator invite | `{baseDir}/modules/tiktokshop/creator-outreach.md` |
-| Lazada affiliate invite | `{baseDir}/modules/lazada/affiliate-invite.md` |
+| Shopee affiliate invite | `{baseDir}/modules/shopee/affiliate-invite.md` after `{baseDir}/modules/affiliate/creator-audit.md` |
+| TikTok Shop creator invite | `{baseDir}/modules/tiktokshop/creator-outreach.md` after `{baseDir}/modules/affiliate/creator-audit.md` |
+| Lazada affiliate invite | `{baseDir}/modules/lazada/affiliate-invite.md` after `{baseDir}/modules/affiliate/creator-audit.md` |
 | Affiliate follow-up and KOL status | `{baseDir}/modules/affiliate/post-invite.md` |
 | Reply to a creator in platform chat | `{baseDir}/modules/affiliate/chat-reply.md` |
 | Competitor research for a listing | `{baseDir}/modules/listing/research-sheet.md` |

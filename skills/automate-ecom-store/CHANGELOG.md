@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.15.0
+
+- Affiliate invites on Shopee, TikTok Shop, and Lazada score each creator before anyone is selected. Weights and thresholds are configurable. Inactive, off-category, suspicious views/followers, a 90-day repeat invite, low engagement, zero GMV, and a sample that produced no sales stay off the list. The owner approves the ranked shortlist, then the skill invites the top N. Later results record acceptance, content, orders, GMV, and ROI, and can propose new weights. The live weights change only after a yes.
+
 ## 1.14.0
 
 - After the AdsPower key, onboarding asks two optional yes/no questions: reports on Google Sheets, and an existing real-time inventory file on Google Sheets. Neither is required. If both answers are no, Gmail, Drive, and Sheets are not connected. Sheet pushes and the inventory read-only token run only for the case they accepted.
