@@ -1,5 +1,7 @@
 # Owner alerts
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Tell the owner in this chat. Do not email a customer. Do not email a one-time code. One alert per cause per session, not a repeat every minute.
 
 Send an alert when:

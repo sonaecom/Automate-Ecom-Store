@@ -1,5 +1,7 @@
 # Where wallet balances and withdrawals are read
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Read the number on the screen or in the official export. The label you see wins over this table. Record that label in `source`, the report timezone in `timezone`, and `read_time` as the shop computer's local time. Do not click Withdraw, Transfer, or any bank-account control.
 
 Read once per session. Do not refresh the balance page in a loop.

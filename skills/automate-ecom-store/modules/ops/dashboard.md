@@ -1,5 +1,7 @@
 # Owner dashboard
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Read-only. The default view is Google Sheets. The optional web app is the same numbers in a browser. Do not type a rate that is not already in the sheet or the rate ledger. Do not average two sources.
 
 Policy gate action is `read`.
@@ -31,6 +33,7 @@ Set `DASHBOARD_PASSWORD` before pointing the app at real exports. On Vercel, als
 - Cancel and return uses `Orders` when that tab exists, with the same shipped-out rule as `{baseDir}/modules/orders/cancel-return.md`. Otherwise it lists `CancelFacts` by level.
 - SKU profit uses `SkuPnl`. Inventory uses `Inventory`. Those two files are examples until a module writes them. The page says so.
 - Alerts use the thresholds tab. If the label is `example`, say the threshold is an example.
+- AI cost uses `AiCost`, one row per run and store. A blank cost stays blank.
 
 ## QC
 

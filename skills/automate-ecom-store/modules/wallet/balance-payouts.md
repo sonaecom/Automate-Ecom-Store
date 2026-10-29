@@ -1,5 +1,7 @@
 # Seller wallet and withdrawals
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Read-only. Once per session for each saved store, inside the pace and session caps. Never start a withdrawal. Never add or edit a bank account. Bank numbers are last 4 digits only.
 
 Policy gate action is `read`.

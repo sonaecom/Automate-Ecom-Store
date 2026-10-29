@@ -1,5 +1,7 @@
 # Lazada shop homepage
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Template to refine. Same gates as `{baseDir}/modules/shopee/shop-decoration.md` and `{baseDir}/modules/homepage/method.md`. Every Lazada size in `{baseDir}/modules/homepage/sizes.md` is marked verify-in-app. The crop tool after you click the header is the spec.
 
 ## When to use

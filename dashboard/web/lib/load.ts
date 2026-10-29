@@ -162,6 +162,24 @@ function mapInventory(rows: Record<string, string>[]): InventoryRow[] {
   }))
 }
 
+function mapAi(rows: Record<string, string>[]) {
+  return rows.map((row) => ({
+    loggedAt: row.logged_at || "",
+    runId: row.run_id || "",
+    store: row.store || "",
+    platform: row.platform || "",
+    market: row.market || "",
+    staff: row.staff || "",
+    module: row.module || "",
+    model: row.model || "",
+    inputTokens: num(row.input_tokens),
+    outputTokens: num(row.output_tokens),
+    cost: num(row.cost),
+    currency: (row.currency || "").toUpperCase(),
+    note: row.note || "",
+  }))
+}
+
 function mapCancel(rows: Record<string, string>[]): CancelFact[] {
   return rows.map((row) => ({
     level: row.level || "",
@@ -252,6 +270,7 @@ function bundleFrom(tables: Record<string, string>, sourceLabel: string, example
     wallet: mapWallet(parseCsv(tables.wallet || "")),
     sku: mapSku(parseCsv(tables.sku || "")),
     inventory: mapInventory(parseCsv(tables.inventory || "")),
+    aiCosts: mapAi(parseCsv(tables.ai || "")),
     thresholds,
   }
 }
@@ -282,7 +301,7 @@ export async function loadBundle(): Promise<Bundle> {
   if (source === "sheets") {
     const id = process.env.GOOGLE_SHEETS_ID || ""
     if (!id) throw new Error("Thiếu GOOGLE_SHEETS_ID.")
-    const [fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds] = await Promise.all([
+    const [fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds, ai] = await Promise.all([
       sheetValues(id, "FxFacts"),
       sheetValues(id, "MarketRates"),
       sheetValues(id, "Settings/FX"),
@@ -293,8 +312,9 @@ export async function loadBundle(): Promise<Bundle> {
       sheetValues(id, "SkuPnl"),
       sheetValues(id, "Inventory"),
       sheetValues(id, "Thresholds"),
+      sheetValues(id, "AiCost"),
     ])
-    return bundleFrom({ fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds }, "Google Sheets", false)
+    return bundleFrom({ fx, market, custom, orders, cancel, ads, wallet, sku, inventory, thresholds, ai }, "Google Sheets", false)
   }
   const dir = source === "csv" ? (process.env.CSV_DIR || SAMPLE) : SAMPLE
   const tables = {
@@ -308,6 +328,7 @@ export async function loadBundle(): Promise<Bundle> {
     sku: readLocal(dir, "sku-pnl.csv"),
     inventory: readLocal(dir, "inventory.csv"),
     thresholds: readLocal(dir, "thresholds.json"),
+    ai: readLocal(dir, "ai-cost.csv"),
   }
   if (!tables.fx && !tables.orders && !tables.ads) {
     throw new Error(`Không đọc được CSV trong ${dir}.`)

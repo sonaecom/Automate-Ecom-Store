@@ -1,5 +1,7 @@
 # Run logs and safety lessons
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Every run already appends a row and, on failure, a lesson. This module is how those notes are used. A lesson may only make the next run safer. It must not change a price, a cap, a budget, or a program.
 
 ## When to use

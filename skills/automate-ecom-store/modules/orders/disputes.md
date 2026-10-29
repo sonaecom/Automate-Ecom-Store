@@ -1,5 +1,7 @@
 # Disputes and claims
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Prepare returns, lost parcels, and complaints. You may collect evidence. You may not submit an appeal, accept a refund, or close a case until the owner says yes for that case.
 
 Policy gate action is `read` while you prepare. The moment you would press submit, the action is `submit` and the gate must be `ALLOW`. If it is pending, stop. Even with `ALLOW`, wait for the owner's yes.

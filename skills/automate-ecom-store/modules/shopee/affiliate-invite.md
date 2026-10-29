@@ -1,5 +1,7 @@
 # Shopee Affiliate Targeted Campaign invite
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Create one Targeted Campaign in the shop's own Shopee Seller Centre, offer a free sample on one exact variation, and invite the next new affiliates who are not already in the private invited list.
 
 This path was checked on a real supervised run. Follow it in order.

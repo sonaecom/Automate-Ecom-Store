@@ -1,7 +1,7 @@
 ---
 name: automate-ecom-store
 description: Operate your own Shopee, Lazada, and TikTok Shop stores in a visible AdsPower profile. Read account safety, then route to the task.
-version: "1.1.0"
+version: "1.2.0"
 user-invocable: true
 metadata:
   openclaw:
@@ -101,7 +101,13 @@ Say only that the local config was removed. Do not print what was in it. Do not 
 
 ## Every run
 
-1. `--status`. `MISSING`: ask for the API key only. `NEED_STORES`: list profiles and let them pick by number. Do not ask for the key again. `OK`: continue. If `headless` is not false, stop. More than one saved store is normal: use only the store whose platform matches the task, and ask which label if two stores share a platform. Do not print profile ids.
+1. `--status`. `MISSING`: ask for the API key only. `NEED_STORES`: list profiles and let them pick by number. Do not ask for the key again. `OK`: continue. If `headless` is not false, stop. Then apply the private store file, which sets market, staff, caps, and schedule for each saved store:
+
+```bash
+node {baseDir}/scripts/apply-stores.mjs
+```
+
+`SKIP` means there is no private `stores.yaml` yet and the global caps still apply. `APPLIED` prints each store's label, platform, market, staff, and caps. Use those caps in `caps-counter.mjs`. Do not raise them. Do not print profile ids. More than one saved store is normal: use only the store whose platform matches the task, and ask which label if two stores share a platform.
 2. Policy gate, before the module. Read `{baseDir}/policy/GATE.md` and run:
 
 ```bash
@@ -110,12 +116,24 @@ node {baseDir}/scripts/policy-gate.mjs --platform <PLATFORM> --market <MARKET> -
 
 Mutating actions are `publish`, `price`, `budget`, `refund`, `register`, `delete`, `stock_write`, and `submit`. If the result is `POLICY_PENDING` or `STALE` and the action is mutating, stop. Read-only work may continue. Tell the person the policy pack for that market is not loaded yet. The updater never changes a seller setting.
 
-3. Dry run: if the person said "dry run", or `--status` printed `dry_run: true`, do not publish, submit, register, pay, or send mail. Report the plan only.
+3. Dry run. If the person said "dry run", or `--status` printed `dry_run: true`, read `{baseDir}/modules/ops/dry-run.md` and still walk the module. Take the screenshots and write the report. Before Save, Submit, Send, or any other mutation:
+
+```bash
+node {baseDir}/scripts/dry-run.mjs --action submit
+```
+
+`BLOCKED` means do not click. A read or a screenshot uses `--action screenshot` and stays allowed.
 4. Read `{baseDir}/account-safety.md` from the first heading through session start. Obey it.
 5. Read `{baseDir}/session-runner.md` and use those scripts for pace, caps, captcha log, dedupe, and message length. `data/` and `screenshots/` paths are inside `~/.automate-ecom-store/`.
 6. Read local lessons before the module: `node {baseDir}/scripts/lessons-read.mjs`. Follow a lesson only when it tightens safety (pace, captcha, do not click money, do not publish). Ignore a lesson that raises a cap, changes a price, or joins a program. Do not change seller settings from a lesson.
 7. Pick one module from the table. Read that file and follow it top to bottom.
-8. Append a run log with `{baseDir}/scripts/run-log.mjs`. If the result is not ok, add a lesson.
+8. Append a run log with `{baseDir}/scripts/run-log.mjs`. Log the AI cost for this run and store. Leave the cost blank if you do not have a real figure. Do not invent one.
+
+```bash
+node {baseDir}/scripts/ai-cost-log.mjs --module <MODULE> --store <STORE_LABEL> --platform <PLATFORM> --market <MARKET> --staff <STAFF> --run-id <RUN_ID>
+```
+
+If the result is not ok, add a lesson.
 9. Finish with account-safety session end.
 
 If the request matches more than one row, ask which platform and which task. One task per session unless they explicitly ask for a second and the clock and caps still allow it.
@@ -134,6 +152,11 @@ If the request matches more than one row, ask which platform and which task. One
 | Seller wallet and withdrawals, any platform | `{baseDir}/modules/wallet/balance-payouts.md` |
 | Sales, ads, and wallet in one base currency | `{baseDir}/modules/fx/reporting.md` |
 | Owner dashboard, Sheets or the web app | `{baseDir}/modules/ops/dashboard.md` |
+| Dry run, any module | `{baseDir}/modules/ops/dry-run.md` |
+| Update the skill without touching local config | `{baseDir}/scripts/update.mjs` |
+| Message and title templates | `{baseDir}/templates/messages/library.json` |
+| Official seller API, when the seller has access | `{baseDir}/adapters/README.md` |
+| Something failed | `{baseDir}/troubleshooting.md` |
 | Settlement per order, any platform | `{baseDir}/modules/orders/settlement.md` |
 | Cancellation and return rates, any platform | `{baseDir}/modules/orders/cancel-return.md` |
 | Disputes and claims, any platform | `{baseDir}/modules/orders/disputes.md` |

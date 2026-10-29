@@ -1,5 +1,7 @@
 # Shopee product listing
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 New Shopee listing, or a full rebuild of one (new pack, new size, new gallery). For a small field change on a listing that already matches its spec, use `listing-update.md` instead.
 
 This is the primary listing path. TikTok Shop and Lazada follow the same gates with their own limits.

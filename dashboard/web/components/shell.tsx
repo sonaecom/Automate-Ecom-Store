@@ -12,6 +12,7 @@ import {
   Megaphone,
   Menu,
   Package,
+  Receipt,
   Settings,
   Store,
   Undo2,
@@ -33,6 +34,7 @@ const links = [
   { href: "/returns", label: "Huỷ & hoàn", icon: Undo2 },
   { href: "/inventory", label: "Tồn kho", icon: Boxes },
   { href: "/alerts", label: "Cảnh báo", icon: Bell },
+  { href: "/ai-cost", label: "Chi phí AI", icon: Receipt },
   { href: "/settings", label: "Cài đặt", icon: Settings },
 ]
 

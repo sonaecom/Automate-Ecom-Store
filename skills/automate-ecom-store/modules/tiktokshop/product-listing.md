@@ -1,5 +1,7 @@
 # TikTok Shop product listing
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Template to refine. Same gates as `{baseDir}/modules/shopee/product-listing.md` and `{baseDir}/modules/listing/method.md`. Use only the limits and menu hints in this file. Do not type a Shopee-only label if this form does not show it. If a label does not match, stop and ask.
 
 ## When to use

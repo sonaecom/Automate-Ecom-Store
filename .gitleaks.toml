@@ -1,0 +1,26 @@
+title = "automate-ecom-store"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "ipv4-address"
+description = "IPv4 address"
+regex = '''\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b'''
+keywords = ["."]
+
+[[rules]]
+id = "email-address"
+description = "Email address"
+regex = '''\b[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}\b'''
+keywords = ["@"]
+
+[allowlist]
+description = "Lockfiles and placeholder tokens"
+paths = [
+  '''(^|/)pnpm-lock\.yaml$''',
+  '''(^|/)package-lock\.json$''',
+]
+regexes = [
+  '''<[A-Z0-9_]+>''',
+]

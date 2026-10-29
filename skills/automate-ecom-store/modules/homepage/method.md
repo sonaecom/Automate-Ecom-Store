@@ -1,5 +1,7 @@
 # Shop homepage method
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Shared steps for Shopee Shop Decoration, TikTok Shop's shop page, and Lazada Store Builder. The platform file names the menu. Sizes are in `sizes.md`. The editor's crop tool wins over the table.
 
 Account safety still wins: one seller tab, human pace, no headless, no internal endpoints, no captcha solver. This task does not spend the listing-edit cap unless you also change a product. Each upload is still an action: wait 3–8 seconds, and take the longer pause every 10–15 actions.

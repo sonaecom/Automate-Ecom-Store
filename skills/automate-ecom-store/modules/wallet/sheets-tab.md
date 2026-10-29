@@ -1,5 +1,7 @@
 # Wallet & Payouts sheet
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 The owner looks at the tab named `Wallet & Payouts`. The script writes rows to `WalletFacts` so those formulas are not wiped.
 
 ## WalletFacts columns

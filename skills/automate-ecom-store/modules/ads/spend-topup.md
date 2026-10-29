@@ -1,5 +1,7 @@
 # Ads spend and top-up tracking
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Read-only across every saved store. Owners use this for actual ad spend and actual card top-ups. Never top up. Never withdraw. Never type or save a card number. Last 4 digits only.
 
 Policy gate action is `read`. Do not use `budget`.

@@ -174,11 +174,21 @@ function applyPayload(current, payload, { requireKey }) {
   if (payload.stores !== undefined) {
     const error = validateStores(payload.stores);
     if (error) return error;
-    next.stores = payload.stores.map((store) => ({
-      platform: store.platform,
-      profile_id: store.profile_id.trim(),
-      label: typeof store.label === "string" ? store.label.trim() : "",
-    }));
+    next.stores = payload.stores.map((store) => {
+      const previous = (current.stores || []).find((item) => item && (item.profile_id === store.profile_id || (store.label && item.label === store.label))) || {};
+      const merged = {
+        platform: store.platform,
+        profile_id: store.profile_id.trim(),
+        label: typeof store.label === "string" ? store.label.trim() : (previous.label || ""),
+        market: typeof store.market === "string" ? store.market.trim() : (previous.market || ""),
+        staff: typeof store.staff === "string" ? store.staff.trim() : (previous.staff || ""),
+      };
+      if (store.schedule && typeof store.schedule === "object") merged.schedule = store.schedule;
+      else if (previous.schedule) merged.schedule = previous.schedule;
+      if (store.caps && typeof store.caps === "object") merged.caps = store.caps;
+      else if (previous.caps) merged.caps = previous.caps;
+      return merged;
+    });
   }
   if (payload.roas_floor !== undefined) next.roas_floor = payload.roas_floor;
   if (payload.price_drop_approval_percent !== undefined) {

@@ -1,5 +1,7 @@
 # Customer retention
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Use only the platform's own follower and voucher tools. Propose a comeback offer. Do not publish it until the owner says yes for that offer. Do not message buyers outside the platform.
 
 Policy gate for a proposal is `read`. Publishing a voucher is `publish` and needs `ALLOW` plus the owner's yes. Dry run stops before publish.

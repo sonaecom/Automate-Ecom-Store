@@ -1,5 +1,7 @@
 # Ads & Top-up sheet
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 The owner looks at the tab named `Ads & Top-up`. The script writes rows to `AdsFacts` so those formulas are not wiped.
 
 ## AdsFacts columns

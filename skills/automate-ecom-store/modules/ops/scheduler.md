@@ -1,5 +1,7 @@
 # Session scheduler
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Build a plan. Do not start the work until the person says to run the next block.
 
 For each saved store, one block only if `caps-counter.mjs --show --gap-hours` would be `READY` and the policy gate for that market is not blocking the actions in the block.

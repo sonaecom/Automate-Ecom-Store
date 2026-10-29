@@ -1,5 +1,7 @@
 # Shopee shop homepage
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Redesign the public shop homepage in Shopee Shop Decoration. Read `{baseDir}/modules/homepage/method.md` and `{baseDir}/modules/homepage/sizes.md` before you draw or upload.
 
 ## When to use

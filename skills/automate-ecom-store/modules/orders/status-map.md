@@ -1,5 +1,7 @@
 # Order status map
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 The owner's definitions win over a status word.
 
 - An order is **shipped out** only when the export has a courier pickup time or a first transit time. That cell is the shipped signal. BigSeller All Orders uses that same column. Empty means the parcel is still in the warehouse.

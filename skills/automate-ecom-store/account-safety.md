@@ -15,7 +15,7 @@ Use this at the start and the end of every Shopee, Lazada, and TikTok Shop task.
 - One AdsPower profile per store. That profile keeps its own fixed proxy and fingerprint.
 - Open only the profile id in private config. If the seller page is a different store than the one this profile is for, stop. Do not switch accounts.
 - Never log a store in outside its own profile.
-- Never change IP, proxy, user agent, or fingerprint. Do not call `new-fingerprint`, `delete-cache-v2`, `update-browser`, `create-proxy`, or any tool that edits the profile.
+- Never change IP, proxy, user agent, or fingerprint. Do not call `new-fingerprint`, `delete-cache-v2`, `update-browser`, `create-proxy`, or any tool that edits the profile. If the proxy drops or the country on screen changes, stop. Do not reconnect it yourself.
 - Never clear cookies or site data.
 - Never start a second window for the same store.
 

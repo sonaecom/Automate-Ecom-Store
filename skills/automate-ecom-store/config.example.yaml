@@ -9,10 +9,14 @@ adspower:
   api_base: ""
   headless: false
 
+# Per-store market, staff, caps, and schedule live in stores.example.yaml.
+# The private copy is ~/.automate-ecom-store/stores.yaml and is applied every run.
 stores:
   - platform: "<PLATFORM>"
     profile_id: "<PROFILE_ID>"
     label: "<STORE_LABEL>"
+    market: "<MARKET>"
+    staff: "<STAFF>"
 
 schedule:
   gap_hours_min: 2

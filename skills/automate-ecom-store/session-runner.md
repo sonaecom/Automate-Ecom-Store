@@ -39,7 +39,7 @@ node {baseDir}/scripts/caps-counter.mjs --state <SESSION_STATE> --new-session
 node {baseDir}/scripts/caps-counter.mjs --state <SESSION_STATE> --action affiliate_invites --add 1 --session-limit 30 --daily-limit 30
 ```
 
-Use the limits from config, not a higher number. Before each new batch:
+Use the limits `apply-stores.mjs` printed for this store. If that store has no private caps, use the global caps. Do not use a higher number. Before each new batch:
 
 ```bash
 node {baseDir}/scripts/caps-counter.mjs --state <SESSION_STATE> --check-duration --max-minutes <SESSION_MINUTES_MAX>

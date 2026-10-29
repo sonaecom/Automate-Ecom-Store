@@ -1,5 +1,7 @@
 # Where ad spend and top-ups are read
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Read the number on the screen or in the official export. The column header you see wins over this table. Record that header in `source`. Record `read_time` as the shop computer's local time. The `date` is the date on the report, in the timezone the report itself prints. Do not convert it. Do not click Top up, Add funds, Pay, or Withdraw.
 
 ## Shopee Ads, including GMV Max

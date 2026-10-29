@@ -1,5 +1,7 @@
 # Homepage asset sizes
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 The editor on the day wins. If the crop tool or the component panel shows a different pixel size, file-size limit, or ratio, use that and do not upload the file from this table.
 
 "Verify" means the figure comes from a seller-education page or a widely repeated guide, and the live editor can still differ by country or by component. Read the number in the panel before you export.

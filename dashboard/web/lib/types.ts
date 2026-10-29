@@ -162,6 +162,22 @@ export type Thresholds = {
   label: string
 }
 
+export type AiCost = {
+  loggedAt: string
+  runId: string
+  store: string
+  platform: string
+  market: string
+  staff: string
+  module: string
+  model: string
+  inputTokens: number | null
+  outputTokens: number | null
+  cost: number | null
+  currency: string
+  note: string
+}
+
 export type Bundle = {
   example: boolean
   sourceLabel: string
@@ -176,6 +192,7 @@ export type Bundle = {
   wallet: WalletFact[]
   sku: SkuRow[]
   inventory: InventoryRow[]
+  aiCosts: AiCost[]
   thresholds: Thresholds
 }
 

@@ -1,5 +1,7 @@
 # Cancellation and return-to-sender rates
 
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
 Read-only. Drill from variation up to market. Encode the owner's definitions exactly. Do not cancel an order from this module.
 
 Policy gate action is `read`.

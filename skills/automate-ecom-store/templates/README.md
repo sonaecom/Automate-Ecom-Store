@@ -9,6 +9,7 @@
 | `sample-settlement*.csv` | Placeholder order payouts. One row is underpaid on purpose. |
 | `sample-orders-cancel*.csv` | Placeholder orders. One return has no pickup time and must stay out of the return rate. |
 | `sample-fx-*` | Placeholder sales, ads, and wallet amounts with a daily rate ledger and a monthly custom rate table. |
+| `messages/library.json` | KOL invite, chat reply, review reply, and title templates in EN, VI, ID, MS, and TH. KOL invites are at most 200 characters. |
 | `../modules/listing/spec.example.yaml` | Listing content plan. |
 | `../modules/listing/research-sheet.md` | Competitor notes. |
 | `../modules/homepage/style.example.yaml` | Brand colors and tone. |

@@ -1,0 +1,69 @@
+# Shape only. Copy to ~/.automate-ecom-store/stores.yaml on the shop computer
+# and fill it there. Do not put a real profile id, shop name, or staff name here.
+# apply-stores.mjs reads the private copy at the start of every run.
+# A cap above the account-safety ceiling is ignored.
+
+stores:
+  - label: "<STORE_A>"
+    platform: shopee
+    market: "<MARKET_PH>"
+    profile_id: "<PROFILE_ID>"
+    staff: "<STAFF_A>"
+    schedule:
+      gap_hours_min: 2
+      gap_hours_max: 3
+      session_minutes_max: 40
+    caps:
+      session:
+        listing_edits: 8
+        affiliate_invites: 20
+        affiliate_batch_size: 10
+        ads_changes: 2
+        chat_replies: 8
+      daily:
+        listing_edits: 8
+        affiliate_invites: 20
+        ads_changes: 2
+        chat_replies: 8
+  - label: "<STORE_B>"
+    platform: lazada
+    market: "<MARKET_MY>"
+    profile_id: "<PROFILE_ID>"
+    staff: "<STAFF_B>"
+    schedule:
+      gap_hours_min: 3
+      gap_hours_max: 4
+      session_minutes_max: 30
+    caps:
+      session:
+        listing_edits: 5
+        affiliate_invites: 10
+        affiliate_batch_size: 10
+        ads_changes: 1
+        chat_replies: 5
+      daily:
+        listing_edits: 5
+        affiliate_invites: 10
+        ads_changes: 1
+        chat_replies: 5
+  - label: "<STORE_C>"
+    platform: tiktokshop
+    market: "<MARKET_VN>"
+    profile_id: "<PROFILE_ID>"
+    staff: "<STAFF_A>"
+    schedule:
+      gap_hours_min: 2
+      gap_hours_max: 3
+      session_minutes_max: 30
+    caps:
+      session:
+        listing_edits: 5
+        affiliate_invites: 10
+        affiliate_batch_size: 10
+        ads_changes: 1
+        chat_replies: 5
+      daily:
+        listing_edits: 5
+        affiliate_invites: 10
+        ads_changes: 1
+        chat_replies: 5

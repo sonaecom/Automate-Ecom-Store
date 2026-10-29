@@ -1,0 +1,54 @@
+{
+  "languages": ["en", "vi", "id", "ms", "th"],
+  "kol_invite": {
+    "en": "Hi <KOL_NAME>. New shop <BRAND> wants a long-term partnership. Reply to this message for a free sample.",
+    "vi": "Chào <KOL_NAME>. Shop mới <BRAND> muốn hợp tác lâu dài. Trả lời tin này để nhận mẫu miễn phí nhé.",
+    "id": "Halo <KOL_NAME>. Toko baru <BRAND> ingin kerja sama jangka panjang. Balas untuk sampel gratis.",
+    "ms": "Hai <KOL_NAME>. Kedai baharu <BRAND> mahu kerjasama jangka panjang. Balas untuk sampel percuma.",
+    "th": "สวัสดี <KOL_NAME> ร้าน <BRAND> อยากร่วมงานระยะยาว ตอบกลับข้อความนี้เพื่อรับตัวอย่างฟรี"
+  },
+  "chat_reply": {
+    "en": "Thanks for writing. We are checking <ORDER_ID> and will reply in this chat.",
+    "vi": "Cảm ơn bạn đã nhắn. Shop đang kiểm tra <ORDER_ID> và sẽ trả lời trong khung chat này.",
+    "id": "Terima kasih sudah menulis. Kami sedang cek <ORDER_ID> dan akan membalas di chat ini.",
+    "ms": "Terima kasih kerana menulis. Kami sedang semak <ORDER_ID> dan akan balas di chat ini.",
+    "th": "ขอบคุณที่ทักมา ร้านกำลังตรวจ <ORDER_ID> แล้วจะตอบในแชทนี้"
+  },
+  "review_reply": {
+    "en": "Thank you for the review of <PRODUCT>. We read every note and will keep improving.",
+    "vi": "Cảm ơn bạn đã đánh giá <PRODUCT>. Shop đọc từng góp ý và sẽ làm tốt hơn.",
+    "id": "Terima kasih atas ulasan <PRODUCT>. Kami baca setiap catatan dan akan terus memperbaiki.",
+    "ms": "Terima kasih atas ulasan <PRODUCT>. Kami baca setiap nota dan akan terus perbaiki.",
+    "th": "ขอบคุณสำหรับรีวิว <PRODUCT> ร้านอ่านทุกข้อความและจะทำให้ดีขึ้น"
+  },
+  "titles": {
+    "general": {
+      "en": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> / <VARIATION_B> | <BENEFIT> | <ORIGIN_PHRASE>",
+      "vi": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> / <VARIATION_B> | <BENEFIT> | <ORIGIN_PHRASE>",
+      "id": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> / <VARIATION_B> | <BENEFIT> | <ORIGIN_PHRASE>",
+      "ms": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> / <VARIATION_B> | <BENEFIT> | <ORIGIN_PHRASE>",
+      "th": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> / <VARIATION_B> | <BENEFIT> | <ORIGIN_PHRASE>"
+    },
+    "home": {
+      "en": "<BRAND> <MAIN_KEYWORD> for home <SIZE_LABEL> | <BENEFIT>",
+      "vi": "<BRAND> <MAIN_KEYWORD> dùng trong nhà <SIZE_LABEL> | <BENEFIT>",
+      "id": "<BRAND> <MAIN_KEYWORD> untuk rumah <SIZE_LABEL> | <BENEFIT>",
+      "ms": "<BRAND> <MAIN_KEYWORD> untuk rumah <SIZE_LABEL> | <BENEFIT>",
+      "th": "<BRAND> <MAIN_KEYWORD> สำหรับบ้าน <SIZE_LABEL> | <BENEFIT>"
+    },
+    "beauty": {
+      "en": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> | <BENEFIT> | <ORIGIN_PHRASE>",
+      "vi": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> | <BENEFIT> | <ORIGIN_PHRASE>",
+      "id": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> | <BENEFIT> | <ORIGIN_PHRASE>",
+      "ms": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> | <BENEFIT> | <ORIGIN_PHRASE>",
+      "th": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> | <BENEFIT> | <ORIGIN_PHRASE>"
+    },
+    "food": {
+      "en": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> | <BENEFIT>",
+      "vi": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> | <BENEFIT>",
+      "id": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> | <BENEFIT>",
+      "ms": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> | <BENEFIT>",
+      "th": "<BRAND> <MAIN_KEYWORD> <SIZE_LABEL> <VARIATION_A> | <BENEFIT>"
+    }
+  }
+}

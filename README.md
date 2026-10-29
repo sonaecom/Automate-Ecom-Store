@@ -46,6 +46,7 @@ Lần đầu, agent chỉ hỏi API Key. Địa chỉ Local API chỉ được h
 5. Script trong `scripts/` canh nhịp, cap, log captcha, và CSV.
 6. File trong `modules/<sàn>/` là các bước của từng việc.
 7. Bảng số mặc định là Google Sheets. Muốn xem trên web: `cd dashboard/web && pnpm i && pnpm dev`. Dữ liệu trong `sample/` chỉ là ví dụ.
+8. Cập nhật skill mà không đụng cấu hình trên máy: `node skills/automate-ecom-store/scripts/update.mjs`.
 
 ### An toàn
 
@@ -80,6 +81,7 @@ On first use the skill asks only for the AdsPower API key. It uses the official 
 5. Scripts in `scripts/` handle pace, caps, the captcha log, and CSV checks.
 6. Files in `modules/<platform>/` are the steps for each task.
 7. The default dashboard is Google Sheets. The optional web app is `cd dashboard/web && pnpm i && pnpm dev`. Files in `sample/` are examples.
+8. Update the skill without touching local config: `node skills/automate-ecom-store/scripts/update.mjs`.
 
 ### Safety
 
