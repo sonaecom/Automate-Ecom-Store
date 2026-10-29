@@ -55,4 +55,4 @@ Two sources agree per store, platform, market, and date, or you report both. Eve
 
 ## Report
 
-Per store: date, spend, currency, attributed GMV, ROAS, floor, spend percent of GMV, balance, days left, top-up match counts, source names, read time, timezone. Screenshot the report page and the balance page. Do not screenshot a full card number. If one is visible, cover it and record the last 4 digits only.
+Per store: date, spend, currency, attributed GMV, ROAS, floor, spend percent of GMV, balance, days left, top-up match counts, source names, read time, timezone. Screenshot the report page and the balance page. Do not screenshot a full card number. If one is visible, cover it and record the last 4 digits only. To show spend in the base currency, pass the same native amounts to `{baseDir}/modules/fx/reporting.md`. Do not convert them in this module.

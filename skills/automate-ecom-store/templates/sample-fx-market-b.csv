@@ -1,0 +1,10 @@
+date,currency,base,rate,source
+2026-10-02,PHP,VND,428,fixture
+2026-10-03,PHP,VND,430,fixture
+2026-09-15,MYR,VND,5400,fixture
+2026-10-05,IDR,VND,1.5,fixture
+2026-10-04,THB,VND,700,fixture
+2026-10-08,SGD,VND,18000,fixture
+2026-10-08,USD,VND,25000,fixture
+2026-07-20,PHP,VND,400,fixture
+2026-11-15,PHP,VND,999,fixture

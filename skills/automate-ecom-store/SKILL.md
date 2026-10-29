@@ -132,6 +132,7 @@ If the request matches more than one row, ask which platform and which task. One
 | Shopee ads or GMV Max settings | `{baseDir}/modules/shopee/ads-gmv-max.md` |
 | Ads spend and top-up tracking, any platform | `{baseDir}/modules/ads/spend-topup.md` |
 | Seller wallet and withdrawals, any platform | `{baseDir}/modules/wallet/balance-payouts.md` |
+| Sales, ads, and wallet in one base currency | `{baseDir}/modules/fx/reporting.md` |
 | Settlement per order, any platform | `{baseDir}/modules/orders/settlement.md` |
 | Cancellation and return rates, any platform | `{baseDir}/modules/orders/cancel-return.md` |
 | Disputes and claims, any platform | `{baseDir}/modules/orders/disputes.md` |

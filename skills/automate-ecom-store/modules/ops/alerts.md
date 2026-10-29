@@ -13,6 +13,7 @@ Send an alert when:
 - A withdrawal from `modules/wallet/balance-payouts.md` is missing, pending too long, or the bank amount does not match. Do not start a withdrawal.
 - An order from `modules/orders/settlement.md` is `UNDERPAID`. Do not file the dispute yourself.
 - A store cancellation rate or return rate from `modules/orders/cancel-return.md` is above the owner's threshold. Do not cancel orders to change the rate.
+- A sales, ads, or wallet row from `modules/fx/reporting.md` has no rate or the two rate files disagree. Do not invent a rate and do not average the two files.
 - A dispute deadline from `modules/orders/disputes.md` is inside 2 days. Do not submit the appeal yourself.
 - Account security from `modules/ops/account-security.md` shows a new login or a bank-account change. Do not edit the account.
 

@@ -43,4 +43,4 @@ The person wants orders, GMV, and ad spend percent for a date range. This skill 
 
 ## Report
 
-Date range, orders, GMV, ad spend, ad spend percent or "not defined", the source of each number, any cross-check mismatch as two numbers, duration, and screenshot paths. Omit profile id, API address, port, and key.
+Date range, orders, GMV, ad spend, ad spend percent or "not defined", the source of each number, any cross-check mismatch as two numbers, duration, and screenshot paths. Omit profile id, API address, port, and key. Native GMV and ad spend can be passed to `{baseDir}/modules/fx/reporting.md` for a base-currency total. Do not convert them by hand.

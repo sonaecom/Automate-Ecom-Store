@@ -1,0 +1,14 @@
+date,store,platform,market,stream,native_amount,currency,source,read_time
+2026-10-03,<STORE_LABEL>,shopee,<MARKET>,sales,100,PHP,sample_export,2026-10-29T09:00:00Z
+2026-10-02,<STORE_LABEL>,shopee,<MARKET>,ads,10,PHP,sample_export,2026-10-29T09:00:00Z
+2026-10-02,<STORE_LABEL>,shopee,<MARKET>,wallet,50,PHP,sample_export,2026-10-29T09:00:00Z
+2026-09-15,<STORE_LABEL>,lazada,<MARKET>,sales,20,MYR,sample_export,2026-10-29T09:00:00Z
+2026-10-05,<STORE_LABEL>,tiktokshop,<MARKET>,sales,100000,IDR,sample_export,2026-10-29T09:00:00Z
+2026-10-05,<STORE_LABEL>,shopee,<MARKET>,sales,200,THB,sample_export,2026-10-29T09:00:00Z
+2026-10-08,<STORE_LABEL>,shopee,<MARKET>,sales,50000,VND,sample_export,2026-10-29T09:00:00Z
+2026-10-08,<STORE_LABEL>,shopee,<MARKET>,sales,10,SGD,sample_export,2026-10-29T09:00:00Z
+2026-10-08,<STORE_LABEL>,shopee,<MARKET>,ads,5,USD,sample_export,2026-10-29T09:00:00Z
+2026-08-01,<STORE_LABEL>,shopee,<MARKET>,sales,10,PHP,sample_export,2026-10-29T09:00:00Z
+2026-11-01,<STORE_LABEL>,shopee,<MARKET>,sales,2,PHP,sample_export,2026-10-29T09:00:00Z
+2026-10-08,<STORE_LABEL>,shopee,<MARKET>,wallet,1000,KRW,sample_export,2026-10-29T09:00:00Z
+2026-07-01,<STORE_LABEL>,shopee,<MARKET>,wallet,3,EUR,sample_export,2026-10-29T09:00:00Z

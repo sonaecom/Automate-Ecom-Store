@@ -45,3 +45,8 @@ show_click_dot: true
 
 # When true, modules report the plan and do not publish, submit, or send mail.
 dry_run: false
+
+# Base currency for multi-currency reports. View is market or custom.
+fx:
+  base_currency: VND
+  view: custom

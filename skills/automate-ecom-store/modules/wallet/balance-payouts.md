@@ -55,4 +55,4 @@ Available and pending agree across two sources, or both numbers are in the repor
 
 ## Report
 
-Per store: available, pending, incoming, currency, each withdrawal with fee, net, last 4, status, and match result, source names, read time, timezone. Screenshot the balance page with any full account number covered.
+Per store: available, pending, incoming, currency, each withdrawal with fee, net, last 4, status, and match result, source names, read time, timezone. Screenshot the balance page with any full account number covered. To show a balance in the base currency, pass the same native amounts to `{baseDir}/modules/fx/reporting.md`. Do not convert them in this module.
