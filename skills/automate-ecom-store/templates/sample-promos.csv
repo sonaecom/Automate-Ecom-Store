@@ -1,0 +1,4 @@
+# synthetic
+name,start,end,discount,items,budget
+PROMO_1,2026-11-01,2026-11-07,10,ITEM_1,none
+PROMO_2,<PROMO_NAME>,2026-11-01,2026-11-07,10,ITEM_1,none

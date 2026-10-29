@@ -4,7 +4,11 @@ Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` f
 
 Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
 
-> Skeleton. `shopee-affiliate-invite` is the proven Shopee path. This file is the safe order of work. On a supervised run, if an on-screen label does not match the hint below, stop and ask. Do not wander through other menus.
+Classification: **write**. Manifest `selling.promotion`. A row is `APPLY` only after `--approved yes`. A placeholder is `REJECT`. A budget or coin field is `HOLD_MONEY`. Do not invent a discount. If a menu label does not match, stop and ask.
+
+```bash
+node {baseDir}/scripts/promo-plan.mjs --promos ~/.automate-ecom-store/data/promos.csv --platform shopee --out-dir ~/.automate-ecom-store/data/promos/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl --approved yes --target <PROMO_COUNT>
+```
 
 Khung an toàn cho Shopee. Lần chạy có người xem: nhãn menu không khớp thì dừng và hỏi.
 

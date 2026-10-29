@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.34.0
+
+- Vouchers and promotions on Shopee, TikTok Shop, and Lazada stay proposals until the owner approves that row. A placeholder or a budget field does not get saved.
+
 ## 1.33.0
 
 - Stock and price sync on Shopee, TikTok Shop, and Lazada plans through `stock-price.mjs`. A price cut stays a proposal. The variation name is required. The hourly listing ceiling still applies.
