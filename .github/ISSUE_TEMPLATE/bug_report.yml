@@ -1,0 +1,37 @@
+name: Bug report
+description: Something in a module, runner, or guard did not work
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not paste keys, IPs, profile ids, shop names, staff names, or screenshots with store data."
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options: [Shopee, TikTok Shop, Lazada, Not platform-specific]
+    validations: { required: true }
+  - type: input
+    id: module
+    attributes:
+      label: Module id
+      placeholder: listing.edit
+  - type: dropdown
+    id: runner
+    attributes:
+      label: Runner
+      options: [adspower, mktlogin]
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened and what you expected
+    validations: { required: true }
+  - type: textarea
+    id: result
+    attributes:
+      label: Result code / log excerpt (redacted)
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Skill version (skills/automate-ecom-store/VERSION)

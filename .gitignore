@@ -21,3 +21,5 @@ node_modules/
 *.local
 *.local.*
 test-profiles.local.yaml
+
+!.env.example

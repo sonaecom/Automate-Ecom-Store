@@ -1,131 +1,240 @@
+<div align="center">
+
 # Automate Ecom Store
 
-## Bắt đầu trong 5 bước
+**All-in-one, human-paced automation for Shopee, TikTok Shop and Lazada seller centers — driven through AdsPower / MKTLogin profiles and Playwright.**
 
-Dành cho người chạy shop, không cần biết lập trình.
+[![CI](https://github.com/sonaecom/Automate-Ecom-Store/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sonaecom/Automate-Ecom-Store/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D22-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![Tests](https://img.shields.io/badge/tests-node%20--test-brightgreen)](tests/unit)
+[![Playwright](https://img.shields.io/badge/playwright-1.55-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev)
 
-1. **Cài.** Mở terminal và dán đúng một lệnh này:
+[Quick start](#quick-start) · [Architecture](#architecture) · [Modules](#modules) · [Safety](#safety-ceilings) · [Docs](docs/) · [Tiếng Việt](#tiếng-việt)
 
-```bash
-git clone https://github.com/sonaecom/Automate-Ecom-Store.git && openclaw skills install ./Automate-Ecom-Store/skills/automate-ecom-store
+</div>
+
+---
+
+## What it does
+
+Automate Ecom Store is an agent skill plus a small Node.js runtime for staff who operate their **own** marketplace stores. A staff member names a job — *invite affiliates*, *edit a listing*, *sync stock*, *reply to chats*, *daily report* — and the agent:
+
+1. reads the safety rules first,
+2. opens the store's own anti-detect browser profile (AdsPower or MKTLogin) in a **visible** window,
+3. attaches Playwright to that profile's single tab,
+4. performs the job on the normal seller-center pages at a human pace, under hard per-hour and per-day ceilings,
+5. records every write in an idempotency journal and produces a report.
+
+No direct marketplace APIs, no internal endpoints, no request replay, no headless mode.
+
+## Features
+
+### Shopee
+- **Affiliate invites** — creator scoring, owner-approved ranked shortlist, batched invites (the most proven path).
+- **Affiliate follow-up** — KOL chat templates, FAQ, keep / remind / review labels.
+- Listing edits and new product listings (variation + image required), stock & price sync.
+- Vouchers & promotions as owner-approved proposals; ads (GMV Max) read and bounded changes.
+- Customer chat replies (template-based, existing threads only), review replies, order handling.
+- Shop homepage decoration, daily report from two in-store sources.
+
+### TikTok Shop
+- Creator outreach / affiliate invites via the shared affiliate plan.
+- Listing edits, product listings, stock & price sync, promotions, ads, customer chat, shop decoration, daily report.
+
+### Lazada
+- Affiliate invites, listing edits, product listings, stock & price sync, promotions, ads, customer chat, shop decoration, daily report.
+
+> TikTok Shop and Lazada modules are templates refined after supervised runs; see [module status](#modules).
+
+### Cross-platform
+- Orchestrator day plan for up to 10 stores with one job queue per profile.
+- Policy gate (blocks star asks, review rewards, off-platform contacts, scrape floods).
+- Read-only money views: fees, settlement, wallet, ads spend, FX to VND — exact export figures with a second source.
+- Optional Next.js dashboard and optional Google Sheets reports.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    Owner([Owner / staff]) -->|job request| Agent[Agent + SKILL.md router]
+    Agent --> Orch[Orchestrator<br/>day plan, per-store schedule]
+    Orch --> Queue[(Job queue<br/>one per profile)]
+    Queue --> Guards{Guards<br/>read-only · policy · caps · money}
+    Guards --> Runner[Runner selector]
+    Runner --> AP[AdsPower runner]
+    Runner --> MK[MKTLogin runner]
+    AP --> CDP((CDP websocket))
+    MK --> CDP
+    CDP --> PW[Playwright actions<br/>one tab · human pace · captcha stop]
+    PW --> SC[Seller center<br/>Shopee · TikTok Shop · Lazada]
+    PW --> J[(Idempotency journal<br/>store/module/action/target/day)]
+    J --> Rep[Reports<br/>CSV · Sheets · dashboard]
 ```
 
-2. **Mở AdsPower** như mọi khi. Cửa sổ trình duyệt phải hiện trên màn hình. Đừng bật chế độ ẩn.
-3. **Chỉ dán API Key.** Nhắn agent, ví dụ "làm shop". Khi được hỏi, vào AdsPower → Automation → API, copy API Key và dán vào chat. Không cần gửi địa chỉ mạng hay mã profile. Sau khi key đã lưu, agent hỏi hai câu, mỗi câu chỉ cần có hoặc không. Cả hai đều không bắt buộc. (1) Có muốn báo cáo trên Google Sheets không? (2) Đã có file theo dõi tồn kho thời gian thực trên Google Sheets chưa? Cả hai đều không thì bỏ qua Google: không kết nối Gmail, Drive, hay Sheets. Agent không tự trả lời email của khách.
-4. **Chọn profile theo số.** Agent liệt kê profile và đoán sàn từ tên (Shopee, Lazada, TikTok Shop). Đúng thì trả lời `ok`. Sai thì sửa theo số, ví dụ `1 shopee, 2 tiktok`. Giới hạn an toàn mỗi phiên đã có sẵn (10 lần sửa listing, 30 lời mời, 3 lần đổi ads, 10 tin chat). Không cần điền. Sau đó là một phỏng vấn ngắn, trắc nghiệm, bỏ qua được: số cửa hàng, sàn, thị trường, và giai đoạn từng cửa hàng (mới / chưa đạt / đang ổn). Có thể nói thêm mục tiêu và số người trong đội. Chọn lộ trình theo tuần, tháng, hoặc quý. Nhắn `phỏng vấn lại` khi muốn làm lại.
-5. **Nói việc cần làm.** Ví dụ: "mời affiliate Shopee", "đăng sản phẩm mới", hoặc "làm lại trang chủ shop". Agent làm chậm, một tab, và dừng gọi bạn nếu gặp captcha.
-
-Muốn nhập lại key từ đầu, nhắn `reset config`.
-
-One skill for staff who operate their **own** Shopee, Lazada, and TikTok Shop stores. The usual host is a Linux VPS with OpenClaw or Hermes Agent, and AdsPower, on that same machine. A headed AdsPower profile opens the store on a virtual display. Playwright MCP works in one tab, at a human pace, so the account is less likely to hit captchas, restrictions, or a ban. The VPS stays on. A seller session does not.
-
-This repository is public. The API key stays on the shop computer in `~/.automate-ecom-store/config.yaml` (mode 600). The first run asks for that key, then a short skippable interview (store count, platforms, markets, and a stage per store) and two optional yes/no questions: Sheets reports, and an existing real-time inventory file on Google Sheets. If both Google answers are no, Google is skipped.
-
-## Tiếng Việt
-
-### Mục đích
-
-Một skill duy nhất. Nhân viên nhắn việc cần làm (mời affiliate, sửa listing, tồn kho, khuyến mãi, ads, chat, báo cáo). Agent đọc luật an toàn trước, rồi mở đúng phần việc trong `modules/`.
-
-### Cài vào OpenClaw
-
-Trong bản clone của repo này:
-
-```bash
-git clone https://github.com/sonaecom/Automate-Ecom-Store.git && openclaw skills install ./Automate-Ecom-Store/skills/automate-ecom-store
-```
-
-Lần đầu, agent hỏi API Key, rồi một phỏng vấn ngắn có thể bỏ qua (số cửa hàng, sàn, thị trường, giai đoạn từng cửa hàng), rồi hai câu không bắt buộc: có muốn báo cáo trên Google Sheets không, và đã có file tồn kho thời gian thực trên Google Sheets chưa. Cả hai câu Google đều không thì bỏ qua Google. Địa chỉ Local API chỉ được hỏi khi không kết nối được. Profile thì agent tự liệt kê để bạn chọn theo số. Giới hạn an toàn đã điền sẵn. Key được ghi trên máy, không in lại. Nhắn `reset config` khi muốn nhập lại key.
-
-### Kiến trúc
-
-1. `SKILL.md` là lối vào và bảng chọn việc.
-2. `account-safety.md` được đọc trước mọi thao tác trên seller centre.
-3. Skill / MCP / CLI chính thức của AdsPower mở profile (cửa sổ hiện) và trả CDP websocket. Nếu shop dùng MKTLogin, đặt `runner: mktlogin` cho store đó trong `stores.yaml`; Local API của MKTLogin (mặc định `http://localhost:4980`) mở profile và trả websocket theo cùng cách.
-4. `@playwright/mcp` gắn websocket đó, một tab.
-5. Script trong `scripts/` canh nhịp, cap, log captcha, và CSV.
-6. File trong `modules/<sàn>/` là các bước của từng việc.
-7. Báo cáo Google Sheets chỉ khi chủ shop đã trả lời có. Không thì giữ CSV trên máy. Muốn xem trên web: `cd dashboard/web && pnpm i && pnpm dev`. Dữ liệu trong `sample/` chỉ là ví dụ.
-8. Cập nhật skill mà không đụng cấu hình trên máy: `node skills/automate-ecom-store/scripts/update.mjs`.
-
-### An toàn
-
-Luật đầy đủ nằm ở `skills/automate-ecom-store/account-safety.md`: một profile một shop, không đổi IP/UA/cookie, một tab, phiên 2–3 giờ một lần và tối đa 30–40 phút, nhịp người, trần số lần sửa, không headless, không giải captcha thuê, không endpoint nội bộ. Số liệu lấy từ export chính thức. QC hai lần. Không tin tiêu đề để chọn size biến thể.
-
-### Đóng góp
-
-Sửa module trong `skills/automate-ecom-store/modules/`. Không thêm `SKILL.md` thứ hai. Không đưa khóa, host, cổng, profile id, tên shop, tên sản phẩm, hay handle vào git.
-
-## English
-
-### Purpose
-
-One skill. The marketer names the job (affiliate invite, listings, stock and price, promotions, ads, chat, or a daily report). The agent reads the safety rules first, then opens the matching file under `modules/`.
-
-### Install for OpenClaw
-
-From a clone of this repository:
-
-```bash
-git clone https://github.com/sonaecom/Automate-Ecom-Store.git && openclaw skills install ./Automate-Ecom-Store/skills/automate-ecom-store
-```
-
-On first use the skill asks for the AdsPower API key, then a short skippable interview: how many stores, which platforms, which markets, and whether each store is new, underperforming, or stable. Optional goals and team size can be skipped. The owner then picks a week, month, or quarter roadmap. It also asks two optional yes/no questions: whether the owner wants reports on Google Sheets, and whether they already have a real-time inventory tracking file on Google Sheets. Neither Google question is required. If both answers are no, Gmail, Drive, and Sheets are not connected. It uses the official tool's usual Local API address, and asks for an address only if that connection fails. It lists AdsPower profiles and the marketer picks by number; platform is guessed from the profile name when the name is clear. Safety caps are already filled in. The key is stored in `~/.automate-ecom-store/config.yaml` with mode 600 and is not printed back. Say "reset config" to delete that file and paste the key again.
-
-### Architecture
-
-1. `SKILL.md` is the entry point and the router.
-2. `account-safety.md` is read before every seller-centre action.
-2a. `OPERATING_RULES.md` lists the allowed browser runners (AdsPower, MKTLogin) and the guards that apply to both.
-3. The official AdsPower skill, MCP, or CLI opens the profile in a visible window and returns a CDP websocket. A store can use MKTLogin instead: set `runner: mktlogin` for it in `stores.yaml` (or pass `--runner mktlogin` to `scripts/real-test.mjs`). The MKTLogin local API (`MKTLOGIN_API_BASE`, default `http://localhost:4980`, optional `MKTLOGIN_API_KEY`) opens the profile and returns the websocket. Everything after that is the same code: the profile's own tab, pacing, captcha handling, and the read-only, money, and journal guards.
-4. `@playwright/mcp` attaches to that websocket and stays on one tab.
-5. Scripts in `scripts/` handle pace, caps, the captcha log, and CSV checks.
-6. Files in `modules/<platform>/` are the steps for each task.
-7. Google Sheets reports are used only when the owner said yes. Otherwise the CSV stays on the shop computer. The optional web app is `cd dashboard/web && pnpm i && pnpm dev`. Files in `sample/` are examples.
-8. Update the skill without touching local config: `node skills/automate-ecom-store/scripts/update.mjs`.
-
-### Safety
-
-The full rules are in `skills/automate-ecom-store/account-safety.md`: one profile per store, no IP, user-agent, or cookie changes, one tab, sessions 2–3 hours apart and at most 30–40 minutes, human pacing, per-session caps, no headless mode, no captcha-solver service, no internal endpoints. Figures come from official exports. Every edit is checked twice. A product title is not a variant size.
-
-### Contribution guide for staff
-
-Edit a module under `skills/automate-ecom-store/modules/`. Do not add a second `SKILL.md`. Do not put keys, hosts, ports, profile ids, shop names, product names, or creator handles in git. The Shopee affiliate invite module is the proven path. Other Shopee modules are skeletons. TikTok Shop and Lazada modules are templates to refine after a supervised run.
-
-## Local only
-
-Internal test profiles, notes, and store-specific config stay on the shop computer. Put them in `local/` or in a `*.local` / `*.local.*` file. Those paths are gitignored. The public tree keeps placeholders and synthetic samples. Before a push, `.githooks/pre-push` rejects a tracked file that names an internal test store. Turn the hook on with `git config core.hooksPath .githooks`.
-
-## Docs
-
-| Read this | For |
+| Layer | Path |
 | --- | --- |
-| `skills/automate-ecom-store/docs/vps.md` | Linux VPS: headed AdsPower, OpenClaw, Hermes Agent, systemd, update |
-| `skills/automate-ecom-store/SKILL.md` | Route from a job to one module |
-| `skills/automate-ecom-store/account-safety.md` | Pace, caps, captcha, one visible tab |
-| `skills/automate-ecom-store/policies/LAYER.md` | Policy gate, fee and chat blocks, weekly re-check gaps |
-| `skills/automate-ecom-store/modules/selling/README.md` | Day-to-day selling map |
-| `skills/automate-ecom-store/modules/fees/fee-cap.md` | Fee percent of GMV and join/leave proposals |
-| `skills/automate-ecom-store/modules/fx/reporting.md` | Market or custom monthly rates into VND |
-| `skills/automate-ecom-store/modules/orders/cancel-return.md` | Cancellation versus shipped-only returns |
-| `skills/automate-ecom-store/CHANGELOG.md` | What each version changed |
-| `dashboard/web/README.md` | Optional web dashboard, sample data, password |
+| Skill entry & router | `skills/automate-ecom-store/SKILL.md` |
+| Orchestrator & queue | `scripts/orchestrator.mjs`, `scripts/task-queue.mjs`, `scripts/unattended-tick.mjs` |
+| Runners | `core/browser/adspower-runner.mjs`, `core/browser/mktlogin-runner.mjs`, `core/browser/runners.mjs` |
+| Playwright actions | `core/browser/actions.mjs`, `core/browser/selectors/` |
+| Guards | `core/safety/read-only.mjs`, `core/policy/`, `core/targets.mjs`, `core/pace.mjs` |
+| Journal | `core/journal/action-key.mjs` |
+| Module manifests | `core/manifest/*.manifest.json` |
+| Dashboard | `dashboard/web` (Next.js, sample data only) |
 
-## Layout
+More: [docs/architecture.md](docs/architecture.md).
 
-```text
-README.md
-skills/automate-ecom-store/SKILL.md
-skills/automate-ecom-store/account-safety.md
-skills/automate-ecom-store/session-runner.md
-skills/automate-ecom-store/policies/          market notes and the rule list
-skills/automate-ecom-store/modules/          one file per job
-skills/automate-ecom-store/scripts/          checks, pace, caps, reconciles
-skills/automate-ecom-store/templates/        synthetic samples
-dashboard/web/                               optional Vietnamese dashboard
-.githooks/pre-push                           secret scan and private-name check
+## Modules
+
+| Module id | What it does | Status |
+| --- | --- | --- |
+| `affiliate.invite` | Score creators, owner approves shortlist, invite in batches | ✅ Stable on Shopee · 🧪 Beta TikTok Shop / Lazada |
+| `affiliate.post-invite` | KOL follow-up: keep / remind / review | 🧪 Beta |
+| `listing.edit` | Edit existing listings with two-step QC | 🧪 Beta |
+| `listing.product` | Create new product listings | 🧪 Beta |
+| `ads.read` | Read ads spend & metrics (read-only) | 🧪 Beta |
+| `ads.change` | Bounded ads setting changes; budget = owner approval | 🧪 Beta |
+| `customers.chat` | Template replies in existing threads | 🧪 Beta |
+| `inventory.stock-price` | Stock & price sync; big price cuts = proposal | 🧪 Beta |
+| `selling.promotion` | Voucher / promotion drafts, owner approves | 🧪 Beta |
+| `orders.handling` | Mark shipped only with pickup time; cancel vs return | 🧪 Beta |
+| `reviews.replies` | One reply per review, policy-gated | 🧪 Beta |
+| `ops.daily-report` | Daily figures cross-checked across two sources | 🧪 Beta |
+| `homepage.decoration` | Shop decoration plan, owner approves each slot | 🧪 Beta |
+| `content.video-live` | Video / live scan and posting plan | 🧪 Beta |
+
+**Beta** = code, manifest and unit tests exist; real-store supervised runs are still in progress. Full details: [docs/modules.md](docs/modules.md).
+
+## Quick start
+
+### 1. Install on a VPS
+
+Linux VPS with a desktop/virtual display, headed AdsPower or MKTLogin, Node.js ≥ 22. See [docs/deployment-vps.md](docs/deployment-vps.md).
+
+```bash
+git clone https://github.com/sonaecom/Automate-Ecom-Store.git
+cd Automate-Ecom-Store/skills/automate-ecom-store
+npm install
+npx playwright install chromium
 ```
+
+As an OpenClaw skill:
+
+```bash
+openclaw skills install ./Automate-Ecom-Store/skills/automate-ecom-store
+```
+
+### 2. Environment
+
+Copy [`.env.example`](.env.example) to a file **outside** the repo (or export in your shell / systemd unit):
+
+```bash
+export ADSPOWER_API_BASE="<ADSPOWER_LOCAL_API_URL>"
+export ADSPOWER_API_KEY="<ADSPOWER_API_KEY>"
+export MKTLOGIN_API_BASE="http://localhost:4980"   # only for runner: mktlogin
+```
+
+### 3. Run one module with a tiny limit
+
+```bash
+node scripts/real-test.mjs \
+  --store <PROFILE_ID> \
+  --module listing.edit \
+  --platform shopee \
+  --round 1 \
+  --max-actions 3 \
+  --day YYYY-MM-DD \
+  --journal file
+# add --runner mktlogin to use MKTLogin
+```
+
+The round log stores a hash of the store id, never the id itself.
+
+## Per-store config
+
+Each owner keeps a private `~/.automate-ecom-store/stores.yaml` (mode 600). Caps and targets (`modules/affiliate/targets.example.yaml`) are **set by each owner** and are never hard-coded; an empty target is not filled up to the ceiling. Example: [examples/stores.yaml](examples/stores.yaml).
+
+```yaml
+stores:
+  - label: "<STORE_A>"
+    platform: shopee          # shopee | tiktokshop | lazada
+    market: "<MARKET>"
+    profile_id: "<PROFILE_ID>"
+    runner: adspower          # adspower (default) | mktlogin
+    mode: read_only           # read_only (default) | full
+    caps:
+      session: { listing_edits: 8, affiliate_invites: 20, ads_changes: 2, chat_replies: 8 }
+      daily:   { listing_edits: 8, affiliate_invites: 20, ads_changes: 2, chat_replies: 8 }
+```
+
+See [docs/configuration.md](docs/configuration.md).
+
+## Safety ceilings
+
+Ceilings, not targets. A configured cap above a ceiling is ignored.
+
+| Rule | Value |
+| --- | --- |
+| Affiliate invites | ≤ 2,000 / day and ≤ 100 / hour, batches of ~10 |
+| Listing edits | ≤ 40 / hour |
+| Ads changes | ≤ 10 / hour |
+| Work rhythm | batches of 40–50 min, then 10–20 min breaks; seller sessions 2–3 h apart |
+| Browser | one profile per store, one tab, one fixed proxy per profile, headed only |
+| Captcha | at most one slider drag, then screenshot + pause the store (≥ 30 min) |
+
+Full rules: [docs/safety-rules.md](docs/safety-rules.md) and `skills/automate-ecom-store/account-safety.md`.
+
+## Security
+
+- **No direct marketplace APIs**, internal endpoints, request replay, or injected scripts.
+- **No secrets in the repo** — keys, IPs, profile ids, shop/staff names stay on the shop computer (`local/`, `*.local*` are gitignored).
+- **Read-only stores are enforced in code** (`core/safety/read-only.mjs`).
+- **Money actions need owner approval**: top-up, withdraw, pay, budget, refunds and big price cuts are refused or turned into proposals.
+- CI runs gitleaks, a secret scan, a repo-hygiene scan and a private-name scan on every push.
+
+Report vulnerabilities per [SECURITY.md](SECURITY.md).
+
+## Testing
+
+```bash
+cd skills/automate-ecom-store
+npm test                                   # node --test ../../tests/unit/*.test.mjs
+cd ../..
+node skills/automate-ecom-store/scripts/secret-scan.mjs .
+node skills/automate-ecom-store/scripts/repo-hygiene.mjs .
+node skills/automate-ecom-store/scripts/pre-push-private.mjs
+git config core.hooksPath .githooks        # run the scans before every push
+```
+
+Runner tests use mocked AdsPower / MKTLogin HTTP servers; no real store is touched.
+
+## Roadmap
+
+- [x] AdsPower and MKTLogin runners, shared guards
+- [x] Shopee affiliate invite (proven path)
+- [x] Orchestrator, job queue, idempotency journal
+- [ ] Supervised real-store runs for every Beta module *(planned)*
+- [ ] TikTok Shop / Lazada selector hardening *(planned)*
+- [ ] Dashboard fed from live run logs instead of samples *(planned)*
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Changes are listed in [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+[MIT](LICENSE)
+
+---
+
+## Tiếng Việt
+
+Một skill cho nhân viên vận hành **shop của chính mình** trên Shopee, TikTok Shop, Lazada. Nhân viên nhắn việc (mời affiliate, sửa listing, tồn kho, khuyến mãi, ads, chat, báo cáo); agent đọc luật an toàn, mở profile AdsPower/MKTLogin (cửa sổ hiện), làm trên một tab với nhịp người, và dừng gọi bạn khi gặp captcha.
+
+1. **Cài:** `git clone https://github.com/sonaecom/Automate-Ecom-Store.git && openclaw skills install ./Automate-Ecom-Store/skills/automate-ecom-store`
+2. **Mở AdsPower** (không bật chế độ ẩn), dán API Key khi agent hỏi. Key lưu trên máy, mode 600.
+3. **Chọn profile theo số**, trả lời phỏng vấn ngắn (có thể bỏ qua).
+4. **Nói việc cần làm**, ví dụ "mời affiliate Shopee".
+
+Nhắn `reset config` để nhập lại key, `phỏng vấn lại` để làm lại phỏng vấn. Không đưa khóa, IP, profile id, tên shop hay tên người vào git.

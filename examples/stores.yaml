@@ -1,0 +1,35 @@
+# synthetic
+# Placeholder example. Copy to ~/.automate-ecom-store/stores.yaml on the shop computer
+# (chmod 600) and fill it there. Never commit real profile ids, shop names, or staff names.
+# Caps are set by each owner. A cap above the account-safety ceiling is ignored.
+stores:
+  - label: "<STORE_A>"
+    platform: shopee            # shopee | tiktokshop | lazada
+    market: "<MARKET>"
+    profile_id: "<PROFILE_ID>"
+    runner: adspower            # adspower (default) | mktlogin
+    mode: read_only             # read_only (default) | full
+    staff: "<STAFF_A>"
+    schedule:
+      gap_hours_min: 2
+      gap_hours_max: 3
+      session_minutes_max: 40
+    caps:
+      session:
+        listing_edits: "<OWNER_VALUE>"
+        affiliate_invites: "<OWNER_VALUE>"
+        affiliate_batch_size: 10
+        ads_changes: "<OWNER_VALUE>"
+        chat_replies: "<OWNER_VALUE>"
+      daily:
+        listing_edits: "<OWNER_VALUE>"
+        affiliate_invites: "<OWNER_VALUE>"
+        ads_changes: "<OWNER_VALUE>"
+        chat_replies: "<OWNER_VALUE>"
+  - label: "<STORE_B>"
+    platform: tiktokshop
+    market: "<MARKET>"
+    profile_id: "<PROFILE_ID>"
+    runner: mktlogin
+    mode: read_only
+    staff: "<STAFF_B>"

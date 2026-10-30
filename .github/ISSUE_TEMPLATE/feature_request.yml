@@ -1,0 +1,22 @@
+name: Feature request
+description: Suggest a module or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety
+      options:
+        - label: Works through the normal seller-center pages (no direct or internal APIs)
+          required: true
+        - label: Respects the hourly/daily ceilings and owner approval for money actions
+          required: true

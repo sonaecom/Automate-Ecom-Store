@@ -23,4 +23,5 @@ paths = [
 ]
 regexes = [
   '''<[A-Z0-9_]+>''',
+  '''\ba@b\.co\b''',  # synthetic fixture in tests/unit/kol-chat.test.mjs
 ]
