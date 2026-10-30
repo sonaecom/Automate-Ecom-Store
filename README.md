@@ -41,7 +41,7 @@ Lần đầu, agent hỏi API Key, rồi một phỏng vấn ngắn có thể b�
 
 1. `SKILL.md` là lối vào và bảng chọn việc.
 2. `account-safety.md` được đọc trước mọi thao tác trên seller centre.
-3. Skill / MCP / CLI chính thức của AdsPower mở profile (cửa sổ hiện) và trả CDP websocket.
+3. Skill / MCP / CLI chính thức của AdsPower mở profile (cửa sổ hiện) và trả CDP websocket. Nếu shop dùng MKTLogin, đặt `runner: mktlogin` cho store đó trong `stores.yaml`; Local API của MKTLogin (mặc định `http://localhost:4980`) mở profile và trả websocket theo cùng cách.
 4. `@playwright/mcp` gắn websocket đó, một tab.
 5. Script trong `scripts/` canh nhịp, cap, log captcha, và CSV.
 6. File trong `modules/<sàn>/` là các bước của từng việc.
@@ -76,7 +76,8 @@ On first use the skill asks for the AdsPower API key, then a short skippable int
 
 1. `SKILL.md` is the entry point and the router.
 2. `account-safety.md` is read before every seller-centre action.
-3. The official AdsPower skill, MCP, or CLI opens the profile in a visible window and returns a CDP websocket.
+2a. `OPERATING_RULES.md` lists the allowed browser runners (AdsPower, MKTLogin) and the guards that apply to both.
+3. The official AdsPower skill, MCP, or CLI opens the profile in a visible window and returns a CDP websocket. A store can use MKTLogin instead: set `runner: mktlogin` for it in `stores.yaml` (or pass `--runner mktlogin` to `scripts/real-test.mjs`). The MKTLogin local API (`MKTLOGIN_API_BASE`, default `http://localhost:4980`, optional `MKTLOGIN_API_KEY`) opens the profile and returns the websocket. Everything after that is the same code: the profile's own tab, pacing, captcha handling, and the read-only, money, and journal guards.
 4. `@playwright/mcp` attaches to that websocket and stays on one tab.
 5. Scripts in `scripts/` handle pace, caps, the captcha log, and CSV checks.
 6. Files in `modules/<platform>/` are the steps for each task.

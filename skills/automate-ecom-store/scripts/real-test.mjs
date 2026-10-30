@@ -5,7 +5,9 @@
  *
  *   node real-test.mjs --store <PROFILE_ID> --module listing.edit --round 1 --max-actions 3 --platform shopee --day YYYY-MM-DD --journal file
  *
- * Set ADSPOWER_API_BASE and ADSPOWER_API_KEY in the environment. Do not put them in the repo.
+ * --runner adspower (default): set ADSPOWER_API_BASE and ADSPOWER_API_KEY.
+ * --runner mktlogin: MKTLOGIN_API_BASE (default http://localhost:4980), optional MKTLOGIN_API_KEY.
+ * Keep these in the environment, never in the repo.
  */
 
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -13,7 +15,8 @@ import { dirname, join } from "node:path";
 import { homedir } from "node:os";
 import { pathToFileURL } from "node:url";
 import { readFileSync } from "node:fs";
-import { adsPowerConfig, connectOverCDP, finishWrite, moveMouse, wrapPage, readKeys, scrollBy, startProfile, stopProfile, storeHash, typeWithJitter } from "../core/browser/adspower-runner.mjs";
+import { connectOverCDP, finishWrite, moveMouse, wrapPage, readKeys, scrollBy, storeHash, typeWithJitter } from "../core/browser/adspower-runner.mjs";
+import { selectRunner } from "../core/browser/runners.mjs";
 import { runModule } from "../core/browser/actions.mjs";
 
 const MANIFESTS = {
@@ -77,8 +80,10 @@ export async function executeRealTest(options, deps) {
     return { code: 2, log: body };
   }
   let config;
+  let runner;
   try {
-    config = adsPowerConfig(deps.env || process.env);
+    runner = selectRunner(options.runner, deps.env || process.env);
+    config = runner.config;
   } catch (error) {
     const body = roundLog(options, { result: error.code || "MISSING_ENV", actions: 0 });
     write(body);
@@ -87,10 +92,10 @@ export async function executeRealTest(options, deps) {
   let started;
   let connected;
   try {
-    started = await startProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl });
+    started = await runner.startProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl });
     connected = await connectOverCDP(started.ws, deps);
   } catch (error) {
-    if (started) await stopProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl }).catch(() => {});
+    if (started) await runner.stopProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl }).catch(() => {});
     const body = roundLog(options, {
       result: "ERROR",
       actions: 0,
@@ -133,7 +138,7 @@ export async function executeRealTest(options, deps) {
   } finally {
     if (options.shot) await page.screenshot(options.shot).catch(() => {});
     await connected.browser.close().catch(() => {});
-    await stopProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl }).catch(() => {});
+    await runner.stopProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl }).catch(() => {});
   }
   if (outcome.actionKey && options.journal) finishWrite(options.journal, outcome.actionKey, outcome.result === "PAUSE" ? "pending" : "done");
   outcome.missing = outcome.missing || hooks.missing;
@@ -149,7 +154,7 @@ async function main() {
   const round = arg("--round");
   const maxActions = arg("--max-actions");
   if (!store || !moduleName || !round || !maxActions) {
-    console.error("usage: node real-test.mjs --store <PROFILE_ID> --module <name> --round <n> --max-actions <k> --platform shopee|tiktokshop|lazada --day YYYY-MM-DD --journal file");
+    console.error("usage: node real-test.mjs --store <PROFILE_ID> --module <name> --round <n> --max-actions <k> --platform shopee|tiktokshop|lazada --day YYYY-MM-DD --journal file [--runner adspower|mktlogin]");
     process.exit(2);
   }
   const log = arg("--log") || join(homedir(), ".automate-ecom-store", "data", "rounds", `round-${round}.json`);
@@ -168,6 +173,7 @@ async function main() {
     value: arg("--value"),
     policyResult: arg("--policy") || "ALLOW",
     shot: arg("--shot"),
+    runner: arg("--runner") || "adspower",
   }, { env: process.env, fetchImpl: fetch });
   console.log(`round: ${outcome.log.round}`);
   console.log(`module: ${outcome.log.module}`);

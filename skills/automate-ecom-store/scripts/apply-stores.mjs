@@ -130,6 +130,7 @@ function validateStore(store, { allowPlaceholder }) {
   if (typeof store.market !== "string" || !store.market.trim()) return "market is required";
   if (typeof store.staff !== "string" || !store.staff.trim()) return "staff is required";
   if (typeof store.profile_id !== "string" || !store.profile_id.trim()) return "profile_id is required";
+  if (store.runner !== undefined && !["adspower", "mktlogin"].includes(String(store.runner).trim().toLowerCase())) return "runner must be adspower or mktlogin";
   const placeholder = store.profile_id.includes("<");
   if (allowPlaceholder && !placeholder) return "example profile_id must stay a placeholder";
   if (!allowPlaceholder && placeholder) return "placeholder";
@@ -139,6 +140,7 @@ function validateStore(store, { allowPlaceholder }) {
 function printStore(store) {
   console.log(`store: ${store.label}`);
   console.log(`platform: ${store.platform}`);
+  console.log(`runner: ${store.runner || "adspower"}`);
   console.log(`market: ${store.market}`);
   console.log(`staff: ${store.staff}`);
   console.log(`gap_hours_min: ${store.schedule.gap_hours_min}`);
@@ -162,6 +164,7 @@ function normalize(raw, allowPlaceholder) {
       profile_id: store.profile_id.trim(),
       label: store.label.trim(),
       platform: store.platform,
+      runner: String(store.runner || "adspower").trim().toLowerCase(),
       market: store.market.trim(),
       staff: store.staff.trim(),
       schedule: clampSchedule(store.schedule),
@@ -227,6 +230,7 @@ function main() {
     const merged = {
       ...previous,
       platform: store.platform,
+      runner: store.runner,
       profile_id: profile,
       label: store.label,
       market: store.market,

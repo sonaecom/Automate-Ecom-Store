@@ -9,6 +9,8 @@ stores:
     platform: shopee
     market: "<MARKET_PH>"
     profile_id: "<PROFILE_ID>"
+    # runner: adspower (default) or mktlogin. Pick the anti-detect browser that holds this profile.
+    runner: adspower
     staff: "<STAFF_A>"
     # night defaults to on (4 hours from 01:00). Set night: off only for a supervised test store.
     schedule:
@@ -31,6 +33,8 @@ stores:
     platform: lazada
     market: "<MARKET_MY>"
     profile_id: "<PROFILE_ID>"
+    # runner: adspower (default) or mktlogin. Pick the anti-detect browser that holds this profile.
+    runner: adspower
     staff: "<STAFF_B>"
     schedule:
       gap_hours_min: 3
@@ -52,6 +56,8 @@ stores:
     platform: tiktokshop
     market: "<MARKET_VN>"
     profile_id: "<PROFILE_ID>"
+    # runner: adspower (default) or mktlogin. Pick the anti-detect browser that holds this profile.
+    runner: adspower
     staff: "<STAFF_A>"
     schedule:
       gap_hours_min: 2
