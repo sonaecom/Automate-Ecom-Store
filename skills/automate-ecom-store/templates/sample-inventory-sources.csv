@@ -1,0 +1,5 @@
+# synthetic
+store,platform,source,sheet_id,tab,sku_column,qty_column
+<STORE_A>,shopee,bigseller,,,,
+<STORE_A>,tiktokshop,sheet,<SHEET_ID>,Stock,sku,qty
+<STORE_B>,lazada,sheet,<SHEET_ID>,Stock,sku,qty

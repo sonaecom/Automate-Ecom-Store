@@ -1,0 +1,13 @@
+{
+  "id": "customers.chat",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": true,
+  "money": false,
+  "priority": 0,
+  "cost": { "actions": 6, "captchaRisk": "medium" },
+  "input": "approved chat replies",
+  "output": "chat-plan.csv",
+  "policyTags": ["submit"],
+  "schema": "RunLog"
+}

@@ -1,0 +1,14 @@
+{
+  "note": "Pre-upload ceilings for finished videos. The seller upload screen wins if it shows a tighter limit. This file is not a copy of policies/rules.yaml. Livestream is not listed.",
+  "shopee": {
+    "product_video": { "formats": ["mp4"], "min_seconds": 10, "max_seconds": 60, "max_bytes": 31457280, "min_width": 720, "aspects": ["1:1", "16:9", "3:4"] },
+    "shopee_video": { "formats": ["mp4"], "min_seconds": 3, "max_seconds": 60, "max_bytes": 31457280, "min_width": 720, "aspects": ["9:16"] }
+  },
+  "tiktokshop": {
+    "product_video": { "formats": ["mp4", "mov"], "min_seconds": 5, "max_seconds": 60, "max_bytes": 104857600, "min_width": 720, "aspects": ["9:16", "1:1"] },
+    "shop_video": { "formats": ["mp4", "mov"], "min_seconds": 5, "max_seconds": 60, "max_bytes": 104857600, "min_width": 720, "aspects": ["9:16", "1:1"] }
+  },
+  "lazada": {
+    "product_video": { "formats": ["mp4"], "min_seconds": 10, "max_seconds": 60, "max_bytes": 104857600, "min_width": 720, "aspects": ["1:1", "16:9", "9:16"] }
+  }
+}

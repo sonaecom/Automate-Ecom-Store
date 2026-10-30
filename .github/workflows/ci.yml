@@ -1,0 +1,46 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install gitleaks
+        run: |
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v8.28.0/gitleaks_8.28.0_linux_x64.tar.gz" | tar -xz
+          sudo mv gitleaks /usr/local/bin/gitleaks
+      - name: Scan for keys, passwords, IPs, and emails
+        run: gitleaks detect --source . --config .gitleaks.toml --redact --no-banner --exit-code 1
+
+  skill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node skills/automate-ecom-store/scripts/secret-scan.mjs .
+      - run: node skills/automate-ecom-store/scripts/lint-skill.mjs
+      - run: node skills/automate-ecom-store/scripts/check-md-links.mjs .
+      - run: node skills/automate-ecom-store/scripts/check-templates.mjs
+      - run: node skills/automate-ecom-store/scripts/apply-stores.mjs --check
+
+  dashboard:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dashboard/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: corepack enable && corepack prepare pnpm@12.16.1 --activate
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build

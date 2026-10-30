@@ -1,0 +1,11 @@
+{
+  "name": "automate-ecom-store",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test ../../tests/unit/*.test.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.55.1"
+  }
+}

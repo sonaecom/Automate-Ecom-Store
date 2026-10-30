@@ -1,0 +1,5 @@
+# synthetic
+date,store,platform,market,available,pending,incoming,currency,withdrawal_amount,withdrawal_fee,withdrawal_net,bank_last4,withdrawal_status,match_status,source,read_time,timezone
+2026-10-20,<STORE_A>,shopee,<MARKET_PH>,200,50,10,PHP,100,1,99,<LAST4>,completed,MISSING,example,2026-10-29T09:00:00Z,<TIMEZONE>
+2026-10-20,<STORE_B>,lazada,<MARKET_MY>,80,10,0,MYR,20,1,19,<LAST4>,completed,MATCH,example,2026-10-29T09:00:00Z,<TIMEZONE>
+2026-10-20,<STORE_C>,tiktokshop,<MARKET_VN>,500000,0,0,VND,0,0,0,,none,OK,example,2026-10-29T09:00:00Z,<TIMEZONE>

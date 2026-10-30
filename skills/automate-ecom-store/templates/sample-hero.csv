@@ -1,0 +1,8 @@
+# synthetic
+sku,name,margin_pct,stock,orders,photo_ready,compliant,source
+<SKU_A>,<PRODUCT_A>,40,20,12,yes,yes,example
+<SKU_B>,<PRODUCT_B>,25,8,4,yes,yes,example
+<SKU_C>,<PRODUCT_C>,55,0,30,yes,yes,example
+<SKU_D>,<PRODUCT_D>,60,15,9,yes,no,example
+<SKU_E>,<PRODUCT_E>,10,6,1,no,yes,example
+<SKU_F>,<PRODUCT_F>,15,10,2,yes,yes,example

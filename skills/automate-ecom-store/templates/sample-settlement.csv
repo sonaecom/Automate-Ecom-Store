@@ -1,0 +1,4 @@
+# synthetic
+order_id,date,store,platform,market,sale_price,platform_fee,shipping_fee,voucher,refund,payout,currency,source,read_time
+<ORDER_ID>,2026-10-28,<STORE_LABEL>,shopee,<MARKET>,100.00,10.00,5.00,5.00,0,80.00,USD,sample_income,2026-10-29T09:00:00
+<ORDER_ID_2>,2026-10-28,<STORE_LABEL>,shopee,<MARKET>,100.00,10.00,5.00,5.00,0,70.00,USD,sample_income,2026-10-29T09:00:00

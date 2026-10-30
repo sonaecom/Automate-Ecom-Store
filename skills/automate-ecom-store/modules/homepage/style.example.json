@@ -1,0 +1,13 @@
+{
+  "brand": "<BRAND>",
+  "tone": "<TONE>",
+  "logo": "<LOGO_FILE>",
+  "packaging": "<PACKAGING_FILE>",
+  "colors": {
+    "background": "",
+    "ink": "",
+    "accent": ""
+  },
+  "hero_line": "<HERO_LINE>",
+  "trust_line": "<TRUST_LINE>"
+}

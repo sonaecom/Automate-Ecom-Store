@@ -1,0 +1,13 @@
+# synthetic
+date,store,platform,market,stream,native_amount,currency,base_currency,market_rate,market_rate_date,market_rate_month,market_fallback,amount_market,custom_rate,custom_rate_date,custom_rate_month,custom_fallback,amount_custom,applied_mode,applied_rate,applied_rate_date,applied_rate_month,applied_fallback,amount_base,qc,source,read_time
+2026-10-02,<STORE_A>,shopee,<MARKET_PH>,sales,1000,PHP,VND,428,2026-10-02,,none,428000,430,,2026-10,none,430000,custom,430,,2026-10,none,430000,OK,example,2026-10-29T09:00:00Z
+2026-10-15,<STORE_A>,shopee,<MARKET_PH>,sales,500,PHP,VND,431,2026-10-15,,none,215500,430,,2026-10,none,215000,custom,430,,2026-10,none,215000,OK,example,2026-10-29T09:00:00Z
+2026-09-15,<STORE_B>,lazada,<MARKET_MY>,sales,20,MYR,VND,5400,2026-09-15,,none,108000,5000,,2026-09,none,100000,custom,5000,,2026-09,none,100000,OK,example,2026-10-29T09:00:00Z
+2026-10-08,<STORE_C>,tiktokshop,<MARKET_VN>,sales,50000,VND,VND,1,2026-10-08,2026-10,none,50000,1,2026-10-08,2026-10,none,50000,identity,1,2026-10-08,2026-10,none,50000,OK,example,2026-10-29T09:00:00Z
+2026-10-02,<STORE_A>,shopee,<MARKET_PH>,ads,10,PHP,VND,428,2026-10-02,,none,4280,430,,2026-10,none,4300,custom,430,,2026-10,none,4300,OK,example,2026-10-29T09:00:00Z
+2026-10-16,<STORE_A>,shopee,<MARKET_PH>,ads,20,PHP,VND,431,2026-10-15,,market_on_or_before,8620,430,,2026-10,none,8600,custom,430,,2026-10,none,8600,OK,example,2026-10-29T09:00:00Z
+2026-10-10,<STORE_B>,lazada,<MARKET_MY>,ads,5,MYR,VND,5450,2026-10-10,,none,27250,5000,,2026-09,earlier_custom_month,25000,custom,5000,,2026-09,earlier_custom_month,25000,OK,example,2026-10-29T09:00:00Z
+2026-10-20,<STORE_A>,shopee,<MARKET_PH>,wallet,200,PHP,VND,431,2026-10-15,,market_on_or_before,86200,430,,2026-10,none,86000,custom,430,,2026-10,none,86000,OK,example,2026-10-29T09:00:00Z
+2026-10-20,<STORE_B>,lazada,<MARKET_MY>,wallet,80,MYR,VND,5450,2026-10-10,,market_on_or_before,436000,5000,,2026-09,earlier_custom_month,400000,custom,5000,,2026-09,earlier_custom_month,400000,OK,example,2026-10-29T09:00:00Z
+2026-10-20,<STORE_C>,tiktokshop,<MARKET_VN>,wallet,500000,VND,VND,1,2026-10-20,2026-10,none,500000,1,2026-10-20,2026-10,none,500000,identity,1,2026-10-20,2026-10,none,500000,OK,example,2026-10-29T09:00:00Z
+2026-10-09,<STORE_A>,shopee,<MARKET_PH>,sales,5,USD,VND,,,,no_rate,,,,,no_rate,,,,,,no_rate,,NO_RATE,example,2026-10-29T09:00:00Z

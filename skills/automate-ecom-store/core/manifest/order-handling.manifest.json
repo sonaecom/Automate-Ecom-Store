@@ -1,0 +1,13 @@
+{
+  "id": "orders.handling",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": true,
+  "money": false,
+  "priority": 1,
+  "cost": { "actions": 4, "captchaRisk": "low" },
+  "input": "to-ship list",
+  "output": "ship-plan.csv",
+  "policyTags": ["submit"],
+  "schema": "Order"
+}

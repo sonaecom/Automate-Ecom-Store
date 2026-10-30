@@ -1,0 +1,11 @@
+{
+  "$id": "AdSpend",
+  "type": "object",
+  "required": ["storeId", "day", "spend"],
+  "properties": {
+    "storeId": { "type": "string" },
+    "day": { "type": "string" },
+    "spend": { "$ref": "money.schema.json" },
+    "topup": { "$ref": "money.schema.json" }
+  }
+}

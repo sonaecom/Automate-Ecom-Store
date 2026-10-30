@@ -1,0 +1,6 @@
+# synthetic
+order_id,status,store,platform,source
+<ORDER_A>,delivered,<STORE_A>,shopee,example
+<ORDER_B>,completed,<STORE_A>,shopee,example
+<ORDER_C>,ready_to_ship,<STORE_A>,shopee,example
+<ORDER_D>,delivered,<STORE_A>,shopee,example

@@ -1,0 +1,82 @@
+# synthetic
+# Shape only. Do not put a real key, address, profile id, or store name here.
+# First run asks for the API key only, leaves the address empty, then fills
+# stores after the marketer picks profile numbers. Caps below are the defaults.
+# The live file is ~/.automate-ecom-store/config.yaml (mode 600), outside git.
+
+adspower:
+  api_key: ""
+  # Empty means the marketer uses the usual address in AdsPower > Automation > API.
+  api_base: ""
+  headless: false
+
+# Per-store market, staff, caps, and schedule live in stores.example.yaml.
+# The private copy is ~/.automate-ecom-store/stores.yaml and is applied every run.
+stores:
+  - platform: "<PLATFORM>"
+    profile_id: "<PROFILE_ID>"
+    label: "<STORE_LABEL>"
+    market: "<MARKET>"
+    staff: "<STAFF>"
+    # A new, B underperforming, C stable or growing. Empty until the interview.
+    stage: ""
+
+schedule:
+  gap_hours_min: 2
+  gap_hours_max: 3
+  session_minutes_max: 40
+
+caps:
+  session:
+    listing_edits: 10
+    affiliate_invites: 30
+    affiliate_batch_size: 10
+    ads_changes: 3
+    chat_replies: 10
+  daily:
+    listing_edits: 10
+    affiliate_invites: 30
+    ads_changes: 3
+    chat_replies: 10
+
+price_drop_approval_percent: "<PRICE_DROP_APPROVAL_PERCENT>"
+roas_floor: "<ROAS_FLOOR>"
+
+paths:
+  invited_csv: "data/invited.csv"
+  captcha_log: "data/captcha_log.csv"
+  session_state: "data/session-state.json"
+  screenshots_dir: "screenshots"
+
+show_click_dot: true
+
+# safe, normal, or fast. normal is the default. fast stays at or above 300ms.
+pace_profile: normal
+
+# When true, modules report the plan and do not publish, submit, or send mail.
+dry_run: false
+
+# Context interview after the AdsPower key. Every answer can be skipped.
+# stage on each store is A, B, or C. The roadmap files live next to this config, not in git.
+context:
+  asked: false
+  skipped: false
+  store_count: ""
+  platforms: []
+  markets: []
+  goals: []
+  team_size: ""
+  cadence: ""
+
+# Asked once after the AdsPower key. Each value is yes (true) or no (false).
+# Neither is required. Both no skips Gmail, Drive, and Sheets.
+# sheets_reports: the owner wants reports on Google Sheets.
+# inventory_sheet: the owner already has a real-time inventory tracking file on Google Sheets.
+google:
+  sheets_reports: false
+  inventory_sheet: false
+
+# Base currency for multi-currency reports. View is market or custom.
+fx:
+  base_currency: VND
+  view: custom

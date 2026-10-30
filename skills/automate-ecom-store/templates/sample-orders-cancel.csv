@@ -1,0 +1,10 @@
+# synthetic
+order_id,created_date,store,platform,market,category,product,sku,staff,status,cancelled_by,cancel_reason,courier_pickup_time,outcome,source,read_time
+<ORDER_A>,2026-10-02,<STORE_LABEL>,shopee,<MARKET>,<CATEGORY>,<PRODUCT>,<SKU_A>,<STAFF>,cancelled,buyer,change_of_mind,,,sample_export,2026-10-29T09:00:00
+<ORDER_B>,2026-10-03,<STORE_LABEL>,shopee,<MARKET>,<CATEGORY>,<PRODUCT>,<SKU_B>,<STAFF>,to_ship,,,,,sample_export,2026-10-29T09:00:00
+<ORDER_C>,2026-10-04,<STORE_LABEL>,shopee,<MARKET>,<CATEGORY>,<PRODUCT>,<SKU_A>,<STAFF>,delivered,,,2026-10-05T08:00:00,delivered,sample_export,2026-10-29T09:00:00
+<ORDER_D>,2026-10-06,<STORE_LABEL>,shopee,<MARKET>,<CATEGORY>,<PRODUCT>,<SKU_A>,<STAFF>,return_to_sender,,,2026-10-07T08:00:00,return_to_sender,sample_export,2026-10-29T09:00:00
+<ORDER_E>,2026-10-08,<STORE_LABEL>,shopee,<MARKET>,<CATEGORY>,<PRODUCT>,<SKU_B>,<STAFF>,return_to_sender,,, ,return_to_sender,sample_export,2026-10-29T09:00:00
+<ORDER_F>,2026-09-28,<STORE_LABEL>,shopee,<MARKET>,<CATEGORY>,<PRODUCT>,<SKU_A>,<STAFF>,return_to_sender,,,2026-10-09T08:00:00,return_to_sender,sample_export,2026-10-29T09:00:00
+<ORDER_G>,2026-10-10,<STORE_LABEL>,shopee,<MARKET>,<CATEGORY>,<PRODUCT>,<SKU_C>,<STAFF>,cancelled_in_transit,system,lost,2026-10-11T08:00:00,cancelled_in_transit,sample_export,2026-10-29T09:00:00
+<ORDER_H>,2026-10-12,<STORE_LABEL>,shopee,<MARKET>,<CATEGORY>,<PRODUCT>,<SKU_B>,<STAFF>,cancelled,seller,out_of_stock,,,sample_export,2026-10-29T09:00:00

@@ -1,0 +1,23 @@
+config.yaml
+.automate-ecom-store/
+__pycache__/
+*.pyc
+*.env
+.env
+.env.*
+data/
+invited_kol.csv
+invited.csv
+captcha_log.csv
+session-state.json
+screenshots/
+google-token.json
+google-tokens.json
+node_modules/
+.next/
+
+# Internal test tooling. Stays on the shop computer. Never publish.
+/local/
+*.local
+*.local.*
+test-profiles.local.yaml

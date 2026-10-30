@@ -1,0 +1,13 @@
+{
+  "id": "selling.promotion",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": true,
+  "money": false,
+  "priority": 2,
+  "cost": { "actions": 4, "captchaRisk": "medium" },
+  "input": "promotion fields",
+  "output": "promo-plan.csv",
+  "policyTags": ["submit"],
+  "schema": "RunLog"
+}

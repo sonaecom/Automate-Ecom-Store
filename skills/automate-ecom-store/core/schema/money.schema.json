@@ -1,0 +1,10 @@
+{
+  "$id": "Money",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["amountMinor", "currency"],
+  "properties": {
+    "amountMinor": { "type": "integer" },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$" }
+  }
+}

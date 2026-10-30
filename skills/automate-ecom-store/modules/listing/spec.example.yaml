@@ -1,0 +1,48 @@
+# Listing spec. Copy into ~/.automate-ecom-store/data/ and fill there.
+# If any value still contains <PLACEHOLDERS>, do not publish.
+
+brand: "<BRAND>"
+main_keyword: "<MAIN_KEYWORD>"
+origin_phrase: "<ORIGIN_PHRASE>"
+benefit: "<BENEFIT>"
+category: "<CATEGORY>"
+# Only claims you can point to on the pack or a document the person approved.
+claims_allowed: []
+
+# One listing per pack size. Variations are the buyer-facing names
+# (a flavour or a size), never a sentence from the title.
+listings:
+  - size_label: "<SIZE_LABEL>"
+    parent_sku: "<PARENT_SKU>"
+    weight: "<WEIGHT>"
+    dimensions: "<L_X_W_X_H>"
+    price_shown_to_buyer: "<PRICE>"
+    gallery:
+      - role: cover
+        file: "<IMAGE_01>"
+      - role: variations
+        file: "<IMAGE_02>"
+      - role: variation_detail
+        file: "<IMAGE_03>"
+      - role: benefits
+        file: "<IMAGE_04>"
+      - role: size
+        file: "<IMAGE_05>"
+      - role: usage
+        file: "<IMAGE_06>"
+      - role: how_to_store
+        file: "<IMAGE_07>"
+      - role: trust
+        file: "<IMAGE_08>"
+    variations:
+      - buyer_name: "<VARIATION_NAME>"
+        seller_sku: "<CHILD_SKU>"
+        price: "<PRICE>"
+        stock: "<STOCK>"
+        image: "<VARIATION_IMAGE>"
+
+combos: []
+# Example shape, still placeholders:
+# - badge: "x2"
+#   items: ["<SIZE_LABEL>", "<SIZE_LABEL>"]
+#   thumbnail: "<COMBO_IMAGE>"

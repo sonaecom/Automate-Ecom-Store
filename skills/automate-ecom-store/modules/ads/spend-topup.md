@@ -1,0 +1,69 @@
+# Ads spend and top-up tracking
+
+Policy preflight: read `{baseDir}/policies/LAYER.md` and run `policy-gate.mjs` for this platform and market before any action in this file.
+
+Dry run follows `{baseDir}/modules/ops/dry-run.md`: walk the steps, take the screenshots, write the report, and do not click Save, Submit, or Send.
+
+The spend read is read-only. A top-up is a separate write. It uses the card already saved on the store, never a new card, and only after the owner says yes or a standing authorization is already on the store file. Then send the bill. Ten ads setting changes in one hour is the ceiling. A figure such as 10% of GMV is an example target, not a number this module chases.
+
+```bash
+node {baseDir}/scripts/ads-plan.mjs --count <CHANGE_COUNT> --out-dir ~/.automate-ecom-store/data/ads/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl --target <ADS_CHANGES_PER_HOUR> --hourly-done <ALREADY>
+node {baseDir}/scripts/ads-plan.mjs --topup --saved-card yes --approved yes --out-dir ~/.automate-ecom-store/data/ads/ --store <STORE_LABEL> --day <YYYY-MM-DD> --mode full --policy ALLOW --journal ~/.automate-ecom-store/data/journal/<STORE_LABEL>.jsonl
+```
+
+Omit `--target` when the owner has not set one. `--add-card yes` is refused. Without approval or standing authorization the result is `HOLD_APPROVAL` and no bill is sent. The spend reconcile below stays a read and still does not click a top-up by itself.
+
+Policy gate action is `read`. Do not use `budget`.
+
+## When to use
+
+A daily read of ad spend, attributed GMV, ROAS, ads balance, and top-up history. Both sources are inside the store: the ads screen and an official ads export or the transaction history page. Gmail and Drive are not sources for this module.
+
+## Prerequisites
+
+1. Account safety and the session runner. One seller tab per store. Human pace.
+2. `{baseDir}/modules/ads/metric-map.md` for where the number lives.
+3. `{baseDir}/modules/ads/sheets-tab.md` before writing the dashboard.
+4. Two sources for every spend total: the ads screen and an official export, or two exports. One source is `SINGLE_SOURCE` and is not final.
+
+## Steps
+
+1. For each saved store, open only that store's profile. Read yesterday, or the date the person named, from the report in the mapping doc. Copy `spend`, `gmv_attributed`, and `roas` exactly. Record the column header, the report timezone, and `read_time`.
+2. Download or copy the official export for the same date. Do not replay a private request.
+3. Run two-source QC:
+
+```bash
+node {baseDir}/scripts/ads-reconcile.mjs --spend-a <SCREEN_OR_EXPORT_A> --spend-b <EXPORT_B> --topups <TOPUP_SCREEN> --topups-b <TOPUP_EXPORT_OR_HISTORY> --balances <BALANCES> --roas-floor <ROAS_FLOOR> --out-dir <OUT_DIR>
+```
+
+`<OUT_DIR>` is under `~/.automate-ecom-store/data/ads/`. If `roas_floor` is still a placeholder, omit `--roas-floor`. On `QC_FAIL`, stop and report both numbers. Do not average them.
+
+4. On the balance page, read the remaining balance and the top-up history. Do not open a payment dialog. If a top-up button is the only control, stop and ask.
+5. Match top-ups only to the other in-store list: the official ads export or the transaction history page. Match on amount, currency, a date within 2 days, and the same store, platform, and market. Record a card last-4 only when that store page already shows it. Do not open Gmail or a Drive statement. Flag `UNMATCHED_TOPUP`, `UNMATCHED_EXPORT`, and `DUPLICATE`. `--charges` is rejected.
+6. Read the script summary: remaining balance, top-up total versus spend, days of balance left, spend as a percent of attributed GMV, and ROAS against the floor. Days left are remaining balance divided by average daily spend on the dates you read. If spend is 0, days left are undefined. If days left are under 3, use `{baseDir}/modules/ops/alerts.md`. The alert proposes a top-up. It does not perform one.
+7. Push `normalized-spend.csv` to the `AdsFacts` tab. Formulas on `Ads & Top-up` read that tab. See `sheets-tab.md`.
+
+```bash
+node {baseDir}/scripts/push-sheets.mjs --push --csv <OUT_DIR>/normalized-spend.csv --tab AdsFacts
+```
+
+Push only when `save-config.mjs --status` prints `sheets_reports: yes`. If it prints `no` or `unset`, or the Google token is missing, keep the local CSV and do not connect Google. Say the sheet was not updated.
+
+## Platform notes
+
+Follow `metric-map.md`. Shopee is Shopee Ads and GMV Max. TikTok Shop is Ads and GMV Max, where ROI may be the ROAS column. Lazada is Sponsored Solutions. The header you saw is the source name.
+
+## QC
+
+Two sources agree per store, platform, market, and date, or you report both. Every balance has a read time. No full card number in the output. No top-up click.
+
+## Stop
+
+- A control would add funds or pay.
+- The two sources disagree.
+- A file still contains more than 4 consecutive card digits after the script runs.
+- The policy gate is not a read.
+
+## Report
+
+Per store: date, spend, currency, attributed GMV, ROAS, floor, spend percent of GMV, balance, days left, top-up match counts, source names, read time, timezone. Screenshot the report page and the balance page. Do not screenshot a full card number. If one is visible, cover it and record the last 4 digits only. To show spend in the base currency, pass the same native amounts to `{baseDir}/modules/fx/reporting.md`. Do not convert them in this module.

@@ -1,0 +1,8 @@
+{
+  "_label": "synthetic",
+  "cancel_rate": 0.2,
+  "rts_rate": 0.5,
+  "roas_floor": 4,
+  "days_left": 3,
+  "label": "example"
+}

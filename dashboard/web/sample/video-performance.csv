@@ -1,0 +1,6 @@
+# synthetic
+video_id,date,store,platform,market,product,variation,placement,status,reason,views,likes,clicks,orders,gmv,currency,qc,views_floor,read_time
+CLIP_1,2026-10-08,<STORE_A>,shopee,<MARKET_PH>,ITEM_1,S,product_video,live,,120,4,3,1,100,PHP,OK,50,2026-10-29T09:00:00Z
+CLIP_2,2026-10-08,<STORE_A>,shopee,<MARKET_PH>,ITEM_2,M,shopee_video,rejected,cover,0,0,0,0,0,PHP,OK,,2026-10-29T09:00:00Z
+CLIP_3,2026-10-08,<STORE_A>,tiktokshop,<MARKET_PH>,ITEM_3,S,product_video,live,,8,1,1,0,10,PHP,OK,50,2026-10-29T09:00:00Z
+CLIP_4,2026-10-08,<STORE_B>,lazada,<MARKET_MY>,ITEM_4,S,product_video,live,views a=10 b=12,,,,,MYR,QC_FAIL,,2026-10-29T09:00:00Z

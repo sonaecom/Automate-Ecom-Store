@@ -1,0 +1,8 @@
+# synthetic
+handle,gmv_tier,gmv,items_sold,followers,avg_video_views,engagement_rate,last_activity_days,category,category_match,audience_gender,audience_age,audience_region,creator_level,past_collab,usual_commission,samples_sent,sample_orders,sample_gmv,read_time
+<HANDLE_A>,1k-10k,8000,200,10000,4000,0.05,3,beauty,yes,female,18-24,<REGION>,4,yes,10,,,,2026-10-29T09:00:00
+<HANDLE_H>,under-1k,100,10,800,80,0.03,10,beauty,yes,female,18-24,<REGION>,1,no,10,,,,2026-10-29T09:00:00
+<HANDLE_B>,1k-10k,2000,40,5000,800,0.04,45,beauty,yes,female,25-34,<REGION>,2,no,12,,,,2026-10-29T09:00:00
+<HANDLE_C>,1k-10k,3000,50,6000,900,0.04,4,electronics,no,female,18-24,<REGION>,3,no,10,,,,2026-10-29T09:00:00
+<HANDLE_D>,10k+,9000,20,1000000,50,0.04,2,beauty,yes,female,18-24,<REGION>,2,no,10,,,,2026-10-29T09:00:00
+<HANDLE_I>,1k-10k,1500,30,4000,600,0.04,6,beauty,yes,female,18-24,<REGION>,2,yes,10,2,0,0,2026-10-29T09:00:00

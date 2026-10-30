@@ -1,0 +1,38 @@
+# synthetic
+# Copy to ~/.automate-ecom-store/creator-score.yaml. Do not put a real handle here.
+# Weights are points. The script scales them to 100. Thresholds are hard stops.
+# category_required yes excludes a creator whose category does not match.
+# min_gmv 0 means GMV must be above 0. active_within_days 30 excludes older activity.
+# min_views_per_follower flags a views/followers ratio that looks like fake followers.
+# invite_cooldown_days 90 excludes a handle already invited inside that window.
+# audience "any" does not prefer a gender, age, or region.
+
+weights:
+  gmv: 15
+  items_sold: 10
+  followers: 8
+  avg_video_views: 12
+  engagement_rate: 15
+  activity_recency: 10
+  category_match: 10
+  audience_fit: 8
+  creator_level: 4
+  past_collab: 4
+  commission_fit: 4
+
+thresholds:
+  min_engagement: 0.02
+  active_within_days: 30
+  min_views_per_follower: 0.01
+  min_gmv: 0
+  invite_cooldown_days: 90
+  category_required: yes
+  commission_tolerance: 5
+
+categories: "<CATEGORY>"
+offered_commission: "<COMMISSION_PERCENT>"
+
+audience:
+  gender: any
+  age: any
+  region: any

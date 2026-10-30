@@ -1,0 +1,4 @@
+# synthetic
+sku,variation,field,new_value,current_value
+SKU_1,S,stock,4,2
+SKU_2,M,price,90,100

@@ -1,0 +1,35 @@
+# synthetic
+# Copy to ~/.automate-ecom-store/config/shops/<shop>.yaml
+# Do not put a real shop name, link, handle, or SKU in this example.
+# Language: leave empty to use English for PH and MY.
+# ID uses Bahasa only after the owner replaces the template sentences. Do not invent them.
+
+shop_name: "<SHOP_NAME>"
+language: en
+commission: "<COMMISSION_PERCENT>"
+
+sample_allowlist:
+  - sku: "<SKU>"
+    size: "<SMALLEST_SIZE>"
+
+templates:
+  intro: "Hi <creator>! We just sent you a collaboration invite from <shop_name>: <commission>% on all products, free <sample_size> sample. Happy to work long-term!"
+  sample_other_size: "Thanks for your interest! For samples we offer the <sample_size> pack. Could you request that one?"
+  no_invite: "Hi! We've sent you a collaboration invite from <shop_name>. Please check your invitations and request the <sample_size> sample there. Thank you!"
+  faq_miss: "Let me check and get back to you"
+  decline_thanks: ""
+
+faq:
+  commission: ""
+  product_facts: ""
+  shipping_time: ""
+  content_brief: ""
+
+followups:
+  enabled: false
+  no_reply:
+    after_hours: ""
+    text: ""
+  content_reminder:
+    after_hours: ""
+    text: ""

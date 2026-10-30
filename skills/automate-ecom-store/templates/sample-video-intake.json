@@ -1,0 +1,24 @@
+{
+  "note": "synthetic",
+  "video_id": "CLIP_1",
+  "store": "<STORE_LABEL>",
+  "platform": "shopee",
+  "market": "PH",
+  "placement": "product_video",
+  "product": "ITEM_1",
+  "variation": "S",
+  "title": "Soft cotton tee",
+  "caption": "Everyday cotton tee",
+  "hashtags": ["cotton"],
+  "cover": "cover.jpg",
+  "schedule": "09:30",
+  "scan_result": "PASS",
+  "hash": "<VIDEO_HASH>",
+  "probe": {
+    "container": "mp4",
+    "duration": 20,
+    "width": 720,
+    "height": 720,
+    "size": 2000000
+  }
+}

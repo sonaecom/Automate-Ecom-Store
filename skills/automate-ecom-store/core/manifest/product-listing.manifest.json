@@ -1,0 +1,13 @@
+{
+  "id": "listing.product",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": true,
+  "money": false,
+  "priority": 2,
+  "cost": { "actions": 8, "captchaRisk": "high" },
+  "input": "listing spec",
+  "output": "listing-create.csv",
+  "policyTags": ["publish"],
+  "schema": "InventoryItem"
+}

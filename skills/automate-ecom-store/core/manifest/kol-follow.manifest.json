@@ -1,0 +1,13 @@
+{
+  "id": "affiliate.post-invite",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": true,
+  "money": false,
+  "priority": 3,
+  "cost": { "actions": 4, "captchaRisk": "medium" },
+  "input": "invited creators",
+  "output": "follow-plan.csv",
+  "policyTags": ["submit"],
+  "schema": "Affiliate"
+}

@@ -1,0 +1,7 @@
+[Unit]
+Description=Unattended wake check for one store session
+After=automate-ecom-adspower.service
+
+[Service]
+Type=oneshot
+ExecStart=<NODE_BIN> <SKILL_DIR>/scripts/unattended-tick.mjs --state <STATE_FILE> --gap-hours <GAP_HOURS_MIN> --csv <CAPTCHA_LOG> --platform <PLATFORM>

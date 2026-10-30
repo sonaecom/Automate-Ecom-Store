@@ -1,0 +1,168 @@
+{
+  "home": "https://seller.shopee.ph/",
+  "affiliate": {
+    "nav": {
+      "role": "link",
+      "name": "Affiliate Marketing",
+      "path": "/portal/web-seller-affiliate/homepage"
+    },
+    "search": {
+      "role": "textbox",
+      "name": "Search creators"
+    },
+    "invite": {
+      "role": "button",
+      "name": "Invite"
+    }
+  },
+  "listing": {
+    "nav": {
+      "role": "link",
+      "name": "My Products",
+      "path": "/portal/product/list/live/all"
+    },
+    "search": {
+      "role": "textbox",
+      "name": "Search"
+    },
+    "row": {
+      "role": "link",
+      "name": "Product",
+      "byQuery": "link"
+    },
+    "field": {
+      "css": "input[placeholder^='Brand Name']"
+    },
+    "save": {
+      "role": "button",
+      "name": "Update"
+    }
+  },
+  "ads": {
+    "nav": {
+      "role": "link",
+      "name": "Shopee Ads",
+      "path": "/portal/marketing/pas/index"
+    },
+    "spend": {
+      "role": "text",
+      "name": "Spend"
+    },
+    "toggle": {
+      "role": "switch",
+      "name": "Campaign"
+    },
+    "save": {
+      "role": "button",
+      "name": "Save"
+    }
+  },
+  "chat": {
+    "nav": {
+      "role": "link",
+      "name": "Chat Management",
+      "path": "/new-webchat/conversations"
+    },
+    "thread": {
+      "css": "[class*=conversation-cell], [class*=ConversationCell], [class*=chat-list] [class*=item]",
+      "name": "Conversation"
+    },
+    "box": {
+      "role": "textbox",
+      "name": "Type a message"
+    },
+    "send": {
+      "role": "button",
+      "name": "Send"
+    }
+  },
+  "promo": {
+    "nav": {
+      "role": "link",
+      "name": "Discount",
+      "path": "/portal/marketing/list/discount"
+    },
+    "create": {
+      "role": "button",
+      "name": "Create"
+    },
+    "name": {
+      "role": "textbox",
+      "name": "Promotion Name"
+    },
+    "save": {
+      "role": "button",
+      "name": "Save"
+    },
+    "delete": {
+      "role": "button",
+      "name": "Delete"
+    }
+  },
+  "orders": {
+    "nav": {
+      "role": "link",
+      "name": "My Orders",
+      "path": "/portal/sale/order"
+    }
+  },
+  "reviews": {
+    "nav": {
+      "role": "link",
+      "name": "Review Management",
+      "path": "/portal/settings/shop/rating"
+    },
+    "reply": {
+      "role": "button",
+      "name": "Reply"
+    },
+    "box": {
+      "role": "textbox",
+      "name": "Reply"
+    },
+    "send": {
+      "role": "button",
+      "name": "Submit"
+    }
+  },
+  "report": {
+    "nav": {
+      "role": "link",
+      "name": "Business Insights",
+      "path": "/datacenter"
+    }
+  },
+  "shop": {
+    "nav": {
+      "role": "link",
+      "name": "Shop Decoration"
+    }
+  },
+  "video": {
+    "nav": {
+      "role": "link",
+      "name": "Live & Video"
+    }
+  },
+  "captcha": {
+    "slider": {
+      "role": "slider",
+      "name": "slider"
+    },
+    "text": "Verify"
+  },
+  "unavailable": [
+    "page unavailable",
+    "verify your identity",
+    "unusual traffic"
+  ],
+  "popupClose": [
+    ".eds-modal .close-icon",
+    "i.eds-icon.close-icon",
+    ".shopee-modal__close",
+    ".eds-modal__close",
+    "i.eds-icon.eds-modal__close",
+    "[class*=popup] [class*=close]",
+    "[class*=modal] [class*=close-btn]"
+  ]
+}

@@ -1,0 +1,14 @@
+[Unit]
+Description=AdsPower headed on the virtual display
+After=automate-ecom-display.service
+Requires=automate-ecom-display.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/automate-ecom-store/adspower.env
+ExecStart=<ADSPOWER_BIN>
+Restart=on-failure
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target

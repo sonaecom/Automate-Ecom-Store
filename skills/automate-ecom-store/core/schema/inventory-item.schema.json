@@ -1,0 +1,12 @@
+{
+  "$id": "InventoryItem",
+  "type": "object",
+  "required": ["storeId", "sku", "onHand"],
+  "properties": {
+    "storeId": { "type": "string" },
+    "sku": { "type": "string", "description": "Smallest selling variation." },
+    "onHand": { "type": "integer" },
+    "reserved": { "type": "integer" },
+    "pending": { "type": "integer" }
+  }
+}

@@ -1,0 +1,9 @@
+# synthetic
+metric,ours,competitor,direction,impact,effort,fix,source
+review_count,3,40,higher,5,2,Use the official review tool and one honest follow-up per delivered order,example
+cover_score,2,5,higher,5,2,Replace the cover with a clear pack photo from the listing method,example
+title_score,2,4,higher,4,2,Rewrite the title from the category template,example
+price_index,1.2,1,lower,4,3,Propose a price only if break-even still holds,example
+ship_days,3,2,lower,3,4,Ship from stock that is already in the warehouse,example
+roas,2,4,higher,5,3,Keep the small ads test until ROAS meets the floor,example
+shop_rating,4.8,4.6,higher,2,1,Already ahead of the competitor median,example

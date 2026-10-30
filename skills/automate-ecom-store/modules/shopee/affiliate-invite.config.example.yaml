@@ -1,0 +1,24 @@
+# Task file for shopee-affiliate-invite.
+# Copy to config.yaml in this folder. config.yaml is gitignored.
+# The store profile, caps, and schedule live in
+# ~/.automate-ecom-store/config.yaml. Do not copy the profile id into this file.
+# If any value still contains a <PLACEHOLDER> token, the agent must stop.
+
+campaign:
+  name: "<CAMPAIGN_NAME>"
+  commission_percent: "<COMMISSION_PERCENT>"
+  kol_count: "<KOL_COUNT>"
+  start: "<START_TIME>"
+  end: "<END_TIME>"
+  # Private message, max 200 characters. It must ask the affiliate to reply
+  # and request the free sample, and it must mention a long-term partnership
+  # with a new shop. Do not put a real shop name into this example file.
+  message: "<INVITE_MESSAGE>"
+
+products:
+  # label is how staff recognize the row. The sample decision uses
+  # sample_variation_name only. Never choose a sample because the title
+  # contains the size text.
+  - label: "<PRODUCT_LABEL>"
+    sample_variation_name: "<VARIATION_NAME>"
+    sample_quantity: "<SAMPLE_QUANTITY>"

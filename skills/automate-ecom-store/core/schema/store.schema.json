@@ -1,0 +1,14 @@
+{
+  "$id": "Store",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "mode", "currency", "platform", "market"],
+  "properties": {
+    "id": { "type": "string" },
+    "mode": { "enum": ["read_only", "full"] },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "platform": { "enum": ["shopee", "tiktokshop", "lazada"] },
+    "market": { "type": "string" },
+    "profileId": { "type": "string" }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "ops.daily-report",
+  "platforms": ["shopee", "tiktokshop", "lazada"],
+  "markets": ["PH", "MY", "ID", "VN", "TH", "SG"],
+  "writes": false,
+  "money": false,
+  "priority": 3,
+  "cost": { "actions": 2, "captchaRisk": "low" },
+  "input": "two seller exports",
+  "output": "daily-report.csv",
+  "policyTags": ["read"],
+  "schema": "RunLog"
+}

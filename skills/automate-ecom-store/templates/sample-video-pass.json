@@ -1,0 +1,47 @@
+{
+  "note": "synthetic",
+  "video_id": "CLIP_1",
+  "title": "Soft cotton tee",
+  "caption": "Everyday cotton tee for warm weather",
+  "hashtags": ["cotton"],
+  "on_screen": "",
+  "transcript": "Everyday cotton tee",
+  "transcript_available": "yes",
+  "cues": [{ "at": "00:00:02", "text": "Everyday cotton tee" }],
+  "listing_price": "100",
+  "listing_discount": "",
+  "competitors_confirmed": "yes",
+  "competitors": [],
+  "music_rights": "licensed",
+  "silent_ok": "no",
+  "limits": {
+    "formats": ["mp4"],
+    "min_seconds": 5,
+    "max_seconds": 60,
+    "min_width": 720,
+    "aspects": ["9:16"],
+    "max_bytes": 30000000
+  },
+  "probe": {
+    "container": "mp4",
+    "duration": 12,
+    "width": 720,
+    "height": 1280,
+    "size": 4000000,
+    "hasAudio": true,
+    "nb_frames": 300,
+    "other_platform_logo": "no"
+  },
+  "visual": {
+    "nudity": "no",
+    "violence": "no",
+    "weapons": "no",
+    "minors": "no",
+    "other_logo": "no",
+    "qr": "no",
+    "before_after": "no",
+    "ocr_available": "yes",
+    "ocr_text": "",
+    "at": "00:00:01"
+  }
+}

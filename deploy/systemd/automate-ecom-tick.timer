@@ -1,0 +1,11 @@
+[Unit]
+Description=Wake the unattended session check
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=15min
+Persistent=true
+Unit=automate-ecom-tick.service
+
+[Install]
+WantedBy=timers.target

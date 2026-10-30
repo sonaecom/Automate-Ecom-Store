@@ -1,0 +1,6 @@
+platform: lazada
+market: "<MARKET>"
+retrieved: "<YYYY-MM-DD>"
+source_url: "<OFFICIAL_URL>"
+schema_version: 1
+rules: []

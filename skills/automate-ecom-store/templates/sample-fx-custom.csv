@@ -1,0 +1,11 @@
+# synthetic
+month,currency,rate,mode
+2026-10,PHP,430,custom
+2026-09,PHP,420,custom
+2026-09,MYR,5000,custom
+2026-10,IDR,1.4,custom
+2026-10,THB,680,custom
+2026-10,SGD,17500,custom
+2026-10,USD,24000,custom
+2026-10,KRW,18,market
+2026-12,PHP,999,custom

@@ -1,0 +1,9 @@
+# synthetic
+order_id,date,store,platform,market,sku,category,gmv,commission,payment_fee,affiliate,free_shipping,platform_voucher,seller_voucher,coins,mega_sale,flash_sale,other_service,ads_fee,currency
+<ORDER_1>,2026-10-08,<STORE_A>,shopee,PH,<SKU_A>,<CATEGORY_A>,100,12,3,1,10,1,1,1,0,0,0,20,PHP
+<ORDER_2>,2026-10-08,<STORE_A>,shopee,PH,<SKU_B>,<CATEGORY_A>,100,10,2,1,1,0,1,1,0,0,0,0,PHP
+<ORDER_3>,2026-10-07,<STORE_A>,shopee,PH,<SKU_C>,<CATEGORY_A>,100,14,4,1,4,1,1,1,0,0,0,0,PHP
+<ORDER_4>,2026-10-08,<STORE_B>,lazada,MY,<SKU_D>,<CATEGORY_B>,100,8,2,1,4,1,1,2,0,0,0,0,MYR
+<ORDER_5>,2026-10-08,<STORE_B>,lazada,MY,<SKU_E>,<CATEGORY_B>,100,30,2,0,0,0,0,0,0,0,0,0,MYR
+<ORDER_6>,2026-10-08,<STORE_C>,shopee,PH,<SKU_F>,<CATEGORY_A>,50,5,1,0,0,0,20,0,0,0,0,0,PHP
+<ORDER_QC>,2026-10-08,<STORE_A>,shopee,PH,<SKU_A>,<CATEGORY_A>,110,5,1,0,1,0,0,0,0,0,0,0,PHP
