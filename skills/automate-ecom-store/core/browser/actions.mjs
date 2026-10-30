@@ -175,6 +175,7 @@ export async function runModule(page, request, hooks) {
     if (unsafeText(request.value)) return { result: "BLOCK", actions: hooks.actions };
     const gate = write("submit", request.day);
     if (gate.result !== "RUN") return { result: gate.result, actions: hooks.actions };
+    if (hooks.actions + 2 > limit) return { result: "LIMIT", actions: hooks.actions, actionKey: gate.actionKey };
     if (!selectors.chat.box || !selectors.chat.send) return missing(hooks, hooks.actions);
     await page.fill(selectors.chat.box, "");
     await hooks.type(request.value);
@@ -189,6 +190,7 @@ export async function runModule(page, request, hooks) {
     if (unsafeText(request.value)) return { result: "BLOCK", actions: hooks.actions };
     const gate = write("submit", request.day);
     if (gate.result !== "RUN") return { result: gate.result, actions: hooks.actions };
+    if (hooks.actions + 3 > limit) return { result: "LIMIT", actions: hooks.actions, actionKey: gate.actionKey };
     if (!selectors.reviews.reply || !await clickNamed(page, selectors.reviews.reply, hooks)) return missing(hooks, hooks.actions);
     await page.fill(selectors.reviews.box, "");
     await hooks.type(request.value);
@@ -202,6 +204,7 @@ export async function runModule(page, request, hooks) {
     if (request.mode !== "full") return { result: "READ", actions: hooks.actions };
     const gate = write("submit", request.day);
     if (gate.result !== "RUN") return { result: gate.result, actions: hooks.actions };
+    if (hooks.actions + 4 > limit) return { result: "LIMIT", actions: hooks.actions, actionKey: gate.actionKey };
     const name = request.value || "TEST DRAFT";
     if (!selectors.promo.create || !await clickNamed(page, selectors.promo.create, hooks)) return missing(hooks, hooks.actions);
     if (selectors.promo.name) {
