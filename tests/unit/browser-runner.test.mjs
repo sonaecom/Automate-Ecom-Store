@@ -95,7 +95,7 @@ test("a listing edit reverts and the round log hides the store id", async () => 
   };
   const hooks = { actions: 0, dragged: false, move: async () => {}, type: async (text) => events.push(["type", text]) };
   const edited = await runModule(page, {
-    platform: "shopee",
+    platform: "lazada",
     module: "listing.edit",
     maxActions: 6,
     mode: "full",

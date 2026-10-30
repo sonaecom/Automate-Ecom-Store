@@ -1,60 +1,168 @@
 {
   "home": "https://seller-ph.tiktok.com/homepage",
   "affiliate": {
-    "nav": { "role": "link", "name": "Affiliate Center", "path": "/affiliate" },
-    "search": { "role": "textbox", "name": "Search creators" },
-    "invite": { "role": "button", "name": "Invite" }
+    "nav": {
+      "role": "link",
+      "name": "Affiliate Center",
+      "path": "/affiliate"
+    },
+    "search": {
+      "role": "textbox",
+      "name": "Search creators"
+    },
+    "invite": {
+      "role": "button",
+      "name": "Invite"
+    }
   },
   "listing": {
-    "nav": { "role": "link", "name": "Manage Products", "path": "/product/manage" },
-    "search": { "role": "textbox", "name": "Search products" },
-    "row": { "role": "link", "name": "Product" },
-    "edit": { "role": "button", "name": "Edit" },
-    "field": { "role": "textbox", "name": "Product name" },
-    "save": { "role": "button", "name": "Update" }
+    "nav": {
+      "role": "link",
+      "name": "Manage Products",
+      "path": "/product/manage"
+    },
+    "search": {
+      "role": "textbox",
+      "name": "Search products"
+    },
+    "row": {
+      "role": "text",
+      "name": "Product",
+      "byQuery": "text"
+    },
+    "edit": {
+      "css": "tr.core-table-row-expanded:has-text(\"{query}\") td:last-child button",
+      "name": "Edit"
+    },
+    "field": {
+      "role": "textbox",
+      "name": "Product name"
+    },
+    "save": {
+      "role": "button",
+      "name": "Update"
+    }
   },
   "ads": {
-    "nav": { "role": "link", "name": "Shop ads", "path": "/ads" },
-    "spend": { "role": "text", "name": "Cost" },
-    "toggle": { "role": "switch", "name": "Campaign" },
-    "save": { "role": "button", "name": "Save" }
+    "nav": {
+      "role": "link",
+      "name": "Shop ads",
+      "path": "/ads"
+    },
+    "spend": {
+      "role": "text",
+      "name": "Cost"
+    },
+    "toggle": {
+      "role": "switch",
+      "name": "Campaign"
+    },
+    "save": {
+      "role": "button",
+      "name": "Save"
+    }
   },
   "chat": {
-    "nav": { "role": "link", "name": "Customer messages", "path": "/chat/inbox" },
-    "thread": { "role": "link", "name": "Conversation" },
-    "box": { "role": "textbox", "name": "Send a message" },
-    "send": { "role": "button", "name": "Send" }
+    "nav": {
+      "role": "link",
+      "name": "Customer messages",
+      "path": "/chat/inbox"
+    },
+    "thread": {
+      "css": "[class*=conversation-item], [class*=ConversationItem], [class*=session-item]",
+      "name": "Conversation"
+    },
+    "box": {
+      "role": "textbox",
+      "name": "Send a message"
+    },
+    "send": {
+      "role": "button",
+      "name": "Send"
+    }
   },
   "promo": {
-    "nav": { "role": "link", "name": "Marketing", "path": "/promotion/marketing-tools" },
-    "create": { "role": "button", "name": "Create" },
-    "name": { "role": "textbox", "name": "Name" },
-    "save": { "role": "button", "name": "Save draft" },
-    "delete": { "role": "button", "name": "Delete" }
+    "nav": {
+      "role": "link",
+      "name": "Marketing",
+      "path": "/promotion/marketing-tools"
+    },
+    "create": {
+      "role": "button",
+      "name": "Create"
+    },
+    "name": {
+      "role": "textbox",
+      "name": "Name"
+    },
+    "save": {
+      "role": "button",
+      "name": "Save draft"
+    },
+    "delete": {
+      "role": "button",
+      "name": "Delete"
+    }
   },
   "orders": {
-    "nav": { "role": "link", "name": "Manage Orders", "path": "/order" }
+    "nav": {
+      "role": "link",
+      "name": "Manage Orders",
+      "path": "/order"
+    }
   },
   "reviews": {
-    "nav": { "role": "link", "name": "Ratings", "path": "/product/rating" },
-    "reply": { "role": "button", "name": "Reply" },
-    "box": { "role": "textbox", "name": "Reply" },
-    "send": { "role": "button", "name": "Submit" }
+    "nav": {
+      "role": "link",
+      "name": "Ratings",
+      "path": "/product/rating"
+    },
+    "reply": {
+      "role": "button",
+      "name": "Reply"
+    },
+    "box": {
+      "role": "textbox",
+      "name": "Reply"
+    },
+    "send": {
+      "role": "button",
+      "name": "Submit"
+    }
   },
   "report": {
-    "nav": { "role": "link", "name": "Analytics", "path": "/compass" }
+    "nav": {
+      "role": "link",
+      "name": "Analytics",
+      "path": "/compass"
+    }
   },
   "shop": {
-    "nav": { "role": "link", "name": "Shop decoration", "path": "/shop-decoration" }
+    "nav": {
+      "role": "link",
+      "name": "Shop decoration",
+      "path": "/shop-decoration"
+    }
   },
   "video": {
-    "nav": { "role": "link", "name": "Shoppable video", "path": "/shoppable-videos" }
+    "nav": {
+      "role": "link",
+      "name": "Shoppable video",
+      "path": "/shoppable-videos"
+    }
   },
   "captcha": {
-    "slider": { "role": "slider", "name": "slider" },
+    "slider": {
+      "role": "slider",
+      "name": "slider"
+    },
     "text": "Verify"
   },
-  "unavailable": ["page unavailable", "verify your identity", "unusual traffic"],
+  "unavailable": [
+    "page unavailable",
+    "verify your identity",
+    "unusual traffic"
+  ],
   "popupClose": [
     "[data-tid=m4b_modal_close]",
     ".theme-arco-modal-close-icon",

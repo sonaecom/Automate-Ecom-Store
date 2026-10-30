@@ -77,6 +77,13 @@ async function openNav(page, spec, hooks, home) {
   return clickNamed(page, spec, hooks);
 }
 
+function withQuery(spec, query) {
+  if (!spec) return null;
+  if (!spec.css || !spec.css.includes("{query}")) return spec;
+  if (!query) return null;
+  return { ...spec, css: spec.css.replaceAll("{query}", String(query).replace(/["\\]/g, "")) };
+}
+
 function missing(hooks, actions) {
   return { result: "NAV_MISSING", actions, missing: hooks.missing };
 }
@@ -132,9 +139,15 @@ export async function runModule(page, request, hooks) {
       hooks.actions += 1;
     }
     if (hooks.actions >= limit) return { result: "LIMIT", actions: hooks.actions };
-    const row = request.query ? { role: "link", name: request.query } : selectors.listing.row;
-    if (!row || !await clickNamed(page, row, hooks)) return missing(hooks, hooks.actions);
-    if (!await clickNamed(page, selectors.listing.edit, hooks)) return missing(hooks, hooks.actions);
+    // Writes only ever target a named product; without --query the module just reads.
+    if (request.mode === "full" && !request.query) return { result: "READ", actions: hooks.actions };
+    const byQuery = selectors.listing.row?.byQuery || "link";
+    const row = request.query ? { role: byQuery, name: request.query } : selectors.listing.row;
+    // A row whose own edit button opens the form needs no click on the name first.
+    const edit = withQuery(selectors.listing.edit, request.query);
+    const rowHasEdit = Boolean(selectors.listing.edit?.css?.includes("{query}"));
+    if (!rowHasEdit && (!row || !await clickNamed(page, row, hooks))) return missing(hooks, hooks.actions);
+    if (edit && !await clickNamed(page, edit, hooks)) return missing(hooks, hooks.actions);
     const previous = await page.value(selectors.listing.field);
     if (previous == null) return missing(hooks, hooks.actions);
     if (request.mode !== "full") return { result: "READ", actions: hooks.actions, previous };
@@ -163,15 +176,22 @@ export async function runModule(page, request, hooks) {
     const gate = write("publish", request.day);
     if (gate.result !== "RUN") return { result: gate.result, actions: hooks.actions };
     if (hooks.actions + 2 > limit) return { result: "LIMIT", actions: hooks.actions, actionKey: gate.actionKey };
+    const state = async () => (page.checked ? page.checked(selectors.ads.toggle) : null);
+    const before = await state();
     if (!await clickNamed(page, selectors.ads.toggle, hooks)) return missing(hooks, hooks.actions);
-    if (!await clickNamed(page, selectors.ads.toggle, hooks)) return missing(hooks, hooks.actions);
-    return { result: "REVERTED", actions: hooks.actions, actionKey: gate.actionKey };
+    const flipped = await state();
+    if (!await clickNamed(page, selectors.ads.toggle, hooks)) return { result: "REVERT_FAILED", actions: hooks.actions, actionKey: gate.actionKey, before, after: flipped };
+    const after = await state();
+    if (before !== null && after !== before) return { result: "REVERT_FAILED", actions: hooks.actions, actionKey: gate.actionKey, before, after };
+    return { result: "REVERTED", actions: hooks.actions, actionKey: gate.actionKey, before, flipped, after };
   }
 
   if (request.module === "customers.chat") {
     if (!await openNav(page, selectors.chat.nav, hooks, selectors.home)) return missing(hooks, hooks.actions);
-    if (selectors.chat.thread) await clickNamed(page, selectors.chat.thread, hooks);
+    const opened = selectors.chat.thread ? await clickNamed(page, selectors.chat.thread, hooks) : false;
     if (request.mode !== "full" || !request.value) return { result: "READ", actions: hooks.actions };
+    // Reply only inside an existing buyer thread. No thread means nothing to answer.
+    if (!opened) return { result: "NO_THREAD", actions: hooks.actions, missing: hooks.missing };
     if (unsafeText(request.value)) return { result: "BLOCK", actions: hooks.actions };
     const gate = write("submit", request.day);
     if (gate.result !== "RUN") return { result: gate.result, actions: hooks.actions };

@@ -108,6 +108,7 @@ export function wrapPage(page, timeout = 8000) {
       } await page.waitForLoadState("domcontentloaded").catch(() => {}); await page.waitForTimeout(2500); return true; },
     fill: async (spec, value) => { const t = await visible(spec); if (!t) return false; await t.fill(value); return true; },
     value: async (spec) => { const t = await visible(spec); return t ? t.inputValue().catch(() => null) : null; },
+    checked: async (spec) => { const t = await visible(spec); if (!t) return null; const v = await t.getAttribute("aria-checked").catch(() => null); return v ?? String(await t.isChecked().catch(() => null)); },
     textOf: async (spec) => { const t = await visible(spec); return t ? (await t.innerText()).slice(0, 200) : null; },
     screenshot: (path) => page.screenshot(path ? { path } : {}),
     dismiss: async (closers = []) => {

@@ -45,6 +45,8 @@ export function roundLog(options, result) {
     missing: result.missing?.length ? result.missing : undefined,
     error: result.error || undefined,
     landed: result.landed || undefined,
+    previous: result.previous ?? undefined,
+    toggle: result.before !== undefined ? { before: result.before, flipped: result.flipped, after: result.after } : undefined,
     store_hash: storeHash(options.store),
     at: options.now || new Date().toISOString(),
   };
@@ -137,7 +139,7 @@ export async function executeRealTest(options, deps) {
   outcome.missing = outcome.missing || hooks.missing;
   const body = roundLog(options, outcome);
   write(body);
-  const failed = ["PAUSE", "LOGIN_REQUIRED", "ERROR", "NAV_MISSING", "BLOCK"].includes(outcome.result);
+  const failed = ["REVERT_FAILED", "PAUSE", "LOGIN_REQUIRED", "ERROR", "NAV_MISSING", "BLOCK"].includes(outcome.result);
   return { code: failed ? 1 : 0, log: body };
 }
 
