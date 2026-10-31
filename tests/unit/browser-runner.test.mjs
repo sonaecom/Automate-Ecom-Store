@@ -90,7 +90,7 @@ test("a listing edit reverts and the round log hides the store id", async () => 
     box: async () => ({ x: 10, y: 10 }),
     click: async (spec) => events.push(["click", spec.name]),
     fill: async (_spec, value) => events.push(["fill", value]),
-    value: async () => "Original title",
+    value: async () => "ITEM_1 original title",
     textOf: async () => "12",
   };
   const hooks = { actions: 0, dragged: false, move: async () => {}, type: async (text) => events.push(["type", text]) };
@@ -109,10 +109,10 @@ test("a listing edit reverts and the round log hides the store id", async () => 
     revert: true,
   }, hooks);
   assert.equal(edited.result, "EDITED");
-  assert.equal(edited.previous, "Original title");
+  assert.equal(edited.previous, "ITEM_1 original title");
   const clicks = events.filter((event) => event[0] === "click").map((event) => event[1]);
   assert.ok(clicks.indexOf("ITEM_1") >= 0 && clicks.indexOf("ITEM_1") < clicks.indexOf("Edit"));
-  assert.deepEqual(events.filter((event) => event[0] === "fill").map((event) => event[1]), ["", "", "Original title"]);
+  assert.deepEqual(events.filter((event) => event[0] === "fill").map((event) => event[1]), ["", "ITEM_1", "", "ITEM_1 original title"]);
   assert.deepEqual(events.filter((event) => event[0] === "type").map((event) => event[1]), ["ITEM_1", "Temp title"]);
   const log = roundLog({
     round: 1,
