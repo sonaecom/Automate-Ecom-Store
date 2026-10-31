@@ -23,7 +23,7 @@
     },
     "search": {
       "role": "textbox",
-      "name": "Search products"
+      "name": "Product name, ID, or SKU"
     },
     "row": {
       "role": "text",
@@ -35,7 +35,7 @@
       "name": "Edit"
     },
     "field": {
-      "role": "textbox",
+      "css": "input[data-tid=m4b_input]",
       "name": "Product name"
     },
     "save": {
@@ -54,7 +54,7 @@
       "name": "Cost"
     },
     "toggle": {
-      "role": "switch",
+      "css": "[role=switch], .core-switch, .arco-switch",
       "name": "Campaign"
     },
     "save": {
@@ -119,7 +119,8 @@
     },
     "reply": {
       "role": "button",
-      "name": "Reply"
+      "name": "Reply",
+      "exact": true
     },
     "box": {
       "role": "textbox",

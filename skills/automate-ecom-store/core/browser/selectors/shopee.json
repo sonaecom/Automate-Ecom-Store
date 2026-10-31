@@ -23,7 +23,7 @@
     },
     "search": {
       "role": "textbox",
-      "name": "Search"
+      "name": "Search Product Name"
     },
     "row": {
       "role": "link",
@@ -36,6 +36,11 @@
     "save": {
       "role": "button",
       "name": "Update"
+    },
+    "edit": {
+      "css": "td.is-last button:has-text(\"Edit\")",
+      "name": "Edit",
+      "afterSearch": true
     }
   },
   "ads": {
@@ -49,7 +54,7 @@
       "name": "Spend"
     },
     "toggle": {
-      "role": "switch",
+      "css": "[role=switch], .eds-switch",
       "name": "Campaign"
     },
     "save": {
@@ -87,12 +92,13 @@
       "name": "Create"
     },
     "name": {
-      "role": "textbox",
+      "css": "xpath=//*[contains(normalize-space(text()),'Promotion Name')]/following::input[1]",
       "name": "Promotion Name"
     },
     "save": {
       "role": "button",
-      "name": "Save"
+      "name": "Confirm",
+      "exact": true
     },
     "delete": {
       "role": "button",
@@ -114,7 +120,8 @@
     },
     "reply": {
       "role": "button",
-      "name": "Reply"
+      "name": "Reply",
+      "exact": true
     },
     "box": {
       "role": "textbox",

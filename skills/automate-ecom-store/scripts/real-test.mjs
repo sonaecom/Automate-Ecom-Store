@@ -8,6 +8,10 @@
  * --runner adspower (default): set ADSPOWER_API_BASE and ADSPOWER_API_KEY.
  * --runner mktlogin: MKTLOGIN_API_BASE (default http://localhost:4980), optional MKTLOGIN_API_KEY.
  * Keep these in the environment, never in the repo.
+ *
+ * Chat, review, promotion and invite tests stop before the final Send/Save: the text is typed
+ * and cleared again. Pass --send only when a real send is wanted.
+ * AES_PROTECTED (comma list of SKUs or product names) blocks listing edits on those products.
  */
 
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -53,6 +57,10 @@ export function roundLog(options, result) {
     store_hash: storeHash(options.store),
     at: options.now || new Date().toISOString(),
   };
+}
+
+export function protectedList(raw) {
+  return String(raw || "").split(",").map((item) => item.trim()).filter(Boolean);
 }
 
 function arg(name) {
@@ -132,6 +140,8 @@ export async function executeRealTest(options, deps) {
       query: options.query || "",
       value: options.value || "",
       revert: options.revert !== false,
+      send: options.send === true,
+      protect: options.protect || [],
     }, hooks);
   } catch (error) {
     outcome = { result: "ERROR", actions: hooks.actions, error: String(error.message || error).slice(0, 200) };
@@ -144,7 +154,7 @@ export async function executeRealTest(options, deps) {
   outcome.missing = outcome.missing || hooks.missing;
   const body = roundLog(options, outcome);
   write(body);
-  const failed = ["REVERT_FAILED", "PAUSE", "LOGIN_REQUIRED", "ERROR", "NAV_MISSING", "BLOCK"].includes(outcome.result);
+  const failed = ["REVERT_FAILED", "PAUSE", "LOGIN_REQUIRED", "ERROR", "NAV_MISSING", "BLOCK", "FIELD_MISMATCH", "AMBIGUOUS"].includes(outcome.result);
   return { code: failed ? 1 : 0, log: body };
 }
 
@@ -174,6 +184,8 @@ async function main() {
     policyResult: arg("--policy") || "ALLOW",
     shot: arg("--shot"),
     runner: arg("--runner") || "adspower",
+    send: process.argv.includes("--send"),
+    protect: protectedList(process.env.AES_PROTECTED),
   }, { env: process.env, fetchImpl: fetch });
   console.log(`round: ${outcome.log.round}`);
   console.log(`module: ${outcome.log.module}`);

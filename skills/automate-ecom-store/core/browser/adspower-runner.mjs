@@ -79,8 +79,9 @@ export function looksLikeLogin(url, text) {
 function locate(page, spec) {
   if (typeof spec === "string") return page.locator(spec).first();
   if (spec.css) return page.locator(spec.css).first();
-  if (spec.role === "text") return page.getByText(spec.name, { exact: false }).first();
-  return page.getByRole(spec.role, { name: spec.name, exact: false }).first();
+  const exact = spec.exact === true;
+  if (spec.role === "text") return page.getByText(spec.name, { exact }).first();
+  return page.getByRole(spec.role, { name: spec.name, exact }).first();
 }
 
 /** Give actions.mjs the small page surface it needs on top of a Playwright page. */
@@ -94,12 +95,25 @@ export function wrapPage(page, timeout = 8000) {
     mouse: page.mouse,
     keyboard: page.keyboard,
     url: () => page.url(),
+    wait: (ms) => page.waitForTimeout(ms),
     goto: async (url) => { await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 }); await page.waitForTimeout(5000); },
     text: async () => (await page.innerText("body").catch(() => "")).slice(0, 20000),
     box: async (spec) => { const t = await visible(spec); return t ? t.boundingBox() : null; },
     click: async (spec) => { const t = await visible(spec); if (!t) return false; await t.scrollIntoViewIfNeeded().catch(() => {});
+      // Seller centres open product edit pages in a new tab. Keep one tab: move that address into this tab and close the extra one.
+      const context = typeof page.context === "function" ? page.context() : null;
+      const popup = context ? context.waitForEvent("page", { timeout: 4000 }).catch(() => null) : Promise.resolve(null);
       try {
         await t.click({ timeout: 10000 });
+        const extra = await popup;
+        if (extra && extra !== page) {
+          // A new tab starts on about:blank and only then moves to the real address.
+          await extra.waitForURL(/^https?:/i, { timeout: 20000 }).catch(() => {});
+          await extra.waitForLoadState("domcontentloaded").catch(() => {});
+          const target = extra.url();
+          await extra.close().catch(() => {});
+          if (/^https?:/i.test(target)) { await page.goto(target, { waitUntil: "domcontentloaded", timeout: 60000 }); await page.waitForTimeout(6000); }
+        }
       } catch (error) {
         // A queued promo modal can sit over the sidebar with no close button. Follow the link the way a person would open it.
         const href = await t.getAttribute("href").catch(() => null);
@@ -109,6 +123,13 @@ export function wrapPage(page, timeout = 8000) {
     fill: async (spec, value) => { const t = await visible(spec); if (!t) return false; await t.fill(value); return true; },
     value: async (spec) => { const t = await visible(spec); return t ? t.inputValue().catch(() => null) : null; },
     checked: async (spec) => { const t = await visible(spec); if (!t) return null; const v = await t.getAttribute("aria-checked").catch(() => null); return v ?? String(await t.isChecked().catch(() => null)); },
+    count: async (spec) => { const t = await visible(spec); if (!t) return 0; return (typeof spec === "string" ? page.locator(spec) : spec.css ? page.locator(spec.css) : null)?.count() ?? 1; },
+    allText: async () => {
+      // Body text plus form values, so a SKU that only sits inside an input is still seen.
+      const body = (await page.innerText("body").catch(() => "")).slice(0, 40000);
+      const values = await page.evaluate(() => [...document.querySelectorAll("input,textarea")].map((e) => e.value || "").join("\n")).catch(() => "");
+      return `${body}\n${values}`;
+    },
     textOf: async (spec) => { const t = await visible(spec); return t ? (await t.innerText()).slice(0, 200) : null; },
     screenshot: (path) => page.screenshot(path ? { path } : {}),
     dismiss: async (closers = []) => {
