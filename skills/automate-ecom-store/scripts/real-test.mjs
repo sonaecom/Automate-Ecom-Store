@@ -20,7 +20,7 @@ import { homedir } from "node:os";
 import { pathToFileURL } from "node:url";
 import { readFileSync } from "node:fs";
 import { connectOverCDP, finishWrite, moveMouse, wrapPage, readKeys, scrollBy, storeHash, typeWithJitter } from "../core/browser/adspower-runner.mjs";
-import { selectRunner } from "../core/browser/runners.mjs";
+import { isUnreachable, selectRunner } from "../core/browser/runners.mjs";
 import { runModule } from "../core/browser/actions.mjs";
 
 const MANIFESTS = {
@@ -104,6 +104,11 @@ export async function executeRealTest(options, deps) {
     connected = await connectOverCDP(started.ws, deps);
   } catch (error) {
     if (started) await runner.stopProfile({ ...config, profileId: options.store, fetchImpl: deps.fetchImpl }).catch(() => {});
+    if (isUnreachable(error)) {
+      const body = roundLog(options, { result: "RUNNER_UNAVAILABLE", actions: 0, error: `${runner.name}_unreachable` });
+      write(body);
+      return { code: 3, log: body };
+    }
     const body = roundLog(options, {
       result: "ERROR",
       actions: 0,

@@ -22,3 +22,7 @@ Work on the shop computer, in the visible AdsPower window. Do not switch the sto
 | Viewer tried to publish | `audit-log.mjs` returns `DENIED`. Do not publish. |
 
 Do not clear cookies, change the proxy, or open a second seller tab to get past any row in this table.
+
+## Runner not reachable
+
+Before a test round or a work batch, run `node scripts/runner-check.mjs --runner adspower` (or `--runner mktlogin`). Exit 3 with `RUNNER_UNAVAILABLE` means the AdsPower or MKTLogin app is not running or its local API is off on this machine: start the app, sign in, and turn on its local API, then check again. Exit 2 means `ADSPOWER_API_BASE` / `ADSPOWER_API_KEY` are missing or the key was refused. `real-test.mjs` gives the same `RUNNER_UNAVAILABLE` result and exit 3, so a loop can stop that store instead of trying every module.
