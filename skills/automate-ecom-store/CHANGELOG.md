@@ -2,6 +2,10 @@
 
 Semver. The current version is `VERSION` and the `version` field in `SKILL.md`.
 
+## 1.43.0
+
+- `scripts/runner-check.mjs` checks that the AdsPower or MKTLogin local API answers before a round or batch: exit 0 when it answers, 3 when it is down, 2 when config is missing or the key is refused. `real-test.mjs` reports `RUNNER_UNAVAILABLE` (exit 3) when the runner cannot be reached, so a loop stops that store instead of logging an error per module.
+
 ## 1.42.0
 
 - A failed AdsPower start is an error result, not a crash. A missing product or ads menu is `NAV_MISSING` and exits non-zero. Listing edit opens the product before Edit. TikTok and Lazada navigation tries the page address first, then the label, and closes known promo pop-ups. Chat sends one template, a review gets one reply, and a voucher draft is created then deleted. Refund, off-platform contact, star asks, and money movement stay blocked.

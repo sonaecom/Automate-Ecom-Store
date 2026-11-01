@@ -2,6 +2,15 @@
 
 All notable changes to this repository. The detailed skill history is in [skills/automate-ecom-store/CHANGELOG.md](skills/automate-ecom-store/CHANGELOG.md).
 
+## [1.0.2] - 2026-11-01
+
+### Added
+- Runner preflight `node skills/automate-ecom-store/scripts/runner-check.mjs --runner adspower|mktlogin`: exit 0 when the local API answers, 3 when it is down, 2 when config is missing or the key is refused. No hosts or keys are printed.
+
+### Changed
+- `real-test.mjs` returns `RUNNER_UNAVAILABLE` (exit 3) instead of a generic error when the browser runner cannot be reached, so test loops stop the store cleanly.
+- Skill version 1.43.0.
+
 ## [1.0.1] - 2026-10-31
 
 ### Fixed
